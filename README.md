@@ -50,6 +50,10 @@ Open http://localhost:3000 with your favorite browser to see your project.
 └── tailwind.config.js                   # Tailwind CSS configuration
 ```
 
+### Customization
+
+You can easily configure Nextless by making a search in the whole project with `FIXME:`.
+
 ### Deploy to production
 
 You can see the results locally in production mode with:

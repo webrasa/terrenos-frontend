@@ -1,3 +1,4 @@
+// TODO: Add configuration for authentication
 export const AwsConfig = {
   API: {
     endpoints: [
