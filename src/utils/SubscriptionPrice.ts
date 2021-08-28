@@ -1,11 +1,11 @@
-type ISubscriptionPriceEnv = {
+type ISubscriptionPrice = {
   [k: string]: {
     [k: string]: string;
   };
 };
 
 // If needed you can add more plan or remove plan
-export const SubscriptionPrice: ISubscriptionPriceEnv = {
+export const SubscriptionPrice: ISubscriptionPrice = {
   dev: {
     pro: '', // FIXME: Add Stripe Subscription `priceId`
     business: '', // FIXME: Add Stripe Subscription `priceId`
@@ -16,7 +16,7 @@ export const SubscriptionPrice: ISubscriptionPriceEnv = {
   },
 };
 
-export const getSubscriptionPrice = (plan: string) => {
+export const getPriceIdFromName = (plan: string) => {
   const env = process.env.NEXT_PUBLIC_SUBSCRIPTION_PRICE_ENV;
 
   if (!env) {

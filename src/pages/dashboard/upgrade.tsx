@@ -7,7 +7,7 @@ import { getShell } from '../../layout/Shell';
 import { PricingModel } from '../../templates/PricingModel';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 import getStripe from '../../utils/StripeClient';
-import { getSubscriptionPrice } from '../../utils/SubscriptionPrice';
+import { getPriceIdFromName } from '../../utils/SubscriptionPrice';
 
 const Upgrade: NextPageWithLayout = () => {
   const subscribeAsync = useAsync(async (priceId: string) => {
@@ -33,7 +33,7 @@ const Upgrade: NextPageWithLayout = () => {
     plan: string
   ) => {
     event.preventDefault();
-    await subscribeAsync.execute(getSubscriptionPrice(plan));
+    await subscribeAsync.execute(getPriceIdFromName(plan));
   };
 
   return (
