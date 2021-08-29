@@ -6,7 +6,7 @@ import { AppConfig } from '../utils/AppConfig';
 import { Meta } from './Meta';
 
 // Shared layout for Dashboard pages: https://nextjs.org/docs/basic-features/layouts
-// You can also do the same the landing pages if needed
+// You can also do the same the landing pages if needed.
 
 // eslint-disable-next-line react/display-name
 export const getShell = (title: string) => (page: ReactElement) =>

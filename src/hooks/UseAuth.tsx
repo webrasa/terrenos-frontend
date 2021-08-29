@@ -10,6 +10,7 @@ import Auth, { CognitoUser } from '@aws-amplify/auth';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
+// Non-exhaustive attribute from Authenticator provider
 type ProviderInfo = {
   id: string;
   email: string;
@@ -25,22 +26,31 @@ interface CognitoUserExt extends CognitoUser {
   attributes: ProviderInfo;
 }
 
+// Information returned by /user/profile endpoint
 type UserProfile = {
   id: string;
   firstSignIn: string;
 };
 
+// User information from backend (/user/profile) and authentication provider
 type UserAuth = {
   providerInfo: ProviderInfo;
   profile: UserProfile;
 };
 
+// React Hook Context for authentification
 const AuthContext = createContext<UserAuth | null>(null);
 
 type IAuthProviderProps = {
   children: ReactNode;
 };
 
+/**
+ * The provider component of React Hook Context for authentication.
+ * @component
+ * @params {Object} props - Component props.
+ * @param {children} props.children -  Children components.
+ */
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<ProviderInfo | null>(null);
@@ -87,6 +97,10 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   );
 };
 
+/**
+ * Consume React Hook Context for authentication
+ * @hook
+ */
 export const useAuth = () => {
   const userInfo = useContext(AuthContext);
 

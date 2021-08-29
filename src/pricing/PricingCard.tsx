@@ -11,6 +11,16 @@ type IPricingCardProps = {
   children: ReactNode;
 };
 
+/**
+ * @component
+ * @params {Object} props - Component props.
+ * @param {string} props.name - Subscription plan name.
+ * @param {string} props.price - Subscription plan price.
+ * @param {string} props.periodicity - The billing period: monthly, annually, etc.
+ * @param {ReactNode} props.button - Button to display.
+ * @param {boolean} props.popular - Indicates if the subscription plan is popular.
+ * @param {ReactNode} props.children - Children components.
+ */
 const PricingCard = (props: IPricingCardProps) => {
   const pricingCardClass = classNames(
     'p-8',

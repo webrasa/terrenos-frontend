@@ -5,6 +5,12 @@ type ISocialButtonProps = {
   children: string;
 };
 
+/**
+ * @component
+ * @params {Object} props - Component props.
+ * @param {ReactNode} props.icon - SVG icon or image for styling.
+ * @param {string} props.children - Children components.
+ */
 const SocialButton = (props: ISocialButtonProps) => (
   <div className="flex items-center justify-center py-3 px-5 border-2 border-gray-300 hover:border-primary-400 rounded-md">
     <span className="w-6 h-6 inline-flex items-center justify-center">

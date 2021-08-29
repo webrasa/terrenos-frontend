@@ -10,6 +10,14 @@ type ISidebarProps = {
   bottomLinks: ReactNode;
 };
 
+/**
+ * Sidebar menu.
+ * @component
+ * @params {Object} props - Component props.
+ * @param {boolean} show - Indicates if the component need be displayed.
+ * @param {ReactNode} props.topLinks - Menu located at the top of the sidebar.
+ * @param {ReactNode} props.bottomLinks - Menu located at the bottom of the sidebar.
+ */
 const Sidebar = (props: ISidebarProps) => {
   const sidebarClass = classNames(
     'w-64',

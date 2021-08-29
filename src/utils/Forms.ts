@@ -5,6 +5,11 @@ export type IError<T> = {
   type: string;
 };
 
+/**
+ * Go through the list of error and set it in the form management.
+ * @param {Function} setError - Function to set one error with the form field name.
+ * @param {Array} error - List of errors.
+ */
 const setServerError = <T>(
   setError: (fieldName: keyof T, error: ErrorOption) => void,
   error: Array<IError<T>>
@@ -16,6 +21,11 @@ const setServerError = <T>(
     });
   });
 
+/**
+ * Convert errors returned by the server and set the errors in the form management.
+ * @param {Function} setError - Function to set one error with the form field name.
+ * @param {any} exception - Error returned by the server.
+ */
 export const setFormError = <T>(
   setError: (fieldName: keyof T, error: ErrorOption) => void,
   exception: any

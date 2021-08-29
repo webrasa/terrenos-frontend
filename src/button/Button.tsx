@@ -12,6 +12,19 @@ type IButtonProps = {
   children: string;
 };
 
+/**
+ * @component
+ * @params {Object} props - Component props.
+ * @param {boolean} props.loading - Display loading indicator.
+ * @param {boolean} props.xs - Button in xs size.
+ * @param {boolean} props.sm - Button in sm size.
+ * @param {boolean} props.xl - Button in xl size.
+ * @param {boolean} props.secondary - Indicates if the button is a secondary button.
+ * @param {boolean} props.red - Indicates if the button is a red button.
+ * @param {boolean} props.green - Indicates if the button is a green button.
+ * @param {boolean} props.full - Indicates if the button takes 100% width.
+ * @param {boolean} props.children - Children components.
+ */
 const Button = (props: IButtonProps) => {
   const btnClass = classNames({
     btn: true,

@@ -11,6 +11,7 @@ import '../styles/main.css';
 
 Amplify.configure({ ...AwsConfig });
 
+// Next JS App props with the shared layout support.
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };

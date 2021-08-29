@@ -15,6 +15,13 @@ type ITodoFormProps = {
   defaultValues?: ITodo;
 };
 
+/**
+ * A example form to add a new Todo or edit an existing one.
+ * @component
+ * @params {Object} props - Component props.
+ * @param {string} props.id - The Todo ID to edit. In add mode, the value is undefined
+ * @param {ITodo} props.defaultValues - Default value to initialized in edit mode.
+ */
 const TodoForm = (props: ITodoFormProps) => {
   const router = useRouter();
   const {
@@ -29,10 +36,12 @@ const TodoForm = (props: ITodoFormProps) => {
   const saveAsync = useAsync(async (data) => {
     try {
       if (props.id) {
+        // In EDIT mode
         await API.put('backend', `/todo/${props.id}`, {
           body: data,
         });
       } else {
+        // In ADD mode
         await API.post('backend', '/todo/create', {
           body: data,
         });
@@ -40,6 +49,7 @@ const TodoForm = (props: ITodoFormProps) => {
 
       await router.push('/dashboard');
     } catch (ex) {
+      // Retrieves error from the server and display them in the UI.
       setFormError(setError, ex);
     }
   });

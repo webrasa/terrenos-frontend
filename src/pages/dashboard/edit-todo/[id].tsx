@@ -15,6 +15,7 @@ const EditTodo: NextPageWithLayout = () => {
     return null;
   }
 
+  // Need to use `as string` because router.query can return a string or an array of string.
   return (
     <Section
       title="Title Edit Todo page form"

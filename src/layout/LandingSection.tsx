@@ -8,6 +8,15 @@ type ILandingSectionProps = {
   children: ReactNode;
 };
 
+/**
+ * @component
+ * @params {Object} props - Component props.
+ * @param {string} props.title - Section title to display.
+ * @param {string} props.subtitle - Section subtitle to display.
+ * @param {string} props.description - Section description to display.
+ * @param {string} props.yPadding - Tailwind CSS classes for padding in `y` axis.
+ * @param {ReactNode} props.children - Children components.
+ */
 const LandingSection = (props: ILandingSectionProps) => (
   <div
     className={`max-w-screen-xl mx-auto px-3 sm:px-5 lg:px-6 ${

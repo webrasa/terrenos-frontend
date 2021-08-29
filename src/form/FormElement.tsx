@@ -8,6 +8,13 @@ type IFormElementProps = {
   helper?: string;
 };
 
+/**
+ * @component
+ * @params {Object} props - Component props.
+ * @param {ReactNode} props.children - Children components.
+ * @param {string} props.colSpanSize - Tailwind CSS class to control how elements are sized in grid.
+ * @param {string} props.helper - Helper message for users on how fill the form element.
+ */
 const FormElement = (props: IFormElementProps) => {
   const inputClass = classNames('input', props.colSpanSize);
 

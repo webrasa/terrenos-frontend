@@ -41,6 +41,7 @@ const Index: NextPageWithLayout = () => {
   );
 };
 
+// Shared layout for Dashboard pages: https://nextjs.org/docs/basic-features/layouts
 Index.getLayout = getShell('Dashboard');
 
 export default Index;
