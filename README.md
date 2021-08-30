@@ -79,7 +79,7 @@ You can create an optimized production build with:
 npm run build-prod
 ```
 
-Now, your blog is ready to be deployed. All generated files are located at `out` folder, which you can deploy with any hosting service.
+Now, your blog is ready to be deployed. All generated files are located at `out` folder, which you can deploy with any hosting service. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue (more detailed guide will be provided or contact if you need any helps).
 
 ### VSCode information (optional)
 
