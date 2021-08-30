@@ -33,8 +33,8 @@ Open http://localhost:3000 with your favorite browser to see your project.
 ├── netlify.toml                         # Netlify configuration file
 ├── next.config.js                       # Next JS configuration
 ├── public                               # Public folder
-│   ├── assets
-│   │   └── images                       # Image used by default template
+│   └── assets
+│       └── images                       # Image used by default template
 ├── src
 │   ├── hooks                            # React hooks
 │   ├── layout
