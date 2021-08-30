@@ -36,12 +36,12 @@ const TodoForm = (props: ITodoFormProps) => {
   const saveAsync = useAsync(async (data) => {
     try {
       if (props.id) {
-        // In EDIT mode
+        // In EDIT mode, edit existing Todo
         await API.put('backend', `/todo/${props.id}`, {
           body: data,
         });
       } else {
-        // In ADD mode
+        // In ADD mode, add a new Todo
         await API.post('backend', '/todo/create', {
           body: data,
         });

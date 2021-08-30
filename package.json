@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@aws-amplify/auth": "^4.3.1",
-    "@headlessui/react": "^1.4.0",
+    "@headlessui/react": "^1.4.1",
     "@hookform/error-message": "^2.0.0",
     "@stripe/stripe-js": "^1.17.1",
     "aws-amplify": "^4.2.5",
@@ -31,7 +31,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^11.1.0",
     "@tailwindcss/forms": "^0.3.3",
-    "@types/node": "^16.7.4",
+    "@types/node": "^16.7.6",
     "@types/react": "^17.0.19",
     "@typescript-eslint/eslint-plugin": "^4.29.3",
     "autoprefixer": "^10.3.3",
@@ -44,7 +44,7 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react": "^7.25.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-unused-imports": "^1.1.4",
     "husky": "^7.0.2",
@@ -53,7 +53,7 @@
     "postcss": "^8.3.6",
     "prettier": "^2.3.2",
     "rimraf": "^3.0.2",
-    "tailwindcss": "^2.2.8",
+    "tailwindcss": "^2.2.9",
     "typescript": "^4.4.2"
   },
   "license": "ISC"
