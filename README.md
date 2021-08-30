@@ -81,6 +81,14 @@ If you are VSCode users, you can have a better integration with VSCode by instal
 
 Pro tips: if you need a project wide type checking with TypeScript, you can run a build with <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd> on Mac.
 
+The debug configuration is also provided for VSCode. 3 debug configuration are provided:
+
+| Name | Description |
+| --- | ----------- |
+| `Next: Chrome` | Launch Google Chrome in debug mode |
+| `Next: Node` | Launch Next JS in debug mode |
+| `Next: Full` | Launch Google Chrome and Next JS in debug mode |
+
 ### Contributions
 
 Everyone is welcome to contribute to this project. Feel free to open an issue if you have question or found a bug.
