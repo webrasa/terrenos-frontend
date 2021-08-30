@@ -7,9 +7,9 @@ type IBackgroundProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {ReactNode} props.children - Children components.
- * @param {string} props.color - Tailwind CSS class for background color.
+ * @params props - Component props.
+ * @param props.children - Children components.
+ * @param props.color - Tailwind CSS class for background color.
  */
 const Background = (props: IBackgroundProps) => (
   <div className={props.color}>{props.children}</div>

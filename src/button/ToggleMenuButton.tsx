@@ -5,8 +5,8 @@ type IToggleMenuButtonProps = {
 /**
  * A toggle button to show/hide component in small screen.
  * @component
- * @params {Object} props - Component props.
- * @param {Function} props.onClick - Function to run when the button is clicked.
+ * @params props - Component props.
+ * @param props.onClick - Function to run when the button is clicked.
  */
 const ToggleMenuButton = (props: IToggleMenuButtonProps) => (
   <button

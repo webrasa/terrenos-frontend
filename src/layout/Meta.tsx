@@ -11,10 +11,10 @@ type IMetaProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {string} props.title - Page title for SEO.
- * @param {string} props.description - Page description for SEO.
- * @param {string} props.canonical - Page canonical url.
+ * @params props - Component props.
+ * @param props.title - Page title for SEO.
+ * @param props.description - Page description for SEO.
+ * @param props.canonical - Page canonical url.
  */
 const Meta = (props: IMetaProps) => (
   <>

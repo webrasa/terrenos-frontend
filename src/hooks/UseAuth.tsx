@@ -48,8 +48,8 @@ type IAuthProviderProps = {
 /**
  * The provider component of React Hook Context for authentication.
  * @component
- * @params {Object} props - Component props.
- * @param {children} props.children -  Children components.
+ * @params props - Component props.
+ * @param props.children -  Children components.
  */
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();

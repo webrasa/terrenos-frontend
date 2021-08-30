@@ -16,11 +16,11 @@ type ITodoFormProps = {
 };
 
 /**
- * A example form to add a new Todo or edit an existing one.
+ * An example form to add a new Todo or edit an existing one.
  * @component
- * @params {Object} props - Component props.
- * @param {string} props.id - The Todo ID to edit. In add mode, the value is undefined
- * @param {ITodo} props.defaultValues - Default value to initialized in edit mode.
+ * @params props - Component props.
+ * @param props.id - The Todo ID to edit. In `add` mode, the value is undefined
+ * @param props.defaultValues - Default value to initialized in edit mode.
  */
 const TodoForm = (props: ITodoFormProps) => {
   const router = useRouter();

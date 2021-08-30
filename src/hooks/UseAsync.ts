@@ -3,12 +3,12 @@ import { useCallback, useEffect, useState } from 'react';
 /**
  * Run asynchronously fn function and know if the function is currently running.
  * @hook
- * @param {string} fn - Async function to run.
- * @param {string} immediate - Indicates if the async function needs to be run immediately.
- * @returns {Object} result - The function returns an Object.
- * @return {Function} result.execute - The function to execute to trigger the async function.
- * @return {boolean} result.pending - Indicates if the async is currently running.
- * @return {string} result.value - Result returned by the async function.
+ * @param fn - Async function to run.
+ * @param immediate - Indicates if the async function needs to be run immediately.
+ * @returns result - The function returns an Object.
+ * @return result.execute - The function to execute to trigger the async function.
+ * @return result.pending - Indicates if the async is currently running.
+ * @return result.value - Result returned by the async function.
  */
 export const useAsync = (
   fn: (...args: any[]) => Promise<any>,

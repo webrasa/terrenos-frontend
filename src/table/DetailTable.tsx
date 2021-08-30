@@ -9,11 +9,11 @@ type IDetailTableProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {string} props.title - Table title to display.
- * @param {ReactNode} props.head - Table head elements.
- * @param {ReactNode} props.buttons - Table action buttons.
- * @param {ReactNode} props.children - Children components, table body elements.
+ * @params props - Component props.
+ * @param props.title - Table title to display.
+ * @param props.head - Table head elements.
+ * @param props.buttons - Table action buttons.
+ * @param props.children - Children components, table body elements.
  */
 const DetailTable = (props: IDetailTableProps) => (
   <div>

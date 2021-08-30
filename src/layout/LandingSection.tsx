@@ -10,12 +10,12 @@ type ILandingSectionProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {string} props.title - Section title to display.
- * @param {string} props.subtitle - Section subtitle to display.
- * @param {string} props.description - Section description to display.
- * @param {string} props.yPadding - Tailwind CSS classes for padding in `y` axis.
- * @param {ReactNode} props.children - Children components.
+ * @params props - Component props.
+ * @param props.title - Section title to display.
+ * @param props.subtitle - Section subtitle to display.
+ * @param props.description - Section description to display.
+ * @param props.yPadding - Tailwind CSS classes for padding in `y` axis.
+ * @param props.children - Children components.
  */
 const LandingSection = (props: ILandingSectionProps) => (
   <div

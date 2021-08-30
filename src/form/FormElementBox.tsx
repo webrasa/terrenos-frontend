@@ -11,11 +11,11 @@ type IFormElementBoxProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {string} props.htmlFor - for attribute in HTML.
- * @param {string} props.text - Label text.
- * @param {ReactNode} props.children - Children components.
- * @param {string} props.colSpanSize - Tailwind CSS class to control how elements are sized in grid.
+ * @params props - Component props.
+ * @param props.htmlFor - for attribute in HTML.
+ * @param props.text - Label text.
+ * @param props.children - Children components.
+ * @param props.colSpanSize - Tailwind CSS class to control how elements are sized in grid.
  */
 const FormElementBox = (props: IFormElementBoxProps) => {
   const boxClass = classNames(

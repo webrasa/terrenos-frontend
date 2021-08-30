@@ -16,12 +16,12 @@ type ISidebarHeaderProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {ReactNode} props.topLinks - Menu located at the top of the sidebar.
- * @param {ReactNode} props.bottomLinks - Menu located at the bottom of the sidebar.
- * @param {string} props.title - Page title to display in the header.
- * @param {ReactNode} props.leftContent - Elements to be display at the left side of the header.
- * @param {children} props.children - Children components.
+ * @params props - Component props.
+ * @param props.topLinks - Menu located at the top of the sidebar.
+ * @param props.bottomLinks - Menu located at the bottom of the sidebar.
+ * @param props.title - Page title to display in the header.
+ * @param props.leftContent - Elements to be display at the left side of the header.
+ * @param props.children - Children components.
  */
 const SidebarHeader = (props: ISidebarHeaderProps) => {
   const { showMenu, handleToggleMenu, handleClose } = useMenu();

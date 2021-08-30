@@ -10,10 +10,10 @@ type ILabelProps = {
 
 /**
  * @component
- * @params {Object} props - Component props.
- * @param {string} props.htmlFor - for attribute in HTML.
- * @param {ReactNode} props.children - Children components.
- * @param {string} props.colSpanSize - Tailwind CSS class to control how elements are sized in grid.
+ * @params props - Component props.
+ * @param props.htmlFor - for attribute in HTML.
+ * @param props.children - Children components.
+ * @param props.colSpanSize - Tailwind CSS class to control how elements are sized in grid.
  */
 const Label = (props: ILabelProps) => {
   const labelClass = classNames('text-gray-700', 'mt-2', props.colSpanSize);

@@ -52,7 +52,9 @@ Open http://localhost:3000 with your favorite browser to see your project.
 
 ### Customization
 
-You can easily configure Nextless by making a search in the whole project with `FIXME:`.
+You can easily configure Nextless by making a search in the whole project with `FIXME:` for making quick customization. You also need to change the following files:
+
+- `public/apple-touch-icon.png`, `public/favicon.ico`, `public/favicon-16x16.png` and `public/favicon-32x32.png`: your favicon, you can generate from https://favicon.io/favicon-converter/
 
 ### Deploy to production
 
@@ -78,6 +80,10 @@ Now, your blog is ready to be deployed. All generated files are located at `out`
 If you are VSCode users, you can have a better integration with VSCode by installing the suggested extension in `.vscode/extension.json`. The starter code comes up with Settings for a seamless integration with VSCode. The Debug configuration is also provided for frontend and backend debugging experience.
 
 Pro tips: if you need a project wide type checking with TypeScript, you can run a build with <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd> on Mac.
+
+### Contributions
+
+Everyone is welcome to contribute to this project. Feel free to open an issue if you have question or found a bug.
 
 ---
 
