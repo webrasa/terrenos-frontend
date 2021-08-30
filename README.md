@@ -1,5 +1,9 @@
 # Nextless.js frontend
 
+Nextless.js frontend code for marketing website and user dashboard. It includes example code to build a Todo SaaS application. The landing page includes 9 components blocks: Navbar, Hero, Features, VerticalFeatures, Testimonial, Pricing, FAQ, Banner and Footer. All components are highly customizable so you can modify to meet your requirements.
+
+The Dashboard displays all Todo created by the user in the table component. It also comes up with CRUD operation: you can create, read, update and delete a Todo with the provided code. And the most important things, the frontend is integrated to Stripe with some backend help.
+
 ### Requirements
 
 - Node.js and npm
@@ -81,7 +85,7 @@ If you are VSCode users, you can have a better integration with VSCode by instal
 
 Pro tips: if you need a project wide type checking with TypeScript, you can run a build with <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>B</kbd> on Mac.
 
-The debug configuration is also provided for VSCode. 3 debug configuration are provided:
+The debug configuration is also provided for VSCode. 3 debug configurations are provided:
 
 | Name | Description |
 | --- | ----------- |
