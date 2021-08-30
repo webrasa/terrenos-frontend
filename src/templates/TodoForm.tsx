@@ -48,7 +48,7 @@ const TodoForm = (props: ITodoFormProps) => {
       }
 
       await router.push('/dashboard');
-    } catch (ex) {
+    } catch (ex: any) {
       // Retrieves error from the server and display them in the UI.
       setFormError(setError, ex);
     }
