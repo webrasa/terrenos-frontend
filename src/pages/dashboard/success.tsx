@@ -2,11 +2,11 @@ import Link from 'next/link';
 
 import { Button } from '../../button/Button';
 import { getShell } from '../../layout/Shell';
-import { ZeroState } from '../../templates/ZeroState';
+import { MessageState } from '../../message/MessageState';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 
 const Success: NextPageWithLayout = () => (
-  <ZeroState
+  <MessageState
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"

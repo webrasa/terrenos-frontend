@@ -1,6 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 
-type IZeroStateProps = {
+type IMessageStateProps = {
   icon?: ReactNode;
   title: string;
   description: string;
@@ -9,7 +9,7 @@ type IZeroStateProps = {
   children?: ReactElement;
 };
 
-const ZeroState = (props: IZeroStateProps) => {
+const MessageState = (props: IMessageStateProps) => {
   if (!props.children || (props.shouldDisplay && props.shouldDisplay())) {
     return (
       <div className="px-3 lg:px-6 py-8 h-full">
@@ -31,4 +31,4 @@ const ZeroState = (props: IZeroStateProps) => {
   return props.children;
 };
 
-export { ZeroState };
+export { MessageState };

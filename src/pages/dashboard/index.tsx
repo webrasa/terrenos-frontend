@@ -4,8 +4,8 @@ import useSWR from 'swr';
 import { Button } from '../../button/Button';
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
+import { MessageState } from '../../message/MessageState';
 import { Table } from '../../templates/Table';
-import { ZeroState } from '../../templates/ZeroState';
 import { ITodo } from '../../types/ITodo';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 
@@ -13,7 +13,6 @@ type IResponse = {
   list: ITodo[];
 };
 
-// TODO: Rename ZeroState to MessageState
 const Index: NextPageWithLayout = () => {
   const { data } = useSWR<IResponse>('/todo/list');
 
@@ -22,7 +21,7 @@ const Index: NextPageWithLayout = () => {
   }
 
   return (
-    <ZeroState
+    <MessageState
       title="Add message here when the list if empty"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur purus. In laoreet tincidunt libero vitae sagittis."
       shouldDisplay={() => data.list.length === 0}
@@ -37,7 +36,7 @@ const Index: NextPageWithLayout = () => {
       <Section>
         <Table list={data.list} />
       </Section>
-    </ZeroState>
+    </MessageState>
   );
 };
 
