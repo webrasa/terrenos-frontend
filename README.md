@@ -1,8 +1,8 @@
-# Nextless.js frontend
+# Nextless.js frontend for SaaS 🚀
 
-Nextless.js frontend code for marketing website and user dashboard. It includes example code to build a Todo SaaS application. The landing page includes 9 components blocks: Navbar, Hero, Features, VerticalFeatures, Testimonial, Pricing, FAQ, Banner and Footer. All components are highly customizable so you can modify to meet your requirements.
+Nextless.js frontend code for marketing website and user dashboard for your SaaS. It includes example code to build a Todo SaaS application. The landing page includes 9 components blocks: Navbar, Hero, Features, VerticalFeatures, Testimonial, Pricing, FAQ, Banner and Footer. All components are highly customizable so you can modify to meet your requirements.
 
-The Dashboard displays all Todo created by the user in the table component. It also comes up with CRUD operation: you can create, read, update and delete a Todo with the provided code. And the most important things, the frontend is integrated to Stripe with some backend help.
+The Dashboard displays all Todos created by the user in the table component. It also comes up with CRUD operation: you can create, read, update and delete a Todo with the provided code. And the most important things, the frontend is integrated to Stripe with some backend help.
 
 ### Requirements
 
@@ -59,6 +59,8 @@ Open http://localhost:3000 with your favorite browser to see your project.
 You can easily configure Nextless by making a search in the whole project with `FIXME:` for making quick customization. You also need to change the following files:
 
 - `public/apple-touch-icon.png`, `public/favicon.ico`, `public/favicon-16x16.png` and `public/favicon-32x32.png`: your favicon, you can generate from https://favicon.io/favicon-converter/
+
+You have access to the whole code source if you need further customization. The provided code is only example for you to start your SaaS products. The sky is the limit 🚀.
 
 ### Deploy to production
 
