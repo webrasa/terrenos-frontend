@@ -25,6 +25,10 @@ npm run dev
 
 Open http://localhost:3000 with your favorite browser to see your project.
 
+### Bypass authentication
+
+On you can local environment, you can login to the dashboard by directly browse to https://localhost:3000/dashboard and don't use https://localhost:3000/login.
+
 ### File structure, most important folder
 
 ```
@@ -79,7 +83,7 @@ You can create an optimized production build with:
 npm run build-prod
 ```
 
-Now, your blog is ready to be deployed. All generated files are located at `out` folder, which you can deploy with any hosting service. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue (more detailed guide will be provided or contact if you need any helps).
+Now, your blog is ready to be deployed. All generated files are located at `out` folder, which you can deploy with any hosting service. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue (more detailed guide will be provided or contact if you need any helps). With all modern static hosting, you can setup an automated preview of every commit.
 
 ### VSCode information (optional)
 
@@ -94,6 +98,10 @@ The debug configuration is also provided for VSCode. 3 debug configurations are 
 | `Next: Chrome` | Launch Google Chrome in debug mode |
 | `Next: Node` | Launch Next JS in debug mode |
 | `Next: Full` | Launch Google Chrome and Next JS in debug mode |
+
+### Going further with third party tool (optional)
+
+- Setting up Sentry for Application Monitoring and Error Tracking.
 
 ### Contributions
 
