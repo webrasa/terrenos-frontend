@@ -59,12 +59,15 @@ const TodoForm = (props: ITodoFormProps) => {
   });
 
   return (
-    <form className="grid grid-cols-12 gap-y-5" onSubmit={handleSave}>
-      <Label htmlFor="title" colSpanSize="col-span-2">
+    <form
+      className="grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-8 gap-y-2 sm:gap-y-5"
+      onSubmit={handleSave}
+    >
+      <Label htmlFor="title" colSpanSize="sm:col-span-2">
         Todo title *
       </Label>
       <FormElement
-        colSpanSize="col-span-4"
+        colSpanSize="sm:col-span-4"
         helper="Random helper text - Todo title should not be empty"
       >
         <input id="title" type="text" {...register('title')} />
@@ -89,7 +92,7 @@ const TodoForm = (props: ITodoFormProps) => {
         />
       </FormElement>
 
-      <div className="col-start-3">
+      <div className="sm:col-start-3">
         <button type="submit" disabled={saveAsync.pending}>
           <Button loading={saveAsync.pending}>Save</Button>
         </button>
