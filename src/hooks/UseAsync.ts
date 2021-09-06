@@ -1,4 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
+const useIsMounted = (): (() => boolean) => {
+  const ref = useRef<boolean>(false);
+  useEffect(() => {
+    ref.current = true;
+    return () => {
+      ref.current = false;
+    };
+  }, []);
+  return () => ref.current;
+};
 
 /**
  * Run asynchronously fn function and know if the function is currently running.
@@ -16,6 +27,7 @@ export const useAsync = (
 ) => {
   const [pending, setPending] = useState(false);
   const [value, setValue] = useState(null);
+  const isMounted = useIsMounted();
 
   // useCallback ensures useEffect is not called on every render, but only if asyncFunction changes.
   const execute = useCallback(
@@ -24,10 +36,10 @@ export const useAsync = (
       setValue(null);
 
       return fn(...args)
-        .then((response: any) => setValue(response))
-        .finally(() => setPending(false));
+        .then((response: any) => isMounted() && setValue(response))
+        .finally(() => isMounted() && setPending(false));
     },
-    [fn]
+    [fn, isMounted]
   );
 
   useEffect(() => {
