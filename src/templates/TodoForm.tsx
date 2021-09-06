@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/dist/client/router';
@@ -28,10 +30,16 @@ const TodoForm = (props: ITodoFormProps) => {
     register,
     setError,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<ITodo>({
-    defaultValues: props.defaultValues,
-  });
+  } = useForm<ITodo>();
+
+  // For async value, `defaultValues` attribute from useForm doesn't work due to cache issue
+  // Please refer to https://github.com/react-hook-form/react-hook-form/issues/2492#issuecomment-771578524
+  // So we need to use `useEffect` for defaultValues
+  useEffect(() => {
+    reset(props.defaultValues);
+  }, [reset, props.defaultValues]);
 
   const saveAsync = useAsync(async (data) => {
     try {
