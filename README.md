@@ -68,6 +68,8 @@ You have access to the whole code source if you need further customization. The 
 
 ### Deploy to production
 
+If you deploy for the first time, please checkout [this guide](https://github.com/Nextlessjs/Quick-Start/blob/main/PRODUCTION_DEPLOYMENT.md).
+
 You can see the results locally in production mode with:
 
 ```
