@@ -1,4 +1,3 @@
-// TODO: Add configuration for authentication
 export const AwsConfig = {
   Auth: {
     mandatorySignIn: true,
