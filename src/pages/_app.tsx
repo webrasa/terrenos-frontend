@@ -7,7 +7,7 @@ import { SWRConfig } from 'swr';
 import { AwsConfig } from '../utils/AwsConfig';
 import { NextPageWithLayout } from '../utils/NextLayout';
 
-import '../styles/main.css';
+import '../styles/global.css';
 
 Amplify.configure({ ...AwsConfig });
 
