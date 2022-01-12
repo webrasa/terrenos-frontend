@@ -25,7 +25,7 @@ npm run dev
 
 Open http://localhost:3000 with your favorite browser to see your project.
 
-### Bypass authentication
+### Bypass authentication (local only)
 
 On you can local environment, you can login to the dashboard by directly browse to https://localhost:3000/dashboard and don't use https://localhost:3000/login.
 
@@ -85,7 +85,7 @@ You can create an optimized production build with:
 npm run build-prod
 ```
 
-Now, your blog is ready to be deployed. All generated files are located at `out` folder, which you can deploy with any hosting service. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue (more detailed guide will be provided or contact if you need any helps). With all modern static hosting, you can setup an automated preview of every commit.
+Now, your frontend is ready to be deployed. All generated files are located at `out` folder and you can deploy these files to any hosting services. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue (more detailed guide will be provided or contact if you need any helps). With all modern static hosting, you can setup an automated preview of every commit.
 
 ### VSCode information (optional)
 
