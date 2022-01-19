@@ -66,9 +66,17 @@ You can easily configure Nextless by making a search in the whole project with `
 
 You have access to the whole code source if you need further customization. The provided code is only example for you to start your SaaS products. The sky is the limit 🚀.
 
-### Deploy to production
+### Deploy to production with Amplify Hosting (like Vercel or Netlify on AWS)
 
 If you deploy for the first time, please checkout [this guide](https://github.com/Nextlessjs/Quick-Start/blob/main/PRODUCTION_DEPLOYMENT.md).
+
+You can host the frontend on Vercel, Netlify or Cloudflare Pages without any issue. But, if you want to have everything inside your AWS account, you can host easily on Amplify Hosting. And, here is the steps.
+
+Go your to AWS Console, then select `AWS Amplify` service. At the bottom of the page, you can select `Amplify Hosting` by clicking on `Get started` button. You just need to follow the setup process by selecting your Git repository. The project has already included a `amplify.yml`. So you don't need to configure anything.
+
+At the end of the process, your frontend is now deployed on your AWS account.
+
+### Manual deployment to production
 
 You can see the results locally in production mode with:
 
@@ -85,7 +93,7 @@ You can create an optimized production build with:
 npm run build-prod
 ```
 
-Now, your frontend is ready to be deployed. All generated files are located at `out` folder and you can deploy these files to any hosting services. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue (more detailed guide will be provided or contact if you need any helps). With all modern static hosting, you can setup an automated preview of every commit.
+Now, your frontend is ready to be deployed. All generated files are located at `out` folder and you can deploy these files to any hosting services. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue. If you choose to host on AWS, you can read the previous section on how to deploy on Amplify Hosting. With all modern static hosting, you can setup an automated preview of every commit.
 
 ### VSCode information (optional)
 
