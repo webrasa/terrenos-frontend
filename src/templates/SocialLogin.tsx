@@ -1,5 +1,6 @@
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
+import Link from 'next/link';
 
 import { Button } from '../button/Button';
 import { SocialButton } from '../button/SocialButton';
@@ -25,7 +26,11 @@ const SocialLogin = () => {
         <button className="w-full" type="button" onClick={handleSignInGoogle}>
           <SocialButton
             icon={
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full"
+                viewBox="0 0 48 48"
+              >
                 <defs>
                   <path
                     id="a"
@@ -60,7 +65,11 @@ const SocialLogin = () => {
         <button className="w-full" type="button" onClick={handleSignInFacebook}>
           <SocialButton
             icon={
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14222 14222">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-full"
+                viewBox="0 0 14222 14222"
+              >
                 <circle cx="7111" cy="7112" r="7111" fill="#1977f3" />
                 <path
                   d="M9879 9168l315-2056H8222V5778c0-562 275-1111 1159-1111h897V2917s-814-139-1592-139c-1624 0-2686 984-2686 2767v1567H4194v2056h1806v4969c362 57 733 86 1111 86s749-30 1111-86V9168z"
@@ -87,14 +96,27 @@ const SocialLogin = () => {
 
         <div className="mt-3">
           <button type="submit" className="w-full">
-            <Button full>Save</Button>
+            <Button full>Sign in with Email</Button>
           </button>
         </div>
       </form>
 
       <div className="mt-5 text-xs">
-        <div>Forget your password?</div>
-        <div>Don&apos;t have an account? Sign up now.</div>
+        <div>
+          <Link href="">
+            <a className="text-primary-500 hover:text-primary-600">
+              Forget your password?
+            </a>
+          </Link>
+        </div>
+        <div>
+          Don&apos;t have an account?{' '}
+          <Link href="">
+            <a className="text-primary-500 hover:text-primary-600">
+              Sign up now.
+            </a>
+          </Link>
+        </div>
       </div>
     </FullCenterSection>
   );

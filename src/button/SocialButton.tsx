@@ -17,7 +17,7 @@ const SocialButton = (props: ISocialButtonProps) => (
       {props.icon}
     </span>
 
-    <span className="ml-2 text-xl font-semibold">{props.children}</span>
+    <span className="ml-2 text-lg font-semibold">{props.children}</span>
   </div>
 );
 
