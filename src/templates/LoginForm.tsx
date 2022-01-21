@@ -95,9 +95,9 @@ const LoginForm = () => {
 
       <div className="mt-5 text-xs">
         <div>
-          <Link href="">
+          <Link href="/forgot-password">
             <a className="text-primary-500 hover:text-primary-600">
-              Forget your password?
+              Forgot your password?
             </a>
           </Link>
         </div>
@@ -105,9 +105,10 @@ const LoginForm = () => {
           Don&apos;t have an account?{' '}
           <Link href="/signup">
             <a className="text-primary-500 hover:text-primary-600">
-              Sign up now.
+              Sign up now
             </a>
           </Link>
+          .
         </div>
       </div>
     </FullCenterSection>

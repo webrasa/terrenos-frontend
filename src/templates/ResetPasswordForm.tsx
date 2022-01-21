@@ -5,22 +5,17 @@ import { FormElement } from '../form/FormElement';
 import { Label } from '../form/Label';
 import { FullCenterSection } from '../layout/FullCenterSection';
 
-const SignUpForm = () => (
-  <FullCenterSection title="Create new account">
+const ResetPasswordForm = () => (
+  <FullCenterSection title="Reset password">
     <form className="text-left grid gap-y-2">
       <Label htmlFor="email">Email address</Label>
       <FormElement>
         <input id="email" type="text" />
       </FormElement>
 
-      <Label htmlFor="password">Password</Label>
-      <FormElement>
-        <input id="password" type="text" />
-      </FormElement>
-
       <div className="mt-3">
         <button type="submit" className="w-full">
-          <Button full>Sign up</Button>
+          <Button full>Reset</Button>
         </button>
       </div>
     </form>
@@ -37,4 +32,4 @@ const SignUpForm = () => (
   </FullCenterSection>
 );
 
-export { SignUpForm };
+export { ResetPasswordForm };
