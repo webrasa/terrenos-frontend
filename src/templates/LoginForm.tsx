@@ -9,7 +9,7 @@ import { FormElement } from '../form/FormElement';
 import { Label } from '../form/Label';
 import { FullCenterSection } from '../layout/FullCenterSection';
 
-const SocialLogin = () => {
+const LoginForm = () => {
   const handleSignInGoogle = () => {
     Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
   };
@@ -114,4 +114,4 @@ const SocialLogin = () => {
   );
 };
 
-export { SocialLogin };
+export { LoginForm };
