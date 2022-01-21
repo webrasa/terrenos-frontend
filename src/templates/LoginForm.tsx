@@ -103,7 +103,7 @@ const LoginForm = () => {
         </div>
         <div>
           Don&apos;t have an account?{' '}
-          <Link href="">
+          <Link href="/signup">
             <a className="text-primary-500 hover:text-primary-600">
               Sign up now.
             </a>

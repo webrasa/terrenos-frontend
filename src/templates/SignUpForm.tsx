@@ -28,7 +28,7 @@ const SignUpForm = () => (
     <div className="mt-5 text-xs">
       <div>
         Already a member?{' '}
-        <Link href="">
+        <Link href="/login">
           <a className="text-primary-500 hover:text-primary-600">Log in now.</a>
         </Link>
       </div>

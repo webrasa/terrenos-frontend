@@ -25,7 +25,7 @@ const Hero = () => (
           </>
         }
         button={
-          <Link href="/login">
+          <Link href="/signup">
             <a>
               <Button xl>Get Started for Free</Button>
             </a>
