@@ -6,9 +6,9 @@ import { Label } from '../form/Label';
 import { FullCenterSection } from '../layout/FullCenterSection';
 
 const SignUpForm = () => (
-  <FullCenterSection title="Create new account">
+  <FullCenterSection title="Create your account">
     <form className="text-left grid gap-y-2">
-      <Label htmlFor="email">Email address</Label>
+      <Label htmlFor="email">Email</Label>
       <FormElement>
         <input id="email" type="text" />
       </FormElement>
@@ -20,7 +20,7 @@ const SignUpForm = () => (
 
       <div className="mt-3">
         <button type="submit" className="w-full">
-          <Button full>Sign up</Button>
+          <Button full>Sign up with Email</Button>
         </button>
       </div>
     </form>

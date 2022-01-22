@@ -76,7 +76,7 @@ const LoginForm = () => {
       </div>
       <Divider content="Or continue with" />
       <form className="text-left grid gap-y-2">
-        <Label htmlFor="email">Email address</Label>
+        <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" />
         </FormElement>
