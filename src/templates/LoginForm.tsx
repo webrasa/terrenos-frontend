@@ -20,6 +20,15 @@ const LoginForm = () => {
     });
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    await Auth.signIn({
+      username: 'devops@oufnix.com',
+      password: 'Test123@123123',
+    });
+  };
+
   return (
     <FullCenterSection title="Sign in to your account">
       <div className="space-y-4">
@@ -75,7 +84,7 @@ const LoginForm = () => {
         </button>
       </div>
       <Divider content="Or continue with" />
-      <form className="text-left grid gap-y-2">
+      <form className="text-left grid gap-y-2" onSubmit={handleSubmit}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" />
