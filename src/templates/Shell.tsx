@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Button } from '../button/Button';
 import { SidebarHeader } from '../shell/SidebarHeader';
@@ -13,8 +14,12 @@ type IShellProps = {
 };
 
 const Shell = (props: IShellProps) => {
-  const handleLogout = () => {
-    Auth.signOut();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await Auth.signOut();
+
+    await router.push('/login');
   };
 
   return (

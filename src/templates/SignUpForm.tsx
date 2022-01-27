@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import { Button } from '../button/Button';
 import { FormElement } from '../form/FormElement';
@@ -7,13 +8,20 @@ import { Label } from '../form/Label';
 import { FullCenterSection } from '../layout/FullCenterSection';
 
 const SignUpForm = () => {
+  const router = useRouter();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     await Auth.signUp({
       username: 'devops@oufnix.com',
-      password: 'Test123@123123',
+      password: '',
     });
+
+    await router.push(
+      '/confirm-signup?email=devops@oufnix.com',
+      '/confirm-signup'
+    );
   };
 
   return (
@@ -28,7 +36,7 @@ const SignUpForm = () => {
         </FormElement>
 
         <Label htmlFor="password">Password</Label>
-        <FormElement>
+        <FormElement helper="Your password must be at least 8 characters with a mix of upper and lower case letters, numbers, and symbols.">
           <input id="password" type="text" />
         </FormElement>
 

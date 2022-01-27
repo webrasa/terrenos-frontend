@@ -25,7 +25,7 @@ const LoginForm = () => {
 
     await Auth.signIn({
       username: 'devops@oufnix.com',
-      password: 'Test123@123123',
+      password: '',
     });
   };
 

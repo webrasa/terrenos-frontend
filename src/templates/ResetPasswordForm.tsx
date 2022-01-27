@@ -1,5 +1,6 @@
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
+import router from 'next/router';
 
 import { Button } from '../button/Button';
 import { FormElement } from '../form/FormElement';
@@ -11,12 +12,17 @@ const ResetPasswordForm = () => {
     e.preventDefault();
 
     await Auth.forgotPassword('devops@oufnix.com');
+
+    await router.push(
+      '/confirm-forgot-password?email=devops@oufnix.com',
+      '/confirm-forgot-password'
+    );
   };
 
   return (
     <FullCenterSection
       title="Forgot your password?"
-      description="Enter your email and we'll send you"
+      description="Enter your email and we'll send you a verification code."
     >
       <form className="text-left grid gap-y-2" onSubmit={handleSubmit}>
         <Label htmlFor="email">Email</Label>
@@ -26,7 +32,7 @@ const ResetPasswordForm = () => {
 
         <div className="mt-3">
           <button type="submit" className="w-full">
-            <Button full>Send reset instructions</Button>
+            <Button full>Send email</Button>
           </button>
         </div>
       </form>
