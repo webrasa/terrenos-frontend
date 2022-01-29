@@ -1,5 +1,5 @@
 import { Meta } from '../layout/Meta';
-import { ConfirmForgotPasswordForm } from '../templates/ConfirmForgotPasswordForm';
+import { ConfirmForgotPasswordForm } from '../templates/auth/ConfirmForgotPasswordForm';
 import { AppConfig } from '../utils/AppConfig';
 
 const ConfirmForgotPassword = () => (

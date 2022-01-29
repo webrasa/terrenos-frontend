@@ -1,5 +1,5 @@
 import { Meta } from '../layout/Meta';
-import { SignUpForm } from '../templates/SignUpForm';
+import { SignUpForm } from '../templates/auth/SignUpForm';
 import { AppConfig } from '../utils/AppConfig';
 
 const SignUp = () => (

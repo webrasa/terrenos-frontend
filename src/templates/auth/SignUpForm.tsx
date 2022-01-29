@@ -2,10 +2,10 @@ import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Button } from '../button/Button';
-import { FormElement } from '../form/FormElement';
-import { Label } from '../form/Label';
-import { FullCenterSection } from '../layout/FullCenterSection';
+import { Button } from '../../button/Button';
+import { FormElement } from '../../form/FormElement';
+import { Label } from '../../form/Label';
+import { FullCenterSection } from '../../layout/FullCenterSection';
 
 const SignUpForm = () => {
   const router = useRouter();

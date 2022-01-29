@@ -2,12 +2,12 @@ import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 
-import { Button } from '../button/Button';
-import { SocialButton } from '../button/SocialButton';
-import { Divider } from '../divider/Divider';
-import { FormElement } from '../form/FormElement';
-import { Label } from '../form/Label';
-import { FullCenterSection } from '../layout/FullCenterSection';
+import { Button } from '../../button/Button';
+import { SocialButton } from '../../button/SocialButton';
+import { Divider } from '../../divider/Divider';
+import { FormElement } from '../../form/FormElement';
+import { Label } from '../../form/Label';
+import { FullCenterSection } from '../../layout/FullCenterSection';
 
 const LoginForm = () => {
   const handleSignInGoogle = () => {

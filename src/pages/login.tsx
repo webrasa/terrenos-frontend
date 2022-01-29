@@ -1,5 +1,5 @@
 import { Meta } from '../layout/Meta';
-import { LoginForm } from '../templates/LoginForm';
+import { LoginForm } from '../templates/auth/LoginForm';
 import { AppConfig } from '../utils/AppConfig';
 
 const Login = () => (

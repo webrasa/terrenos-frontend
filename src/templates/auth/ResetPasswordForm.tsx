@@ -2,10 +2,10 @@ import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import router from 'next/router';
 
-import { Button } from '../button/Button';
-import { FormElement } from '../form/FormElement';
-import { Label } from '../form/Label';
-import { FullCenterSection } from '../layout/FullCenterSection';
+import { Button } from '../../button/Button';
+import { FormElement } from '../../form/FormElement';
+import { Label } from '../../form/Label';
+import { FullCenterSection } from '../../layout/FullCenterSection';
 
 const ResetPasswordForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {

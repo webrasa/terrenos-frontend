@@ -1,5 +1,5 @@
 import { Meta } from '../layout/Meta';
-import { ResetPasswordForm } from '../templates/ResetPasswordForm';
+import { ResetPasswordForm } from '../templates/auth/ResetPasswordForm';
 import { AppConfig } from '../utils/AppConfig';
 
 const ForgotPassword = () => (
