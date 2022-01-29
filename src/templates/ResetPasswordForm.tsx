@@ -14,7 +14,12 @@ const ResetPasswordForm = () => {
     await Auth.forgotPassword('devops@oufnix.com');
 
     await router.push(
-      '/confirm-forgot-password?email=devops@oufnix.com',
+      {
+        pathname: '/confirm-forgot-password',
+        query: {
+          email: 'devops@oufnix.com',
+        },
+      },
       '/confirm-forgot-password'
     );
   };
