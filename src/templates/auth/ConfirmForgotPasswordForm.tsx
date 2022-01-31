@@ -57,7 +57,7 @@ const ConfirmForgotPasswordForm = () => {
         </FormElement>
         <Label htmlFor="password">New password</Label>
         <FormElement helper="Your password must be at least 8 characters with a mix of upper and lower case letters, numbers, and symbols.">
-          <input id="password" type="text" {...register('password')} />
+          <input id="password" type="password" {...register('password')} />
         </FormElement>
 
         <div className="mt-3">

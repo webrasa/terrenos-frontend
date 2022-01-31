@@ -107,7 +107,7 @@ const LoginForm = () => {
 
         <Label htmlFor="password">Password</Label>
         <FormElement>
-          <input id="password" type="text" {...register('password')} />
+          <input id="password" type="password" {...register('password')} />
         </FormElement>
 
         <div className="mt-3">
