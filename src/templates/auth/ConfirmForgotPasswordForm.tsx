@@ -1,4 +1,5 @@
 import { Auth } from 'aws-amplify';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
@@ -71,6 +72,16 @@ const ConfirmForgotPasswordForm = () => {
           </button>
         </div>
       </form>
+
+      <div className="mt-5 text-xs">
+        Didn&apos;t receive the email?{' '}
+        <Link href="/forgot-password">
+          <a className="text-primary-500 hover:text-primary-600">
+            Resend a new code
+          </a>
+        </Link>
+        .
+      </div>
     </FullCenterSection>
   );
 };
