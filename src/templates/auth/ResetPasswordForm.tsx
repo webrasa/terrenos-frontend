@@ -1,43 +1,56 @@
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
-import router from 'next/router';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 import { Button } from '../../button/Button';
 import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
+import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 
-const ResetPasswordForm = () => {
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+type IResetPasswordForm = {
+  email: string;
+};
 
-    await Auth.forgotPassword('devops@oufnix.com');
+const ResetPasswordForm = () => {
+  const router = useRouter();
+  const { register, handleSubmit } = useForm<IResetPasswordForm>();
+
+  const sendAsync = useAsync(async (data: IResetPasswordForm) => {
+    await Auth.forgotPassword(data.email);
 
     await router.push(
       {
         pathname: '/confirm-forgot-password',
         query: {
-          email: 'devops@oufnix.com',
+          email: data.email,
         },
       },
       '/confirm-forgot-password'
     );
-  };
+  });
+
+  const handleSend = handleSubmit(async (data) => {
+    await sendAsync.execute(data);
+  });
 
   return (
     <FullCenterSection
       title="Forgot your password?"
       description="Enter your email and we'll send you a verification code."
     >
-      <form className="text-left grid gap-y-2" onSubmit={handleSubmit}>
+      <form className="text-left grid gap-y-2" onSubmit={handleSend}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
-          <input id="email" type="text" />
+          <input id="email" type="text" {...register('email')} />
         </FormElement>
 
         <div className="mt-3">
-          <button type="submit" className="w-full">
-            <Button full>Send email</Button>
+          <button type="submit" className="w-full" disabled={sendAsync.pending}>
+            <Button full loading={sendAsync.pending}>
+              Send email
+            </Button>
           </button>
         </div>
       </form>

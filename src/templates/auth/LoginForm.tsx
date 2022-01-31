@@ -1,15 +1,26 @@
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
 
 import { Button } from '../../button/Button';
 import { SocialButton } from '../../button/SocialButton';
 import { Divider } from '../../divider/Divider';
 import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
+import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 
+type ILoginForm = {
+  email: string;
+  password: string;
+};
+
 const LoginForm = () => {
+  const router = useRouter();
+  const { register, handleSubmit } = useForm<ILoginForm>();
+
   const handleSignInGoogle = () => {
     Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
   };
@@ -20,14 +31,18 @@ const LoginForm = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const loginAsync = useAsync(async (data: ILoginForm) => {
     await Auth.signIn({
-      username: 'devops@oufnix.com',
-      password: '',
+      username: data.email,
+      password: data.password,
     });
-  };
+
+    await router.push('/dashboard');
+  });
+
+  const handleLogin = handleSubmit(async (data) => {
+    await loginAsync.execute(data);
+  });
 
   return (
     <FullCenterSection title="Sign in to your account">
@@ -84,20 +99,26 @@ const LoginForm = () => {
         </button>
       </div>
       <Divider content="Or continue with" />
-      <form className="text-left grid gap-y-2" onSubmit={handleSubmit}>
+      <form className="text-left grid gap-y-2" onSubmit={handleLogin}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
-          <input id="email" type="text" />
+          <input id="email" type="text" {...register('email')} />
         </FormElement>
 
         <Label htmlFor="password">Password</Label>
         <FormElement>
-          <input id="password" type="text" />
+          <input id="password" type="text" {...register('password')} />
         </FormElement>
 
         <div className="mt-3">
-          <button type="submit" className="w-full">
-            <Button full>Sign in with Email</Button>
+          <button
+            type="submit"
+            className="w-full"
+            disabled={loginAsync.pending}
+          >
+            <Button full loading={loginAsync.pending}>
+              Sign in with Email
+            </Button>
           </button>
         </div>
       </form>
