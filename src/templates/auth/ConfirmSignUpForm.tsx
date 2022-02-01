@@ -31,9 +31,6 @@ const ConfirmSignUpForm = () => {
     await router.push(
       {
         pathname: '/login',
-        query: {
-          email,
-        },
       },
       '/login'
     );
