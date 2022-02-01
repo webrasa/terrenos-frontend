@@ -26,15 +26,12 @@ const ConfirmForgotPasswordForm = () => {
       data.password
     );
 
-    await router.push(
-      {
-        pathname: '/login',
-        query: {
-          email,
-        },
-      },
-      '/login'
-    );
+    await Auth.signIn({
+      username: email,
+      password: data.password,
+    });
+
+    await router.push('/dashboard');
   });
 
   const handleVerify = handleSubmit(async (data) => {
