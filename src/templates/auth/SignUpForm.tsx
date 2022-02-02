@@ -24,15 +24,9 @@ const SignUpForm = () => {
       password: data.password,
     });
 
-    await router.push(
-      {
-        pathname: '/confirm-signup',
-        query: {
-          email: data.email,
-        },
-      },
-      '/confirm-signup'
-    );
+    sessionStorage.setItem('confirm-signup-email', data.email);
+
+    await router.push('/confirm-signup');
   });
 
   const handleSignUp = handleSubmit(async (data) => {

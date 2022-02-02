@@ -16,7 +16,7 @@ type IConfirmSignUpForm = {
 
 const ConfirmSignUpForm = () => {
   const router = useRouter();
-  const email = `${router.query.email}`;
+  const email = sessionStorage.getItem('confirm-signup-email') || '';
   const { register, handleSubmit } = useForm<IConfirmSignUpForm>();
 
   const handleResend: MouseEventHandler = async (e: React.FormEvent) => {
@@ -28,12 +28,7 @@ const ConfirmSignUpForm = () => {
   const verifyAsync = useAsync(async (data: IConfirmSignUpForm) => {
     await Auth.confirmSignUp(email, data.verificationCode);
 
-    await router.push(
-      {
-        pathname: '/login',
-      },
-      '/login'
-    );
+    await router.push('/login');
   });
 
   const handleVerify = handleSubmit(async (data) => {

@@ -20,15 +20,9 @@ const ResetPasswordForm = () => {
   const sendAsync = useAsync(async (data: IResetPasswordForm) => {
     await Auth.forgotPassword(data.email);
 
-    await router.push(
-      {
-        pathname: '/confirm-forgot-password',
-        query: {
-          email: data.email,
-        },
-      },
-      '/confirm-forgot-password'
-    );
+    sessionStorage.setItem('confirm-forgot-password-email', data.email);
+
+    await router.push('/confirm-forgot-password');
   });
 
   const handleSend = handleSubmit(async (data) => {
