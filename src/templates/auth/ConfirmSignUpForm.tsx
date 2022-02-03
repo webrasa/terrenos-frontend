@@ -11,6 +11,7 @@ import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
+import { getSessionItem } from '../../utils/Session';
 
 type IConfirmSignUpForm = {
   verificationCode: string;
@@ -18,10 +19,7 @@ type IConfirmSignUpForm = {
 
 const ConfirmSignUpForm = () => {
   const router = useRouter();
-  const email =
-    typeof window !== 'undefined'
-      ? sessionStorage.getItem('confirm-signup-email') || ''
-      : '';
+  const email = getSessionItem('confirm-signup-email');
   const { register, handleSubmit } = useForm<IConfirmSignUpForm>();
   const [error, setError] = useState<string | null>(null);
 
