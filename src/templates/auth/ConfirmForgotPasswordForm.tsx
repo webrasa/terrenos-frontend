@@ -1,13 +1,18 @@
+import { useState } from 'react';
+
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
 import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
+import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
+import { getSessionItem } from '../../utils/Session';
 
 type IConfirmForgotPasswordForm = {
   verificationCode: string;
@@ -16,22 +21,27 @@ type IConfirmForgotPasswordForm = {
 
 const ConfirmForgotPasswordForm = () => {
   const router = useRouter();
-  const email = sessionStorage.getItem('confirm-forgot-password-email') || '';
+  const email = getSessionItem('confirm-forgot-password-email');
   const { register, handleSubmit } = useForm<IConfirmForgotPasswordForm>();
+  const [error, setError] = useState<string | null>(null);
 
   const verifyAsync = useAsync(async (data: IConfirmForgotPasswordForm) => {
-    await Auth.forgotPasswordSubmit(
-      email,
-      data.verificationCode,
-      data.password
-    );
+    try {
+      await Auth.forgotPasswordSubmit(
+        email,
+        data.verificationCode,
+        data.password
+      );
 
-    await Auth.signIn({
-      username: email,
-      password: data.password,
-    });
+      await Auth.signIn({
+        username: email,
+        password: data.password,
+      });
 
-    await router.push('/dashboard');
+      await router.push('/dashboard');
+    } catch (err) {
+      setError(mapAmplifyMessage(err));
+    }
   });
 
   const handleVerify = handleSubmit(async (data) => {
@@ -43,6 +53,8 @@ const ConfirmForgotPasswordForm = () => {
       title="Reset your password"
       description="Enter the 6-digit verification code sent to your email and set your new password."
     >
+      {error && <Alert text={error} />}
+
       <form className="text-left grid gap-y-2" onSubmit={handleVerify}>
         <Label htmlFor="verificationCode">Verification code</Label>
         <FormElement>
