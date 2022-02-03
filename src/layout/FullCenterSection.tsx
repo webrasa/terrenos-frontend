@@ -24,7 +24,7 @@ const FullCenterSection = (props: IFullCenterSectionProps) => (
             <div className="text-sm mb-4">{props.description}</div>
           )}
 
-          {props.children}
+          <div className="text-left">{props.children}</div>
         </div>
       </div>
     </div>

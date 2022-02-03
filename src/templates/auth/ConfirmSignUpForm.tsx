@@ -27,7 +27,7 @@ const ConfirmSignUpForm = () => {
     try {
       await Auth.confirmSignUp(email, data.verificationCode);
 
-      await router.push('/login');
+      await router.push('/confirm-signup-success');
     } catch (err) {
       setError(mapAmplifyMessage(err));
     }
@@ -44,7 +44,7 @@ const ConfirmSignUpForm = () => {
     >
       {error && <Alert text={error} />}
 
-      <form className="text-left grid gap-y-2" onSubmit={handleVerify}>
+      <form className="grid gap-y-2" onSubmit={handleVerify}>
         <Label htmlFor="verificationCode">Verification code</Label>
         <FormElement>
           <input
@@ -54,7 +54,7 @@ const ConfirmSignUpForm = () => {
           />
         </FormElement>
 
-        <div className="mt-3">
+        <div className="mt-3 text-center">
           <button
             type="submit"
             className="w-full"

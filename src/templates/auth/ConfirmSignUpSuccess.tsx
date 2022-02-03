@@ -23,7 +23,7 @@ const ConfirmSignUpSuccess = () => (
     title="Your email has been verified"
     description="You can now log into your account with your email."
   >
-    <div className="mt-6">
+    <div className="mt-6 text-center">
       <Link href="/login">
         <a>
           <Button>Go to login</Button>

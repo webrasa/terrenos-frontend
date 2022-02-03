@@ -45,7 +45,7 @@ const ResetPasswordForm = () => {
     >
       {error && <Alert text={error} />}
 
-      <form className="text-left grid gap-y-2" onSubmit={handleSend}>
+      <form className="grid gap-y-2" onSubmit={handleSend}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" {...register('email')} />
@@ -60,7 +60,7 @@ const ResetPasswordForm = () => {
         </div>
       </form>
 
-      <div className="mt-5 text-xs">
+      <div className="mt-5 text-xs text-center">
         <Link href="/login">
           <a className="text-primary-500 hover:text-primary-600">
             Go back to login

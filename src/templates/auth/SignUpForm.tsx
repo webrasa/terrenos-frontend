@@ -49,7 +49,7 @@ const SignUpForm = () => {
     >
       {error && <Alert text={error} />}
 
-      <form className="text-left grid gap-y-2" onSubmit={handleSignUp}>
+      <form className="grid gap-y-2" onSubmit={handleSignUp}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" {...register('email')} />
@@ -73,7 +73,7 @@ const SignUpForm = () => {
         </div>
       </form>
 
-      <div className="mt-5 text-xs">
+      <div className="mt-5 text-xs text-center">
         Already have an account?{' '}
         <Link href="/login">
           <a className="text-primary-500 hover:text-primary-600">Log in now</a>

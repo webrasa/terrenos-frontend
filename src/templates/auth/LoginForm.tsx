@@ -118,7 +118,7 @@ const LoginForm = () => {
       <Divider content="Or continue with" />
 
       {error && <Alert text={error} />}
-      <form className="text-left grid gap-y-2" onSubmit={handleLogin}>
+      <form className="grid gap-y-2" onSubmit={handleLogin}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" {...register('email')} />
@@ -142,7 +142,7 @@ const LoginForm = () => {
         </div>
       </form>
 
-      <div className="mt-5 text-xs">
+      <div className="mt-5 text-xs text-center">
         <div>
           <Link href="/forgot-password">
             <a className="text-primary-500 hover:text-primary-600">
