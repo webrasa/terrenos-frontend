@@ -1,9 +1,12 @@
+import { useState } from 'react';
+
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
 import { SocialButton } from '../../button/SocialButton';
 import { Divider } from '../../divider/Divider';
@@ -11,6 +14,7 @@ import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
+import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
 
 type ILoginForm = {
   email: string;
@@ -20,6 +24,7 @@ type ILoginForm = {
 const LoginForm = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ILoginForm>();
+  const [error, setError] = useState<string | null>(null);
 
   const handleSignInGoogle = () => {
     Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
@@ -32,12 +37,24 @@ const LoginForm = () => {
   };
 
   const loginAsync = useAsync(async (data: ILoginForm) => {
-    await Auth.signIn({
-      username: data.email,
-      password: data.password,
-    });
+    try {
+      await Auth.signIn({
+        username: data.email,
+        password: data.password,
+      });
 
-    await router.push('/dashboard');
+      await router.push('/dashboard');
+    } catch (err: any) {
+      if (err.code === 'UserNotConfirmedException') {
+        await Auth.resendSignUp(data.email);
+
+        sessionStorage.setItem('confirm-signup-email', data.email);
+
+        await router.push('/confirm-signup');
+      } else {
+        setError(mapAmplifyMessage(err));
+      }
+    }
   });
 
   const handleLogin = handleSubmit(async (data) => {
@@ -99,6 +116,8 @@ const LoginForm = () => {
         </button>
       </div>
       <Divider content="Or continue with" />
+
+      {error && <Alert text={error} />}
       <form className="text-left grid gap-y-2" onSubmit={handleLogin}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
