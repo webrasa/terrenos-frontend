@@ -1,13 +1,17 @@
+import { useState } from 'react';
+
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
+import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
 import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
+import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
 
 type ISignUpForm = {
   email: string;
@@ -17,16 +21,21 @@ type ISignUpForm = {
 const SignUpForm = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ISignUpForm>();
+  const [error, setError] = useState<string | null>(null);
 
   const signUpAsync = useAsync(async (data: ISignUpForm) => {
-    await Auth.signUp({
-      username: data.email,
-      password: data.password,
-    });
+    try {
+      await Auth.signUp({
+        username: data.email,
+        password: data.password,
+      });
 
-    sessionStorage.setItem('confirm-signup-email', data.email);
+      sessionStorage.setItem('confirm-signup-email', data.email);
 
-    await router.push('/confirm-signup');
+      await router.push('/confirm-signup');
+    } catch (err) {
+      setError(mapAmplifyMessage(err));
+    }
   });
 
   const handleSignUp = handleSubmit(async (data) => {
@@ -38,6 +47,8 @@ const SignUpForm = () => {
       title="Create your account"
       description="Sign up with your email address and password."
     >
+      {error && <Alert text={error} />}
+
       <form className="text-left grid gap-y-2" onSubmit={handleSignUp}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
