@@ -17,11 +17,11 @@ export type ISettings = {
   hasStripeCustomerId: boolean;
 };
 
-type ISubscriptionProps = {
+type IAccountSettingsProps = {
   settings: ISettings;
 };
 
-const Subscription = (props: ISubscriptionProps) => {
+const AccountSettings = (props: IAccountSettingsProps) => {
   const auth = useAuth();
 
   const customerPortalAsync = useAsync(async () => {
@@ -98,4 +98,4 @@ const Subscription = (props: ISubscriptionProps) => {
   );
 };
 
-export { Subscription };
+export { AccountSettings };
