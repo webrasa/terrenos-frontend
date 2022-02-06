@@ -8,6 +8,7 @@ type IAccountSettingDialogProps = {
   show: boolean;
   handleCancel: () => void;
   button: ReactNode;
+  children: ReactNode;
 };
 
 const AccountSettingDialog = (props: IAccountSettingDialogProps) => (
@@ -20,7 +21,9 @@ const AccountSettingDialog = (props: IAccountSettingDialogProps) => (
       Change email
     </Dialog.Title>
 
-    <div className="mt-2 text-sm text-gray-600">description</div>
+    <div className="mt-2 text-gray-600">description</div>
+
+    <div className="mt-4">{props.children}</div>
   </CancelableDialog>
 );
 

@@ -123,7 +123,9 @@ const AccountSettings = (props: IAccountSettingsProps) => {
             </Button>
           </button>
         }
-      />
+      >
+        Test
+      </AccountSettingDialog>
     </>
   );
 };
