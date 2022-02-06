@@ -115,7 +115,7 @@ const LoginForm = () => {
           </SocialButton>
         </button>
       </div>
-      <Divider content="Or continue with" />
+      <Divider>Or continue with</Divider>
 
       {error && <Alert text={error} />}
       <form className="grid gap-y-2" onSubmit={handleLogin}>
