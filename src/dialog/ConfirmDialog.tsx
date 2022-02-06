@@ -8,7 +8,6 @@ type IConfirmDialogProps = {
   title: string;
   description: string;
   show: boolean;
-  cancelText: string;
   handleCancel: () => void;
   button: ReactNode;
 };
@@ -52,7 +51,7 @@ const ConfirmDialog = (props: IConfirmDialogProps) => (
             <div className="mt-4 flex justify-end space-x-2">
               <button type="button" onClick={props.handleCancel}>
                 <Button sm secondary>
-                  {props.cancelText}
+                  Cancel
                 </Button>
               </button>
 

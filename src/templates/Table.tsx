@@ -77,7 +77,6 @@ const Table = (props: ITableProps) => {
         show={openDialogId !== ''}
         title="Your title here"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur purus. In laoreet tincidunt libero vitae sagittis."
-        cancelText="Cancel"
         handleCancel={handleCloseDialog}
         button={
           <button

@@ -1,8 +1,10 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
+import { Dialog } from '@headlessui/react';
 import { API } from 'aws-amplify';
 import Link from 'next/link';
 
+import { AccountSettingDialog } from '../account/AccountSettingDialog';
 import { AccountSettingLine } from '../account/AccountSettingLine';
 import { Button } from '../button/Button';
 import { useAsync } from '../hooks/UseAsync';
@@ -23,6 +25,7 @@ type IAccountSettingsProps = {
 
 const AccountSettings = (props: IAccountSettingsProps) => {
   const auth = useAuth();
+  const [showDialog, setShowDialog] = useState(false);
 
   const customerPortalAsync = useAsync(async () => {
     const customerPortalResult = await API.post(
@@ -39,6 +42,18 @@ const AccountSettings = (props: IAccountSettingsProps) => {
     await customerPortalAsync.execute();
   };
 
+  const handleShowEmail = () => {
+    setShowDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+  };
+
+  const handleSaveDialog = () => {
+    setShowDialog(false);
+  };
+
   return (
     <>
       <CardSection title={<div>Your Account</div>}>
@@ -46,7 +61,11 @@ const AccountSettings = (props: IAccountSettingsProps) => {
           <AccountSettingLine
             title="Email address"
             value={auth.providerInfo.email}
-            action={<Button sm>Change</Button>}
+            action={
+              <button type="button" onClick={handleShowEmail}>
+                <Button sm>Change</Button>
+              </button>
+            }
           />
 
           <AccountSettingLine
@@ -94,6 +113,27 @@ const AccountSettings = (props: IAccountSettingsProps) => {
           <UsageStats title="Random Stats 3" count={400} limit="10000 limit" />
         </div>
       </CardSection>
+
+      <AccountSettingDialog
+        show={showDialog}
+        handleCancel={handleCloseDialog}
+        button={
+          <button type="button" onClick={handleSaveDialog}>
+            <Button sm red>
+              Save
+            </Button>
+          </button>
+        }
+        content={
+          <>
+            <Dialog.Title className="text-gray-800 text-xl leading-6 font-medium">
+              Change email
+            </Dialog.Title>
+
+            <div className="mt-2 text-sm text-gray-600">description</div>
+          </>
+        }
+      />
     </>
   );
 };
