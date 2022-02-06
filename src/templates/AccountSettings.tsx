@@ -1,6 +1,5 @@
 import { MouseEventHandler, useState } from 'react';
 
-import { Dialog } from '@headlessui/react';
 import { API } from 'aws-amplify';
 import Link from 'next/link';
 
@@ -51,7 +50,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
   };
 
   const handleSaveDialog = () => {
-    setShowDialog(false);
+    handleCloseDialog();
   };
 
   return (
@@ -123,15 +122,6 @@ const AccountSettings = (props: IAccountSettingsProps) => {
               Save
             </Button>
           </button>
-        }
-        content={
-          <>
-            <Dialog.Title className="text-gray-800 text-xl leading-6 font-medium">
-              Change email
-            </Dialog.Title>
-
-            <div className="mt-2 text-sm text-gray-600">description</div>
-          </>
         }
       />
     </>
