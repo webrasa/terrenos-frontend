@@ -3,9 +3,9 @@ import { MouseEventHandler, useState } from 'react';
 import { API } from 'aws-amplify';
 import Link from 'next/link';
 
-import { AccountSettingDialog } from '../account/AccountSettingDialog';
 import { AccountSettingLine } from '../account/AccountSettingLine';
 import { Button } from '../button/Button';
+import { FormDialog } from '../dialog/FormDialog';
 import { useAsync } from '../hooks/UseAsync';
 import { useAuth } from '../hooks/UseAuth';
 import { CardSection } from '../layout/CardSection';
@@ -113,7 +113,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
         </div>
       </CardSection>
 
-      <AccountSettingDialog
+      <FormDialog
         show={showDialog}
         handleCancel={handleCloseDialog}
         button={
@@ -125,7 +125,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
         }
       >
         Test
-      </AccountSettingDialog>
+      </FormDialog>
     </>
   );
 };

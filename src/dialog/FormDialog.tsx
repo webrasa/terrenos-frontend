@@ -2,16 +2,16 @@ import { ReactNode } from 'react';
 
 import { Dialog } from '@headlessui/react';
 
-import { CancelableDialog } from '../dialog/CancelableDialog';
+import { CancelableDialog } from './CancelableDialog';
 
-type IAccountSettingDialogProps = {
+type IFormDialogProps = {
   show: boolean;
   handleCancel: () => void;
   button: ReactNode;
   children: ReactNode;
 };
 
-const AccountSettingDialog = (props: IAccountSettingDialogProps) => (
+const FormDialog = (props: IFormDialogProps) => (
   <CancelableDialog
     show={props.show}
     handleCancel={props.handleCancel}
@@ -27,4 +27,4 @@ const AccountSettingDialog = (props: IAccountSettingDialogProps) => (
   </CancelableDialog>
 );
 
-export { AccountSettingDialog };
+export { FormDialog };
