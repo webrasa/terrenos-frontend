@@ -12,6 +12,11 @@ import { UsageStats } from '../stats/UsageStats';
 import { SubscriptionPlan } from '../types/SubscriptionPlan';
 import { ChangeEmail } from './settings/ChangeEmail';
 
+enum DisplayState {
+  NONE = 'NONE',
+  CHANGE_EMAIL = 'CHANGE_EMAIL',
+}
+
 export type ISettings = {
   planId: string;
   planName: string;
@@ -24,7 +29,9 @@ type IAccountSettingsProps = {
 
 const AccountSettings = (props: IAccountSettingsProps) => {
   const auth = useAuth();
-  const [showDialog, setShowDialog] = useState(false);
+  const [dialogState, setDialogState] = useState<DisplayState>(
+    DisplayState.NONE
+  );
 
   const customerPortalAsync = useAsync(async () => {
     const customerPortalResult = await API.post(
@@ -41,12 +48,12 @@ const AccountSettings = (props: IAccountSettingsProps) => {
     await customerPortalAsync.execute();
   };
 
-  const handleShowEmail = () => {
-    setShowDialog(true);
+  const handleDialogState = (state: DisplayState) => {
+    setDialogState(state);
   };
 
   const handleCloseDialog = () => {
-    setShowDialog(false);
+    setDialogState(DisplayState.NONE);
   };
 
   return (
@@ -57,7 +64,10 @@ const AccountSettings = (props: IAccountSettingsProps) => {
             title="Email address"
             value={auth.providerInfo.email}
             action={
-              <button type="button" onClick={handleShowEmail}>
+              <button
+                type="button"
+                onClick={() => handleDialogState(DisplayState.CHANGE_EMAIL)}
+              >
                 <Button sm>Change</Button>
               </button>
             }
@@ -109,7 +119,10 @@ const AccountSettings = (props: IAccountSettingsProps) => {
         </div>
       </CardSection>
 
-      <ChangeEmail show={showDialog} handleCloseDialog={handleCloseDialog} />
+      <ChangeEmail
+        show={dialogState === DisplayState.CHANGE_EMAIL}
+        handleCloseDialog={handleCloseDialog}
+      />
     </>
   );
 };
