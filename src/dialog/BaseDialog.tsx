@@ -2,16 +2,13 @@ import { ReactNode } from 'react';
 
 import { Dialog } from '@headlessui/react';
 
-import { Button } from '../button/Button';
-
-type ICancelableDialogProps = {
+type IBaseDialogProps = {
   show: boolean;
   handleCancel: () => void;
   children: ReactNode;
-  button: ReactNode;
 };
 
-const CancelableDialog = (props: ICancelableDialogProps) => (
+const BaseDialog = (props: IBaseDialogProps) => (
   <Dialog
     className="fixed z-50 inset-0 overflow-y-auto"
     open={props.show}
@@ -25,19 +22,9 @@ const CancelableDialog = (props: ICancelableDialogProps) => (
       </span>
       <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden bg-white transition-all transform shadow-xl rounded-lg">
         {props.children}
-
-        <div className="mt-4 flex justify-end space-x-2">
-          <button type="button" onClick={props.handleCancel}>
-            <Button sm secondary>
-              Cancel
-            </Button>
-          </button>
-
-          {props.button}
-        </div>
       </div>
     </div>
   </Dialog>
 );
 
-export { CancelableDialog };
+export { BaseDialog };

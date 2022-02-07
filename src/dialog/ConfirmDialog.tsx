@@ -2,7 +2,8 @@ import { ReactNode } from 'react';
 
 import { Dialog } from '@headlessui/react';
 
-import { CancelableDialog } from './CancelableDialog';
+import { Button } from '../button/Button';
+import { BaseDialog } from './BaseDialog';
 
 type IConfirmDialogProps = {
   title: string;
@@ -13,11 +14,7 @@ type IConfirmDialogProps = {
 };
 
 const ConfirmDialog = (props: IConfirmDialogProps) => (
-  <CancelableDialog
-    show={props.show}
-    handleCancel={props.handleCancel}
-    button={props.button}
-  >
+  <BaseDialog show={props.show} handleCancel={props.handleCancel}>
     <div className="flex">
       <div className="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 flex-shrink-0">
         <svg
@@ -39,9 +36,19 @@ const ConfirmDialog = (props: IConfirmDialogProps) => (
         </Dialog.Title>
 
         <div className="mt-2 text-sm text-gray-600">{props.description}</div>
+
+        <div className="mt-4 flex justify-end space-x-2">
+          <button type="button" onClick={props.handleCancel}>
+            <Button sm secondary>
+              Cancel
+            </Button>
+          </button>
+
+          {props.button}
+        </div>
       </div>
     </div>
-  </CancelableDialog>
+  </BaseDialog>
 );
 
 export { ConfirmDialog };

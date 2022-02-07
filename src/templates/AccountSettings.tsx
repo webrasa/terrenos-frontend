@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { AccountSettingLine } from '../account/AccountSettingLine';
 import { Button } from '../button/Button';
 import { FormDialog } from '../dialog/FormDialog';
+import { FormElement } from '../form/FormElement';
+import { Label } from '../form/Label';
 import { useAsync } from '../hooks/UseAsync';
 import { useAuth } from '../hooks/UseAuth';
 import { CardSection } from '../layout/CardSection';
@@ -49,7 +51,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
     setShowDialog(false);
   };
 
-  const handleSaveDialog = () => {
+  const handleSubmitDialog = () => {
     handleCloseDialog();
   };
 
@@ -116,15 +118,14 @@ const AccountSettings = (props: IAccountSettingsProps) => {
       <FormDialog
         show={showDialog}
         handleCancel={handleCloseDialog}
-        button={
-          <button type="button" onClick={handleSaveDialog}>
-            <Button sm red>
-              Save
-            </Button>
-          </button>
-        }
+        handleSubmit={handleSubmitDialog}
       >
-        Test
+        <>
+          <Label htmlFor="email">New email</Label>
+          <FormElement>
+            <input id="email" type="text" />
+          </FormElement>
+        </>
       </FormDialog>
     </>
   );
