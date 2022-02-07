@@ -5,14 +5,12 @@ import Link from 'next/link';
 
 import { AccountSettingLine } from '../account/AccountSettingLine';
 import { Button } from '../button/Button';
-import { FormDialog } from '../dialog/FormDialog';
-import { FormElement } from '../form/FormElement';
-import { Label } from '../form/Label';
 import { useAsync } from '../hooks/UseAsync';
 import { useAuth } from '../hooks/UseAuth';
 import { CardSection } from '../layout/CardSection';
 import { UsageStats } from '../stats/UsageStats';
 import { SubscriptionPlan } from '../types/SubscriptionPlan';
+import { ChangeEmail } from './settings/ChangeEmail';
 
 export type ISettings = {
   planId: string;
@@ -49,10 +47,6 @@ const AccountSettings = (props: IAccountSettingsProps) => {
 
   const handleCloseDialog = () => {
     setShowDialog(false);
-  };
-
-  const handleSubmitDialog = () => {
-    handleCloseDialog();
   };
 
   return (
@@ -115,18 +109,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
         </div>
       </CardSection>
 
-      <FormDialog
-        show={showDialog}
-        handleCancel={handleCloseDialog}
-        handleSubmit={handleSubmitDialog}
-      >
-        <>
-          <Label htmlFor="email">New email</Label>
-          <FormElement>
-            <input id="email" type="text" />
-          </FormElement>
-        </>
-      </FormDialog>
+      <ChangeEmail show={showDialog} handleCloseDialog={handleCloseDialog} />
     </>
   );
 };

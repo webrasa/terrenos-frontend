@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { Dialog } from '@headlessui/react';
 
+import { Alert } from '../alert/Alert';
 import { Button } from '../button/Button';
 import { BaseDialog } from './BaseDialog';
 
@@ -10,6 +11,8 @@ type IFormDialogProps = {
   handleCancel: () => void;
   handleSubmit: () => void;
   children: ReactNode;
+  isSubmitting: boolean;
+  error: string | null;
 };
 
 const FormDialog = (props: IFormDialogProps) => (
@@ -23,18 +26,26 @@ const FormDialog = (props: IFormDialogProps) => (
       verify it.
     </div>
 
+    {props.error && <Alert text={props.error} />}
+
     <form className="grid gap-y-2" onSubmit={props.handleSubmit}>
       {props.children}
 
       <div className="mt-4 flex justify-end space-x-2">
-        <button type="button" onClick={props.handleCancel}>
+        <button
+          type="button"
+          onClick={props.handleCancel}
+          disabled={props.isSubmitting}
+        >
           <Button sm secondary>
             Cancel
           </Button>
         </button>
 
-        <button type="submit">
-          <Button sm>Save</Button>
+        <button type="submit" disabled={props.isSubmitting}>
+          <Button sm loading={props.isSubmitting}>
+            Save
+          </Button>
         </button>
       </div>
     </form>
