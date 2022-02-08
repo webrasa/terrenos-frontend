@@ -9,13 +9,12 @@ import { useAsync } from '../hooks/UseAsync';
 import { useAuth } from '../hooks/UseAuth';
 import { CardSection } from '../layout/CardSection';
 import { UsageStats } from '../stats/UsageStats';
+import { SettingsDialogState } from '../types/SettingsDialogState';
 import { SubscriptionPlan } from '../types/SubscriptionPlan';
 import { ChangeEmail } from './settings/ChangeEmail';
-
-enum DisplayState {
-  NONE = 'NONE',
-  CHANGE_EMAIL = 'CHANGE_EMAIL',
-}
+import { ChangePassword } from './settings/ChangePassword';
+import { ChangePasswordSuccess } from './settings/ChangePasswordSuccess';
+import { ConfirmChangeEmail } from './settings/ConfirmChangeEmail';
 
 export type ISettings = {
   planId: string;
@@ -29,8 +28,8 @@ type IAccountSettingsProps = {
 
 const AccountSettings = (props: IAccountSettingsProps) => {
   const auth = useAuth();
-  const [dialogState, setDialogState] = useState<DisplayState>(
-    DisplayState.NONE
+  const [dialogState, setDialogState] = useState<SettingsDialogState>(
+    SettingsDialogState.NONE
   );
 
   const customerPortalAsync = useAsync(async () => {
@@ -48,12 +47,12 @@ const AccountSettings = (props: IAccountSettingsProps) => {
     await customerPortalAsync.execute();
   };
 
-  const handleDialogState = (state: DisplayState) => {
+  const handleDialogState = (state: SettingsDialogState) => {
     setDialogState(state);
   };
 
   const handleCloseDialog = () => {
-    setDialogState(DisplayState.NONE);
+    setDialogState(SettingsDialogState.NONE);
   };
 
   return (
@@ -66,7 +65,9 @@ const AccountSettings = (props: IAccountSettingsProps) => {
             action={
               <button
                 type="button"
-                onClick={() => handleDialogState(DisplayState.CHANGE_EMAIL)}
+                onClick={() =>
+                  handleDialogState(SettingsDialogState.CHANGE_EMAIL)
+                }
               >
                 <Button sm>Change</Button>
               </button>
@@ -76,7 +77,16 @@ const AccountSettings = (props: IAccountSettingsProps) => {
           <AccountSettingLine
             title="Password"
             value="••••••••••••"
-            action={<Button sm>Change</Button>}
+            action={
+              <button
+                type="button"
+                onClick={() =>
+                  handleDialogState(SettingsDialogState.CHANGE_PASSWORD)
+                }
+              >
+                <Button sm>Change</Button>
+              </button>
+            }
           />
         </div>
       </CardSection>
@@ -120,7 +130,20 @@ const AccountSettings = (props: IAccountSettingsProps) => {
       </CardSection>
 
       <ChangeEmail
-        show={dialogState === DisplayState.CHANGE_EMAIL}
+        show={dialogState === SettingsDialogState.CHANGE_EMAIL}
+        handleDialogState={handleDialogState}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <ConfirmChangeEmail
+        show={dialogState === SettingsDialogState.CONFIRM_CHANGE_EMAIL}
+      />
+      <ChangePassword
+        show={dialogState === SettingsDialogState.CHANGE_PASSWORD}
+        handleDialogState={handleDialogState}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <ChangePasswordSuccess
+        show={dialogState === SettingsDialogState.CHANGE_PASSWORD_SUCCESS}
         handleCloseDialog={handleCloseDialog}
       />
     </>

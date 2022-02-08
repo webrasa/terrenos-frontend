@@ -1,5 +1,5 @@
 /**
- * Map the amplify message error and output the desired message.
+ * Map the amplify message error and output the desired message in authentication pages.
  * @param err - Exception raised by Amplify.
  */
 export const mapAmplifyMessage = (err: any) => {
@@ -17,6 +17,22 @@ export const mapAmplifyMessage = (err: any) => {
       /The username should either be a string/i.test(err.message)
     ) {
       return 'Incorrect username or password';
+    }
+
+    return err.message;
+  }
+
+  return 'Unexpected error occurred, please try again.';
+};
+
+/**
+ * Map the amplify message error and output the desired message in settings page.
+ * @param err - Exception raised by Amplify.
+ */
+export const mapAmplifyMessageSettings = (err: any) => {
+  if (err.message) {
+    if (/Incorrect username or password/i.test(err.message)) {
+      return 'Incorrect old password';
     }
 
     return err.message;

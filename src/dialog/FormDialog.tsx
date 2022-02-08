@@ -13,18 +13,18 @@ type IFormDialogProps = {
   children: ReactNode;
   isSubmitting: boolean;
   error: string | null;
+  title: string;
+  description: string;
+  hideCancelButton?: boolean;
 };
 
 const FormDialog = (props: IFormDialogProps) => (
   <BaseDialog show={props.show} handleCancel={props.handleCancel}>
     <Dialog.Title className="text-gray-800 text-xl leading-6 font-medium">
-      Change email
+      {props.title}
     </Dialog.Title>
 
-    <div className="mt-2 text-gray-600">
-      Update your new email and we&apos;ll send you a verification code to
-      verify it.
-    </div>
+    <div className="mt-2 text-gray-600 mb-2">{props.description}</div>
 
     {props.error && <Alert text={props.error} />}
 
@@ -32,15 +32,17 @@ const FormDialog = (props: IFormDialogProps) => (
       {props.children}
 
       <div className="mt-4 flex justify-end space-x-2">
-        <button
-          type="button"
-          onClick={props.handleCancel}
-          disabled={props.isSubmitting}
-        >
-          <Button sm secondary>
-            Cancel
-          </Button>
-        </button>
+        {!props.hideCancelButton && (
+          <button
+            type="button"
+            onClick={props.handleCancel}
+            disabled={props.isSubmitting}
+          >
+            <Button sm secondary>
+              Cancel
+            </Button>
+          </button>
+        )}
 
         <button type="submit" disabled={props.isSubmitting}>
           <Button sm loading={props.isSubmitting}>
