@@ -31,7 +31,7 @@ const ChangePasswordSuccess = (props: IChangePasswordSuccessProps) => (
       </Dialog.Title>
 
       <div className="mt-4 text-sm text-gray-600">
-        You can now use your new password to log.
+        You can now use your new password to log in.
       </div>
 
       <div className="mt-6">

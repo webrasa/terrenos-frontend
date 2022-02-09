@@ -1,7 +1,8 @@
 import useSWR from 'swr';
 
 import { getShell } from '../../layout/Shell';
-import { ISettings, AccountSettings } from '../../templates/AccountSettings';
+import { AccountSettings } from '../../templates/AccountSettings';
+import { ISettings } from '../../templates/settings/BillingSettings';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 
 const Settings: NextPageWithLayout = () => {
