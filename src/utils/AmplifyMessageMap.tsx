@@ -1,5 +1,5 @@
 /**
- * Map the amplify message error and output the desired message in authentication pages.
+ * Map the amplify message error and output the desired message in public authentication pages.
  * @param err - Exception raised by Amplify.
  */
 export const mapAmplifyMessage = (err: any) => {
@@ -26,7 +26,7 @@ export const mapAmplifyMessage = (err: any) => {
 };
 
 /**
- * Map the amplify message error and output the desired message in settings page.
+ * Map the amplify message error and output the desired message in settings page to update user personal information.
  * @param err - Exception raised by Amplify.
  */
 export const mapAmplifyMessageSettings = (err: any) => {
