@@ -10,7 +10,7 @@ type IChangePasswordSuccessProps = {
 };
 
 const ChangePasswordSuccess = (props: IChangePasswordSuccessProps) => (
-  <BaseDialog show={props.show} handleCancel={props.handleCloseDialog}>
+  <BaseDialog show={props.show} handleClose={props.handleCloseDialog}>
     <div className="text-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"

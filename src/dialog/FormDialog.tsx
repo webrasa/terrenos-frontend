@@ -19,7 +19,7 @@ type IFormDialogProps = {
 };
 
 const FormDialog = (props: IFormDialogProps) => (
-  <BaseDialog show={props.show} handleCancel={props.handleCancel}>
+  <BaseDialog show={props.show} handleClose={props.handleCancel}>
     <Dialog.Title className="text-gray-800 text-xl leading-6 font-medium">
       {props.title}
     </Dialog.Title>

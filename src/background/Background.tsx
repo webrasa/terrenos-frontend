@@ -6,6 +6,7 @@ type IBackgroundProps = {
 };
 
 /**
+ * Add a background color around the component children.
  * @component
  * @params props - Component props.
  * @param props.children - Children components.

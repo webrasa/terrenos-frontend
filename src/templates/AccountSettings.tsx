@@ -60,7 +60,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
       <CardSection title={<div>Your Account</div>}>
         <div className="space-y-6">
           <AccountSettingLine
-            title="Email address"
+            name="Email address"
             value={auth.providerInfo.email}
             action={
               <button
@@ -75,7 +75,7 @@ const AccountSettings = (props: IAccountSettingsProps) => {
           />
 
           <AccountSettingLine
-            title="Password"
+            name="Password"
             value="••••••••••••"
             action={
               <button
