@@ -19,7 +19,7 @@ const Navbar = () => (
               </Link>
             </li>
             <li>
-              <Link href="/login">
+              <Link href="/signup">
                 <a>
                   <Button>Start Free Trial</Button>
                 </a>

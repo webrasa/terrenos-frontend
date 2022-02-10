@@ -1,12 +1,12 @@
 import { Meta } from '../layout/Meta';
-import { LoginForm } from '../templates/auth/LoginForm';
+import { ConfirmSignUpSuccess } from '../templates/auth/ConfirmSignUpSuccess';
 import { AppConfig } from '../utils/AppConfig';
 
-const Login = () => (
+const ConfirmSignUp = () => (
   <div className="antialiased text-gray-900">
     <Meta title={AppConfig.title} description={AppConfig.description} />
-    <LoginForm />
+    <ConfirmSignUpSuccess />
   </div>
 );
 
-export default Login;
+export default ConfirmSignUp;

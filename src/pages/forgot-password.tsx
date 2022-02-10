@@ -1,12 +1,12 @@
 import { Meta } from '../layout/Meta';
-import { LoginForm } from '../templates/auth/LoginForm';
+import { ResetPasswordForm } from '../templates/auth/ResetPasswordForm';
 import { AppConfig } from '../utils/AppConfig';
 
-const Login = () => (
+const ForgotPassword = () => (
   <div className="antialiased text-gray-900">
     <Meta title={AppConfig.title} description={AppConfig.description} />
-    <LoginForm />
+    <ResetPasswordForm />
   </div>
 );
 
-export default Login;
+export default ForgotPassword;

@@ -3,11 +3,11 @@ import { MouseEventHandler } from 'react';
 import { API } from 'aws-amplify';
 import Link from 'next/link';
 
-import { Button } from '../button/Button';
-import { useAsync } from '../hooks/UseAsync';
-import { CardSection } from '../layout/CardSection';
-import { UsageStats } from '../stats/UsageStats';
-import { SubscriptionPlan } from '../types/SubscriptionPlan';
+import { Button } from '../../button/Button';
+import { useAsync } from '../../hooks/UseAsync';
+import { CardSection } from '../../layout/CardSection';
+import { UsageStats } from '../../stats/UsageStats';
+import { SubscriptionPlan } from '../../types/SubscriptionPlan';
 
 export type ISettings = {
   planId: string;
@@ -15,11 +15,11 @@ export type ISettings = {
   hasStripeCustomerId: boolean;
 };
 
-type ISubscriptionProps = {
+export type IBillingSettingsProps = {
   settings: ISettings;
 };
 
-const Subscription = (props: ISubscriptionProps) => {
+const BillingSettings = (props: IBillingSettingsProps) => {
   const customerPortalAsync = useAsync(async () => {
     const customerPortalResult = await API.post(
       'backend',
@@ -38,7 +38,7 @@ const Subscription = (props: ISubscriptionProps) => {
   return (
     <CardSection
       title={
-        <div className="text-lg font-semibold text-gray-800 flex flex-col space-y-3 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
+        <div className="flex flex-col space-y-3 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
           <div>Your Plan</div>
           <div className="flex space-x-2">
             {props.settings.hasStripeCustomerId && (
@@ -77,4 +77,4 @@ const Subscription = (props: ISubscriptionProps) => {
   );
 };
 
-export { Subscription };
+export { BillingSettings };

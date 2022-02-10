@@ -12,12 +12,18 @@ type ISocialButtonProps = {
  * @param props.children - Children components.
  */
 const SocialButton = (props: ISocialButtonProps) => (
-  <div className="flex items-center justify-center py-3 px-5 border-2 border-gray-300 hover:border-primary-400 rounded-md">
-    <span className="w-6 h-6 inline-flex items-center justify-center">
-      {props.icon}
-    </span>
+  <div className="signup-button flex items-center justify-center py-3 px-5 border-2 border-gray-300 hover:border-primary-400 rounded-md">
+    {props.icon}
 
-    <span className="ml-2 text-xl font-semibold">{props.children}</span>
+    <span className="ml-2 text-lg font-semibold">{props.children}</span>
+
+    <style jsx>
+      {`
+        .signup-button :global(svg) {
+          @apply w-6 h-6;
+        }
+      `}
+    </style>
   </div>
 );
 
