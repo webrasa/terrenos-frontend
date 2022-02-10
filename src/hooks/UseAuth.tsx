@@ -14,6 +14,10 @@ import useSWR from 'swr';
 type ProviderInfo = {
   id: string;
   email: string;
+  identities?: any;
+  // identities contains third party oauth information.
+  // identities is emptied if the user signed up with email.
+  // identities contains a stringify JSON data if the user signed up using social login.
 };
 
 /*
@@ -74,6 +78,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
           setUserInfo({
             email: currentUserInfo.attributes.email,
             id: currentUserInfo.attributes.id,
+            identities: currentUserInfo.attributes.identities,
           });
         } else {
           await router.push('/login');
