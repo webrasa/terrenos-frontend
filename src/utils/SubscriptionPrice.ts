@@ -11,6 +11,7 @@ export const SubscriptionPrice: ISubscriptionPrice = {
   dev: {
     pro: 'price_1JSmUjGrcfaiexgslH41e88g', // FIXME: Add your Stripe Subscription `priceId`
     business: '', // FIXME: Add your Stripe Subscription `priceId`
+    // You can add more subscription plan for example `enterprise`
   },
   prod: {
     pro: '', // FIXME: Add your Stripe Subscription `priceId`
