@@ -4,6 +4,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
+  eslint: {
+    dirs: ['.'],
+  },
   poweredByHeader: false,
   trailingSlash: true,
   // The starter code load resources from `public` folder with `router.basePath` in React components.
