@@ -4,7 +4,7 @@ import { FormElementBox } from '../form/FormElementBox';
 import { Label } from '../form/Label';
 
 const RandomForm = () => (
-  <form className="grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-8 gap-y-2 sm:gap-y-5">
+  <form className="grid grid-cols-1 gap-y-2 sm:grid-cols-6 sm:gap-y-5 lg:grid-cols-8">
     <Label htmlFor="name" colSpanSize="sm:col-span-2">
       Name *
     </Label>
@@ -68,7 +68,7 @@ const RandomForm = () => (
     </FormElement>
 
     <Label colSpanSize="sm:col-start-1 sm:col-span-2">Operating system</Label>
-    <div className="sm:col-span-4 flex space-x-5">
+    <div className="flex space-x-5 sm:col-span-4">
       <FormElementBox htmlFor="linux" text="Linux">
         <input id="linux" name="os" type="radio" />
       </FormElementBox>

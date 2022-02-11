@@ -6,8 +6,8 @@ type IQuestionAnswerProps = {
 };
 
 const QuestionAnswer = (props: IQuestionAnswerProps) => (
-  <div className="question-answer mt-8 first:mt-0 sm:w-3/4 border border-gray-200 rounded-md shadow p-4 sm:p-6 mx-auto">
-    <div className="text-2xl text-primary-500 font-semibold">
+  <div className="p-4 mx-auto mt-8 first:mt-0 rounded-md border border-gray-200 shadow sm:p-6 sm:w-3/4 question-answer">
+    <div className="text-2xl font-semibold text-primary-500">
       {props.question}
     </div>
 

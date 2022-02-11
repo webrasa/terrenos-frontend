@@ -68,7 +68,7 @@ const TodoForm = (props: ITodoFormProps) => {
 
   return (
     <form
-      className="grid grid-cols-1 sm:grid-cols-6 lg:grid-cols-8 gap-y-2 sm:gap-y-5"
+      className="grid grid-cols-1 gap-y-2 sm:grid-cols-6 sm:gap-y-5 lg:grid-cols-8"
       onSubmit={handleSave}
     >
       <Label htmlFor="title" colSpanSize="sm:col-span-2">

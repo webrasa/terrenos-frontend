@@ -32,11 +32,11 @@ const NavbarMenuCenter = (props: INavbarProps) => {
       </div>
 
       <nav className={`mt-2 md:mt-0 ${navClass}`}>
-        <ul className="navbar rounded-t">{props.children}</ul>
+        <ul className="rounded-t navbar">{props.children}</ul>
       </nav>
 
       <div className={`border-t border-gray-200 ${navClass}`}>
-        <ul className="navbar rounded-b">{props.rightMenu}</ul>
+        <ul className="rounded-b navbar">{props.rightMenu}</ul>
       </div>
 
       <style jsx>

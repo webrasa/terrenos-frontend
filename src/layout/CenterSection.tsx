@@ -5,8 +5,8 @@ type ICenterSectionProps = {
 };
 
 const CenterSection = (props: ICenterSectionProps) => (
-  <div className="md:h-full md:flex md:items-center md:justify-center">
-    <div className="max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-y-12">
+  <div className="md:flex md:justify-center md:items-center md:h-full">
+    <div className="grid grid-cols-1 gap-y-12 w-full max-w-4xl md:grid-cols-3">
       {props.children}
     </div>
   </div>

@@ -14,7 +14,7 @@ const ChangePasswordSuccess = (props: IChangePasswordSuccessProps) => (
     <div className="text-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="inline-block stroke-current text-primary-500 h-16 w-16"
+        className="inline-block w-16 h-16 text-primary-500 stroke-current"
         viewBox="0 0 24 24"
         fill="none"
         strokeWidth="1.5"
@@ -26,7 +26,7 @@ const ChangePasswordSuccess = (props: IChangePasswordSuccessProps) => (
         <path d="M9 12l2 2 4-4" />
       </svg>
 
-      <Dialog.Title className="mt-1 text-gray-800 text-xl leading-6 font-medium">
+      <Dialog.Title className="mt-1 text-xl font-medium leading-6 text-gray-800">
         Your password has been updated
       </Dialog.Title>
 

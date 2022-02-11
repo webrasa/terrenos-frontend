@@ -14,12 +14,12 @@ const FooterTwoRowsCopyright = (props: IFooterTwoRowsCopyrightProps) => (
   <>
     {props.children}
 
-    <div className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-y-5 items-center justify-center border-t border-gray-300 pt-10">
-      <div className="w-fit-content mx-auto lg:mx-0">
+    <div className="grid grid-cols-1 gap-y-5 justify-center items-center pt-10 mt-10 border-t border-gray-300 lg:grid-cols-3">
+      <div className="mx-auto lg:mx-0 w-fit-content">
         <FooterIconList>{props.iconList}</FooterIconList>
       </div>
 
-      <div className="w-fit-content mx-auto">
+      <div className="mx-auto w-fit-content">
         <VerticalFooterLinks>{props.verticalLinks}</VerticalFooterLinks>
       </div>
 

@@ -94,7 +94,7 @@ const VerticalFeatures = () => (
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
           malesuada nisi tellus, non imperdiet nisi tempor at:
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+        <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
           <VerticalFeatureElementColumn
             icon={
               <svg

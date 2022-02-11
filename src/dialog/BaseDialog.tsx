@@ -18,17 +18,14 @@ type IBaseDialogProps = {
  */
 const BaseDialog = (props: IBaseDialogProps) => (
   <Dialog
-    className="fixed z-50 inset-0 overflow-y-auto"
+    className="overflow-y-auto fixed inset-0 z-50"
     open={props.show}
     onClose={props.handleClose}
   >
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen">
       <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
 
-      <span className="inline-block h-screen align-middle" aria-hidden="true">
-        &#8203;
-      </span>
-      <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden bg-white transition-all transform shadow-xl rounded-lg">
+      <div className="relative p-6 my-8 w-full max-w-md bg-white rounded-lg shadow-xl">
         {props.children}
       </div>
     </div>

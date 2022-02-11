@@ -15,9 +15,9 @@ type IAccountSettingLineProps = {
  * @param props.action - Action can be performed to update the setting.
  */
 const AccountSettingLine = (props: IAccountSettingLineProps) => (
-  <div className="flex items-center justify-between bg-gray-100 p-6">
+  <div className="flex justify-between items-center p-6 bg-gray-100">
     <div>
-      <p className="text-gray-700 font-bold">{props.name}</p>
+      <p className="font-bold text-gray-700">{props.name}</p>
       <p>{props.value}</p>
     </div>
 

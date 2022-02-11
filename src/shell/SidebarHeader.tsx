@@ -42,7 +42,7 @@ const SidebarHeader = (props: ISidebarHeaderProps) => {
   );
 
   return (
-    <div className="antialiased text-gray-600 flex h-screen">
+    <div className="flex h-screen antialiased text-gray-600">
       <button
         className={clickableBgClass}
         onClick={handleClose}
@@ -57,9 +57,9 @@ const SidebarHeader = (props: ISidebarHeaderProps) => {
         bottomLinks={props.bottomLinks}
       />
 
-      <div className="bg-primary-100 flex-1 flex flex-col overflow-hidden">
-        <header className="h-16 bg-white flex items-center justify-between py-3 px-3 sm:px-6">
-          <div className="lg:hidden mr-2">
+      <div className="flex overflow-hidden flex-col flex-1 bg-primary-100">
+        <header className="flex justify-between items-center p-3 h-16 bg-white sm:px-6">
+          <div className="mr-2 lg:hidden">
             <ToggleMenuButton onClick={handleToggleMenu} />
           </div>
 
@@ -68,7 +68,7 @@ const SidebarHeader = (props: ISidebarHeaderProps) => {
           <div className="ml-auto">{props.leftContent}</div>
         </header>
 
-        <div className="flex-1 overflow-y-auto overflow-x-hidden py-8">
+        <div className="overflow-x-hidden overflow-y-auto flex-1 py-8">
           {props.children}
         </div>
       </div>

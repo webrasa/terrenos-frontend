@@ -31,17 +31,17 @@ const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
   return (
     <div className={verticalFeatureClass}>
       <div className="w-full md:w-1/2">
-        <div className="text-primary-500 text-sm font-bold">
+        <div className="text-sm font-bold text-primary-500">
           {props.subtitle}
         </div>
-        <h3 className="mt-1 text-3xl text-gray-900 font-semibold">
+        <h3 className="mt-1 text-3xl font-semibold text-gray-900">
           {props.title}
         </h3>
         <div className="mt-3 text-lg leading-7">{props.children}</div>
         {props.action && <div className="mt-4">{props.action}</div>}
       </div>
 
-      <div className="w-full md:w-1/2 md:p-5 lg:p-10 flex items-center justify-center">
+      <div className="flex justify-center items-center w-full md:p-5 md:w-1/2 lg:p-10">
         <img src={props.image.src} alt={props.image.alt} />
       </div>
 

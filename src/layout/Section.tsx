@@ -7,9 +7,9 @@ type ISectionProps = {
 };
 
 const Section = (props: ISectionProps) => (
-  <div className="px-3 lg:px-6 py-8">
+  <div className="py-8 px-3 lg:px-6">
     {props.title || props.description ? (
-      <div className="px-4 py-5 border-gray-200 bg-white rounded-md">
+      <div className="py-5 px-4 bg-white rounded-md border-gray-200">
         {props.title && (
           <div className="text-lg font-semibold text-gray-800">
             {props.title}

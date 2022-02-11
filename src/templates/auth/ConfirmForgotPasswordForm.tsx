@@ -55,7 +55,7 @@ const ConfirmForgotPasswordForm = () => {
     >
       {error && <Alert text={error} />}
 
-      <form className="text-left grid gap-y-2" onSubmit={handleVerify}>
+      <form className="grid gap-y-2 text-left" onSubmit={handleVerify}>
         <Label htmlFor="verificationCode">Verification code</Label>
         <FormElement>
           <input

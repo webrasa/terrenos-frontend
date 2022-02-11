@@ -27,8 +27,8 @@ const DetailTable = (props: IDetailTableProps) => (
      * Border style applied to div and not to table.
      * Border style don't work with table.
      */}
-    <div className="mt-5 border border-gray-200 rounded-xl overflow-auto">
-      <table className="min-w-full mx-auto text-left whitespace-nowrap overflow-auto">
+    <div className="overflow-auto mt-5 rounded-xl border border-gray-200">
+      <table className="overflow-auto mx-auto min-w-full text-left whitespace-nowrap">
         <thead className="bg-gray-100 border-b border-gray-300">
           {props.head}
         </thead>

@@ -5,7 +5,7 @@ type IVerticalFooterLinksProps = {
 };
 
 const VerticalFooterLinks = (props: IVerticalFooterLinksProps) => (
-  <ul className="vertical-footer-links grid grid-cols-2 divide-x divide-gray-300 gap-x-2 text-center">
+  <ul className="grid grid-cols-2 gap-x-2 text-center divide-x divide-gray-300 vertical-footer-links">
     {props.children}
 
     <style jsx>

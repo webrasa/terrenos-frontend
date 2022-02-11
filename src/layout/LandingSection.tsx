@@ -24,14 +24,14 @@ const LandingSection = (props: ILandingSectionProps) => (
     }`}
   >
     {(props.title || props.subtitle || props.description) && (
-      <div className="mb-12 text-center w-full md:w-4/5 lg:w-3/4 xl:w-2/3 mx-auto">
+      <div className="mx-auto mb-12 w-full text-center md:w-4/5 lg:w-3/4 xl:w-2/3">
         {props.subtitle && (
-          <div className="text-primary-500 text-sm font-bold">
+          <div className="text-sm font-bold text-primary-500">
             {props.subtitle}
           </div>
         )}
         {props.title && (
-          <h2 className="text-4xl text-gray-900 font-bold">{props.title}</h2>
+          <h2 className="text-4xl font-bold text-gray-900">{props.title}</h2>
         )}
         {props.description && (
           <div className="mt-4 text-xl">{props.description}</div>

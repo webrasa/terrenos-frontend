@@ -16,10 +16,10 @@ type IConfirmDialogProps = {
 const ConfirmDialog = (props: IConfirmDialogProps) => (
   <BaseDialog show={props.show} handleClose={props.handleCancel}>
     <div className="flex">
-      <div className="w-10 h-10 flex items-center justify-center rounded-full bg-red-100 flex-shrink-0">
+      <div className="flex shrink-0 justify-center items-center w-10 h-10 bg-red-100 rounded-full">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="text-red-600 stroke-current w-6 h-6 stroke-2"
+          className="w-6 h-6 text-red-600 stroke-current stroke-2"
           viewBox="0 0 24 24"
           fill="none"
           strokeLinecap="round"
@@ -31,13 +31,13 @@ const ConfirmDialog = (props: IConfirmDialogProps) => (
       </div>
 
       <div className="ml-4">
-        <Dialog.Title className="text-gray-800 text-xl leading-6 font-medium">
+        <Dialog.Title className="text-xl font-medium leading-6 text-gray-800">
           {props.title}
         </Dialog.Title>
 
         <div className="mt-2 text-sm text-gray-600">{props.description}</div>
 
-        <div className="mt-4 flex justify-end space-x-2">
+        <div className="flex justify-end mt-4 space-x-2">
           <button type="button" onClick={props.handleCancel}>
             <Button sm secondary>
               Cancel

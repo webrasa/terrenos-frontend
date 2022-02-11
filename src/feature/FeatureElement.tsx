@@ -7,13 +7,13 @@ type IFeatureElementProps = {
 };
 
 const FeatureElement = (props: IFeatureElementProps) => (
-  <div className="feature-element flex flex-col">
-    <div className="w-12 h-12 mx-auto flex items-center justify-center rounded-full bg-gray-100 border border-gray-300 flex-shrink-0">
+  <div className="flex flex-col feature-element">
+    <div className="flex shrink-0 justify-center items-center mx-auto w-12 h-12 bg-gray-100 rounded-full border border-gray-300">
       {props.icon}
     </div>
 
     <div className="mt-2 text-center">
-      <div className="text-2xl text-gray-900 font-semibold">{props.title}</div>
+      <div className="text-2xl font-semibold text-gray-900">{props.title}</div>
       <div className="mt-2 text-lg leading-8">{props.children}</div>
     </div>
 

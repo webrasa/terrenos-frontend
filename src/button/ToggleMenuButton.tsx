@@ -10,12 +10,12 @@ type IToggleMenuButtonProps = {
  */
 const ToggleMenuButton = (props: IToggleMenuButtonProps) => (
   <button
-    className="p-2 text-gray-900 rounded-md hover:bg-white"
+    className="p-2 text-gray-900 hover:bg-white rounded-md"
     onClick={props.onClick}
     type="button"
   >
     <svg
-      className="stroke-current h-6 w-6"
+      className="w-6 h-6 stroke-current"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       strokeWidth="1.5"
