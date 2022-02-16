@@ -4,6 +4,7 @@ import Amplify, { API } from 'aws-amplify';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 
+import { PoweredBy } from '../badge/PoweredBy';
 import { AwsConfig } from '../utils/AwsConfig';
 import { NextPageWithLayout } from '../utils/NextLayout';
 
@@ -27,6 +28,8 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
       }}
     >
       {getLayout(<Component {...pageProps} />)}
+
+      <PoweredBy />
     </SWRConfig>
   );
 };

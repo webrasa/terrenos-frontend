@@ -141,7 +141,7 @@ const Shell = (props: IShellProps) => {
       }
       leftContent={
         <>
-          <a href="mailto:contact@example.com">
+          <a href="mailto:contact@creativedesignsguru.com">
             <Button>Need Help?</Button>
           </a>
         </>
