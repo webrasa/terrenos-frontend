@@ -136,7 +136,7 @@ const LoginForm = () => {
             disabled={loginAsync.pending}
           >
             <Button full loading={loginAsync.pending}>
-              Sign in with Email
+              Sign in
             </Button>
           </button>
         </div>
