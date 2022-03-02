@@ -6,7 +6,7 @@ The Dashboard displays all Todos created by the user in the table component. It 
 
 ### Requirements
 
-- Node.js and npm
+- Node.js 14+ and npm
 
 ### Getting started
 
