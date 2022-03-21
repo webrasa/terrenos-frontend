@@ -7,6 +7,7 @@ import { mutate } from 'swr';
 import { Button } from '../button/Button';
 import { ConfirmDialog } from '../dialog/ConfirmDialog';
 import { useAsync } from '../hooks/UseAsync';
+import { useAuth } from '../hooks/UseAuth';
 import { DetailTable } from '../table/DetailTable';
 import { ITodo } from '../types/ITodo';
 
@@ -15,6 +16,7 @@ type ITableProps = {
 };
 
 const Table = (props: ITableProps) => {
+  const { currentTeamId } = useAuth();
   const [openDialogId, setOpenDialogId] = useState('');
 
   const handleOpenDialog = (id: string) => {
@@ -26,11 +28,11 @@ const Table = (props: ITableProps) => {
   };
 
   const deleteAsync = useAsync(async (openId: string) => {
-    await API.del('backend', `/todo/${openId}`, null);
+    await API.del('backend', `/${currentTeamId}/todo/${openId}`, {});
 
     handleCloseDialog();
 
-    mutate('/todo/list');
+    mutate(`/${currentTeamId}/todo/list`);
   });
 
   const handleDelete: MouseEventHandler = async (event) => {

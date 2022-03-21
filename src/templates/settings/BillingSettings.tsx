@@ -24,7 +24,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
     const customerPortalResult = await API.post(
       'backend',
       '/billing/customer-portal',
-      null
+      {}
     );
 
     window.location.assign(customerPortalResult.url);

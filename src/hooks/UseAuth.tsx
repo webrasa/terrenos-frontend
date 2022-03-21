@@ -34,12 +34,17 @@ interface CognitoUserExt extends CognitoUser {
 type UserProfile = {
   id: string;
   firstSignIn: string;
+  teamList: {
+    displayName: string;
+    id: string;
+  }[];
 };
 
 // User information from backend (/user/profile) and authentication provider
 type UserAuth = {
   providerInfo: ProviderInfo;
   profile: UserProfile;
+  currentTeamId: string;
 };
 
 // React Hook Context for authentification
@@ -90,14 +95,26 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   }, [router]);
 
   // Retrieves User information and if it's the first sign in, it creates a new data entry for the user.
-  const { data } = useSWR<UserProfile>(userInfo ? '/user/profile' : null);
+  const { data } = useSWR<UserProfile>(
+    userInfo ? `/user/profile?email=${userInfo.email}` : null
+  );
 
   if (!userInfo || !data) {
     return null;
   }
 
+  if (!data.teamList[0]) {
+    throw new Error("Auth: the user don't have any team");
+  }
+
   return (
-    <AuthContext.Provider value={{ providerInfo: userInfo, profile: data }}>
+    <AuthContext.Provider
+      value={{
+        providerInfo: userInfo,
+        profile: data,
+        currentTeamId: data.teamList[0].id,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

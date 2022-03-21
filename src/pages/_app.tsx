@@ -23,7 +23,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <SWRConfig
       value={{
-        fetcher: (url: string) => API.get('backend', url, null),
+        fetcher: (url: string) => API.get('backend', url, {}),
         revalidateOnFocus: false,
       }}
     >

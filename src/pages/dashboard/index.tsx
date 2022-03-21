@@ -2,6 +2,7 @@ import Link from 'next/link';
 import useSWR from 'swr';
 
 import { Button } from '../../button/Button';
+import { useAuth } from '../../hooks/UseAuth';
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
 import { MessageState } from '../../message/MessageState';
@@ -14,7 +15,8 @@ type IResponse = {
 };
 
 const Index: NextPageWithLayout = () => {
-  const { data } = useSWR<IResponse>('/todo/list');
+  const { currentTeamId } = useAuth();
+  const { data } = useSWR<IResponse>(`/${currentTeamId}/todo/list`);
 
   if (!data) {
     return null;

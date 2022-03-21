@@ -9,6 +9,7 @@ import { Button } from '../button/Button';
 import { FormElement } from '../form/FormElement';
 import { Label } from '../form/Label';
 import { useAsync } from '../hooks/UseAsync';
+import { useAuth } from '../hooks/UseAuth';
 import { ITodo } from '../types/ITodo';
 import { setFormError } from '../utils/Forms';
 
@@ -25,6 +26,7 @@ type ITodoFormProps = {
  * @param props.defaultValues - Default value to initialized in edit mode.
  */
 const TodoForm = (props: ITodoFormProps) => {
+  const { currentTeamId } = useAuth();
   const router = useRouter();
   const {
     register,
@@ -45,12 +47,12 @@ const TodoForm = (props: ITodoFormProps) => {
     try {
       if (props.id) {
         // In EDIT mode, edit existing Todo
-        await API.put('backend', `/todo/${props.id}`, {
+        await API.put('backend', `/${currentTeamId}/todo/${props.id}`, {
           body: data,
         });
       } else {
         // In ADD mode, add a new Todo
-        await API.post('backend', '/todo/create', {
+        await API.post('backend', `/${currentTeamId}/todo/create`, {
           body: data,
         });
       }

@@ -1,15 +1,19 @@
 import { useRouter } from 'next/dist/client/router';
 import useSWR from 'swr';
 
+import { useAuth } from '../../../hooks/UseAuth';
 import { Section } from '../../../layout/Section';
 import { getShell } from '../../../layout/Shell';
 import { TodoForm } from '../../../templates/TodoForm';
 import { NextPageWithLayout } from '../../../utils/NextLayout';
 
 const EditTodo: NextPageWithLayout = () => {
+  const { currentTeamId } = useAuth();
   const router = useRouter();
 
-  const { data } = useSWR(router.isReady ? `/todo/${router.query.id}` : null);
+  const { data } = useSWR(
+    router.isReady ? `/${currentTeamId}/todo/${router.query.id}` : null
+  );
 
   if (!data) {
     return null;
