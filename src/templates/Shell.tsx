@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
+import Avvvatars from 'avvvatars-react';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Button } from '../button/Button';
+import { useAuth } from '../hooks/UseAuth';
 import { SidebarHeader } from '../shell/SidebarHeader';
 import { SidebarLink } from '../shell/SidebarLink';
 
@@ -14,6 +15,7 @@ type IShellProps = {
 };
 
 const Shell = (props: IShellProps) => {
+  const { providerInfo } = useAuth();
   const router = useRouter();
 
   const handleLogout = async () => {
@@ -141,9 +143,13 @@ const Shell = (props: IShellProps) => {
       }
       leftContent={
         <>
-          <a href="mailto:contact@creativedesignsguru.com">
-            <Button>Need Help?</Button>
-          </a>
+          <Avvvatars
+            value={providerInfo.email}
+            size={48}
+            border={true}
+            borderSize={2}
+            borderColor="#e2e8f0"
+          />
         </>
       }
     >
