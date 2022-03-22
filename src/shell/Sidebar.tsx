@@ -1,8 +1,9 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 
 import { Listbox } from '@headlessui/react';
 import classNames from 'classnames';
 
+import { useAuth } from '../hooks/UseAuth';
 import { Logo } from '../templates/Logo';
 
 type ISidebarProps = {
@@ -10,15 +11,6 @@ type ISidebarProps = {
   topLinks: ReactNode;
   bottomLinks: ReactNode;
 };
-
-const people = [
-  { name: 'Wade Cooper' },
-  { name: 'Arlene Mccoy' },
-  { name: 'Devon Webb' },
-  { name: 'Tom Cook' },
-  { name: 'Tanya Fox' },
-  { name: 'Hellen Schmidt' },
-];
 
 /**
  * Sidebar menu.
@@ -29,6 +21,9 @@ const people = [
  * @param props.bottomLinks - Menu located at the bottom of the sidebar.
  */
 const Sidebar = (props: ISidebarProps) => {
+  const { teamList, currentTeamInd, setCurrentTeamInd, currentTeam } =
+    useAuth();
+
   const sidebarClass = classNames(
     'w-64',
     'inset-y-0',
@@ -53,8 +48,6 @@ const Sidebar = (props: ISidebarProps) => {
     'lg:translate-x-0'
   );
 
-  const [selectedPeople, setSelectedPeople] = useState(people?.[0]?.name);
-
   return (
     <div className={sidebarClass}>
       <div className="text-center">
@@ -62,9 +55,9 @@ const Sidebar = (props: ISidebarProps) => {
       </div>
 
       <div className="relative mt-3">
-        <Listbox value={selectedPeople} onChange={setSelectedPeople}>
+        <Listbox value={currentTeamInd} onChange={setCurrentTeamInd}>
           <Listbox.Button className="relative py-2 pr-10 pl-3 w-full font-semibold text-left text-gray-800 rounded-md border border-gray-300 focus:border-primary-300 focus:outline-none focus:ring focus:ring-primary-200/50 shadow-sm cursor-default">
-            <span className="block truncate">{selectedPeople}</span>
+            <span className="block truncate">{currentTeam.displayName}</span>
             <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -82,10 +75,10 @@ const Sidebar = (props: ISidebarProps) => {
 
           <div className="absolute mt-1 w-full bg-white rounded-md shadow-md">
             <Listbox.Options className="overflow-auto py-1 max-h-60 leading-6 rounded-md border border-gray-200 focus:outline-none shadow-xs">
-              {people.map((elt) => (
+              {teamList.map((team, ind) => (
                 <Listbox.Option
-                  key={elt.name}
-                  value={elt.name}
+                  key={team.id}
+                  value={ind}
                   className={({ active }) => {
                     return classNames(
                       'relative py-2 pr-9 pl-3 focus:outline-none cursor-default select-none',
@@ -101,7 +94,7 @@ const Sidebar = (props: ISidebarProps) => {
                           selected ? 'font-semibold' : 'font-normal'
                         )}
                       >
-                        {elt.name}
+                        {team.displayName}
                       </span>
 
                       {selected && (

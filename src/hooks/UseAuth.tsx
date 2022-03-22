@@ -30,21 +30,26 @@ interface CognitoUserExt extends CognitoUser {
   attributes: ProviderInfo;
 }
 
+type Team = {
+  displayName: string;
+  id: string;
+};
+
 // Information returned by /user/profile endpoint
 type UserProfile = {
   id: string;
   firstSignIn: string;
-  teamList: {
-    displayName: string;
-    id: string;
-  }[];
+  teamList: Team[];
 };
 
 // User information from backend (/user/profile) and authentication provider
 type UserAuth = {
   providerInfo: ProviderInfo;
   profile: UserProfile;
-  currentTeamId: string;
+  teamList: Team[];
+  setCurrentTeamInd: (teamInd: number) => void;
+  currentTeamInd: number;
+  currentTeam: Team;
 };
 
 // React Hook Context for authentification
@@ -63,6 +68,7 @@ type IAuthProviderProps = {
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<ProviderInfo | null>(null);
+  const [currentTeamInd, setCurrentTeamInd] = useState<number>(0);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -103,8 +109,12 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     return null;
   }
 
-  if (!data.teamList[0]) {
-    throw new Error("Auth: the user don't have any team");
+  const currentTeam = data.teamList[currentTeamInd];
+
+  if (!currentTeam) {
+    throw new Error(
+      "Incorrect state: the user shouldn't be able to select out of bounds in teamList"
+    );
   }
 
   return (
@@ -112,7 +122,10 @@ export const AuthProvider = (props: IAuthProviderProps) => {
       value={{
         providerInfo: userInfo,
         profile: data,
-        currentTeamId: data.teamList[0].id,
+        teamList: data.teamList,
+        setCurrentTeamInd,
+        currentTeamInd,
+        currentTeam,
       }}
     >
       {props.children}

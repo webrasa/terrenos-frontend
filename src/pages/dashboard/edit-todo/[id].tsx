@@ -8,11 +8,11 @@ import { TodoForm } from '../../../templates/TodoForm';
 import { NextPageWithLayout } from '../../../utils/NextLayout';
 
 const EditTodo: NextPageWithLayout = () => {
-  const { currentTeamId } = useAuth();
+  const { currentTeam } = useAuth();
   const router = useRouter();
 
   const { data } = useSWR(
-    router.isReady ? `/${currentTeamId}/todo/${router.query.id}` : null
+    router.isReady ? `/${currentTeam.id}/todo/${router.query.id}` : null
   );
 
   if (!data) {

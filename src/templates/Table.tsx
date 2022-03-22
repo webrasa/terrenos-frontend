@@ -16,7 +16,7 @@ type ITableProps = {
 };
 
 const Table = (props: ITableProps) => {
-  const { currentTeamId } = useAuth();
+  const { currentTeam } = useAuth();
   const [openDialogId, setOpenDialogId] = useState('');
 
   const handleOpenDialog = (id: string) => {
@@ -28,11 +28,11 @@ const Table = (props: ITableProps) => {
   };
 
   const deleteAsync = useAsync(async (openId: string) => {
-    await API.del('backend', `/${currentTeamId}/todo/${openId}`, {});
+    await API.del('backend', `/${currentTeam.id}/todo/${openId}`, {});
 
     handleCloseDialog();
 
-    mutate(`/${currentTeamId}/todo/list`);
+    mutate(`/${currentTeam.id}/todo/list`);
   });
 
   const handleDelete: MouseEventHandler = async (event) => {

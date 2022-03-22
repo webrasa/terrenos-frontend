@@ -15,8 +15,8 @@ type IResponse = {
 };
 
 const Index: NextPageWithLayout = () => {
-  const { currentTeamId } = useAuth();
-  const { data } = useSWR<IResponse>(`/${currentTeamId}/todo/list`);
+  const { currentTeam } = useAuth();
+  const { data } = useSWR<IResponse>(`/${currentTeam.id}/todo/list`);
 
   if (!data) {
     return null;
