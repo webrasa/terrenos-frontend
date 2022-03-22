@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { Menu } from '@headlessui/react';
 import { PropsOf } from '@headlessui/react/dist/types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import Link, { LinkProps } from 'next/link';
 
 type IMenuInternalLinkProps = {
@@ -19,8 +19,8 @@ const MenuInternalLink = (
   return (
     <Link href={href}>
       <a
-        className={classnames(
-          'flex justify-between py-2 px-4 w-full text-sm font-semibold leading-5 text-left text-gray-700',
+        className={classNames(
+          'flex justify-between py-2 px-4 w-full text-sm font-semibold leading-5 text-left text-gray-700 ',
           active && 'text-white bg-indigo-500'
         )}
         {...rest}

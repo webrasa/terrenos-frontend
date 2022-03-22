@@ -62,6 +62,12 @@
         "import/prefer-default-export": "off", // Named export is easier to refactor automatically
         "class-methods-use-this": "off", // _document.tsx use render method without `this` keyword
         "tailwindcss/no-custom-classname": "off", // Disabled otherwise nightmare to allow each custom tailwind classes
+        "tailwindcss/classnames-order": [
+          "warn",
+          {
+            "callees": ["classNames", "classnames", "clsx", "ctl"]
+          }
+        ],
         "@typescript-eslint/no-unused-vars": "off",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
