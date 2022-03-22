@@ -31,12 +31,12 @@ const MenuInternalLink = (
   );
 };
 
-type MenuLinkProps = {
+type IMenuLinkProps = {
   href: string;
   children: ReactNode;
 };
 
-const MenuLink = (props: MenuLinkProps) => (
+const MenuLink = (props: IMenuLinkProps) => (
   <Menu.Item>
     {({ active }) => (
       <MenuInternalLink href={props.href} active={active}>
