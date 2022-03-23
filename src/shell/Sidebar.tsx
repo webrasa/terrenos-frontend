@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { Listbox } from '@headlessui/react';
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 
 import { useAuth } from '../hooks/UseAuth';
 import { Logo } from '../templates/Logo';
@@ -11,6 +12,10 @@ type ISidebarProps = {
   topLinks: ReactNode;
   bottomLinks: ReactNode;
 };
+
+enum TeamOption {
+  NEW = 'NEW',
+}
 
 /**
  * Sidebar menu.
@@ -23,6 +28,20 @@ type ISidebarProps = {
 const Sidebar = (props: ISidebarProps) => {
   const { teamList, currentTeamInd, setCurrentTeamInd, currentTeam } =
     useAuth();
+  const router = useRouter();
+
+  const optionList = teamList.concat({
+    id: TeamOption.NEW,
+    displayName: 'Create new team',
+  });
+
+  const handleTeamChange = async (teamInd: number) => {
+    if (teamInd >= optionList.length - 1) {
+      await router.push('/dashboard/create-team');
+    } else {
+      setCurrentTeamInd(teamInd);
+    }
+  };
 
   const sidebarClass = classNames(
     'w-64',
@@ -55,7 +74,7 @@ const Sidebar = (props: ISidebarProps) => {
       </div>
 
       <div className="relative mt-3">
-        <Listbox value={currentTeamInd} onChange={setCurrentTeamInd}>
+        <Listbox value={currentTeamInd} onChange={handleTeamChange}>
           <Listbox.Button className="relative py-2 pr-10 pl-3 w-full font-semibold text-left text-gray-800 rounded-md border border-gray-300 focus:border-primary-300 focus:outline-none focus:ring focus:ring-primary-200/50 shadow-sm cursor-default">
             <span className="block truncate">{currentTeam.displayName}</span>
             <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
@@ -75,7 +94,7 @@ const Sidebar = (props: ISidebarProps) => {
 
           <div className="absolute mt-1 w-full bg-white rounded-md shadow-md">
             <Listbox.Options className="overflow-auto py-1 max-h-60 leading-6 rounded-md border border-gray-200 focus:outline-none shadow-xs">
-              {teamList.map((team, ind) => (
+              {optionList.map((team, ind) => (
                 <Listbox.Option
                   key={team.id}
                   value={ind}

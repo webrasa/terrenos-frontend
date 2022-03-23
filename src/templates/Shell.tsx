@@ -23,7 +23,7 @@ const Shell = (props: IShellProps) => {
   const handleLogout = async () => {
     await Auth.signOut();
 
-    await router.push('/login');
+    await router.push('/');
   };
 
   return (

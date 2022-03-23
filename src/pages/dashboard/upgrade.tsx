@@ -38,35 +38,37 @@ const Upgrade: NextPageWithLayout = () => {
 
   return (
     <CenterSection>
-      <PricingModel
-        button={
-          <Button full secondary>
-            Current Plan
-          </Button>
-        }
-        button2={
-          <button
-            type="button"
-            onClick={(event: React.MouseEvent<HTMLElement>) => {
-              handleSubscribe(event, 'pro');
-            }}
-            disabled={subscribeAsync.pending}
-          >
-            <Button full>Choose This Plan</Button>
-          </button>
-        }
-        button3={
-          <button
-            type="button"
-            onClick={(event: React.MouseEvent<HTMLElement>) => {
-              handleSubscribe(event, 'business');
-            }}
-            disabled={subscribeAsync.pending}
-          >
-            <Button full>Choose This Plan</Button>
-          </button>
-        }
-      />
+      <div className="grid grid-cols-1 gap-y-12 w-full max-w-4xl md:grid-cols-3">
+        <PricingModel
+          button={
+            <Button full secondary>
+              Current Plan
+            </Button>
+          }
+          button2={
+            <button
+              type="button"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                handleSubscribe(event, 'pro');
+              }}
+              disabled={subscribeAsync.pending}
+            >
+              <Button full>Choose This Plan</Button>
+            </button>
+          }
+          button3={
+            <button
+              type="button"
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                handleSubscribe(event, 'business');
+              }}
+              disabled={subscribeAsync.pending}
+            >
+              <Button full>Choose This Plan</Button>
+            </button>
+          }
+        />
+      </div>
     </CenterSection>
   );
 };
