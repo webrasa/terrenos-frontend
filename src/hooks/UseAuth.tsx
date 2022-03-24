@@ -112,9 +112,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   const currentTeam = data.teamList[currentTeamInd];
 
   if (!currentTeam) {
-    throw new Error(
-      "Incorrect state: the user shouldn't be able to make an `teamList` out of bounds"
-    );
+    return null;
   }
 
   return (

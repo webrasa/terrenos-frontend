@@ -1,6 +1,7 @@
 import { CenterSection } from '../../layout/CenterSection';
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
+import { CreateTeamForm } from '../../templates/CreateTeamForm';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 
 const CreateTeam: NextPageWithLayout = () => (
@@ -10,7 +11,7 @@ const CreateTeam: NextPageWithLayout = () => (
         title="Create new team"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at metus dictum, vulputate tellus eu, feugiat sem. Ut porta erat pharetra dui commodo lobortis."
       >
-        New
+        <CreateTeamForm />
       </Section>
     </div>
   </CenterSection>
