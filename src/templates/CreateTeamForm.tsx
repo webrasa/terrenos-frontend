@@ -1,3 +1,4 @@
+import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
@@ -16,7 +17,12 @@ type ICreateTeamForm = {
 };
 
 const CreateTeamForm = () => {
-  const { register, setError, handleSubmit } = useForm<ICreateTeamForm>();
+  const {
+    register,
+    setError,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ICreateTeamForm>();
   const { providerInfo, setCurrentTeamInd, teamList } = useAuth();
   const router = useRouter();
 
@@ -48,6 +54,20 @@ const CreateTeamForm = () => {
 
       <FormElement>
         <input id="displayName" type="text" {...register('displayName')} />
+
+        <ErrorMessage
+          errors={errors}
+          name="displayName"
+          render={({ message }) => {
+            let text;
+
+            if (message === 'too_small') {
+              text = 'Display name is too small, please add a name';
+            }
+
+            return <div className="text-sm text-red-600">{text}</div>;
+          }}
+        />
       </FormElement>
 
       <div className="flex justify-end mt-4">
