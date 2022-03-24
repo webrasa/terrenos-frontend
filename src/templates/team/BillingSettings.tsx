@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { Button } from '../../button/Button';
 import { useAsync } from '../../hooks/UseAsync';
+import { useAuth } from '../../hooks/UseAuth';
 import { CardSection } from '../../layout/CardSection';
 import { UsageStats } from '../../stats/UsageStats';
 import { SubscriptionPlan } from '../../types/SubscriptionPlan';
@@ -20,10 +21,11 @@ export type IBillingSettingsProps = {
 };
 
 const BillingSettings = (props: IBillingSettingsProps) => {
+  const { currentTeam } = useAuth();
   const customerPortalAsync = useAsync(async () => {
     const customerPortalResult = await API.post(
       'backend',
-      '/billing/customer-portal',
+      `/${currentTeam.id}/billing/customer-portal`,
       {}
     );
 
