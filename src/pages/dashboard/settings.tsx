@@ -1,8 +1,8 @@
 import useSWR from 'swr';
 
 import { getShell } from '../../layout/Shell';
-import { AccountSettings } from '../../templates/account/AccountSettings';
-import { ISettings } from '../../templates/account/BillingSettings';
+import { ISettings } from '../../templates/team/BillingSettings';
+import { TeamSettings } from '../../templates/team/TeamSettings';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 
 const Settings: NextPageWithLayout = () => {
@@ -12,7 +12,7 @@ const Settings: NextPageWithLayout = () => {
     return null;
   }
 
-  return <AccountSettings settings={data} />;
+  return <TeamSettings settings={data} />;
 };
 
 Settings.getLayout = getShell('Settings');

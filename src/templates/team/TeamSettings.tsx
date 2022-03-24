@@ -1,9 +1,9 @@
 import { BillingSettings, IBillingSettingsProps } from './BillingSettings';
 
-const AccountSettings = (props: IBillingSettingsProps) => (
+const TeamSettings = (props: IBillingSettingsProps) => (
   <>
     <BillingSettings settings={props.settings} />
   </>
 );
 
-export { AccountSettings };
+export { TeamSettings };
