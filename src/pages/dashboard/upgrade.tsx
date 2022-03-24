@@ -2,6 +2,7 @@ import { API } from 'aws-amplify';
 
 import { Button } from '../../button/Button';
 import { useAsync } from '../../hooks/UseAsync';
+import { useAuth } from '../../hooks/UseAuth';
 import { CenterSection } from '../../layout/CenterSection';
 import { getShell } from '../../layout/Shell';
 import { PricingModel } from '../../templates/PricingModel';
@@ -10,10 +11,12 @@ import getStripe from '../../utils/StripeClient';
 import { getPriceIdFromName } from '../../utils/SubscriptionPrice';
 
 const Upgrade: NextPageWithLayout = () => {
+  const { currentTeam } = useAuth();
+
   const subscribeAsync = useAsync(async (priceId: string) => {
     const checkoutResult = await API.post(
       'backend',
-      '/billing/create-checkout-session',
+      `/${currentTeam.id}/billing/create-checkout-session`,
       {
         body: {
           priceId,
