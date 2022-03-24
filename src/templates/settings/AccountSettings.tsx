@@ -1,9 +1,6 @@
-import { useAuth } from '../hooks/UseAuth';
-import {
-  BillingSettings,
-  IBillingSettingsProps,
-} from './settings/BillingSettings';
-import { UserInfoSettings } from './settings/UserInfoSettings';
+import { useAuth } from '../../hooks/UseAuth';
+import { BillingSettings, IBillingSettingsProps } from './BillingSettings';
+import { UserInfoSettings } from './UserInfoSettings';
 
 const AccountSettings = (props: IBillingSettingsProps) => {
   const auth = useAuth();

@@ -1,8 +1,9 @@
 import { CenterSection } from '../../layout/CenterSection';
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
+import { NextPageWithLayout } from '../../utils/NextLayout';
 
-const CreateTeam = () => (
+const CreateTeam: NextPageWithLayout = () => (
   <CenterSection>
     <div className="max-w-screen-sm">
       <Section

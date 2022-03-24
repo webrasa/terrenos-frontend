@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 
 import { getShell } from '../../layout/Shell';
-import { AccountSettings } from '../../templates/AccountSettings';
+import { AccountSettings } from '../../templates/settings/AccountSettings';
 import { ISettings } from '../../templates/settings/BillingSettings';
 import { NextPageWithLayout } from '../../utils/NextLayout';
 
