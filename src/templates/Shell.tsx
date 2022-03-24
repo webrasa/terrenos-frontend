@@ -164,7 +164,9 @@ const Shell = (props: IShellProps) => {
             </div>
 
             <div className="py-1">
-              <MenuLink href="/settings">Account</MenuLink>
+              {!providerInfo.identities && (
+                <MenuLink href="/dashboard/account">Account</MenuLink>
+              )}
               <MenuLink href="/">Landing page</MenuLink>
             </div>
 
