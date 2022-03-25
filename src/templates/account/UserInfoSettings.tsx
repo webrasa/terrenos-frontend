@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-import { AccountSettingLine } from '../../account/AccountSettingLine';
 import { Button } from '../../button/Button';
 import { useAuth } from '../../hooks/UseAuth';
 import { CardSection } from '../../layout/CardSection';
+import { SettingLine } from '../../settings/SettingLine';
 import { SettingsDialogState } from '../../types/SettingsDialogState';
 import { ChangeEmail } from './ChangeEmail';
 import { ChangePassword } from './ChangePassword';
@@ -26,11 +26,11 @@ const UserInfoSettings = () => {
 
   return (
     <>
-      <CardSection title={<div>Your Account</div>}>
+      <CardSection title="Your Account">
         <div className="space-y-6">
-          <AccountSettingLine
+          <SettingLine
             name="Email address"
-            value={auth.providerInfo.email}
+            description={auth.providerInfo.email}
             action={
               <button
                 type="button"
@@ -43,9 +43,9 @@ const UserInfoSettings = () => {
             }
           />
 
-          <AccountSettingLine
+          <SettingLine
             name="Password"
-            value="••••••••••••"
+            description="••••••••••••"
             action={
               <button
                 type="button"

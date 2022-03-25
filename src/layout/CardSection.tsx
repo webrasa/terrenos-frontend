@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactChild, ReactNode } from 'react';
 
 type ICardSectionProps = {
-  title: ReactNode;
+  title: ReactChild;
   children: ReactNode;
 };
 

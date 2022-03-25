@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-type IAccountSettingLineProps = {
+type ISettingLineProps = {
   name: string;
-  value: string;
+  description?: string;
   action: ReactNode;
 };
 
@@ -14,15 +14,15 @@ type IAccountSettingLineProps = {
  * @param props.value - Current value of the setting.
  * @param props.action - Action can be performed to update the setting.
  */
-const AccountSettingLine = (props: IAccountSettingLineProps) => (
+const SettingLine = (props: ISettingLineProps) => (
   <div className="flex justify-between items-center p-6 bg-gray-100">
     <div>
       <p className="font-bold text-gray-700">{props.name}</p>
-      <p>{props.value}</p>
+      {props.description && <p>{props.description}</p>}
     </div>
 
     {props.action}
   </div>
 );
 
-export { AccountSettingLine };
+export { SettingLine };
