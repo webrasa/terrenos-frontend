@@ -41,7 +41,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
     <CardSection
       title={
         <div className="flex flex-col space-y-3 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
-          <div>Your Plan</div>
+          <div>Billing</div>
           <div className="flex space-x-2">
             {props.settings.hasStripeCustomerId && (
               <button

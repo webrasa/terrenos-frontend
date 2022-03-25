@@ -12,7 +12,7 @@ type IFormDialogProps = {
   handleSubmit: () => void;
   children: ReactNode;
   isSubmitting: boolean;
-  error: string | null;
+  error?: string | null;
   title: string;
   description: string;
   hideCancelButton?: boolean;

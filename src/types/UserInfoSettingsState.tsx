@@ -1,4 +1,4 @@
-export enum SettingsDialogState {
+export enum UserInfoSettingsState {
   NONE = 'NONE',
   CHANGE_EMAIL = 'CHANGE_EMAIL',
   CONFIRM_CHANGE_EMAIL = 'CONFIRM_CHANGE_EMAIL',

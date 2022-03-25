@@ -6,13 +6,13 @@ import Link from 'next/link';
 import { ToggleMenuButton } from '../button/ToggleMenuButton';
 import { useMenu } from '../hooks/UseMenu';
 
-type INavbarProps = {
+type INavbarMenuCenterProps = {
   logo: ReactNode;
   children: ReactNode;
   rightMenu: ReactNode;
 };
 
-const NavbarMenuCenter = (props: INavbarProps) => {
+const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
   const { showMenu, handleToggleMenu } = useMenu();
 
   const navClass = classNames('w-full', 'md:w-auto', 'md:block', {
