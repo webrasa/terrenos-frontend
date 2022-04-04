@@ -35,7 +35,7 @@ const CreateTeamForm = () => {
         },
       });
 
-      mutate(`/user/profile?email=${providerInfo.email}`);
+      await mutate(`/user/profile?email=${providerInfo.email}`);
       setCurrentTeamInd(teamList.length);
       await router.push('/dashboard');
     } catch (ex) {

@@ -5,8 +5,8 @@ import { useAuth } from '../../hooks/UseAuth';
 import { CardSection } from '../../layout/CardSection';
 import { SettingLine } from '../../settings/SettingLine';
 import { UserInfoSettingsState } from '../../types/UserInfoSettingsState';
-import { ChangeEmail } from './ChangeEmail';
-import { ChangePassword } from './ChangePassword';
+import { ChangeEmailDialog } from './ChangeEmailDialog';
+import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
 import { ConfirmChangeEmail } from './ConfirmChangeEmail';
 
@@ -60,7 +60,7 @@ const UserInfoSettings = () => {
         </div>
       </CardSection>
 
-      <ChangeEmail
+      <ChangeEmailDialog
         show={dialogState === UserInfoSettingsState.CHANGE_EMAIL}
         handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}
@@ -68,7 +68,7 @@ const UserInfoSettings = () => {
       <ConfirmChangeEmail
         show={dialogState === UserInfoSettingsState.CONFIRM_CHANGE_EMAIL}
       />
-      <ChangePassword
+      <ChangePasswordDialog
         show={dialogState === UserInfoSettingsState.CHANGE_PASSWORD}
         handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}

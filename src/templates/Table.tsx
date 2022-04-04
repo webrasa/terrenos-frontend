@@ -30,9 +30,9 @@ const Table = (props: ITableProps) => {
   const deleteAsync = useAsync(async (openId: string) => {
     await API.del('backend', `/${currentTeam.id}/todo/${openId}`, {});
 
-    handleCloseDialog();
+    await mutate(`/${currentTeam.id}/todo/list`);
 
-    mutate(`/${currentTeam.id}/todo/list`);
+    handleCloseDialog();
   });
 
   const handleDelete: MouseEventHandler = async (event) => {

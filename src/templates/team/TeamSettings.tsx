@@ -7,6 +7,7 @@ import { SettingLine } from '../../settings/SettingLine';
 import { TeamSettingsState } from '../../types/TeamSettingsState';
 import { BillingSettings, IBillingSettingsProps } from './BillingSettings';
 import { ChangeTeamDisplayName } from './ChangeTeamDisplayName';
+import { DeleteTeamDialog } from './DeleteTeamDialog';
 
 const TeamSettings = (props: IBillingSettingsProps) => {
   const { currentTeam } = useAuth();
@@ -45,7 +46,10 @@ const TeamSettings = (props: IBillingSettingsProps) => {
         <SettingLine
           name="Delete team"
           action={
-            <button type="button">
+            <button
+              type="button"
+              onClick={() => handleDialogState(TeamSettingsState.DELETE_TEAM)}
+            >
               <Button sm red>
                 Delete
               </Button>
@@ -56,6 +60,10 @@ const TeamSettings = (props: IBillingSettingsProps) => {
 
       <ChangeTeamDisplayName
         show={dialogState === TeamSettingsState.CHANGE_DISPLAY_NAME}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <DeleteTeamDialog
+        show={dialogState === TeamSettingsState.DELETE_TEAM}
         handleCloseDialog={handleCloseDialog}
       />
     </>

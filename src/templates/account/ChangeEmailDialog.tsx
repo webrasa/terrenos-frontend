@@ -14,13 +14,13 @@ type IChangeEmailForm = {
   email: string;
 };
 
-type IChangeEmailProps = {
+type IChangeEmailDialogProps = {
   show: boolean;
   handleDialogState: (displayState: UserInfoSettingsState) => void;
   handleCloseDialog: () => void;
 };
 
-const ChangeEmail = (props: IChangeEmailProps) => {
+const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
   const { register, handleSubmit } = useForm<IChangeEmailForm>();
   const [error, setError] = useState<string | null>(null);
 
@@ -60,4 +60,4 @@ const ChangeEmail = (props: IChangeEmailProps) => {
   );
 };
 
-export { ChangeEmail };
+export { ChangeEmailDialog };

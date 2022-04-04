@@ -15,13 +15,13 @@ type IChangePasswordForm = {
   newPassword: string;
 };
 
-type IChangePasswordProps = {
+type IChangePasswordDialogProps = {
   show: boolean;
   handleDialogState: (displayState: UserInfoSettingsState) => void;
   handleCloseDialog: () => void;
 };
 
-const ChangePassword = (props: IChangePasswordProps) => {
+const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
   const { register, handleSubmit, reset, clearErrors } =
     useForm<IChangePasswordForm>();
   const [error, setError] = useState<string | null>(null);
@@ -86,4 +86,4 @@ const ChangePassword = (props: IChangePasswordProps) => {
   );
 };
 
-export { ChangePassword };
+export { ChangePasswordDialog };
