@@ -3,7 +3,10 @@ import { useState } from 'react';
 import { Button } from '../../button/Button';
 import { DetailTable } from '../../table/DetailTable';
 import { IMember } from '../../types/IMember';
-import { TeamMembersState } from '../../types/TeamMembersState';
+import {
+  TeamMembersActionType,
+  TeamMembersAction,
+} from '../../types/TeamMembersAction';
 import { InviteMemberDialog } from './InviteMemberDialog';
 
 type ITeamTableProps = {
@@ -11,16 +14,18 @@ type ITeamTableProps = {
 };
 
 const TeamTable = (props: ITeamTableProps) => {
-  const [dialogState, setDialogState] = useState<TeamMembersState>(
-    TeamMembersState.NONE
-  );
+  const [dialogState, setDialogState] = useState<TeamMembersAction>({
+    type: TeamMembersActionType.NONE,
+  });
 
-  const handleDialogState = (state: TeamMembersState) => {
+  const handleDialogState = (state: TeamMembersAction) => {
     setDialogState(state);
   };
 
   const handleCloseDialog = () => {
-    setDialogState(TeamMembersState.NONE);
+    setDialogState({
+      type: TeamMembersActionType.NONE,
+    });
   };
 
   return (
@@ -38,7 +43,11 @@ const TeamTable = (props: ITeamTableProps) => {
           <>
             <button
               type="button"
-              onClick={() => handleDialogState(TeamMembersState.INVITE_MEMBER)}
+              onClick={() =>
+                handleDialogState({
+                  type: TeamMembersActionType.INVITE_MEMBER,
+                })
+              }
             >
               <Button sm>Invite member</Button>
             </button>
@@ -57,7 +66,7 @@ const TeamTable = (props: ITeamTableProps) => {
       </DetailTable>
 
       <InviteMemberDialog
-        show={dialogState === TeamMembersState.INVITE_MEMBER}
+        show={dialogState.type === TeamMembersActionType.INVITE_MEMBER}
         handleCloseDialog={handleCloseDialog}
       />
     </>
