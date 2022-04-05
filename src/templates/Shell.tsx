@@ -90,7 +90,7 @@ const Shell = (props: IShellProps) => {
                   </svg>
                 }
               >
-                Random form
+                Random Form
               </SidebarLink>
             </a>
           </Link>
@@ -98,6 +98,29 @@ const Shell = (props: IShellProps) => {
       }
       bottomLinks={
         <>
+          <Link href="/dashboard/members">
+            <a>
+              <SidebarLink
+                icon={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M0 0h24v24H0z" stroke="none" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M16 3.13a4 4 0 0 1 0 7.75M21 21v-2a4 4 0 0 0-3-3.85" />
+                  </svg>
+                }
+              >
+                Members
+              </SidebarLink>
+            </a>
+          </Link>
+
           <Link href="/dashboard/settings">
             <a>
               <SidebarLink
@@ -137,7 +160,7 @@ const Shell = (props: IShellProps) => {
                   </svg>
                 }
               >
-                Sign out
+                Sign Out
               </SidebarLink>
             </button>
           </div>
@@ -167,11 +190,11 @@ const Shell = (props: IShellProps) => {
               {!providerInfo.identities && (
                 <MenuLink href="/dashboard/account">Account</MenuLink>
               )}
-              <MenuLink href="/">Landing page</MenuLink>
+              <MenuLink href="/">Landing Page</MenuLink>
             </div>
 
             <div className="py-1">
-              <MenuLink href="/signout">Sign out</MenuLink>
+              <MenuLink href="/signout">Sign Out</MenuLink>
             </div>
           </Menu.Items>
         </Menu>
