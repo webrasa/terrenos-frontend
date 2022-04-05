@@ -50,7 +50,7 @@ const CreateTeamForm = () => {
 
   return (
     <form className="grid grid-cols-1 gap-y-2" onSubmit={handleCreateTeam}>
-      <Label htmlFor="displayName">Display name *</Label>
+      <Label htmlFor="displayName">Display name</Label>
 
       <FormElement>
         <input id="displayName" type="text" {...register('displayName')} />
