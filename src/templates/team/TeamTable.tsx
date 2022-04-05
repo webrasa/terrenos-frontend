@@ -7,6 +7,7 @@ import {
   TeamMembersActionType,
   TeamMembersAction,
 } from '../../types/TeamMembersAction';
+import { DeleteMember } from './DeleteMember';
 import { InviteMemberDialog } from './InviteMemberDialog';
 
 type ITeamTableProps = {
@@ -59,7 +60,17 @@ const TeamTable = (props: ITeamTableProps) => {
             <td>{elt.email}</td>
             <td>{elt.status}</td>
             <td>
-              <button type="button">Delete</button>
+              <button
+                type="button"
+                onClick={() =>
+                  handleDialogState({
+                    type: TeamMembersActionType.REMOVE_MEMBER,
+                    userId: elt.userId,
+                  })
+                }
+              >
+                Delete
+              </button>
             </td>
           </tr>
         ))}
@@ -67,6 +78,10 @@ const TeamTable = (props: ITeamTableProps) => {
 
       <InviteMemberDialog
         show={dialogState.type === TeamMembersActionType.INVITE_MEMBER}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <DeleteMember
+        action={dialogState}
         handleCloseDialog={handleCloseDialog}
       />
     </>

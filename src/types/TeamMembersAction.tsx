@@ -1,6 +1,7 @@
 export enum TeamMembersActionType {
   NONE = 'NONE',
   INVITE_MEMBER = 'INVITE_MEMBER',
+  REMOVE_MEMBER = 'REMOVE_MEMBER',
 }
 
 interface INone {
@@ -11,4 +12,9 @@ interface IInviteMember {
   type: TeamMembersActionType.INVITE_MEMBER;
 }
 
-export type TeamMembersAction = INone | IInviteMember;
+interface IRemoveMember {
+  type: TeamMembersActionType.REMOVE_MEMBER;
+  userId: string;
+}
+
+export type TeamMembersAction = INone | IInviteMember | IRemoveMember;
