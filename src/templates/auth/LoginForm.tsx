@@ -63,7 +63,7 @@ const LoginForm = () => {
 
   return (
     <FullCenterSection title="Sign in to your account">
-      <div className="space-y-4">
+      <div className="mt-5 space-y-4">
         <button className="w-full" type="button" onClick={handleSignInGoogle}>
           <SocialButton
             icon={

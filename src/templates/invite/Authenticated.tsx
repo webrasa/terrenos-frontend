@@ -9,7 +9,7 @@ type IAuthenticatedProps = {
 const Authenticated = (props: IAuthenticatedProps) => (
   <FullCenterSection
     title="Join team"
-    description={`Log in ${props.userInfo.email}`}
+    description={`You've been invited to join Team name with ${props.userInfo.email}.`}
   >
     <Button full>Accept invite</Button>
   </FullCenterSection>
