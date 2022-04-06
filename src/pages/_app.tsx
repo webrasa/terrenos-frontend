@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import Amplify, { API } from 'aws-amplify';
+import { API, Amplify } from 'aws-amplify';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 
