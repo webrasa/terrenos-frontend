@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
 
 import { Auth } from 'aws-amplify';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { Button } from '../button/Button';
-import { FullCenterSection } from '../layout/FullCenterSection';
 import { Meta } from '../layout/Meta';
+import { Unauthenticated } from '../templates/invitation/Unauthenticated';
 import { CognitoUserExt, ProviderInfo } from '../types/Auth';
 import { AppConfig } from '../utils/AppConfig';
 
@@ -52,15 +50,7 @@ const Join = () => {
       `teamId=${router.query.teamId}&verificationCode=${router.query.verificationCode}`
     );
 
-    content = (
-      <FullCenterSection title="Join team" description="Log in or sign in">
-        <Link href="/login">
-          <a>
-            <Button full>Log in</Button>
-          </a>
-        </Link>
-      </FullCenterSection>
-    );
+    content = <Unauthenticated />;
   } else {
     content = <div>{userInfo.email}</div>;
   }
