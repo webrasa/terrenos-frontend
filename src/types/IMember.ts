@@ -1,5 +1,10 @@
+export enum MemberStatus {
+  ACTIVE = 'ACTIVE',
+  PENDING = 'PENDING',
+}
+
 export type IMember = {
-  userId: string;
+  memberId: string;
   email: string;
-  status: string;
+  status: MemberStatus;
 };

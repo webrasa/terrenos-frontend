@@ -56,7 +56,7 @@ const TeamTable = (props: ITeamTableProps) => {
         }
       >
         {props.list.map((elt) => (
-          <tr key={elt.userId}>
+          <tr key={elt.memberId}>
             <td>{elt.email}</td>
             <td>{elt.status}</td>
             <td>
@@ -65,7 +65,8 @@ const TeamTable = (props: ITeamTableProps) => {
                 onClick={() =>
                   handleDialogState({
                     type: TeamMembersActionType.REMOVE_MEMBER,
-                    userId: elt.userId,
+                    memberId: elt.memberId,
+                    status: elt.status,
                   })
                 }
               >

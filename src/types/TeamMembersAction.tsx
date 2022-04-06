@@ -1,3 +1,5 @@
+import { MemberStatus } from './IMember';
+
 export enum TeamMembersActionType {
   NONE = 'NONE',
   INVITE_MEMBER = 'INVITE_MEMBER',
@@ -14,7 +16,8 @@ interface IInviteMember {
 
 interface IRemoveMember {
   type: TeamMembersActionType.REMOVE_MEMBER;
-  userId: string;
+  memberId: string;
+  status: MemberStatus;
 }
 
 export type TeamMembersAction = INone | IInviteMember | IRemoveMember;
