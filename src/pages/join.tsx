@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
 import { Meta } from '../layout/Meta';
+import { Authenticated } from '../templates/invitation/Authenticated';
 import { Unauthenticated } from '../templates/invitation/Unauthenticated';
 import { CognitoUserExt, ProviderInfo } from '../types/Auth';
 import { AppConfig } from '../utils/AppConfig';
@@ -52,7 +53,7 @@ const Join = () => {
 
     content = <Unauthenticated />;
   } else {
-    content = <div>{userInfo.email}</div>;
+    content = <Authenticated userInfo={userInfo} />;
   }
 
   return (
