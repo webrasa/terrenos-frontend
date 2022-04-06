@@ -6,7 +6,7 @@ import {
   useState,
 } from 'react';
 
-import Auth from '@aws-amplify/auth';
+import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
