@@ -4,8 +4,8 @@ import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
 import { Meta } from '../layout/Meta';
-import { Authenticated } from '../templates/invitation/Authenticated';
-import { Unauthenticated } from '../templates/invitation/Unauthenticated';
+import { Authenticated } from '../templates/invite/Authenticated';
+import { Unauthenticated } from '../templates/invite/Unauthenticated';
 import { CognitoUserExt, ProviderInfo } from '../types/Auth';
 import { AppConfig } from '../utils/AppConfig';
 

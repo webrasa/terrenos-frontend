@@ -7,7 +7,7 @@ const Unauthenticated = () => (
   <FullCenterSection title="Join team" description="Log in or sign in">
     <Link href="/login">
       <a>
-        <Button full>Log in</Button>
+        <Button full>Go to login page</Button>
       </a>
     </Link>
   </FullCenterSection>
