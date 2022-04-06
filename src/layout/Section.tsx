@@ -11,7 +11,7 @@ const Section = (props: ISectionProps) => (
     {props.title || props.description ? (
       <div className="py-5 px-4 bg-white rounded-md border-gray-200">
         {props.title && (
-          <div className="text-lg font-semibold text-gray-800">
+          <div className="text-xl font-semibold text-gray-800">
             {props.title}
           </div>
         )}
