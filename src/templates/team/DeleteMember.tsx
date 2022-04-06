@@ -1,6 +1,7 @@
 import { MouseEventHandler } from 'react';
 
 import { API } from 'aws-amplify';
+import router from 'next/router';
 import { mutate } from 'swr';
 
 import { Button } from '../../button/Button';
@@ -19,7 +20,7 @@ type IDeleteMemberProps = {
 };
 
 const DeleteMember = (props: IDeleteMemberProps) => {
-  const { currentTeam } = useAuth();
+  const { currentTeam, providerInfo, setCurrentTeamInd } = useAuth();
 
   const deleteAsync = useAsync(async () => {
     if (props.action.type !== TeamMembersActionType.REMOVE_MEMBER) {
@@ -37,7 +38,15 @@ const DeleteMember = (props: IDeleteMemberProps) => {
       {}
     );
 
-    await mutate(`/team/${currentTeam.id}/list-members`);
+    if (providerInfo.id === props.action.memberId) {
+      // When the user leaves the team/when the user remove himself from the team
+      await mutate(`/user/profile?email=${providerInfo.email}`);
+      setCurrentTeamInd(0);
+      await router.push('/dashboard');
+    } else {
+      // When the user remove someone else, the default case
+      await mutate(`/team/${currentTeam.id}/list-members`);
+    }
 
     props.handleCloseDialog();
   });
