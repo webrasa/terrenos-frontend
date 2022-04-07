@@ -23,7 +23,6 @@ const Index: NextPageWithLayout = () => {
   const { data } = useSWR<IResponse>(`/${currentTeam.id}/todo/list`);
 
   if (joinTeamPath) {
-    sessionStorage.removeItem('join-team-path');
     router.push(`/join/?${joinTeamPath}`);
     return null;
   }

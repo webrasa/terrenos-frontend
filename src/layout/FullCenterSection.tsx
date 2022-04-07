@@ -3,7 +3,7 @@ import { ReactChild, ReactNode } from 'react';
 import { Logo } from '../templates/Logo';
 
 type IFullCenterSectionProps = {
-  children: ReactNode;
+  children?: ReactNode;
   icon?: ReactNode;
   title: string;
   description?: ReactChild;

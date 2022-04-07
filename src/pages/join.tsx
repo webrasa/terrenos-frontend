@@ -46,13 +46,17 @@ const Join = () => {
   let content;
 
   if (userInfo === AuthState.UNAUTHENTICATED) {
-    sessionStorage.setItem(
-      'join-team-path',
-      `teamId=${router.query.teamId}&verificationCode=${router.query.verificationCode}`
-    );
+    if (router.query.teamId && router.query.verificationCode) {
+      sessionStorage.setItem(
+        'join-team-path',
+        `teamId=${router.query.teamId}&verificationCode=${router.query.verificationCode}`
+      );
+    }
 
     content = <Unauthenticated />;
   } else {
+    sessionStorage.removeItem('join-team-path');
+
     content = <Authenticated userInfo={userInfo} />;
   }
 
