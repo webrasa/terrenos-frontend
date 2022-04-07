@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 
 import { AuthProvider } from '../hooks/UseAuth';
-import { Shell } from '../templates/Shell';
+import { Shell } from '../templates/shell/Shell';
 import { AppConfig } from '../utils/AppConfig';
 import { Meta } from './Meta';
 
