@@ -10,6 +10,7 @@ import { MenuLink } from '../avatar/MenuLink';
 import { useAuth } from '../hooks/UseAuth';
 import { SidebarHeader } from '../shell/SidebarHeader';
 import { SidebarLink } from '../shell/SidebarLink';
+import { AppConfig } from '../utils/AppConfig';
 
 type IShellProps = {
   title: string;
@@ -191,6 +192,9 @@ const Shell = (props: IShellProps) => {
                 <MenuLink href="/dashboard/account">Account</MenuLink>
               )}
               <MenuLink href="/">Landing Page</MenuLink>
+              <MenuLink href={`mailto:${AppConfig.mailto_contact}`}>
+                Need Helps?
+              </MenuLink>
             </div>
 
             <div className="py-1">
