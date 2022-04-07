@@ -1,13 +1,15 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, useState } from 'react';
 
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
+import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 import { ProviderInfo } from '../../types/Auth';
+import { mapInviteMessage } from '../../utils/InviteMessageMap';
 
 type IAuthenticatedProps = {
   userInfo: ProviderInfo;
@@ -24,17 +26,22 @@ const Authenticated = (props: IAuthenticatedProps) => {
       ? `/team/${router.query.teamId}/join/${router.query.verificationCode}`
       : null
   );
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   const joinTeamAsync = useAsync(async () => {
-    await API.post(
-      'backend',
-      `/team/${router.query.teamId}/join/${router.query.verificationCode}`,
-      {
-        body: {
-          email: props.userInfo.email,
-        },
-      }
-    );
+    try {
+      await API.post(
+        'backend',
+        `/team/${router.query.teamId}/join/${router.query.verificationCode}`,
+        {
+          body: {
+            email: props.userInfo.email,
+          },
+        }
+      );
+    } catch (err) {
+      setErrorMsg(mapInviteMessage(err));
+    }
   });
 
   const handleJoinTeam: MouseEventHandler = async (event) => {
@@ -62,6 +69,8 @@ const Authenticated = (props: IAuthenticatedProps) => {
         </div>
       }
     >
+      {errorMsg && <Alert text={errorMsg} />}
+
       <button
         type="button"
         className="w-full"
