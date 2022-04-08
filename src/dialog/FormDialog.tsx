@@ -16,6 +16,7 @@ type IFormDialogProps = {
   title: string;
   description: string;
   hideCancelButton?: boolean;
+  submitText?: string;
 };
 
 const FormDialog = (props: IFormDialogProps) => (
@@ -46,7 +47,7 @@ const FormDialog = (props: IFormDialogProps) => (
 
         <button type="submit" disabled={props.isSubmitting}>
           <Button sm loading={props.isSubmitting}>
-            Save
+            {props.submitText ?? 'Save'}
           </Button>
         </button>
       </div>

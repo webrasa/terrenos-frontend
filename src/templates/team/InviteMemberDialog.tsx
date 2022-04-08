@@ -55,7 +55,8 @@ const InviteMemberDialog = (props: IInviteMemberProps) => {
       handleSubmit={handleSubmitDialog}
       isSubmitting={inviteMemberAsync.pending}
       title="Invite member"
-      description="Enter email address"
+      description="Enter new member email address and we'll send him an email with a link to join your team."
+      submitText="Send"
     >
       <>
         <Label htmlFor="email">Email</Label>
