@@ -6,10 +6,10 @@ import { NextPageWithLayout } from '../../utils/NextLayout';
 
 const CreateTeam: NextPageWithLayout = () => (
   <CenterSection>
-    <div className="max-w-screen-sm">
+    <div className="w-full max-w-screen-sm">
       <Section
         title="Create new team"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at metus dictum, vulputate tellus eu, feugiat sem. Ut porta erat pharetra dui commodo lobortis."
+        description="A dedicated space for your team to edit, share and manage Todo list."
       >
         <CreateTeamForm />
       </Section>

@@ -45,6 +45,7 @@ const TeamSettings = (props: IBillingSettingsProps) => {
       <CardSection title="Danger Zone">
         <SettingLine
           name="Delete team"
+          description="Permanently remove team and all its data."
           action={
             <button
               type="button"
