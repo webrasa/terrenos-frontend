@@ -39,7 +39,7 @@ const AvatarMenu = () => {
         </div>
 
         <div className="py-1">
-          <MenuLink href="/signout">Sign Out</MenuLink>
+          <MenuLink href="/dashboard/logout">Sign Out</MenuLink>
         </div>
       </Menu.Items>
     </Menu>
