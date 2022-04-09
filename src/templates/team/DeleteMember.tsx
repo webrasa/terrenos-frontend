@@ -59,8 +59,8 @@ const DeleteMember = (props: IDeleteMemberProps) => {
   return (
     <ConfirmDialog
       show={props.action.type === TeamMembersActionType.REMOVE_MEMBER}
-      title="Your title here"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur purus. In laoreet tincidunt libero vitae sagittis."
+      title="Remove member"
+      description="Are you sure you want to remove this user from the team?"
       handleCancel={props.handleCloseDialog}
       button={
         <button
@@ -69,7 +69,7 @@ const DeleteMember = (props: IDeleteMemberProps) => {
           disabled={deleteAsync.pending}
         >
           <Button sm red loading={deleteAsync.pending}>
-            Delete
+            Remove
           </Button>
         </button>
       }

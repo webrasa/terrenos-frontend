@@ -70,7 +70,7 @@ const TeamTable = (props: ITeamTableProps) => {
                   })
                 }
               >
-                Delete
+                Remove
               </button>
             </td>
           </tr>

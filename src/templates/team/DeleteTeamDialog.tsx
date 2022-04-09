@@ -8,6 +8,7 @@ import { Button } from '../../button/Button';
 import { ConfirmDialog } from '../../dialog/ConfirmDialog';
 import { useAsync } from '../../hooks/UseAsync';
 import { useAuth } from '../../hooks/UseAuth';
+import { AppConfig } from '../../utils/AppConfig';
 
 type IDeleteTeamDialogProps = {
   show: boolean;
@@ -34,8 +35,8 @@ const DeleteTeamDialog = (props: IDeleteTeamDialogProps) => {
   return (
     <ConfirmDialog
       show={props.show}
-      title="Your title here"
-      description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur purus. In laoreet tincidunt libero vitae sagittis."
+      title="Delete team"
+      description={`Permanently delete team and all its data stored on ${AppConfig.site_name}. Team deletion cannot be undone. Please be certain.`}
       handleCancel={props.handleCloseDialog}
       button={
         <button
@@ -44,7 +45,7 @@ const DeleteTeamDialog = (props: IDeleteTeamDialogProps) => {
           disabled={deleteTeamAsync.pending}
         >
           <Button sm red loading={deleteTeamAsync.pending}>
-            Delete
+            Delete forever
           </Button>
         </button>
       }
