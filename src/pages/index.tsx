@@ -11,7 +11,7 @@ import { VerticalFeatures } from '../templates/VerticalFeatures';
 import { AppConfig } from '../utils/AppConfig';
 
 const Index = () => (
-  <div className="antialiased text-gray-600">
+  <div className="text-gray-600 antialiased">
     <Meta title={AppConfig.title} description={AppConfig.description} />
     <Navbar />
     <Hero />

@@ -9,7 +9,8 @@
     "prettier/prettier": [
       "error",
       {
-        "singleQuote": true
+        "singleQuote": true,
+        "endOfLine": "auto"
       }
     ]
   },
@@ -31,7 +32,8 @@
         "prettier/prettier": [
           "error",
           {
-            "singleQuote": true
+            "singleQuote": true,
+            "endOfLine": "auto"
           }
         ],
         "react/destructuring-assignment": "off", // Vscode doesn't support automatically destructuring, it's a pain to add a new variable
@@ -61,10 +63,10 @@
         "@typescript-eslint/comma-dangle": "off", // Avoid conflict rule between Eslint and Prettier
         "import/prefer-default-export": "off", // Named export is easier to refactor automatically
         "class-methods-use-this": "off", // _document.tsx use render method without `this` keyword
-        "tailwindcss/no-custom-classname": "off", // Disabled otherwise nightmare to allow each custom tailwind classes
         "tailwindcss/classnames-order": [
           "warn",
           {
+            "officialSorting": true,
             "callees": ["classNames", "classnames", "clsx", "ctl"]
           }
         ],

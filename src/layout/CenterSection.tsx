@@ -5,7 +5,7 @@ type ICenterSectionProps = {
 };
 
 const CenterSection = (props: ICenterSectionProps) => (
-  <div className="md:flex md:justify-center md:items-center md:min-h-full">
+  <div className="md:flex md:min-h-full md:items-center md:justify-center">
     {props.children}
   </div>
 );

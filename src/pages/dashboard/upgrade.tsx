@@ -41,7 +41,7 @@ const Upgrade: NextPageWithLayout = () => {
 
   return (
     <CenterSection>
-      <div className="grid grid-cols-1 gap-y-12 w-full max-w-4xl md:grid-cols-3">
+      <div className="grid w-full max-w-4xl grid-cols-1 gap-y-12 md:grid-cols-3">
         <PricingModel
           button={
             <Button full secondary>

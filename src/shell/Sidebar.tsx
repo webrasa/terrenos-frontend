@@ -54,7 +54,7 @@ const Sidebar = (props: ISidebarProps) => {
         <SidebarTeamSelection />
       </div>
 
-      <div className="flex-1 mt-5">{props.topLinks}</div>
+      <div className="mt-5 flex-1">{props.topLinks}</div>
 
       <div>{props.bottomLinks}</div>
     </div>

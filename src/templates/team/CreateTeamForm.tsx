@@ -70,7 +70,7 @@ const CreateTeamForm = () => {
         />
       </FormElement>
 
-      <div className="flex justify-end mt-4">
+      <div className="mt-4 flex justify-end">
         <button type="submit" disabled={createTeamAsync.pending}>
           <Button loading={createTeamAsync.pending}>Create</Button>
         </button>

@@ -40,7 +40,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
   return (
     <CardSection
       title={
-        <div className="flex flex-col space-y-3 sm:flex-row sm:justify-between sm:items-center sm:space-y-0">
+        <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
           <div>Billing</div>
           <div className="flex space-x-2">
             {props.settings.hasStripeCustomerId && (
@@ -70,7 +70,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
         {props.settings.planName} plan
       </div>
 
-      <div className="grid grid-cols-1 gap-4 mt-4 sm:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <UsageStats title="Random Stats" count={10} limit="1000 limit" />
         <UsageStats title="Random Stats 2" count={23} limit="100 limit" />
         <UsageStats title="Random Stats 3" count={400} limit="10000 limit" />

@@ -20,8 +20,8 @@ const MenuInternalLink = (
     <Link href={href}>
       <a
         className={classNames(
-          'flex justify-between py-2 px-4 w-full text-sm font-semibold leading-5 text-left',
-          active ? 'text-white bg-primary-500' : 'text-gray-700'
+          'flex w-full justify-between py-2 px-4 text-left text-sm font-semibold leading-5',
+          active ? 'bg-primary-500 text-white' : 'text-gray-700'
         )}
         {...rest}
       >

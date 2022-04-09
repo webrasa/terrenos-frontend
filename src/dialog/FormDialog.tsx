@@ -32,7 +32,7 @@ const FormDialog = (props: IFormDialogProps) => (
     <form className="grid gap-y-2" onSubmit={props.handleSubmit}>
       {props.children}
 
-      <div className="flex justify-end mt-4 space-x-2">
+      <div className="mt-4 flex justify-end space-x-2">
         {!props.hideCancelButton && (
           <button
             type="button"

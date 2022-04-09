@@ -20,10 +20,10 @@ const AvatarMenu = () => {
         />
       </Menu.Button>
 
-      <Menu.Items className="absolute right-4 w-56 bg-white rounded-md border border-gray-200 divide-y divide-gray-200 outline-none shadow-lg">
+      <Menu.Items className="absolute right-4 w-56 divide-y divide-gray-200 rounded-md border border-gray-200 bg-white shadow-lg outline-none">
         <div className="py-3 px-4">
           <p className="text-sm leading-5">Signed in as</p>
-          <p className="text-sm font-medium leading-5 text-gray-900 truncate">
+          <p className="truncate text-sm font-medium leading-5 text-gray-900">
             {providerInfo.email}
           </p>
         </div>

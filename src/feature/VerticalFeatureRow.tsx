@@ -41,7 +41,7 @@ const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
         {props.action && <div className="mt-4">{props.action}</div>}
       </div>
 
-      <div className="flex justify-center items-center w-full md:p-5 md:w-1/2 lg:p-10">
+      <div className="flex w-full items-center justify-center md:w-1/2 md:p-5 lg:p-10">
         <img src={props.image.src} alt={props.image.alt} />
       </div>
 

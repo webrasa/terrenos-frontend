@@ -10,11 +10,11 @@ type IFullCenterSectionProps = {
 };
 
 const FullCenterSection = (props: IFullCenterSectionProps) => (
-  <div className="flex justify-center items-center min-h-screen bg-primary-100">
+  <div className="flex min-h-screen items-center justify-center bg-primary-100">
     <div className="w-full max-w-md text-center">
       <Logo xl />
 
-      <div className="py-7 px-6 mt-5 bg-white rounded-md">
+      <div className="mt-5 rounded-md bg-white py-7 px-6">
         {props.icon && <div className="mb-1">{props.icon}</div>}
 
         <h1 className="text-xl font-semibold">{props.title}</h1>

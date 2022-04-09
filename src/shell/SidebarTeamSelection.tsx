@@ -28,13 +28,13 @@ const SidebarTeamSelection = () => {
 
   return (
     <Listbox value={currentTeamInd} onChange={handleTeamChange}>
-      <Listbox.Button className="relative py-2 pr-10 pl-3 w-full font-semibold text-left text-gray-800 rounded-md border border-gray-300 focus:border-primary-300 focus:outline-none focus:ring focus:ring-primary-200/50 shadow-sm cursor-default">
+      <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 py-2 pr-10 pl-3 text-left font-semibold text-gray-800 shadow-sm focus:border-primary-300 focus:outline-none focus:ring focus:ring-primary-200/50">
         <span className="block truncate">{currentTeam.displayName}</span>
-        <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
+        <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
-            className="w-5 h-5 text-gray-500 stroke-current stroke-2"
+            className="h-5 w-5 stroke-current stroke-2 text-gray-500"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -45,16 +45,16 @@ const SidebarTeamSelection = () => {
         </span>
       </Listbox.Button>
 
-      <div className="absolute mt-1 w-full bg-white rounded-md shadow-md">
-        <Listbox.Options className="overflow-auto py-1 max-h-60 leading-6 rounded-md border border-gray-200 focus:outline-none shadow-xs">
+      <div className="absolute mt-1 w-full rounded-md bg-white shadow-md">
+        <Listbox.Options className="max-h-60 overflow-auto rounded-md border border-gray-200 py-1 leading-6 shadow-sm focus:outline-none">
           {optionList.map((team, ind) => (
             <Listbox.Option
               key={team.id}
               value={ind}
               className={({ active }) => {
                 return classNames(
-                  'relative py-2 pr-9 pl-3 focus:outline-none cursor-default select-none',
-                  active ? 'text-white bg-primary-500' : 'text-gray-900'
+                  'relative cursor-default select-none py-2 pr-9 pl-3 focus:outline-none',
+                  active ? 'bg-primary-500 text-white' : 'text-gray-900'
                 );
               }}
             >
@@ -72,14 +72,14 @@ const SidebarTeamSelection = () => {
                   {selected && (
                     <span
                       className={classNames(
-                        'flex absolute inset-y-0 right-0 items-center pr-4',
+                        'absolute inset-y-0 right-0 flex items-center pr-4',
                         active ? 'text-white' : 'text-primary-600'
                       )}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
-                        className="w-5 h-5 stroke-current stroke-2"
+                        className="h-5 w-5 stroke-current stroke-2"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"

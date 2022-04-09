@@ -11,12 +11,12 @@ type ITestimonialCardProps = {
 };
 
 const TestimonialCard = (props: ITestimonialCardProps) => (
-  <div className="p-8 bg-white rounded-md sm:p-16">
+  <div className="rounded-md bg-white p-8 sm:p-16">
     <div className="text-lg leading-8">{props.children}</div>
 
-    <div className="flex justify-center items-center mt-6">
+    <div className="mt-6 flex items-center justify-center">
       <img
-        className="w-16 h-16 bg-primary-400 rounded-full"
+        className="h-16 w-16 rounded-full bg-primary-400"
         src={props.image.src}
         alt={props.image.alt}
       />
