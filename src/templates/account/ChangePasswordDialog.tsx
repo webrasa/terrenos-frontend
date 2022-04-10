@@ -7,7 +7,7 @@ import { FormDialog } from '../../dialog/FormDialog';
 import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
-import { SettingsDialogState } from '../../types/SettingsDialogState';
+import { UserInfoSettingsState } from '../../types/UserInfoSettingsState';
 import { mapAmplifyMessageSettings } from '../../utils/AmplifyMessageMap';
 
 type IChangePasswordForm = {
@@ -15,13 +15,13 @@ type IChangePasswordForm = {
   newPassword: string;
 };
 
-type IChangePasswordProps = {
+type IChangePasswordDialogProps = {
   show: boolean;
-  handleDialogState: (displayState: SettingsDialogState) => void;
+  handleDialogState: (displayState: UserInfoSettingsState) => void;
   handleCloseDialog: () => void;
 };
 
-const ChangePassword = (props: IChangePasswordProps) => {
+const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
   const { register, handleSubmit, reset, clearErrors } =
     useForm<IChangePasswordForm>();
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +38,7 @@ const ChangePassword = (props: IChangePasswordProps) => {
       await Auth.changePassword(user, data.oldPassword, data.newPassword);
 
       clearForm();
-      props.handleDialogState(SettingsDialogState.CHANGE_PASSWORD_SUCCESS);
+      props.handleDialogState(UserInfoSettingsState.CHANGE_PASSWORD_SUCCESS);
     } catch (err) {
       setError(mapAmplifyMessageSettings(err));
     }
@@ -86,4 +86,4 @@ const ChangePassword = (props: IChangePasswordProps) => {
   );
 };
 
-export { ChangePassword };
+export { ChangePasswordDialog };

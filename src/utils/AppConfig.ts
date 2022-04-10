@@ -5,4 +5,5 @@ export const AppConfig = {
   description:
     'Building your SaaS faster with React SaaS Boilerplate Template with Nextless JS',
   locale: 'en',
+  mailto_contact: 'contact@creativedesignsguru.com',
 };

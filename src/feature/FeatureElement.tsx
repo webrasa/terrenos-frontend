@@ -7,8 +7,8 @@ type IFeatureElementProps = {
 };
 
 const FeatureElement = (props: IFeatureElementProps) => (
-  <div className="flex flex-col feature-element">
-    <div className="flex shrink-0 justify-center items-center mx-auto w-12 h-12 bg-gray-100 rounded-full border border-gray-300">
+  <div className="feature-element flex flex-col">
+    <div className="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-gray-100">
       {props.icon}
     </div>
 

@@ -6,13 +6,13 @@ import Link from 'next/link';
 import { ToggleMenuButton } from '../button/ToggleMenuButton';
 import { useMenu } from '../hooks/UseMenu';
 
-type INavbarProps = {
+type INavbarMenuCenterProps = {
   logo: ReactNode;
   children: ReactNode;
   rightMenu: ReactNode;
 };
 
-const NavbarMenuCenter = (props: INavbarProps) => {
+const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
   const { showMenu, handleToggleMenu } = useMenu();
 
   const navClass = classNames('w-full', 'md:w-auto', 'md:block', {
@@ -20,7 +20,7 @@ const NavbarMenuCenter = (props: INavbarProps) => {
   });
 
   return (
-    <div className="flex flex-wrap justify-between items-center">
+    <div className="flex flex-wrap items-center justify-between">
       <div>
         <Link href="/">
           <a>{props.logo}</a>
@@ -32,11 +32,11 @@ const NavbarMenuCenter = (props: INavbarProps) => {
       </div>
 
       <nav className={`mt-2 md:mt-0 ${navClass}`}>
-        <ul className="rounded-t navbar">{props.children}</ul>
+        <ul className="navbar rounded-t">{props.children}</ul>
       </nav>
 
       <div className={`border-t border-gray-200 ${navClass}`}>
-        <ul className="rounded-b navbar">{props.rightMenu}</ul>
+        <ul className="navbar rounded-b">{props.rightMenu}</ul>
       </div>
 
       <style jsx>

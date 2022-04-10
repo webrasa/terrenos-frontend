@@ -5,7 +5,7 @@ type IFooterIconListProps = {
 };
 
 const FooterIconList = (props: IFooterIconListProps) => (
-  <div className="flex flex-wrap footer-icon-list">
+  <div className="footer-icon-list flex flex-wrap">
     {props.children}
 
     <style jsx>

@@ -53,6 +53,9 @@ module.exports = {
       lineHeight: {
         hero: '3.7rem',
       },
+      width: {
+        'fit-content': 'fit-content',
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],

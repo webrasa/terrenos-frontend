@@ -6,7 +6,7 @@ type IFooterLinksProps = {
 };
 
 const FooterLinks = (props: IFooterLinksProps) => (
-  <div className="text-center sm:text-left footer-links">
+  <div className="footer-links text-center sm:text-left">
     <div className="font-semibold text-gray-800">{props.title}</div>
 
     <nav className="mt-6">

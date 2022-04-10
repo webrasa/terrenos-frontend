@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Logo } from '../templates/Logo';
+import { SidebarTeamSelection } from './SidebarTeamSelection';
 
 type ISidebarProps = {
   show?: boolean;
@@ -49,7 +50,11 @@ const Sidebar = (props: ISidebarProps) => {
         <Logo />
       </div>
 
-      <div className="flex-1 mt-10">{props.topLinks}</div>
+      <div className="relative mt-3">
+        <SidebarTeamSelection />
+      </div>
+
+      <div className="mt-5 flex-1">{props.topLinks}</div>
 
       <div>{props.bottomLinks}</div>
     </div>

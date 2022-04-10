@@ -9,9 +9,9 @@ type IVerticalFeatureElementColumnProps = {
 const VerticalFeatureElementColumn = (
   props: IVerticalFeatureElementColumnProps
 ) => (
-  <div className="flex flex-col vertical-feature-element-column">
+  <div className="vertical-feature-element-column flex flex-col">
     <div className="flex items-center">
-      <div className="flex shrink-0 justify-center items-center w-12 h-12 bg-primary-400 rounded-md">
+      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-primary-400">
         {props.icon}
       </div>
 

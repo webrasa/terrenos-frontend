@@ -12,9 +12,9 @@ type IMessageStateProps = {
 const MessageState = (props: IMessageStateProps) => {
   if (!props.children || (props.shouldDisplay && props.shouldDisplay())) {
     return (
-      <div className="py-8 px-3 h-full lg:px-6">
+      <div className="h-full py-8 px-3 lg:px-6">
         {/* We keep the following line when we need a background color */}
-        <div className="flex justify-center items-center h-full">
+        <div className="flex h-full items-center justify-center">
           <div className="mb-24 text-center">
             {props.icon}
 

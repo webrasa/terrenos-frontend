@@ -1,41 +1,41 @@
 import { useState } from 'react';
 
-import { AccountSettingLine } from '../../account/AccountSettingLine';
 import { Button } from '../../button/Button';
 import { useAuth } from '../../hooks/UseAuth';
 import { CardSection } from '../../layout/CardSection';
-import { SettingsDialogState } from '../../types/SettingsDialogState';
-import { ChangeEmail } from './ChangeEmail';
-import { ChangePassword } from './ChangePassword';
+import { SettingLine } from '../../settings/SettingLine';
+import { UserInfoSettingsState } from '../../types/UserInfoSettingsState';
+import { ChangeEmailDialog } from './ChangeEmailDialog';
+import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
 import { ConfirmChangeEmail } from './ConfirmChangeEmail';
 
 const UserInfoSettings = () => {
   const auth = useAuth();
-  const [dialogState, setDialogState] = useState<SettingsDialogState>(
-    SettingsDialogState.NONE
+  const [dialogState, setDialogState] = useState<UserInfoSettingsState>(
+    UserInfoSettingsState.NONE
   );
 
-  const handleDialogState = (state: SettingsDialogState) => {
+  const handleDialogState = (state: UserInfoSettingsState) => {
     setDialogState(state);
   };
 
   const handleCloseDialog = () => {
-    setDialogState(SettingsDialogState.NONE);
+    setDialogState(UserInfoSettingsState.NONE);
   };
 
   return (
     <>
-      <CardSection title={<div>Your Account</div>}>
+      <CardSection title="Your Account">
         <div className="space-y-6">
-          <AccountSettingLine
+          <SettingLine
             name="Email address"
-            value={auth.providerInfo.email}
+            description={auth.providerInfo.email}
             action={
               <button
                 type="button"
                 onClick={() =>
-                  handleDialogState(SettingsDialogState.CHANGE_EMAIL)
+                  handleDialogState(UserInfoSettingsState.CHANGE_EMAIL)
                 }
               >
                 <Button sm>Change</Button>
@@ -43,14 +43,14 @@ const UserInfoSettings = () => {
             }
           />
 
-          <AccountSettingLine
+          <SettingLine
             name="Password"
-            value="••••••••••••"
+            description="••••••••••••"
             action={
               <button
                 type="button"
                 onClick={() =>
-                  handleDialogState(SettingsDialogState.CHANGE_PASSWORD)
+                  handleDialogState(UserInfoSettingsState.CHANGE_PASSWORD)
                 }
               >
                 <Button sm>Change</Button>
@@ -60,21 +60,21 @@ const UserInfoSettings = () => {
         </div>
       </CardSection>
 
-      <ChangeEmail
-        show={dialogState === SettingsDialogState.CHANGE_EMAIL}
+      <ChangeEmailDialog
+        show={dialogState === UserInfoSettingsState.CHANGE_EMAIL}
         handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}
       />
       <ConfirmChangeEmail
-        show={dialogState === SettingsDialogState.CONFIRM_CHANGE_EMAIL}
+        show={dialogState === UserInfoSettingsState.CONFIRM_CHANGE_EMAIL}
       />
-      <ChangePassword
-        show={dialogState === SettingsDialogState.CHANGE_PASSWORD}
+      <ChangePasswordDialog
+        show={dialogState === UserInfoSettingsState.CHANGE_PASSWORD}
         handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}
       />
       <ChangePasswordSuccess
-        show={dialogState === SettingsDialogState.CHANGE_PASSWORD_SUCCESS}
+        show={dialogState === UserInfoSettingsState.CHANGE_PASSWORD_SUCCESS}
         handleCloseDialog={handleCloseDialog}
       />
     </>

@@ -6,41 +6,16 @@ import {
   useState,
 } from 'react';
 
-import Auth, { CognitoUser } from '@aws-amplify/auth';
+import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-// Non-exhaustive attribute from Authenticator provider
-type ProviderInfo = {
-  id: string;
-  email: string;
-  identities?: any;
-  // identities contains third party oauth information.
-  // identities is emptied if the user signed up with email.
-  // identities contains a stringify JSON data if the user signed up using social login.
-};
-
-/*
- * The following interface extends the CognitoUser type because it has issues
- * (see github.com/aws-amplify/amplify-js/issues/4927). Eventually (when you
- * no longer get an error accessing a CognitoUser's 'attribute' property) you
- * will be able to use the CognitoUser type instead of CognitoUserExt.
- */
-interface CognitoUserExt extends CognitoUser {
-  attributes: ProviderInfo;
-}
-
-// Information returned by /user/profile endpoint
-type UserProfile = {
-  id: string;
-  firstSignIn: string;
-};
-
-// User information from backend (/user/profile) and authentication provider
-type UserAuth = {
-  providerInfo: ProviderInfo;
-  profile: UserProfile;
-};
+import {
+  CognitoUserExt,
+  ProviderInfo,
+  UserAuth,
+  UserProfile,
+} from '../types/Auth';
 
 // React Hook Context for authentification
 const AuthContext = createContext<UserAuth | null>(null);
@@ -58,6 +33,7 @@ type IAuthProviderProps = {
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<ProviderInfo | null>(null);
+  const [currentTeamInd, setCurrentTeamInd] = useState<number>(0);
 
   useEffect(() => {
     const getUserInfo = async () => {
@@ -90,14 +66,31 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   }, [router]);
 
   // Retrieves User information and if it's the first sign in, it creates a new data entry for the user.
-  const { data } = useSWR<UserProfile>(userInfo ? '/user/profile' : null);
+  const { data } = useSWR<UserProfile>(
+    userInfo ? `/user/profile?email=${userInfo.email}` : null
+  );
 
   if (!userInfo || !data) {
     return null;
   }
 
+  const currentTeam = data.teamList[currentTeamInd];
+
+  if (!currentTeam) {
+    return null;
+  }
+
   return (
-    <AuthContext.Provider value={{ providerInfo: userInfo, profile: data }}>
+    <AuthContext.Provider
+      value={{
+        providerInfo: userInfo,
+        profile: data,
+        teamList: data.teamList,
+        setCurrentTeamInd,
+        currentTeamInd,
+        currentTeam,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

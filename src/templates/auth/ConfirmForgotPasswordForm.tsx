@@ -82,7 +82,7 @@ const ConfirmForgotPasswordForm = () => {
         </div>
       </form>
 
-      <div className="mt-5 text-xs text-center">
+      <div className="mt-5 text-center text-xs">
         Didn&apos;t receive the email?{' '}
         <Link href="/forgot-password">
           <a className="text-primary-500 hover:text-primary-600">

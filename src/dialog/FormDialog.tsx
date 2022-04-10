@@ -12,10 +12,11 @@ type IFormDialogProps = {
   handleSubmit: () => void;
   children: ReactNode;
   isSubmitting: boolean;
-  error: string | null;
+  error?: string | null;
   title: string;
   description: string;
   hideCancelButton?: boolean;
+  submitText?: string;
 };
 
 const FormDialog = (props: IFormDialogProps) => (
@@ -31,7 +32,7 @@ const FormDialog = (props: IFormDialogProps) => (
     <form className="grid gap-y-2" onSubmit={props.handleSubmit}>
       {props.children}
 
-      <div className="flex justify-end mt-4 space-x-2">
+      <div className="mt-4 flex justify-end space-x-2">
         {!props.hideCancelButton && (
           <button
             type="button"
@@ -46,7 +47,7 @@ const FormDialog = (props: IFormDialogProps) => (
 
         <button type="submit" disabled={props.isSubmitting}>
           <Button sm loading={props.isSubmitting}>
-            Save
+            {props.submitText ?? 'Save'}
           </Button>
         </button>
       </div>

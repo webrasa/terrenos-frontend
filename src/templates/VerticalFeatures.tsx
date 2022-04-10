@@ -61,7 +61,6 @@ const VerticalFeatures = () => (
             icon={
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-bulb"
                 viewBox="0 0 24 24"
                 fill="none"
                 strokeLinecap="round"
@@ -94,7 +93,7 @@ const VerticalFeatures = () => (
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
           malesuada nisi tellus, non imperdiet nisi tempor at:
         </p>
-        <div className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
           <VerticalFeatureElementColumn
             icon={
               <svg

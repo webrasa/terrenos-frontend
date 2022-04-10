@@ -52,14 +52,14 @@ const PricingCard = (props: IPricingCardProps) => {
   return (
     <div className={pricingCardClass}>
       {props.popular && (
-        <div className="self-center py-1 px-3 text-sm font-semibold tracking-wider text-primary-600 bg-primary-200 rounded-full">
+        <div className="self-center rounded-full bg-primary-200 py-1 px-3 text-sm font-semibold tracking-wider text-primary-600">
           Best Value
         </div>
       )}
 
       <div className={cardNameClass}>{props.name}</div>
 
-      <div className="flex justify-center items-center text-center">
+      <div className="flex items-center justify-center text-center">
         <span className="text-5xl font-bold leading-tight text-gray-900">
           {props.price}
         </span>

@@ -63,7 +63,7 @@ const LoginForm = () => {
 
   return (
     <FullCenterSection title="Sign in to your account">
-      <div className="space-y-4">
+      <div className="mt-5 space-y-4">
         <button className="w-full" type="button" onClick={handleSignInGoogle}>
           <SocialButton
             icon={
@@ -142,7 +142,7 @@ const LoginForm = () => {
         </div>
       </form>
 
-      <div className="mt-5 text-xs text-center">
+      <div className="mt-5 text-center text-xs">
         <div>
           <Link href="/forgot-password">
             <a className="text-primary-500 hover:text-primary-600">

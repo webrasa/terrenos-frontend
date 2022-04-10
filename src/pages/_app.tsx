@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import Amplify, { API } from 'aws-amplify';
+import { API, Amplify } from 'aws-amplify';
 import { AppProps } from 'next/app';
 import { SWRConfig } from 'swr';
 
@@ -23,7 +23,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   return (
     <SWRConfig
       value={{
-        fetcher: (url: string) => API.get('backend', url, null),
+        fetcher: (url: string) => API.get('backend', url, {}),
         revalidateOnFocus: false,
       }}
     >

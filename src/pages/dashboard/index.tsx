@@ -1,20 +1,32 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import { Button } from '../../button/Button';
+import { useAuth } from '../../hooks/UseAuth';
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
 import { MessageState } from '../../message/MessageState';
 import { Table } from '../../templates/Table';
 import { ITodo } from '../../types/ITodo';
 import { NextPageWithLayout } from '../../utils/NextLayout';
+import { getSessionItem } from '../../utils/Session';
 
 type IResponse = {
   list: ITodo[];
 };
 
 const Index: NextPageWithLayout = () => {
-  const { data } = useSWR<IResponse>('/todo/list');
+  const { currentTeam } = useAuth();
+  const joinTeamPath = getSessionItem('join-team-path');
+  const router = useRouter();
+  const { data } = useSWR<IResponse>(`/${currentTeam.id}/todo/list`);
+
+  if (joinTeamPath) {
+    // The user has received invite to join a team.
+    router.push(`/join/?${joinTeamPath}`);
+    return null;
+  }
 
   if (!data) {
     return null;

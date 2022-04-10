@@ -12,7 +12,7 @@ type ISocialButtonProps = {
  * @param props.children - Children components.
  */
 const SocialButton = (props: ISocialButtonProps) => (
-  <div className="flex justify-center items-center py-3 px-5 rounded-md border-2 border-gray-300 hover:border-primary-400 signup-button">
+  <div className="signup-button flex items-center justify-center rounded-md border-2 border-gray-300 py-3 px-5 hover:border-primary-400">
     {props.icon}
 
     <span className="ml-2 text-lg font-semibold">{props.children}</span>

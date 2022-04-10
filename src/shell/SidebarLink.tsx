@@ -12,7 +12,7 @@ type ISidebarLinkProps = {
  * @param props.children - Children components.
  */
 const SidebarLink = (props: ISidebarLinkProps) => (
-  <div className="flex items-center p-2 text-lg font-semibold text-gray-800 hover:bg-primary-200 rounded-lg sidebar-link">
+  <div className="sidebar-link flex items-center rounded-lg p-2 text-lg font-semibold text-gray-800 hover:bg-primary-200">
     {props.icon}
 
     {props.children}

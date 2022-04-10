@@ -17,7 +17,7 @@ type IDetailTableProps = {
  */
 const DetailTable = (props: IDetailTableProps) => (
   <div>
-    <div className="flex justify-between items-center">
+    <div className="flex items-center justify-between">
       <div className="text-lg font-semibold text-gray-800">{props.title}</div>
 
       <div className="flex space-x-2">{props.buttons}</div>
@@ -27,12 +27,12 @@ const DetailTable = (props: IDetailTableProps) => (
      * Border style applied to div and not to table.
      * Border style don't work with table.
      */}
-    <div className="overflow-auto mt-5 rounded-xl border border-gray-200">
-      <table className="overflow-auto mx-auto min-w-full text-left whitespace-nowrap">
-        <thead className="bg-gray-100 border-b border-gray-300">
+    <div className="mt-5 overflow-auto rounded-xl border border-gray-200">
+      <table className="mx-auto min-w-full overflow-auto whitespace-nowrap text-left">
+        <thead className="border-b border-gray-300 bg-gray-100">
           {props.head}
         </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
+        <tbody className="divide-y divide-gray-200 bg-white">
           {props.children}
         </tbody>
       </table>

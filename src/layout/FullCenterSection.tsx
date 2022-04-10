@@ -1,27 +1,27 @@
-import { ReactNode } from 'react';
+import { ReactChild, ReactNode } from 'react';
 
 import { Logo } from '../templates/Logo';
 
 type IFullCenterSectionProps = {
-  children: ReactNode;
+  children?: ReactNode;
   icon?: ReactNode;
   title: string;
-  description?: string;
+  description?: ReactChild;
 };
 
 const FullCenterSection = (props: IFullCenterSectionProps) => (
-  <div className="flex justify-center items-center min-h-screen bg-primary-100">
+  <div className="flex min-h-screen items-center justify-center bg-primary-100">
     <div className="w-full max-w-md text-center">
       <Logo xl />
 
-      <div className="py-7 px-6 mt-5 bg-white rounded-md">
+      <div className="mt-5 rounded-md bg-white py-7 px-6">
         {props.icon && <div className="mb-1">{props.icon}</div>}
 
         <h1 className="text-xl font-semibold">{props.title}</h1>
 
-        <div className="mt-4">
+        <div className="mt-1">
           {props.description && (
-            <div className="mb-4 text-sm">{props.description}</div>
+            <div className="mb-5 text-sm">{props.description}</div>
           )}
 
           <div className="text-left">{props.children}</div>

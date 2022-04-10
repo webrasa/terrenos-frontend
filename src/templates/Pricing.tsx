@@ -6,7 +6,7 @@ import { PricingModel } from './PricingModel';
 
 const Pricing = () => (
   <LandingSection title="Flexible Plans" subtitle="Pricing">
-    <div className="grid grid-cols-1 gap-y-12 mx-4 md:grid-cols-3 lg:mx-32">
+    <div className="mx-4 grid grid-cols-1 gap-y-12 md:grid-cols-3 lg:mx-32">
       <PricingModel
         button={
           <Link href="/signup">

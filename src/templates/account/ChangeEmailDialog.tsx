@@ -7,20 +7,20 @@ import { FormDialog } from '../../dialog/FormDialog';
 import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
-import { SettingsDialogState } from '../../types/SettingsDialogState';
+import { UserInfoSettingsState } from '../../types/UserInfoSettingsState';
 import { mapAmplifyMessageSettings } from '../../utils/AmplifyMessageMap';
 
 type IChangeEmailForm = {
   email: string;
 };
 
-type IChangeEmailProps = {
+type IChangeEmailDialogProps = {
   show: boolean;
-  handleDialogState: (displayState: SettingsDialogState) => void;
+  handleDialogState: (displayState: UserInfoSettingsState) => void;
   handleCloseDialog: () => void;
 };
 
-const ChangeEmail = (props: IChangeEmailProps) => {
+const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
   const { register, handleSubmit } = useForm<IChangeEmailForm>();
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +29,7 @@ const ChangeEmail = (props: IChangeEmailProps) => {
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, { email: data.email });
 
-      props.handleDialogState(SettingsDialogState.CONFIRM_CHANGE_EMAIL);
+      props.handleDialogState(UserInfoSettingsState.CONFIRM_CHANGE_EMAIL);
     } catch (err) {
       setError(mapAmplifyMessageSettings(err));
     }
@@ -60,4 +60,4 @@ const ChangeEmail = (props: IChangeEmailProps) => {
   );
 };
 
-export { ChangeEmail };
+export { ChangeEmailDialog };

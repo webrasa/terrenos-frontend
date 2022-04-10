@@ -3,7 +3,7 @@ import { SignUpForm } from '../templates/auth/SignUpForm';
 import { AppConfig } from '../utils/AppConfig';
 
 const SignUp = () => (
-  <div className="antialiased text-gray-900">
+  <div className="text-gray-900 antialiased">
     <Meta title={AppConfig.title} description={AppConfig.description} />
     <SignUpForm />
   </div>
