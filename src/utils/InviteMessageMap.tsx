@@ -1,3 +1,7 @@
+/**
+ * Map the message error when joining a team and output the desired message.
+ * @param exception - Exception raised by the backend.
+ */
 export const mapInviteMessage = (exception: any) => {
   if (exception?.response?.data?.errors) {
     const errorCode = exception?.response?.data?.errors;

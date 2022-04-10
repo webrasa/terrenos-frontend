@@ -23,6 +23,7 @@ const Index: NextPageWithLayout = () => {
   const { data } = useSWR<IResponse>(`/${currentTeam.id}/todo/list`);
 
   if (joinTeamPath) {
+    // The user has received invite to join a team.
     router.push(`/join/?${joinTeamPath}`);
     return null;
   }

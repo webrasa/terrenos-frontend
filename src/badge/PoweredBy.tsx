@@ -1,3 +1,6 @@
+/**
+ * Used only for demo purpose.
+ */
 const PoweredBy = () => (
   <div className="fixed right-0 bottom-0 z-10">
     <a href="https://nextlessjs.com" target="_blank" rel="noopener noreferrer">
