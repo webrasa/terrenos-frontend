@@ -14,7 +14,7 @@ const Logout = () => {
     };
 
     logout();
-  }, [router]);
+  }, []);
 
   return null;
 };

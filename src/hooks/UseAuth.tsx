@@ -63,7 +63,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     };
 
     getUserInfo();
-  }, [router]);
+  }, []);
 
   // Retrieves User information and if it's the first sign in, it creates a new data entry for the user.
   const { data } = useSWR<UserProfile>(

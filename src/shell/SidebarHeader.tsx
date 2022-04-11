@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import className from 'classnames';
+import { useRouter } from 'next/router';
 
 import { ToggleMenuButton } from '../button/ToggleMenuButton';
 import { useMenu } from '../hooks/UseMenu';
@@ -25,6 +26,11 @@ type ISidebarHeaderProps = {
  */
 const SidebarHeader = (props: ISidebarHeaderProps) => {
   const { showMenu, handleToggleMenu, handleClose } = useMenu();
+  const router = useRouter();
+
+  useEffect(() => {
+    handleClose();
+  }, [router]);
 
   const clickableBgClass = className(
     'fixed',
