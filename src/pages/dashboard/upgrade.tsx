@@ -28,6 +28,12 @@ const Upgrade: NextPageWithLayout = () => {
 
     if (stripe) {
       await stripe.redirectToCheckout({ sessionId: checkoutResult.sessionId });
+
+      throw new Error(
+        'redirectToCheckout fails due to a browser or network error'
+      );
+    } else {
+      throw new Error('Impossible to load Stripe');
     }
   });
 
