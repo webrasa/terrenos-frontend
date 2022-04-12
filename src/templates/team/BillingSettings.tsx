@@ -42,7 +42,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
       title={
         <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
           <div>Billing</div>
-          <div className="flex space-x-2">
+          <div className="flex flex-wrap gap-y-1 gap-x-2">
             {props.settings.hasStripeCustomerId && (
               <button
                 type="button"

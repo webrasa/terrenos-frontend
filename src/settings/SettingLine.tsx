@@ -15,7 +15,7 @@ type ISettingLineProps = {
  * @param props.action - Action can be performed to update the setting.
  */
 const SettingLine = (props: ISettingLineProps) => (
-  <div className="flex items-center justify-between bg-gray-100 p-6">
+  <div className="flex flex-col items-start gap-2 bg-gray-100 p-6 sm:flex-row sm:items-center sm:justify-between">
     <div>
       <p className="font-bold text-gray-700">{props.name}</p>
       {props.description && <p>{props.description}</p>}

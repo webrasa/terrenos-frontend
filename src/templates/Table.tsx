@@ -47,7 +47,7 @@ const Table = (props: ITableProps) => {
         head={
           <tr>
             <th>Title</th>
-            <th className="w-60">Action</th>
+            <th className="w-20 sm:w-60">Action</th>
           </tr>
         }
         buttons={

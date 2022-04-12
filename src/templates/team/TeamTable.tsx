@@ -36,8 +36,8 @@ const TeamTable = (props: ITeamTableProps) => {
         head={
           <tr>
             <th>Email</th>
-            <th className="w-60">Status</th>
-            <th className="w-60">Action</th>
+            <th className="w-20 md:w-52">Status</th>
+            <th className="w-20 md:w-52">Action</th>
           </tr>
         }
         buttons={
