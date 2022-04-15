@@ -64,7 +64,7 @@ const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
       description="Need to change your password?"
     >
       <>
-        <Label htmlFor="oldPassword">Password</Label>
+        <Label htmlFor="oldPassword">Old password</Label>
         <FormElement>
           <input
             id="oldPassword"
@@ -73,7 +73,7 @@ const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
           />
         </FormElement>
 
-        <Label htmlFor="newPassword">Password</Label>
+        <Label htmlFor="newPassword">New password</Label>
         <FormElement helper="Your password must be at least 8 characters with a mix of upper and lower case letters, numbers, and symbols.">
           <input
             id="newPassword"

@@ -29,6 +29,8 @@ const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, { email: data.email });
 
+      sessionStorage.setItem('change-email', data.email);
+
       props.handleDialogState(UserInfoSettingsState.CONFIRM_CHANGE_EMAIL);
     } catch (err) {
       setError(mapAmplifyMessageSettings(err));
