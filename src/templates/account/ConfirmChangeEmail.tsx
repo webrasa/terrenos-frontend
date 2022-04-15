@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { API, Auth } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 
@@ -9,7 +9,6 @@ import { FormElement } from '../../form/FormElement';
 import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { mapAmplifyMessageSettings } from '../../utils/AmplifyMessageMap';
-import { getSessionStorage } from '../../utils/SessionStorage';
 
 type IConfirmChangeEmailForm = {
   verificationCode: string;
@@ -22,7 +21,6 @@ type IConfirmChangeEmailProps = {
 const ConfirmChangeEmail = (props: IConfirmChangeEmailProps) => {
   const { register, handleSubmit } = useForm<IConfirmChangeEmailForm>();
   const [error, setError] = useState<string | null>(null);
-  const email = getSessionStorage('confirm-change-email');
   const router = useRouter();
 
   const confirmChangeEmailAsync = useAsync(
@@ -32,12 +30,6 @@ const ConfirmChangeEmail = (props: IConfirmChangeEmailProps) => {
           'email',
           data.verificationCode
         );
-
-        await API.put('backend', '/user/email-update', {
-          body: {
-            email,
-          },
-        });
 
         router.reload();
       } catch (err) {

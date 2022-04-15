@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Auth } from 'aws-amplify';
+import { API, Auth } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 
 import { FormDialog } from '../../dialog/FormDialog';
@@ -29,7 +29,11 @@ const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, { email: data.email });
 
-      sessionStorage.setItem('confirm-change-email', data.email);
+      await API.put('backend', '/user/email-update', {
+        body: {
+          email: data.email,
+        },
+      });
 
       props.handleDialogState(UserInfoSettingsState.CONFIRM_CHANGE_EMAIL);
     } catch (err) {
