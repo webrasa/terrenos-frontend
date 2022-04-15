@@ -18,7 +18,7 @@ type IResponse = {
 
 const Index: NextPageWithLayout = () => {
   const { currentTeam } = useAuth();
-  const [joinTeamPath] = useSessionStorage('join-team-path', '');
+  const [joinTeamPath] = useSessionStorage('join-team-path', '', true);
   const router = useRouter();
   const { data } = useSWR<IResponse>(`/${currentTeam.id}/todo/list`);
 

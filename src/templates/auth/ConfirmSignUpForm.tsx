@@ -19,7 +19,7 @@ type IConfirmSignUpForm = {
 
 const ConfirmSignUpForm = () => {
   const router = useRouter();
-  const [email] = useSessionStorage('confirm-signup-email', '');
+  const [email] = useSessionStorage('confirm-signup-email', '', true);
   const { register, handleSubmit } = useForm<IConfirmSignUpForm>();
   const [error, setError] = useState<string | null>(null);
 

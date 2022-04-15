@@ -36,6 +36,18 @@ const LoginForm = () => {
     });
   };
 
+  const resendVerificationCode = async (data: ILoginForm) => {
+    try {
+      await Auth.resendSignUp(data.email);
+
+      sessionStorage.setItem('confirm-signup-email', data.email);
+
+      await router.push('/confirm-signup');
+    } catch (err: any) {
+      setError(mapAmplifyMessage(err));
+    }
+  };
+
   const loginAsync = useAsync(async (data: ILoginForm) => {
     try {
       await Auth.signIn({
@@ -46,11 +58,7 @@ const LoginForm = () => {
       await router.push('/dashboard');
     } catch (err: any) {
       if (err.code === 'UserNotConfirmedException') {
-        await Auth.resendSignUp(data.email);
-
-        sessionStorage.setItem('confirm-signup-email', data.email);
-
-        await router.push('/confirm-signup');
+        await resendVerificationCode(data);
       } else {
         setError(mapAmplifyMessage(err));
       }

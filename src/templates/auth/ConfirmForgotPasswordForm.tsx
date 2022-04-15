@@ -21,7 +21,7 @@ type IConfirmForgotPasswordForm = {
 
 const ConfirmForgotPasswordForm = () => {
   const router = useRouter();
-  const [email] = useSessionStorage('confirm-forgot-password-email', '');
+  const [email] = useSessionStorage('confirm-forgot-password-email', '', true);
   const { register, handleSubmit } = useForm<IConfirmForgotPasswordForm>();
   const [error, setError] = useState<string | null>(null);
 
