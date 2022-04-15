@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
 import { Button } from '../../button/Button';
@@ -11,6 +10,7 @@ import { MessageState } from '../../message/MessageState';
 import { Table } from '../../templates/Table';
 import { ITodo } from '../../types/ITodo';
 import { NextPageWithLayout } from '../../utils/NextLayout';
+import { getSessionStorage } from '../../utils/SessionStorage';
 
 type IResponse = {
   list: ITodo[];
@@ -18,7 +18,7 @@ type IResponse = {
 
 const Index: NextPageWithLayout = () => {
   const { currentTeam } = useAuth();
-  const [joinTeamPath] = useSessionStorage('join-team-path', '', true);
+  const joinTeamPath = getSessionStorage('join-team-path');
   const router = useRouter();
   const { data } = useSWR<IResponse>(`/${currentTeam.id}/todo/list`);
 

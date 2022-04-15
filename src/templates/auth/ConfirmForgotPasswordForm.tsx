@@ -4,7 +4,6 @@ import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useSessionStorage } from 'react-use';
 
 import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
@@ -13,6 +12,7 @@ import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
+import { getSessionStorage } from '../../utils/SessionStorage';
 
 type IConfirmForgotPasswordForm = {
   verificationCode: string;
@@ -21,7 +21,7 @@ type IConfirmForgotPasswordForm = {
 
 const ConfirmForgotPasswordForm = () => {
   const router = useRouter();
-  const [email] = useSessionStorage('confirm-forgot-password-email', '', true);
+  const email = getSessionStorage('confirm-forgot-password-email');
   const { register, handleSubmit } = useForm<IConfirmForgotPasswordForm>();
   const [error, setError] = useState<string | null>(null);
 
