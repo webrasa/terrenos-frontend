@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useSessionStorage } from 'react-use';
 
 import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
@@ -11,7 +12,6 @@ import { Label } from '../../form/Label';
 import { useAsync } from '../../hooks/UseAsync';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
-import { getSessionItem } from '../../utils/Session';
 
 type IConfirmSignUpForm = {
   verificationCode: string;
@@ -19,7 +19,7 @@ type IConfirmSignUpForm = {
 
 const ConfirmSignUpForm = () => {
   const router = useRouter();
-  const email = getSessionItem('confirm-signup-email');
+  const [email] = useSessionStorage('confirm-signup-email', '');
   const { register, handleSubmit } = useForm<IConfirmSignUpForm>();
   const [error, setError] = useState<string | null>(null);
 

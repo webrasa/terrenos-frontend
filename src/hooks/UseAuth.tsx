@@ -8,6 +8,7 @@ import {
 
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
 import {
@@ -33,7 +34,7 @@ type IAuthProviderProps = {
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState<ProviderInfo | null>(null);
-  const [currentTeamInd, setCurrentTeamInd] = useState<number>(0);
+  const [currentTeamInd, setCurrentTeamInd] = useSessionStorage('team-ind', 0);
 
   useEffect(() => {
     const getUserInfo = async () => {
