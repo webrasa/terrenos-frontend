@@ -30,7 +30,10 @@ export const setFormError = <T>(
   setError: (fieldName: keyof T, error: ErrorOption) => void,
   exception: any
 ) => {
-  if (exception?.response?.data?.errors) {
+  if (
+    exception?.response?.data?.errors &&
+    Array.isArray(exception?.response?.data?.errors)
+  ) {
     setServerError(setError, exception.response.data.errors);
   } else {
     throw exception;

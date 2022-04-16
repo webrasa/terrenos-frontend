@@ -27,7 +27,7 @@ type IAuthProviderProps = {
 
 /**
  * The provider component of React Hook Context for authentication.
- * @component
+ * @hook
  * @params props - Component props.
  * @param props.children -  Children components.
  */
@@ -78,6 +78,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   const currentTeam = data.teamList[currentTeamInd];
 
   if (!currentTeam) {
+    setCurrentTeamInd(0);
     return null;
   }
 
