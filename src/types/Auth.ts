@@ -17,7 +17,11 @@ export type ProviderInfo = {
  * will be able to use the CognitoUser type instead of CognitoUserExt.
  */
 export interface CognitoUserExt extends CognitoUser {
-  attributes: ProviderInfo;
+  attributes: {
+    sub: string;
+    email: string;
+    identities?: any;
+  };
 }
 
 type Team = {

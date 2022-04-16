@@ -54,7 +54,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
         if (currentUserInfo) {
           setUserInfo({
             email: currentUserInfo.attributes.email,
-            id: currentUserInfo.attributes.id,
+            id: currentUserInfo.attributes.sub,
             identities: currentUserInfo.attributes.identities,
           });
         } else {

@@ -4,6 +4,7 @@ import className from 'classnames';
 import { useRouter } from 'next/router';
 
 import { ToggleMenuButton } from '../button/ToggleMenuButton';
+import { useAuth } from '../hooks/UseAuth';
 import { useMenu } from '../hooks/UseMenu';
 import { Sidebar } from './Sidebar';
 
@@ -27,10 +28,11 @@ type ISidebarHeaderProps = {
 const SidebarHeader = (props: ISidebarHeaderProps) => {
   const { showMenu, handleToggleMenu, handleClose } = useMenu();
   const router = useRouter();
+  const { currentTeam } = useAuth();
 
   useEffect(() => {
     handleClose();
-  }, [router]);
+  }, [router, currentTeam]);
 
   const clickableBgClass = className(
     'fixed',
