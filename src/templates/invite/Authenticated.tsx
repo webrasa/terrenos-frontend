@@ -1,12 +1,14 @@
 import { MouseEventHandler, useState } from 'react';
 
 import { API } from 'aws-amplify';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 
 import { Alert } from '../../alert/Alert';
 import { Button } from '../../button/Button';
 import { useAsync } from '../../hooks/UseAsync';
+import { useAuth } from '../../hooks/UseAuth';
 import { FullCenterSection } from '../../layout/FullCenterSection';
 import { ProviderInfo } from '../../types/Auth';
 import { mapInviteMessage } from '../../utils/InviteMessageMap';
@@ -27,6 +29,7 @@ const Authenticated = (props: IAuthenticatedProps) => {
       : null
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const { providerInfo, teamList, setCurrentTeamInd } = useAuth();
 
   const joinTeamAsync = useAsync(async () => {
     try {
@@ -39,6 +42,10 @@ const Authenticated = (props: IAuthenticatedProps) => {
           },
         }
       );
+
+      await mutate(`/user/profile?email=${providerInfo.email}`);
+      setCurrentTeamInd(teamList.length);
+      await router.push('/dashboard');
     } catch (err) {
       setErrorMsg(mapInviteMessage(err));
     }
@@ -50,7 +57,18 @@ const Authenticated = (props: IAuthenticatedProps) => {
   };
 
   if (error) {
-    return <FullCenterSection title="Incorrect invite link" />;
+    return (
+      <FullCenterSection
+        title="Join team"
+        description={<div className="text-red-600">Incorrect invite link.</div>}
+      >
+        <Link href="/dashboard">
+          <a>
+            <Button full>Go to dashboard</Button>
+          </a>
+        </Link>
+      </FullCenterSection>
+    );
   }
 
   if (!data) {
