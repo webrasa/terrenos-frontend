@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
+import { AuthProvider } from '../hooks/UseAuth';
 import { Meta } from '../layout/Meta';
 import { Authenticated } from '../templates/invite/Authenticated';
 import { Unauthenticated } from '../templates/invite/Unauthenticated';
@@ -39,13 +40,11 @@ const Join = () => {
     getUserInfo();
   }, []);
 
-  if (userInfo === AuthState.AUTHENTICATING) {
-    return null;
-  }
-
   let content;
 
-  if (userInfo === AuthState.UNAUTHENTICATED) {
+  if (userInfo === AuthState.AUTHENTICATING) {
+    content = null;
+  } else if (userInfo === AuthState.UNAUTHENTICATED) {
     if (router.query.teamId && router.query.verificationCode) {
       sessionStorage.setItem(
         'join-team-path',
@@ -57,7 +56,11 @@ const Join = () => {
   } else {
     sessionStorage.removeItem('join-team-path');
 
-    content = <Authenticated userInfo={userInfo} />;
+    content = (
+      <AuthProvider>
+        <Authenticated userInfo={userInfo} />
+      </AuthProvider>
+    );
   }
 
   return (
