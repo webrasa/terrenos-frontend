@@ -1,44 +1,15 @@
-import { useEffect, useState } from 'react';
-
-import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
 import { AuthProvider } from '../hooks/UseAuth';
+import { AuthState, useProviderInfo } from '../hooks/UseProviderInfo';
 import { Meta } from '../layout/Meta';
 import { Authenticated } from '../templates/invite/Authenticated';
 import { Unauthenticated } from '../templates/invite/Unauthenticated';
-import { CognitoUserExt, ProviderInfo } from '../types/Auth';
 import { AppConfig } from '../utils/AppConfig';
-
-enum AuthState {
-  AUTHENTICATING = 'AUTHENTICATING',
-  UNAUTHENTICATED = 'UNAUTHENTICATED',
-}
 
 const Join = () => {
   const router = useRouter();
-  const [userInfo, setUserInfo] = useState<ProviderInfo | AuthState>(
-    AuthState.AUTHENTICATING
-  );
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      const currentUserInfo: CognitoUserExt | null =
-        await Auth.currentUserInfo();
-
-      if (currentUserInfo) {
-        setUserInfo({
-          email: currentUserInfo.attributes.email,
-          id: currentUserInfo.attributes.sub,
-          identities: currentUserInfo.attributes.identities,
-        });
-      } else {
-        setUserInfo(AuthState.UNAUTHENTICATED);
-      }
-    };
-
-    getUserInfo();
-  }, []);
+  const { userInfo } = useProviderInfo();
 
   let content;
 

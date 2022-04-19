@@ -1,22 +1,11 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 
-import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
-import {
-  CognitoUserExt,
-  ProviderInfo,
-  UserAuth,
-  UserProfile,
-} from '../types/Auth';
+import { UserAuth, UserProfile } from '../types/Auth';
+import { AuthState, useProviderInfo } from './UseProviderInfo';
 
 // React Hook Context for authentification
 const AuthContext = createContext<UserAuth | null>(null);
@@ -33,45 +22,26 @@ type IAuthProviderProps = {
  */
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();
-  const [userInfo, setUserInfo] = useState<ProviderInfo | null>(null);
+  const { userInfo } = useProviderInfo();
   const [currentTeamInd, setCurrentTeamInd] = useSessionStorage('team-ind', 0);
-
-  useEffect(() => {
-    const getUserInfo = async () => {
-      if (
-        process.env.NEXT_PUBLIC_COGNITO_USER_ID_LOCAL &&
-        process.env.NEXT_PUBLIC_COGNITO_USER_EMAIL_LOCAL
-      ) {
-        // Bypass AWS Cognito authentication for local development environment
-        setUserInfo({
-          email: process.env.NEXT_PUBLIC_COGNITO_USER_EMAIL_LOCAL,
-          id: process.env.NEXT_PUBLIC_COGNITO_USER_ID_LOCAL,
-        });
-      } else {
-        const currentUserInfo: CognitoUserExt | null =
-          await Auth.currentUserInfo();
-
-        if (currentUserInfo) {
-          setUserInfo({
-            email: currentUserInfo.attributes.email,
-            id: currentUserInfo.attributes.sub,
-            identities: currentUserInfo.attributes.identities,
-          });
-        } else {
-          await router.push('/login');
-        }
-      }
-    };
-
-    getUserInfo();
-  }, []);
 
   // Retrieves User information and if it's the first sign in, it creates a new data entry for the user.
   const { data } = useSWR<UserProfile>(
-    userInfo ? `/user/profile?email=${userInfo.email}` : null
+    userInfo !== AuthState.UNAUTHENTICATED &&
+      userInfo !== AuthState.AUTHENTICATING
+      ? `/user/profile?email=${userInfo.email}`
+      : null
   );
 
-  if (!userInfo || !data) {
+  if (
+    userInfo === AuthState.AUTHENTICATING ||
+    userInfo === AuthState.UNAUTHENTICATED ||
+    !data
+  ) {
+    if (userInfo === AuthState.UNAUTHENTICATED) {
+      router.push('/login');
+    }
+
     return null;
   }
 
