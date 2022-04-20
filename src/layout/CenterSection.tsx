@@ -5,7 +5,7 @@ type ICenterSectionProps = {
 };
 
 const CenterSection = (props: ICenterSectionProps) => (
-  <div className="flex min-h-full items-center justify-center">
+  <div className="flex min-h-full flex-col items-center justify-center">
     {props.children}
   </div>
 );
