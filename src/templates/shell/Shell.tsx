@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { SidebarHeader } from '../../shell/SidebarHeader';
 import { SidebarLink } from '../../shell/SidebarLink';
 import { AvatarMenu } from './AvatarDropdown';
+import { SidebarTeamSelection } from './SidebarTeamSelection';
 
 type IShellProps = {
   title: string;
@@ -14,6 +15,7 @@ type IShellProps = {
 const Shell = (props: IShellProps) => (
   <SidebarHeader
     title={props.title}
+    select={<SidebarTeamSelection />}
     topLinks={
       <>
         <Link href="/dashboard">

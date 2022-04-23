@@ -3,10 +3,10 @@ import { ReactNode } from 'react';
 import classNames from 'classnames';
 
 import { Logo } from '../templates/Logo';
-import { SidebarTeamSelection } from './SidebarTeamSelection';
 
 type ISidebarProps = {
   show?: boolean;
+  select: ReactNode;
   topLinks: ReactNode;
   bottomLinks: ReactNode;
 };
@@ -15,7 +15,8 @@ type ISidebarProps = {
  * Sidebar menu.
  * @component
  * @params props - Component props.
- * @param show - Indicates if the component need be displayed.
+ * @param props.show - Indicates if the component need be displayed.
+ * @param props.select - Select menu located at the top of the sidebar.
  * @param props.topLinks - Menu located at the top of the sidebar.
  * @param props.bottomLinks - Menu located at the bottom of the sidebar.
  */
@@ -50,9 +51,7 @@ const Sidebar = (props: ISidebarProps) => {
         <Logo />
       </div>
 
-      <div className="relative mt-3">
-        <SidebarTeamSelection />
-      </div>
+      <div className="relative mt-3">{props.select}</div>
 
       <div className="mt-5 flex-1">{props.topLinks}</div>
 

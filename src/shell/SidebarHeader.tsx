@@ -9,6 +9,7 @@ import { useMenu } from '../hooks/UseMenu';
 import { Sidebar } from './Sidebar';
 
 type ISidebarHeaderProps = {
+  select: ReactNode;
   topLinks: ReactNode;
   bottomLinks: ReactNode;
   title: string;
@@ -17,8 +18,10 @@ type ISidebarHeaderProps = {
 };
 
 /**
+ * Sidebar header, displayed at the top of the application shell.
  * @component
  * @params props - Component props.
+ * @param props.select - Select menu located at the top of the sidebar.
  * @param props.topLinks - Menu located at the top of the sidebar.
  * @param props.bottomLinks - Menu located at the bottom of the sidebar.
  * @param props.title - Page title to display in the header.
@@ -61,6 +64,7 @@ const SidebarHeader = (props: ISidebarHeaderProps) => {
 
       <Sidebar
         show={showMenu}
+        select={props.select}
         topLinks={props.topLinks}
         bottomLinks={props.bottomLinks}
       />

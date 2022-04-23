@@ -1,5 +1,5 @@
 /**
- * Used only for demo purpose.
+ * Used only for demo purpose, it can be removed.
  */
 const PoweredBy = () => (
   <div className="fixed right-0 bottom-0 z-10">
