@@ -5,7 +5,7 @@ type IAlertProps = {
 };
 
 /**
- * Alert shows message as feedback to the users.
+ * Alert shows message as feedback to the users. New comment
  * @component
  * @params props - Component props.
  * @param props.text - Text message to display.
