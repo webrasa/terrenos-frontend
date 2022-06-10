@@ -8,7 +8,6 @@ import { Button } from '../../button/Button';
 import { ConfirmDialog } from '../../dialog/ConfirmDialog';
 import { useAsync } from '../../hooks/UseAsync';
 import { useAuth } from '../../hooks/UseAuth';
-import { MemberStatus } from '../../types/IMember';
 import {
   TeamMembersAction,
   TeamMembersActionType,
@@ -29,12 +28,9 @@ const DeleteMember = (props: IDeleteMemberProps) => {
       );
     }
 
-    const queryParams =
-      props.action.status === MemberStatus.PENDING ? '?isPending=true' : '';
-
     await API.del(
       'backend',
-      `/team/${currentTeam.id}/remove/${props.action.memberId}${queryParams}`,
+      `/team/${currentTeam.id}/remove/${props.action.memberId}`,
       {}
     );
 
