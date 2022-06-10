@@ -8,8 +8,8 @@ import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
 import { MessageState } from '../../message/MessageState';
 import { Table } from '../../templates/Table';
-import { ITodo } from '../../types/ITodo';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import type { ITodo } from '../../types/ITodo';
+import type { NextPageWithLayout } from '../../utils/NextLayout';
 import { getSessionStorage } from '../../utils/SessionStorage';
 
 type IResponse = {

@@ -1,7 +1,7 @@
-import { MouseEventHandler, useState } from 'react';
-
 import { API } from 'aws-amplify';
 import Link from 'next/link';
+import type { MouseEventHandler } from 'react';
+import { useState } from 'react';
 import { mutate } from 'swr';
 
 import { Button } from '../button/Button';
@@ -9,7 +9,7 @@ import { ConfirmDialog } from '../dialog/ConfirmDialog';
 import { useAsync } from '../hooks/UseAsync';
 import { useAuth } from '../hooks/UseAuth';
 import { DetailTable } from '../table/DetailTable';
-import { ITodo } from '../types/ITodo';
+import type { ITodo } from '../types/ITodo';
 
 type ITableProps = {
   list: ITodo[];

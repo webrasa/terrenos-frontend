@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/UseAuth';
 import { CenterSection } from '../../layout/CenterSection';
 import { getShell } from '../../layout/Shell';
 import { PricingModel } from '../../templates/PricingModel';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import type { NextPageWithLayout } from '../../utils/NextLayout';
 import getStripe from '../../utils/StripeClient';
 import { getPriceIdFromName } from '../../utils/SubscriptionPrice';
 

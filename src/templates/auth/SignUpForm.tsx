@@ -1,8 +1,7 @@
-import { useState } from 'react';
-
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Alert } from '../../alert/Alert';

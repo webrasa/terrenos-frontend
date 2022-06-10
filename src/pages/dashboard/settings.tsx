@@ -2,9 +2,9 @@ import useSWR from 'swr';
 
 import { useAuth } from '../../hooks/UseAuth';
 import { getShell } from '../../layout/Shell';
-import { ISettings } from '../../templates/team/BillingSettings';
+import type { ISettings } from '../../templates/team/BillingSettings';
 import { TeamSettings } from '../../templates/team/TeamSettings';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import type { NextPageWithLayout } from '../../utils/NextLayout';
 
 const Settings: NextPageWithLayout = () => {
   const { currentTeam } = useAuth();

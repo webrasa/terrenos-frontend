@@ -2,7 +2,7 @@ import { CenterSection } from '../../layout/CenterSection';
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
 import { CreateTeamForm } from '../../templates/team/CreateTeamForm';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import type { NextPageWithLayout } from '../../utils/NextLayout';
 
 const CreateTeam: NextPageWithLayout = () => (
   <CenterSection>

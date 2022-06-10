@@ -2,11 +2,9 @@ import { useState } from 'react';
 
 import { Button } from '../../button/Button';
 import { DetailTable } from '../../table/DetailTable';
-import { IMember } from '../../types/IMember';
-import {
-  TeamMembersActionType,
-  TeamMembersAction,
-} from '../../types/TeamMembersAction';
+import type { IMember } from '../../types/IMember';
+import type { TeamMembersAction } from '../../types/TeamMembersAction';
+import { TeamMembersActionType } from '../../types/TeamMembersAction';
 import { DeleteMember } from './DeleteMember';
 import { InviteMemberDialog } from './InviteMemberDialog';
 

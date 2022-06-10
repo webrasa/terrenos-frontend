@@ -1,4 +1,4 @@
-import { CognitoUser } from '@aws-amplify/auth';
+import type { CognitoUser } from '@aws-amplify/auth';
 
 // Non-exhaustive attribute from Authenticator provider
 export type ProviderInfo = {

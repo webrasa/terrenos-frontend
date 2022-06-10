@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
-
 import { Dialog } from '@headlessui/react';
+import type { ReactNode } from 'react';
 
 type IBaseDialogProps = {
   show: boolean;

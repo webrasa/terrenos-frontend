@@ -1,8 +1,7 @@
-import { useEffect } from 'react';
-
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/dist/client/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '../button/Button';
@@ -10,7 +9,7 @@ import { FormElement } from '../form/FormElement';
 import { Label } from '../form/Label';
 import { useAsync } from '../hooks/UseAsync';
 import { useAuth } from '../hooks/UseAuth';
-import { ITodo } from '../types/ITodo';
+import type { ITodo } from '../types/ITodo';
 import { setFormError } from '../utils/Forms';
 
 type ITodoFormProps = {

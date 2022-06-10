@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
-
 import { Dialog } from '@headlessui/react';
+import type { ReactNode } from 'react';
 
 import { Alert } from '../alert/Alert';
 import { Button } from '../button/Button';

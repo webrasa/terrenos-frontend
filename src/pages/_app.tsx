@@ -1,14 +1,13 @@
-import { ReactElement } from 'react';
+import '../styles/global.css';
 
-import { API, Amplify } from 'aws-amplify';
-import { AppProps } from 'next/app';
+import { Amplify, API } from 'aws-amplify';
+import type { AppProps } from 'next/app';
+import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
 import { PoweredBy } from '../badge/PoweredBy';
 import { AwsConfig } from '../utils/AwsConfig';
-import { NextPageWithLayout } from '../utils/NextLayout';
-
-import '../styles/global.css';
+import type { NextPageWithLayout } from '../utils/NextLayout';
 
 Amplify.configure({ ...AwsConfig });
 

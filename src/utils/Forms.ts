@@ -1,4 +1,4 @@
-import { ErrorOption } from 'react-hook-form';
+import type { ErrorOption } from 'react-hook-form';
 
 export type IError<T> = {
   param: keyof T;

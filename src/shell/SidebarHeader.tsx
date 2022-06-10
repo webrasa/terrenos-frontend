@@ -1,7 +1,7 @@
-import { ReactNode, useEffect } from 'react';
-
 import className from 'classnames';
 import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
+import { useEffect } from 'react';
 
 import { ToggleMenuButton } from '../button/ToggleMenuButton';
 import { useAuth } from '../hooks/UseAuth';

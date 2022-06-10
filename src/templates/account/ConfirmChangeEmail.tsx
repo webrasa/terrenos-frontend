@@ -1,7 +1,6 @@
-import { useState } from 'react';
-
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { FormDialog } from '../../dialog/FormDialog';

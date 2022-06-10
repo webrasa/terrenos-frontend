@@ -1,7 +1,6 @@
-import { MouseEventHandler } from 'react';
-
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import type { MouseEventHandler } from 'react';
 import { mutate } from 'swr';
 
 import { Button } from '../../button/Button';

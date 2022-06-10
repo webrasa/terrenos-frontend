@@ -1,7 +1,6 @@
-import { ReactNode } from 'react';
-
 import classNames from 'classnames';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 import { ToggleMenuButton } from '../button/ToggleMenuButton';
 import { useMenu } from '../hooks/UseMenu';

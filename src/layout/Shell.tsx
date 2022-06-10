@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import { AuthProvider } from '../hooks/UseAuth';
 import { Shell } from '../templates/shell/Shell';

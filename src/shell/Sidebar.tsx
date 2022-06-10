@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
-
 import classNames from 'classnames';
+import type { ReactNode } from 'react';
 
 import { Logo } from '../templates/Logo';
 

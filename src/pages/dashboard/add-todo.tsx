@@ -1,7 +1,7 @@
 import { Section } from '../../layout/Section';
 import { getShell } from '../../layout/Shell';
 import { TodoForm } from '../../templates/TodoForm';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import type { NextPageWithLayout } from '../../utils/NextLayout';
 
 const AddTodo: NextPageWithLayout = () => (
   <Section

@@ -1,7 +1,6 @@
-import { MouseEventHandler } from 'react';
-
 import { API } from 'aws-amplify';
 import Link from 'next/link';
+import type { MouseEventHandler } from 'react';
 
 import { Button } from '../../button/Button';
 import { useAsync } from '../../hooks/UseAsync';

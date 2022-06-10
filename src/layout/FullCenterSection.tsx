@@ -1,4 +1,4 @@
-import { ReactChild, ReactNode } from 'react';
+import type { ReactChild, ReactNode } from 'react';
 
 import { Logo } from '../templates/Logo';
 

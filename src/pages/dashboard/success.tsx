@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Button } from '../../button/Button';
 import { getShell } from '../../layout/Shell';
 import { MessageState } from '../../message/MessageState';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import type { NextPageWithLayout } from '../../utils/NextLayout';
 
 const Success: NextPageWithLayout = () => (
   <MessageState
