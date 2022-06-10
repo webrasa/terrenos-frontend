@@ -1,9 +1,9 @@
 import { Menu } from '@headlessui/react';
 import Avvvatars from 'avvvatars-react';
 
-import { MenuLink } from '../../avatar/MenuLink';
-import { useAuth } from '../../hooks/UseAuth';
-import { AppConfig } from '../../utils/AppConfig';
+import { MenuLink } from '@/avatar/MenuLink';
+import { useAuth } from '@/hooks/UseAuth';
+import { AppConfig } from '@/utils/AppConfig';
 
 const AvatarMenu = () => {
   const { providerInfo } = useAuth();

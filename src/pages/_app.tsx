@@ -5,8 +5,9 @@ import type { AppProps } from 'next/app';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
-import { PoweredBy } from '../badge/PoweredBy';
-import { AwsConfig } from '../utils/AwsConfig';
+import { PoweredBy } from '@/badge/PoweredBy';
+import { AwsConfig } from '@/utils/AwsConfig';
+
 import type { NextPageWithLayout } from '../utils/NextLayout';
 
 Amplify.configure({ ...AwsConfig });

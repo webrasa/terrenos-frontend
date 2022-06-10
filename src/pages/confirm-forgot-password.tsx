@@ -1,6 +1,6 @@
-import { Meta } from '../layout/Meta';
-import { ConfirmForgotPasswordForm } from '../templates/auth/ConfirmForgotPasswordForm';
-import { AppConfig } from '../utils/AppConfig';
+import { Meta } from '@/layout/Meta';
+import { ConfirmForgotPasswordForm } from '@/templates/auth/ConfirmForgotPasswordForm';
+import { AppConfig } from '@/utils/AppConfig';
 
 const ConfirmForgotPassword = () => (
   <div className="text-gray-900 antialiased">

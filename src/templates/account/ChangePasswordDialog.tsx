@@ -2,12 +2,12 @@ import { Auth } from 'aws-amplify';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { FormDialog } from '../../dialog/FormDialog';
-import { FormElement } from '../../form/FormElement';
-import { Label } from '../../form/Label';
-import { useAsync } from '../../hooks/UseAsync';
-import { UserInfoSettingsState } from '../../types/UserInfoSettingsState';
-import { mapAmplifyMessageSettings } from '../../utils/AmplifyMessageMap';
+import { FormDialog } from '@/dialog/FormDialog';
+import { FormElement } from '@/form/FormElement';
+import { Label } from '@/form/Label';
+import { useAsync } from '@/hooks/UseAsync';
+import { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
+import { mapAmplifyMessageSettings } from '@/utils/AmplifyMessageMap';
 
 type IChangePasswordForm = {
   oldPassword: string;

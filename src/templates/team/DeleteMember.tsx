@@ -3,12 +3,12 @@ import router from 'next/router';
 import type { MouseEventHandler } from 'react';
 import { mutate } from 'swr';
 
-import { Button } from '../../button/Button';
-import { ConfirmDialog } from '../../dialog/ConfirmDialog';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import type { TeamMembersAction } from '../../types/TeamMembersAction';
-import { TeamMembersActionType } from '../../types/TeamMembersAction';
+import { Button } from '@/button/Button';
+import { ConfirmDialog } from '@/dialog/ConfirmDialog';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import type { TeamMembersAction } from '@/types/TeamMembersAction';
+import { TeamMembersActionType } from '@/types/TeamMembersAction';
 
 type IDeleteMemberProps = {
   action: TeamMembersAction;

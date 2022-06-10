@@ -1,7 +1,7 @@
 import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 
-import type { CognitoUserExt, ProviderInfo } from '../types/Auth';
+import type { CognitoUserExt, ProviderInfo } from '@/types/Auth';
 
 export enum AuthState {
   AUTHENTICATING = 'AUTHENTICATING',

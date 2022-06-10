@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import { Button } from '../../button/Button';
-import { DetailTable } from '../../table/DetailTable';
-import type { IMember } from '../../types/IMember';
-import type { TeamMembersAction } from '../../types/TeamMembersAction';
-import { TeamMembersActionType } from '../../types/TeamMembersAction';
+import { Button } from '@/button/Button';
+import { DetailTable } from '@/table/DetailTable';
+import type { IMember } from '@/types/IMember';
+import type { TeamMembersAction } from '@/types/TeamMembersAction';
+import { TeamMembersActionType } from '@/types/TeamMembersAction';
+
 import { DeleteMember } from './DeleteMember';
 import { InviteMemberDialog } from './InviteMemberDialog';
 

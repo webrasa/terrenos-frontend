@@ -1,6 +1,6 @@
-import { Meta } from '../layout/Meta';
-import { ResetPasswordForm } from '../templates/auth/ResetPasswordForm';
-import { AppConfig } from '../utils/AppConfig';
+import { Meta } from '@/layout/Meta';
+import { ResetPasswordForm } from '@/templates/auth/ResetPasswordForm';
+import { AppConfig } from '@/utils/AppConfig';
 
 const ForgotPassword = () => (
   <div className="text-gray-900 antialiased">

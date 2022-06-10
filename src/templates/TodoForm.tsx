@@ -4,13 +4,13 @@ import { useRouter } from 'next/dist/client/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Button } from '../button/Button';
-import { FormElement } from '../form/FormElement';
-import { Label } from '../form/Label';
-import { useAsync } from '../hooks/UseAsync';
-import { useAuth } from '../hooks/UseAuth';
-import type { ITodo } from '../types/ITodo';
-import { setFormError } from '../utils/Forms';
+import { Button } from '@/button/Button';
+import { FormElement } from '@/form/FormElement';
+import { Label } from '@/form/Label';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import type { ITodo } from '@/types/ITodo';
+import { setFormError } from '@/utils/Forms';
 
 type ITodoFormProps = {
   id?: string;

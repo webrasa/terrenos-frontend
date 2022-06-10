@@ -1,8 +1,8 @@
 import { Dialog } from '@headlessui/react';
 import Link from 'next/link';
 
-import { Button } from '../../button/Button';
-import { BaseDialog } from '../../dialog/BaseDialog';
+import { Button } from '@/button/Button';
+import { BaseDialog } from '@/dialog/BaseDialog';
 
 type IChangePasswordSuccessProps = {
   show: boolean;

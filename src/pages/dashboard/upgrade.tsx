@@ -1,14 +1,14 @@
 import { API } from 'aws-amplify';
 
-import { Button } from '../../button/Button';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import { CenterSection } from '../../layout/CenterSection';
-import { getShell } from '../../layout/Shell';
-import { PricingModel } from '../../templates/PricingModel';
-import type { NextPageWithLayout } from '../../utils/NextLayout';
-import getStripe from '../../utils/StripeClient';
-import { getPriceIdFromName } from '../../utils/SubscriptionPrice';
+import { Button } from '@/button/Button';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { CenterSection } from '@/layout/CenterSection';
+import { getShell } from '@/layout/Shell';
+import { PricingModel } from '@/templates/PricingModel';
+import type { NextPageWithLayout } from '@/utils/NextLayout';
+import getStripe from '@/utils/StripeClient';
+import { getPriceIdFromName } from '@/utils/SubscriptionPrice';
 
 const Upgrade: NextPageWithLayout = () => {
   const { currentTeam } = useAuth();

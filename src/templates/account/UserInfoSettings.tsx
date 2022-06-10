@@ -1,10 +1,11 @@
 import { useState } from 'react';
 
-import { Button } from '../../button/Button';
-import { useAuth } from '../../hooks/UseAuth';
-import { CardSection } from '../../layout/CardSection';
-import { SettingLine } from '../../settings/SettingLine';
-import { UserInfoSettingsState } from '../../types/UserInfoSettingsState';
+import { Button } from '@/button/Button';
+import { useAuth } from '@/hooks/UseAuth';
+import { CardSection } from '@/layout/CardSection';
+import { SettingLine } from '@/settings/SettingLine';
+import { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
+
 import { ChangeEmailDialog } from './ChangeEmailDialog';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';

@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import type { MouseEventHandler } from 'react';
 import { mutate } from 'swr';
 
-import { Button } from '../../button/Button';
-import { ConfirmDialog } from '../../dialog/ConfirmDialog';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import { AppConfig } from '../../utils/AppConfig';
+import { Button } from '@/button/Button';
+import { ConfirmDialog } from '@/dialog/ConfirmDialog';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { AppConfig } from '@/utils/AppConfig';
 
 type IDeleteTeamDialogProps = {
   show: boolean;

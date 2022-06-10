@@ -5,13 +5,13 @@ import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import useSWR, { mutate } from 'swr';
 
-import { Alert } from '../../alert/Alert';
-import { Button } from '../../button/Button';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import { FullCenterSection } from '../../layout/FullCenterSection';
-import type { ProviderInfo } from '../../types/Auth';
-import { mapInviteMessage } from '../../utils/InviteMessageMap';
+import { Alert } from '@/alert/Alert';
+import { Button } from '@/button/Button';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { FullCenterSection } from '@/layout/FullCenterSection';
+import type { ProviderInfo } from '@/types/Auth';
+import { mapInviteMessage } from '@/utils/InviteMessageMap';
 
 type IAuthenticatedProps = {
   userInfo: ProviderInfo;

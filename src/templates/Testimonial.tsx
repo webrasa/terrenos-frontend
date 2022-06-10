@@ -1,6 +1,6 @@
-import { Background } from '../background/Background';
-import { LandingSection } from '../layout/LandingSection';
-import { TestimonialCard } from '../testimonial/TestimonialCard';
+import { Background } from '@/background/Background';
+import { LandingSection } from '@/layout/LandingSection';
+import { TestimonialCard } from '@/testimonial/TestimonialCard';
 
 const Testimonial = () => (
   <Background color="bg-primary-100">

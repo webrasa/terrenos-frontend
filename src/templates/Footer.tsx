@@ -1,10 +1,11 @@
 import Link from 'next/link';
 
-import { Background } from '../background/Background';
-import { FooterLinks } from '../footer/FooterLinks';
-import { FooterTwoRowsCopyright } from '../footer/FooterTwoRowsCopyright';
-import { LandingSection } from '../layout/LandingSection';
-import { AppConfig } from '../utils/AppConfig';
+import { Background } from '@/background/Background';
+import { FooterLinks } from '@/footer/FooterLinks';
+import { FooterTwoRowsCopyright } from '@/footer/FooterTwoRowsCopyright';
+import { LandingSection } from '@/layout/LandingSection';
+import { AppConfig } from '@/utils/AppConfig';
+
 import { Logo } from './Logo';
 
 const Footer = () => (

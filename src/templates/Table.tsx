@@ -4,12 +4,12 @@ import type { MouseEventHandler } from 'react';
 import { useState } from 'react';
 import { mutate } from 'swr';
 
-import { Button } from '../button/Button';
-import { ConfirmDialog } from '../dialog/ConfirmDialog';
-import { useAsync } from '../hooks/UseAsync';
-import { useAuth } from '../hooks/UseAuth';
-import { DetailTable } from '../table/DetailTable';
-import type { ITodo } from '../types/ITodo';
+import { Button } from '@/button/Button';
+import { ConfirmDialog } from '@/dialog/ConfirmDialog';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { DetailTable } from '@/table/DetailTable';
+import type { ITodo } from '@/types/ITodo';
 
 type ITableProps = {
   list: ITodo[];

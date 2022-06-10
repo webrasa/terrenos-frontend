@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { QuestionAnswer } from '../faq/QuestionAnswer';
-import { LandingSection } from '../layout/LandingSection';
+import { QuestionAnswer } from '@/faq/QuestionAnswer';
+import { LandingSection } from '@/layout/LandingSection';
 
 const FAQ = () => (
   <LandingSection

@@ -2,15 +2,15 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-import { Button } from '../../button/Button';
-import { useAuth } from '../../hooks/UseAuth';
-import { Section } from '../../layout/Section';
-import { getShell } from '../../layout/Shell';
-import { MessageState } from '../../message/MessageState';
-import { Table } from '../../templates/Table';
-import type { ITodo } from '../../types/ITodo';
-import type { NextPageWithLayout } from '../../utils/NextLayout';
-import { getSessionStorage } from '../../utils/SessionStorage';
+import { Button } from '@/button/Button';
+import { useAuth } from '@/hooks/UseAuth';
+import { Section } from '@/layout/Section';
+import { getShell } from '@/layout/Shell';
+import { MessageState } from '@/message/MessageState';
+import { Table } from '@/templates/Table';
+import type { ITodo } from '@/types/ITodo';
+import type { NextPageWithLayout } from '@/utils/NextLayout';
+import { getSessionStorage } from '@/utils/SessionStorage';
 
 type IResponse = {
   list: ITodo[];

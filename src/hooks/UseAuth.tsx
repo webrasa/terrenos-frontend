@@ -4,7 +4,8 @@ import { createContext, useContext } from 'react';
 import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
-import type { UserAuth, UserProfile } from '../types/Auth';
+import type { UserAuth, UserProfile } from '@/types/Auth';
+
 import { AuthState, useProviderInfo } from './UseProviderInfo';
 
 // React Hook Context for authentification

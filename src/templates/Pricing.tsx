@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
-import { Button } from '../button/Button';
-import { LandingSection } from '../layout/LandingSection';
+import { Button } from '@/button/Button';
+import { LandingSection } from '@/layout/LandingSection';
+
 import { PricingModel } from './PricingModel';
 
 const Pricing = () => (

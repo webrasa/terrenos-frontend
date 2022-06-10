@@ -5,15 +5,15 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Alert } from '../../alert/Alert';
-import { Button } from '../../button/Button';
-import { SocialButton } from '../../button/SocialButton';
-import { Divider } from '../../divider/Divider';
-import { FormElement } from '../../form/FormElement';
-import { Label } from '../../form/Label';
-import { useAsync } from '../../hooks/UseAsync';
-import { FullCenterSection } from '../../layout/FullCenterSection';
-import { mapAmplifyMessage } from '../../utils/AmplifyMessageMap';
+import { Alert } from '@/alert/Alert';
+import { Button } from '@/button/Button';
+import { SocialButton } from '@/button/SocialButton';
+import { Divider } from '@/divider/Divider';
+import { FormElement } from '@/form/FormElement';
+import { Label } from '@/form/Label';
+import { useAsync } from '@/hooks/UseAsync';
+import { FullCenterSection } from '@/layout/FullCenterSection';
+import { mapAmplifyMessage } from '@/utils/AmplifyMessageMap';
 
 type ILoginForm = {
   email: string;

@@ -1,7 +1,7 @@
-import { Section } from '../../layout/Section';
-import { getShell } from '../../layout/Shell';
-import { RandomForm } from '../../templates/RandomForm';
-import type { NextPageWithLayout } from '../../utils/NextLayout';
+import { Section } from '@/layout/Section';
+import { getShell } from '@/layout/Shell';
+import { RandomForm } from '@/templates/RandomForm';
+import type { NextPageWithLayout } from '@/utils/NextLayout';
 
 const FormExample: NextPageWithLayout = () => (
   <Section
