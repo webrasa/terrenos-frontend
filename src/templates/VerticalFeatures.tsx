@@ -1,8 +1,8 @@
-import { Background } from '../background/Background';
-import { VerticalFeatureElement } from '../feature/VerticalFeatureElement';
-import { VerticalFeatureElementColumn } from '../feature/VerticalFeatureElementColumn';
-import { VerticalFeatureRow } from '../feature/VerticalFeatureRow';
-import { LandingSection } from '../layout/LandingSection';
+import { Background } from '@/background/Background';
+import { VerticalFeatureElement } from '@/feature/VerticalFeatureElement';
+import { VerticalFeatureElementColumn } from '@/feature/VerticalFeatureElementColumn';
+import { VerticalFeatureRow } from '@/feature/VerticalFeatureRow';
+import { LandingSection } from '@/layout/LandingSection';
 
 const VerticalFeatures = () => (
   <>

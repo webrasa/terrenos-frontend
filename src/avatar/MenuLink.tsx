@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
-
 import { Menu } from '@headlessui/react';
-import { PropsOf } from '@headlessui/react/dist/types';
+import type { PropsOf } from '@headlessui/react/dist/types';
 import classNames from 'classnames';
-import Link, { LinkProps } from 'next/link';
+import type { LinkProps } from 'next/link';
+import Link from 'next/link';
+import type { ReactNode } from 'react';
 
 type IMenuInternalLinkProps = {
   active?: boolean;

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { useAuth } from '../../hooks/UseAuth';
-import { SidebarSelect } from '../../shell/SidebarSelect';
+import { useAuth } from '@/hooks/UseAuth';
+import { SidebarSelect } from '@/shell/SidebarSelect';
 
 enum TeamOption {
   NEW = 'NEW',

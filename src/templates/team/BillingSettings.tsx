@@ -1,14 +1,13 @@
-import { MouseEventHandler } from 'react';
-
 import { API } from 'aws-amplify';
 import Link from 'next/link';
+import type { MouseEventHandler } from 'react';
 
-import { Button } from '../../button/Button';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import { CardSection } from '../../layout/CardSection';
-import { UsageStats } from '../../stats/UsageStats';
-import { SubscriptionPlan } from '../../types/SubscriptionPlan';
+import { Button } from '@/button/Button';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { CardSection } from '@/layout/CardSection';
+import { UsageStats } from '@/stats/UsageStats';
+import { SubscriptionPlan } from '@/types/SubscriptionPlan';
 
 export type ISettings = {
   planId: string;

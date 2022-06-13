@@ -1,10 +1,11 @@
-import { createContext, ReactNode, useContext } from 'react';
-
 import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
+import { createContext, useContext } from 'react';
 import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
-import { UserAuth, UserProfile } from '../types/Auth';
+import type { UserAuth, UserProfile } from '@/types/Auth';
+
 import { AuthState, useProviderInfo } from './UseProviderInfo';
 
 // React Hook Context for authentification

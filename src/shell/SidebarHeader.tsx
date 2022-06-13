@@ -1,11 +1,12 @@
-import { ReactNode, useEffect } from 'react';
-
 import className from 'classnames';
 import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
+import { useEffect } from 'react';
 
-import { ToggleMenuButton } from '../button/ToggleMenuButton';
-import { useAuth } from '../hooks/UseAuth';
-import { useMenu } from '../hooks/UseMenu';
+import { ToggleMenuButton } from '@/button/ToggleMenuButton';
+import { useAuth } from '@/hooks/UseAuth';
+import { useMenu } from '@/hooks/UseMenu';
+
 import { Sidebar } from './Sidebar';
 
 type ISidebarHeaderProps = {

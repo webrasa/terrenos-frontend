@@ -1,11 +1,11 @@
 import { useRouter } from 'next/dist/client/router';
 import useSWR from 'swr';
 
-import { useAuth } from '../../../hooks/UseAuth';
-import { Section } from '../../../layout/Section';
-import { getShell } from '../../../layout/Shell';
-import { TodoForm } from '../../../templates/TodoForm';
-import { NextPageWithLayout } from '../../../utils/NextLayout';
+import { useAuth } from '@/hooks/UseAuth';
+import { Section } from '@/layout/Section';
+import { getShell } from '@/layout/Shell';
+import { TodoForm } from '@/templates/TodoForm';
+import type { NextPageWithLayout } from '@/utils/NextLayout';
 
 const EditTodo: NextPageWithLayout = () => {
   const { currentTeam } = useAuth();

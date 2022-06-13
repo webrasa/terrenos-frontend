@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 
-import { useAuth } from '../../hooks/UseAuth';
-import { getShell } from '../../layout/Shell';
-import { UserInfoSettings } from '../../templates/account/UserInfoSettings';
-import { NextPageWithLayout } from '../../utils/NextLayout';
+import { useAuth } from '@/hooks/UseAuth';
+import { getShell } from '@/layout/Shell';
+import { UserInfoSettings } from '@/templates/account/UserInfoSettings';
+import type { NextPageWithLayout } from '@/utils/NextLayout';
 
 const Account: NextPageWithLayout = () => {
   const { providerInfo } = useAuth();

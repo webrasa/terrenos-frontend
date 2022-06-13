@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
-
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 
-import { SidebarHeader } from '../../shell/SidebarHeader';
-import { SidebarLink } from '../../shell/SidebarLink';
+import { SidebarHeader } from '@/shell/SidebarHeader';
+import { SidebarLink } from '@/shell/SidebarLink';
+
 import { AvatarMenu } from './AvatarDropdown';
 import { SidebarTeamSelection } from './SidebarTeamSelection';
 

@@ -1,9 +1,9 @@
-import { ReactNode } from 'react';
-
 import { Dialog } from '@headlessui/react';
+import type { ReactNode } from 'react';
 
-import { Alert } from '../alert/Alert';
-import { Button } from '../button/Button';
+import { Alert } from '@/alert/Alert';
+import { Button } from '@/button/Button';
+
 import { BaseDialog } from './BaseDialog';
 
 type IFormDialogProps = {

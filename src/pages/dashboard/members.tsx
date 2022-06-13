@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-import { useAuth } from '../../hooks/UseAuth';
-import { Section } from '../../layout/Section';
-import { getShell } from '../../layout/Shell';
-import { TeamTable } from '../../templates/team/TeamTable';
-import { IMember } from '../../types/IMember';
+import { useAuth } from '@/hooks/UseAuth';
+import { Section } from '@/layout/Section';
+import { getShell } from '@/layout/Shell';
+import { TeamTable } from '@/templates/team/TeamTable';
+import type { IMember } from '@/types/IMember';
 
 type IResponse = {
   list: IMember[];

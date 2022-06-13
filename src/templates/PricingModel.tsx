@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
-import { PricingCard } from '../pricing/PricingCard';
-import { PricingFeature } from '../pricing/PricingFeature';
+import { PricingCard } from '@/pricing/PricingCard';
+import { PricingFeature } from '@/pricing/PricingFeature';
 
 type IPricingModelProps = {
   button: ReactNode;

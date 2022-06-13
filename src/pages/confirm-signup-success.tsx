@@ -1,6 +1,6 @@
-import { Meta } from '../layout/Meta';
-import { ConfirmSignUpSuccess } from '../templates/auth/ConfirmSignUpSuccess';
-import { AppConfig } from '../utils/AppConfig';
+import { Meta } from '@/layout/Meta';
+import { ConfirmSignUpSuccess } from '@/templates/auth/ConfirmSignUpSuccess';
+import { AppConfig } from '@/utils/AppConfig';
 
 const ConfirmSignUp = () => (
   <div className="text-gray-900 antialiased">

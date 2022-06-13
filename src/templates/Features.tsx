@@ -1,5 +1,5 @@
-import { FeatureElement } from '../feature/FeatureElement';
-import { LandingSection } from '../layout/LandingSection';
+import { FeatureElement } from '@/feature/FeatureElement';
+import { LandingSection } from '@/layout/LandingSection';
 
 const Features = () => (
   <LandingSection

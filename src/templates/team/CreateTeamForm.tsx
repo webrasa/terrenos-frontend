@@ -4,12 +4,12 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
-import { Button } from '../../button/Button';
-import { FormElement } from '../../form/FormElement';
-import { Label } from '../../form/Label';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import { setFormError } from '../../utils/Forms';
+import { Button } from '@/button/Button';
+import { FormElement } from '@/form/FormElement';
+import { Label } from '@/form/Label';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { setFormError } from '@/utils/Forms';
 
 type ICreateTeamForm = {
   userEmail: string;

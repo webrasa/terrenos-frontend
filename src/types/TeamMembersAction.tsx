@@ -1,4 +1,4 @@
-import { MemberStatus } from './IMember';
+import type { MemberStatus } from './IMember';
 
 export enum TeamMembersActionType {
   NONE = 'NONE',

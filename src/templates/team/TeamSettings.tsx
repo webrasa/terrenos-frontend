@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
-import { Button } from '../../button/Button';
-import { useAuth } from '../../hooks/UseAuth';
-import { CardSection } from '../../layout/CardSection';
-import { SettingLine } from '../../settings/SettingLine';
-import { TeamSettingsState } from '../../types/TeamSettingsState';
-import { BillingSettings, IBillingSettingsProps } from './BillingSettings';
+import { Button } from '@/button/Button';
+import { useAuth } from '@/hooks/UseAuth';
+import { CardSection } from '@/layout/CardSection';
+import { SettingLine } from '@/settings/SettingLine';
+import { TeamSettingsState } from '@/types/TeamSettingsState';
+
+import type { IBillingSettingsProps } from './BillingSettings';
+import { BillingSettings } from './BillingSettings';
 import { ChangeTeamDisplayName } from './ChangeTeamDisplayName';
 import { DeleteTeamDialog } from './DeleteTeamDialog';
 

@@ -3,12 +3,12 @@ import { API } from 'aws-amplify';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
-import { FormDialog } from '../../dialog/FormDialog';
-import { FormElement } from '../../form/FormElement';
-import { Label } from '../../form/Label';
-import { useAsync } from '../../hooks/UseAsync';
-import { useAuth } from '../../hooks/UseAuth';
-import { setFormError } from '../../utils/Forms';
+import { FormDialog } from '@/dialog/FormDialog';
+import { FormElement } from '@/form/FormElement';
+import { Label } from '@/form/Label';
+import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
+import { setFormError } from '@/utils/Forms';
 
 type IInviteMemberForm = {
   email: string;
