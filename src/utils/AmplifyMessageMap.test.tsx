@@ -1,4 +1,7 @@
-import { mapAmplifyMessage } from './AmplifyMessageMap';
+import {
+  mapAmplifyMessage,
+  mapAmplifyMessageSettings,
+} from './AmplifyMessageMap';
 
 describe('AmplifyMessageMap', () => {
   describe('mapAmplifyMessage function', () => {
@@ -38,6 +41,30 @@ describe('AmplifyMessageMap', () => {
 
     it("shouldn't modify the error message when it doesn't need", () => {
       const message = mapAmplifyMessage({
+        message: 'Random message',
+      });
+
+      expect(message).toEqual('Random message');
+    });
+  });
+
+  describe('mapAmplifyMessageSettings function', () => {
+    it("should return a generic error message when the error don't have a message property", () => {
+      const message = mapAmplifyMessageSettings({});
+
+      expect(message).toEqual('Unexpected error occurred, please try again.');
+    });
+
+    it('should return a better error message when the user try to modify his password in settings', () => {
+      const message = mapAmplifyMessageSettings({
+        message: 'Incorrect username or password',
+      });
+
+      expect(message).toEqual('Incorrect old password');
+    });
+
+    it("shouldn't modify the error message when it doesn't need", () => {
+      const message = mapAmplifyMessageSettings({
         message: 'Random message',
       });
 
