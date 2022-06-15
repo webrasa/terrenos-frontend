@@ -41,7 +41,10 @@ describe('Forms', () => {
       });
 
       expect(mockSetError.mock.calls.length).toEqual(2);
-      // We just make sure the setError function is called the correct time
+      // We just make sure the `setError` function is called the correct time.
+
+      // Relying on TypeScript to make sure `setError` function is called correctly.
+      // So, it doesn't need to test if the function is called with the correct parameter.
     });
   });
 });

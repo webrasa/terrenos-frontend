@@ -9,19 +9,10 @@ describe('InviteMessageMap', () => {
     });
 
     it("should return a generic error message when the error isn't expected/supported", () => {
-      let message = mapInviteMessage({
+      const message = mapInviteMessage({
         response: {
           data: {
             errors: 'random error',
-          },
-        },
-      });
-      expect(message).toEqual('Impossible to accept invite');
-
-      message = mapInviteMessage({
-        response: {
-          data: {
-            errors: 'random error 2',
           },
         },
       });
