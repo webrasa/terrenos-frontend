@@ -28,7 +28,7 @@ describe('Section', () => {
       expect(children).toBeInTheDocument();
     });
 
-    it('should always render children even if the title and the description are both defined', () => {
+    it('should always render children even if the title and description are both defined', () => {
       render(
         <Section title="Random title" description="Random description">
           Children
