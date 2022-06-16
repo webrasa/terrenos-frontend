@@ -15,7 +15,7 @@ describe('FooterTwoRowsCopyright', () => {
         </FooterTwoRowsCopyright>
       );
 
-      const copyrightText = screen.getByText(
+      const copyrightText = screen.queryByText(
         /© Copyright.*All Rights Reserved./
       );
 
