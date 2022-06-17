@@ -6,6 +6,10 @@ export type ISidebarSelectOptionProps = {
   label: string;
 };
 
+/**
+ * An accessible <option> tag that will be rendered in the dropdown of SidebarSelect.
+ * @component
+ */
 const SidebarSelectionOption = (props: ISidebarSelectOptionProps) => (
   <Listbox.Option
     value={props.value}

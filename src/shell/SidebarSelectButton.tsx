@@ -5,6 +5,8 @@ type ISidebarSelectButtonProps = {
 };
 
 /**
+ * Button to render before any interaction with SidebarSelect component.
+ * User need to click on this button to start the interaction with the select component.
  * @component
  * @params props - Component props.
  * @param props.text - Button text used to display.

@@ -19,7 +19,7 @@ type ISidebarHeaderProps = {
 };
 
 /**
- * Sidebar header, displayed at the top of the application shell.
+ * Dashboard header, displayed at the top of the application.
  * @component
  * @params props - Component props.
  * @param props.select - Select menu located at the top of the sidebar.

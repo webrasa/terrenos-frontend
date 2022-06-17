@@ -14,6 +14,7 @@ type ISidebarSelectionProps = {
 };
 
 /**
+ * An accessible React <select> component with design style.
  * @component
  * @params props - Component props.
  * @param props.value - Current selected value in select.

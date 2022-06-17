@@ -8,6 +8,7 @@ type IDetailTableProps = {
 };
 
 /**
+ * A table component to display data with all the detailed information.
  * @component
  * @params props - Component props.
  * @param props.title - Table title to display.
