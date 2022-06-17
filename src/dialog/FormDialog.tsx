@@ -19,6 +19,20 @@ type IFormDialogProps = {
   submitText?: string;
 };
 
+/**
+ * Dialog component with form.
+ * @component
+ * @params props - Component props.
+ * @param props.show - Show or hide the dialog.
+ * @param props.handleCancel - Callback function when the dialog is close or cancelled.
+ * @param props.handleSubmit - Callback function when the form is submitted.
+ * @param props.children - The form inputs.
+ * @param props.isSubmitting - Indicates if a submit event is currently processing.
+ * @param props.title - The title for the dialog.
+ * @param props.description - The description for the dialog.
+ * @param props.hideCancelButton - Indicates if the cancel button need to be hidden.
+ * @param props.submitText - Text for the submit button.
+ */
 const FormDialog = (props: IFormDialogProps) => (
   <BaseDialog show={props.show} handleClose={props.handleCancel}>
     <Dialog.Title className="text-xl font-medium leading-6 text-gray-800">

@@ -6,6 +6,10 @@ type ISectionProps = {
   children: ReactNode;
 };
 
+/**
+ * A Section used in the user dashboard.
+ * @component
+ */
 const Section = (props: ISectionProps) => (
   <div className="py-8 px-3 lg:px-6">
     {props.title || props.description ? (

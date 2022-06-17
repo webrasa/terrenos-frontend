@@ -10,6 +10,7 @@ type IMetaProps = {
 };
 
 /**
+ * Adding element in the <head> of the page.
  * @component
  * @params props - Component props.
  * @param props.title - Page title for SEO.

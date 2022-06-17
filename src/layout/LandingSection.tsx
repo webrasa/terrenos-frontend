@@ -9,6 +9,7 @@ type ILandingSectionProps = {
 };
 
 /**
+ * A Section used in the landing page.
  * @component
  * @params props - Component props.
  * @param props.title - Section title to display.

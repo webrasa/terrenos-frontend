@@ -9,6 +9,10 @@ type IFullCenterSectionProps = {
   description?: ReactChild;
 };
 
+/**
+ * A centered layout when the whole page needs to be centered.
+ * @component
+ */
 const FullCenterSection = (props: IFullCenterSectionProps) => (
   <div className="flex min-h-screen items-center justify-center bg-primary-100">
     <div className="w-full max-w-md text-center">
