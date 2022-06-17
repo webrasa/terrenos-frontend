@@ -6,6 +6,11 @@ type IVerticalFeatureElementProps = {
   children: ReactNode;
 };
 
+/**
+ * Component used within VerticalFeature explain a sub-feature.
+ * Each sub-feature is placed vertically.
+ * @component
+ */
 const VerticalFeatureElement = (props: IVerticalFeatureElementProps) => (
   <div className="vertical-feature-element mt-8 flex">
     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-primary-400">

@@ -3,7 +3,7 @@ type IPricingFeatureProps = {
 };
 
 /**
- * Feature available in the subscription plan.
+ * Feature listed in pricing card explain what is included in the subscription plan.
  * @component
  */
 const PricingFeature = (props: IPricingFeatureProps) => (
