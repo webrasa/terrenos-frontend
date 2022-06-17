@@ -1,6 +1,6 @@
 import type { CognitoUser } from '@aws-amplify/auth';
 
-// Non-exhaustive attribute from Authenticator provider
+// Non-exhaustive attribute from AWS Cognito provider
 export type ProviderInfo = {
   id: string;
   email: string;
@@ -29,14 +29,14 @@ type Team = {
   id: string;
 };
 
-// Information returned by /user/profile endpoint
+// Information returned by `/user/profile` endpoint (backend endpoint)
 export type UserProfile = {
   id: string;
   firstSignIn: string;
   teamList: Team[];
 };
 
-// User information from backend (/user/profile) and authentication provider
+// User information from backend (/user/profile) and authentication provider combined
 export type UserAuth = {
   providerInfo: ProviderInfo;
   profile: UserProfile;
