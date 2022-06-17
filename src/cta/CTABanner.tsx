@@ -6,6 +6,10 @@ type ICTABannerProps = {
   button: ReactNode;
 };
 
+/**
+ * A Call to action banner.
+ * @component
+ */
 const CTABanner = (props: ICTABannerProps) => (
   <div className="flex flex-col rounded-md bg-primary-100 p-4 text-center sm:flex-row sm:items-center sm:justify-between sm:p-12 sm:text-left">
     <div className="text-2xl font-semibold">

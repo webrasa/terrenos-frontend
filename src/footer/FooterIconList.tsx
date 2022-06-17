@@ -4,6 +4,10 @@ type IFooterIconListProps = {
   children: ReactNode;
 };
 
+/**
+ * Style icons located in the footer.
+ * @component
+ */
 const FooterIconList = (props: IFooterIconListProps) => (
   <div className="footer-icon-list flex flex-wrap">
     {props.children}

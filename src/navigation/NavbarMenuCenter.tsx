@@ -11,6 +11,11 @@ type INavbarMenuCenterProps = {
   rightMenu: ReactNode;
 };
 
+/**
+ * A navbar with 3 columns. One column for the logo, another in the center for a list of links.
+ * Another one on the right also for a list of links.
+ * @component
+ */
 const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
   const { showMenu, handleToggleMenu } = useMenu();
 
