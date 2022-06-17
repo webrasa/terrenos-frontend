@@ -11,7 +11,8 @@ type ISidebarProps = {
 };
 
 /**
- * Sidebar menu.
+ * Sidebar menu with two list of links.
+ * One in the top of the sidebar and another one at the bottom.
  * @component
  * @params props - Component props.
  * @param props.show - Indicates if the component need be displayed.

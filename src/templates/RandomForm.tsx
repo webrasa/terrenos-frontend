@@ -3,6 +3,10 @@ import { FormElement } from '@/form/FormElement';
 import { FormElementBox } from '@/form/FormElementBox';
 import { Label } from '@/form/Label';
 
+/**
+ * List of all form elements with design style.
+ * @component
+ */
 const RandomForm = () => (
   <form className="grid grid-cols-1 gap-y-2 sm:grid-cols-6 sm:gap-y-5 lg:grid-cols-8">
     <Label htmlFor="name" colSpanSize="sm:col-span-2">

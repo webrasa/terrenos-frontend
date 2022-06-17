@@ -13,6 +13,7 @@ type IButtonProps = {
 };
 
 /**
+ * Button component with design style.
  * @component
  * @params props - Component props.
  * @param props.loading - Display loading indicator.

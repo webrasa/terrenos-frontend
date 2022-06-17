@@ -7,6 +7,10 @@ enum TeamOption {
   NEW = 'NEW',
 }
 
+/**
+ * A <select>-equivalent to choose a team for multi-tenancy or add a new one.
+ * @component
+ */
 const SidebarTeamSelection = () => {
   const { teamList, currentTeamInd, setCurrentTeamInd, currentTeam } =
     useAuth();

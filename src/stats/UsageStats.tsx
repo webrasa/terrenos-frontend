@@ -5,7 +5,7 @@ type IUsageStatsProps = {
 };
 
 /**
- * Helps the user to know his current usage of the SaaS products and know the limit.
+ * Helps the user to know his current usage of the SaaS and display the usage limit.
  * @component
  * @params props - Component props.
  * @param props.title - Usage Stats title to display.

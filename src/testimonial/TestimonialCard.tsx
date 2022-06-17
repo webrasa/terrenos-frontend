@@ -10,6 +10,10 @@ type ITestimonialCardProps = {
   };
 };
 
+/**
+ * Show users and/or customers testimonial.
+ * @component
+ */
 const TestimonialCard = (props: ITestimonialCardProps) => (
   <div className="rounded-md bg-white p-8 sm:p-16">
     <div className="text-lg leading-8">{props.children}</div>

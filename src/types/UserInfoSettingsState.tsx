@@ -1,3 +1,4 @@
+// Tracking state in User settings
 export enum UserInfoSettingsState {
   NONE = 'NONE',
   CHANGE_EMAIL = 'CHANGE_EMAIL',

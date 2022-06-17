@@ -8,7 +8,7 @@ type ILabelProps = {
 };
 
 /**
- * Wrapper for html <label> tag with style.
+ * Wrapper for html <label> tag with design style.
  * @component
  * @params props - Component props.
  * @param props.htmlFor - for attribute in HTML.

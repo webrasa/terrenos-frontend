@@ -13,6 +13,10 @@ type IVerticalFeatureRowProps = {
   subtitle: string;
 };
 
+/**
+ * A two-column feature section with one column for the image and another one for the text.
+ * @component
+ */
 const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
   const verticalFeatureClass = classNames(
     'vertical-feature',

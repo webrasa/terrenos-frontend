@@ -5,6 +5,10 @@ type IFooterLinksProps = {
   children: ReactNode;
 };
 
+/**
+ * List of links used in the footer.
+ * @component
+ */
 const FooterLinks = (props: IFooterLinksProps) => (
   <div className="footer-links text-center sm:text-left">
     <div className="font-semibold text-gray-800">{props.title}</div>

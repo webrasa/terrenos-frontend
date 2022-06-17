@@ -3,6 +3,10 @@ import Link from 'next/link';
 import { Button } from '@/button/Button';
 import { FullCenterSection } from '@/layout/FullCenterSection';
 
+/**
+ * Message shown in the invite process when the user isn't signed-in.
+ * @component
+ */
 const Unauthenticated = () => (
   <FullCenterSection
     title="Join team"

@@ -6,6 +6,7 @@ type ISidebarLinkProps = {
 };
 
 /**
+ * Link with design style used in the sidebar.
  * @component
  * @params props - Component props.
  * @param props.icon - SVG icon or image for styling.

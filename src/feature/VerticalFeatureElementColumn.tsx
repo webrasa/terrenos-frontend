@@ -6,6 +6,11 @@ type IVerticalFeatureElementColumnProps = {
   children: ReactNode;
 };
 
+/**
+ * Component used within VerticalFeature explain a sub-feature.
+ * Each sub-feature is placed horizontally.
+ * @component
+ */
 const VerticalFeatureElementColumn = (
   props: IVerticalFeatureElementColumnProps
 ) => (

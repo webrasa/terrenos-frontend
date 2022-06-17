@@ -1,4 +1,5 @@
 /**
+ * AWS Cognito returns generic error message which doesn't fit email authentication.
  * Map the amplify message error and output the desired message. It used in public authentication pages.
  * @param err - Exception raised by Amplify.
  */
@@ -28,6 +29,7 @@ export const mapAmplifyMessage = (err: any) => {
 /**
  * Map the amplify message error and output the desired message.
  * It used in settings page to update user personal information.
+ * Amplify returns a generic error message that doesn't fit the context.
  * @param err - Exception raised by Amplify.
  */
 export const mapAmplifyMessageSettings = (err: any) => {

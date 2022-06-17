@@ -9,6 +9,12 @@ type IMessageStateProps = {
   children?: ReactElement;
 };
 
+/**
+ * Display conditionally children component or a message to guide the user.
+ * It can be used as an empty state (when list, table or chart has no items or data).
+ * Or, it can be used as a success page or failure page.
+ * @component
+ */
 const MessageState = (props: IMessageStateProps) => {
   if (!props.children || (props.shouldDisplay && props.shouldDisplay())) {
     return (

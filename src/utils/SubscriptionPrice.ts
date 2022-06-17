@@ -21,7 +21,7 @@ export const SubscriptionPrice: ISubscriptionPrice = {
 
 /**
  * Load priceId based on selected `plan` and environment.
- * @param {string} plan - Subscription plan name.
+ * @param plan - Subscription plan name.
  */
 export const getPriceIdFromName = (plan: string) => {
   const env = process.env.NEXT_PUBLIC_SUBSCRIPTION_PRICE_ENV;

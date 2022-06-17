@@ -11,6 +11,7 @@ type IPricingCardProps = {
 };
 
 /**
+ * Pricing card component for one subscription plan with price, feature list, etc.
  * @component
  * @params props - Component props.
  * @param props.name - Subscription plan name.

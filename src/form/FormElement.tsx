@@ -8,6 +8,7 @@ type IFormElementProps = {
 };
 
 /**
+ * Style html form elements with design style.
  * @component
  * @params props - Component props.
  * @param props.children - Children components.

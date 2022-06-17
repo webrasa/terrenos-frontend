@@ -6,6 +6,7 @@ type ISocialButtonProps = {
 };
 
 /**
+ * Button used for social login button (third-party OAuth sign-in like Facebook, Google, etc.).
  * @component
  * @params props - Component props.
  * @param props.icon - SVG icon or image for styling.

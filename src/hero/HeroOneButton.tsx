@@ -10,6 +10,10 @@ type IHeroOneButtonProps = {
   };
 };
 
+/**
+ * Hero component with a call to action button.
+ * @component
+ */
 const HeroOneButton = (props: IHeroOneButtonProps) => (
   <header className="text-center">
     <h1 className="whitespace-pre-line text-5xl font-bold leading-hero text-gray-900">

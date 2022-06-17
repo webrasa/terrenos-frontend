@@ -1,6 +1,10 @@
 import { FeatureElement } from '@/feature/FeatureElement';
 import { LandingSection } from '@/layout/LandingSection';
 
+/**
+ * List of feature shown visually in grid.
+ * @component
+ */
 const Features = () => (
   <LandingSection
     title="Your title here"

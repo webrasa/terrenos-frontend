@@ -2,6 +2,10 @@ type IPricingFeatureProps = {
   children: string;
 };
 
+/**
+ * Feature listed in pricing card explain what is included in the subscription plan.
+ * @component
+ */
 const PricingFeature = (props: IPricingFeatureProps) => (
   <li className="mt-2 flex items-center">
     <svg

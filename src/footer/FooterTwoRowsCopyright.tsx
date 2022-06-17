@@ -10,6 +10,10 @@ type IFooterTwoRowsCopyrightProps = {
   children: ReactNode;
 };
 
+/**
+ * Used to display copyright in the footer.
+ * @component
+ */
 const FooterTwoRowsCopyright = (props: IFooterTwoRowsCopyrightProps) => (
   <>
     {props.children}

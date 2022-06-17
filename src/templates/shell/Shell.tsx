@@ -12,6 +12,10 @@ type IShellProps = {
   children: ReactNode;
 };
 
+/**
+ * Shell used for user dashboard.
+ * @component
+ */
 const Shell = (props: IShellProps) => (
   <SidebarHeader
     title={props.title}

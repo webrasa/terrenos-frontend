@@ -9,6 +9,7 @@ type IFormElementBoxProps = {
 };
 
 /**
+ * Style radio and checkbox options with design style.
  * @component
  * @params props - Component props.
  * @param props.htmlFor - for attribute in HTML.

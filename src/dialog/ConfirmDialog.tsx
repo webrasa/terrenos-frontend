@@ -12,6 +12,16 @@ type IConfirmDialogProps = {
   button: ReactNode;
 };
 
+/**
+ * Dialog component for confirmation before a sensitive action.
+ * @component
+ * @params props - Component props.
+ * @param props.title - The title for the dialog.
+ * @param props.description - The description for the dialog.
+ * @param props.show - Show or hide the dialog.
+ * @param props.handleCancel - Callback function when the dialog is close or cancelled.
+ * @param props.button - The button to click when the action is confirmed.
+ */
 const ConfirmDialog = (props: IConfirmDialogProps) => (
   <BaseDialog show={props.show} handleClose={props.handleCancel}>
     <div className="flex">

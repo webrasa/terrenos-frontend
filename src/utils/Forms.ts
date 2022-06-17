@@ -7,6 +7,7 @@ export type IError<T> = {
 
 /**
  * Go through the list of error and set it in the form management.
+ * In our case, it uses `react-hook-form` for form management.
  * @param setError - Function to set one error with the form field name.
  * @param error - List of errors.
  */
