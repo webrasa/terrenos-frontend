@@ -36,6 +36,13 @@ type IMenuLinkProps = {
   children: ReactNode;
 };
 
+/**
+ * Link used in the Avatar Dropdown menu.
+ * @component
+ * @params props - Component props.
+ * @param props.href - The URL of the page the link goes to.
+ * @param props.children - Children components.
+ */
 const MenuLink = (props: IMenuLinkProps) => (
   <Menu.Item>
     {({ active }) => (
