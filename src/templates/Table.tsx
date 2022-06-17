@@ -15,6 +15,10 @@ type ITableProps = {
   list: ITodo[];
 };
 
+/**
+ * A detailed table to display Todo.
+ * @component
+ */
 const Table = (props: ITableProps) => {
   const { currentTeam } = useAuth();
   const [openDialogId, setOpenDialogId] = useState('');

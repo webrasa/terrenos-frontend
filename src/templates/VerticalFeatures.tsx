@@ -4,6 +4,10 @@ import { VerticalFeatureElementColumn } from '@/feature/VerticalFeatureElementCo
 import { VerticalFeatureRow } from '@/feature/VerticalFeatureRow';
 import { LandingSection } from '@/layout/LandingSection';
 
+/**
+ * List of features shown vertically with a complete description.
+ * @component
+ */
 const VerticalFeatures = () => (
   <>
     <Background color="bg-gray-100">

@@ -17,6 +17,11 @@ type IConfirmChangeEmailProps = {
   show: boolean;
 };
 
+/**
+ * When the user changes his email address, an email is automatically sent with a new verification code.
+ * He needs to confirm his new email address by entering the verification code.
+ * @component
+ */
 const ConfirmChangeEmail = (props: IConfirmChangeEmailProps) => {
   const { register, handleSubmit } = useForm<IConfirmChangeEmailForm>();
   const [error, setError] = useState<string | null>(null);

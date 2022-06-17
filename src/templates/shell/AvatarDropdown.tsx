@@ -5,6 +5,10 @@ import { MenuLink } from '@/avatar/MenuLink';
 import { useAuth } from '@/hooks/UseAuth';
 import { AppConfig } from '@/utils/AppConfig';
 
+/**
+ * A dropdown menu using avatar (user profile) as trigger.
+ * @component
+ */
 const AvatarMenu = () => {
   const { providerInfo } = useAuth();
 

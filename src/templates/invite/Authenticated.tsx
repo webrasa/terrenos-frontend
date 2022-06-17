@@ -21,6 +21,11 @@ type IJoinInfo = {
   displayName: string;
 };
 
+/**
+ * Join team as member after receiving invitation by email.
+ * Invitation process can only begin when the user is signed-in.
+ * @component
+ */
 const Authenticated = (props: IAuthenticatedProps) => {
   const router = useRouter();
   const { data, error } = useSWR<IJoinInfo>(
