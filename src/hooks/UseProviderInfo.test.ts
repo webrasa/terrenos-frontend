@@ -4,7 +4,7 @@ import assert from 'assert';
 
 import { AuthState, useProviderInfo } from './UseProviderInfo';
 
-describe('useProviderInfo', () => {
+describe('UseProviderInfo', () => {
   describe('Render hook', () => {
     it('should start with `authenticating` state in user info', async () => {
       const { result } = renderHook(() => useProviderInfo());
