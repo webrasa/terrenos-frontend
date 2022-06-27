@@ -9,7 +9,9 @@ describe('UseProviderInfo', () => {
     it('should start with `authenticating` state in user info', async () => {
       const { result } = renderHook(() => useProviderInfo());
 
-      expect(result.current.userInfo).toEqual(AuthState.AUTHENTICATING);
+      await waitFor(() => {
+        expect(result.current.userInfo).toEqual(AuthState.AUTHENTICATING);
+      });
     });
 
     it("should return `unauthenticated` state when the user isn't logged in", async () => {

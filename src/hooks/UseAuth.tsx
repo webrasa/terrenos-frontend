@@ -46,10 +46,13 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     return null;
   }
 
-  const currentTeam = data.teamList[currentTeamInd];
+  const currentTeam = data.teamList?.[currentTeamInd];
 
   if (!currentTeam) {
-    setCurrentTeamInd(0);
+    if (currentTeamInd !== 0) {
+      setCurrentTeamInd(0);
+    }
+
     return null;
   }
 
