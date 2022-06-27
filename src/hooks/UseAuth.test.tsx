@@ -43,21 +43,11 @@ describe('UseAuth', () => {
   });
 
   describe('AuthProvider with mocked endpoint', () => {
-    const server = setupServer(
-      rest.get('/user/profile', (_req, res, ctx) => {
-        return res(ctx.json({}));
-      })
-    );
+    const server = setupServer();
 
     beforeAll(() => server.listen());
 
-    afterAll(() => server.close());
-
-    afterEach(() => {
-      server.resetHandlers();
-    });
-
-    it('should return `null` when the backend only return an empty object', async () => {
+    beforeEach(() => {
       mockCurrentUserInfo.mockReturnValueOnce({
         attributes: {
           sub: 'RANDOM_USER_ATTRIBUTES_SUB',
@@ -65,7 +55,15 @@ describe('UseAuth', () => {
           identities: 'RANDOM_USER_ATTRIBUTES_IDENTITIES',
         },
       });
+    });
 
+    afterAll(() => server.close());
+
+    afterEach(() => {
+      server.resetHandlers();
+    });
+
+    it('should return `null` when the backend only returns an empty object', async () => {
       render(
         <SWRConfig
           value={{
@@ -81,6 +79,40 @@ describe('UseAuth', () => {
       await waitFor(() => {
         const content = screen.queryByText('Protected');
         expect(content).not.toBeInTheDocument();
+      });
+    });
+
+    it('should return the protected content when the user is signed in', async () => {
+      server.use(
+        rest.get('/user/profile', (_req, res, ctx) => {
+          return res(
+            ctx.json({
+              teamList: [
+                {
+                  id: 'RANDOM_TEAM_ID',
+                  displayName: 'Team Name 1',
+                },
+              ],
+            })
+          );
+        })
+      );
+
+      render(
+        <SWRConfig
+          value={{
+            provider: () => new Map(),
+            fetcher,
+            dedupingInterval: 0,
+          }}
+        >
+          <AuthProvider>Protected</AuthProvider>
+        </SWRConfig>
+      );
+
+      await waitFor(() => {
+        const content = screen.queryByText('Protected');
+        expect(content).toBeInTheDocument();
       });
     });
   });
