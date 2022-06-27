@@ -15,7 +15,7 @@ const fetcher = async (url: string) => {
 
 describe('UseAuth', () => {
   describe('AuthProvider without endpoint', () => {
-    it('should start by returning `null` and wait asynchronously for user info', async () => {
+    it('should start by returning null and wait asynchronously for user info', async () => {
       const { container } = render(<AuthProvider>Protected</AuthProvider>);
 
       await waitFor(() => {
@@ -28,7 +28,7 @@ describe('UseAuth', () => {
       expect(content).not.toBeInTheDocument();
     });
 
-    it("should return `null` and redirect to login page when the user isn't signed in", async () => {
+    it("should return null and redirect to login page when the user isn't signed in", async () => {
       const { container } = render(<AuthProvider>Protected</AuthProvider>);
 
       await waitFor(() => {
@@ -63,7 +63,7 @@ describe('UseAuth', () => {
       server.resetHandlers();
     });
 
-    it('should return `null` when the backend only returns an empty object', async () => {
+    it('should return null when the backend only returns an empty object', async () => {
       render(
         <SWRConfig
           value={{

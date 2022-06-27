@@ -6,7 +6,7 @@ import { AuthState, useProviderInfo } from './UseProviderInfo';
 
 describe('UseProviderInfo', () => {
   describe('Render hook', () => {
-    it('should start with `authenticating` state in user info', async () => {
+    it('should start with authenticating state in user info', async () => {
       const { result } = renderHook(() => useProviderInfo());
 
       await waitFor(() => {
@@ -14,7 +14,7 @@ describe('UseProviderInfo', () => {
       });
     });
 
-    it("should return `unauthenticated` state when the user isn't logged in", async () => {
+    it("should return unauthenticated state when the user isn't logged in", async () => {
       const { result } = renderHook(() => useProviderInfo());
 
       await waitFor(() => {

@@ -23,7 +23,7 @@ describe('MessageState', () => {
       expect(cta).toBeInTheDocument();
     });
 
-    it('should always display the message state even if `shouldDisplay` returns false when there is no children', () => {
+    it('should always display the message state even if shouldDisplay returns false when there is no children', () => {
       render(
         <MessageState
           title="Random title"
@@ -37,7 +37,7 @@ describe('MessageState', () => {
       expect(title).toBeInTheDocument();
     });
 
-    it('should display the message state when `shouldDisplay` returns true and there is a children', () => {
+    it('should display the message state when shouldDisplay returns true and there is a children', () => {
       render(
         <MessageState
           title="Random title"
@@ -53,7 +53,7 @@ describe('MessageState', () => {
       expect(title).toBeInTheDocument();
     });
 
-    it('should render the children when `shouldDisplay` is undefined', () => {
+    it('should render the children when shouldDisplay is undefined', () => {
       render(
         <MessageState
           title="Random title"
@@ -68,7 +68,7 @@ describe('MessageState', () => {
       expect(children).toBeInTheDocument();
     });
 
-    it('should render the children when `shouldDisplay` returns false', () => {
+    it('should render the children when shouldDisplay returns false', () => {
       render(
         <MessageState
           title="Random title"
