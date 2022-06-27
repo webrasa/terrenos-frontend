@@ -4,9 +4,13 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { AuthProvider } from './UseAuth';
 
 describe('UseAuth', () => {
-  describe('AuthProvider', () => {
-    it('should start by returning `null` and wait asynchronously for user info', () => {
+  describe('AuthProvider without endpoint', () => {
+    it('should start by returning `null` and wait asynchronously for user info', async () => {
       const { container } = render(<AuthProvider>Protected</AuthProvider>);
+
+      await waitFor(() => {
+        expect(mockUseRouterPush).not.toBeCalled();
+      });
 
       expect(container).toBeEmptyDOMElement();
 
