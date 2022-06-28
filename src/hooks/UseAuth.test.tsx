@@ -1,9 +1,11 @@
 import { mockCurrentUserInfo } from '__mocks__/aws-amplify';
 import { mockUseRouterPush } from '__mocks__/next/router';
+import type { RenderOptions } from '@testing-library/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
 import { AuthProvider } from './UseAuth';
@@ -12,6 +14,20 @@ const fetcher = async (url: string) => {
   const { data } = await axios.get(url);
   return data;
 };
+
+const swrConfigRender = (ui: ReactElement, renderOptions?: RenderOptions) =>
+  render(
+    <SWRConfig
+      value={{
+        provider: () => new Map(),
+        fetcher,
+        dedupingInterval: 0,
+      }}
+    >
+      {ui}
+    </SWRConfig>,
+    renderOptions
+  );
 
 describe('UseAuth', () => {
   describe('AuthProvider without endpoint', () => {
@@ -64,17 +80,7 @@ describe('UseAuth', () => {
     });
 
     it('should return null when the backend only returns an empty object', async () => {
-      render(
-        <SWRConfig
-          value={{
-            provider: () => new Map(),
-            fetcher,
-            dedupingInterval: 0,
-          }}
-        >
-          <AuthProvider>Protected</AuthProvider>
-        </SWRConfig>
-      );
+      swrConfigRender(<AuthProvider>Protected</AuthProvider>);
 
       await waitFor(() => {
         const content = screen.queryByText('Protected');
@@ -98,17 +104,7 @@ describe('UseAuth', () => {
         })
       );
 
-      render(
-        <SWRConfig
-          value={{
-            provider: () => new Map(),
-            fetcher,
-            dedupingInterval: 0,
-          }}
-        >
-          <AuthProvider>Protected</AuthProvider>
-        </SWRConfig>
-      );
+      swrConfigRender(<AuthProvider>Protected</AuthProvider>);
 
       await waitFor(() => {
         const content = screen.queryByText('Protected');
