@@ -7,6 +7,7 @@ import { rest } from 'msw';
 import type { SetupServerApi } from 'msw/node';
 import { setupServer } from 'msw/node';
 import type { ReactElement } from 'react';
+import { act } from 'react-dom/test-utils';
 import { SWRConfig } from 'swr';
 
 import type { IAuthProviderProps } from './UseAuth';
@@ -62,6 +63,14 @@ const setUserProfileServer = (server: SetupServerApi) => {
             {
               id: 'RANDOM_TEAM_ID',
               displayName: 'Team Name 1',
+            },
+            {
+              id: 'RANDOM_TEAM_ID2',
+              displayName: 'Team Name 2',
+            },
+            {
+              id: 'RANDOM_TEAM_ID3',
+              displayName: 'Team Name 3',
             },
           ],
         })
@@ -159,7 +168,7 @@ describe('UseAuth', () => {
       /* eslint-enable no-console */
     });
 
-    it('should be wrapped around AuthProvider component and it selects the first team', async () => {
+    it('should be wrapped around AuthProvider component and team index should remain at 0 when there is an out of bound selection', async () => {
       setMockUserInfo();
       setUserProfileServer(server);
 
@@ -170,6 +179,37 @@ describe('UseAuth', () => {
       await waitFor(() => {
         expect(result.current.currentTeamInd).toEqual(0);
       });
+
+      act(() => {
+        result.current.setCurrentTeamInd(8);
+      });
+
+      await waitFor(() => {
+        expect(result.current.currentTeamInd).toEqual(0);
+      });
+    });
+
+    it('should be wrapped around AuthProvider component and the user can select a new team', async () => {
+      setMockUserInfo();
+      setUserProfileServer(server);
+
+      const { result } = renderHook(() => useAuth(), {
+        wrapper: authProviderWrapper,
+      });
+
+      await waitFor(() => {
+        expect(result.current.currentTeamInd).toEqual(0);
+      });
+
+      act(() => {
+        result.current.setCurrentTeamInd(2);
+      });
+
+      await waitFor(() => {
+        expect(result.current.currentTeamInd).toEqual(2);
+      });
+
+      expect(result.current.currentTeam.id).toEqual('RANDOM_TEAM_ID3');
     });
   });
 });
