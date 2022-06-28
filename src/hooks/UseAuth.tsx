@@ -11,7 +11,7 @@ import { AuthState, useProviderInfo } from './UseProviderInfo';
 // React Hook Context for authentification
 const AuthContext = createContext<UserAuth | null>(null);
 
-type IAuthProviderProps = {
+export type IAuthProviderProps = {
   children: ReactNode;
 };
 

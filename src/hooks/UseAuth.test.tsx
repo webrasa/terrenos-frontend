@@ -8,6 +8,7 @@ import { setupServer } from 'msw/node';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
+import type { IAuthProviderProps } from './UseAuth';
 import { AuthProvider, useAuth } from './UseAuth';
 
 const fetcher = async (url: string) => {
@@ -29,7 +30,21 @@ const swrConfigRender = (ui: ReactElement, renderOptions?: RenderOptions) =>
     renderOptions
   );
 
+const authProviderWrapper = ({ children }: IAuthProviderProps) => (
+  <AuthProvider>{children}</AuthProvider>
+);
+
 describe('UseAuth', () => {
+  const server = setupServer();
+
+  beforeAll(() => server.listen());
+
+  afterAll(() => server.close());
+
+  afterEach(() => {
+    server.resetHandlers();
+  });
+
   describe('AuthProvider without endpoint', () => {
     it('should start by returning null and wait asynchronously for user info', async () => {
       const { container } = render(<AuthProvider>Protected</AuthProvider>);
@@ -59,10 +74,6 @@ describe('UseAuth', () => {
   });
 
   describe('AuthProvider with mocked endpoint', () => {
-    const server = setupServer();
-
-    beforeAll(() => server.listen());
-
     beforeEach(() => {
       mockCurrentUserInfo.mockReturnValueOnce({
         attributes: {
@@ -71,12 +82,6 @@ describe('UseAuth', () => {
           identities: 'RANDOM_USER_ATTRIBUTES_IDENTITIES',
         },
       });
-    });
-
-    afterAll(() => server.close());
-
-    afterEach(() => {
-      server.resetHandlers();
     });
 
     it('should return null when the backend only returns an empty object', async () => {
@@ -106,18 +111,41 @@ describe('UseAuth', () => {
 
       swrConfigRender(<AuthProvider>Protected</AuthProvider>);
 
-      await waitFor(() => {
-        const content = screen.queryByText('Protected');
-        expect(content).toBeInTheDocument();
-      });
+      expect(await screen.findByText('Protected')).toBeInTheDocument();
     });
   });
 
   describe('useAuth hook', () => {
     it('should expect to wrapped around AuthProvider component', () => {
+      // Save original console.error
+      /* eslint-disable no-console */
+      const originalError = console.error;
+      console.error = (...args) => {
+        // Filtering console.error message. This is done automatically in React Hook Testing library: https://github.com/testing-library/react-hooks-testing-library/blob/main/src/core/console.ts#L2
+        // But not in React Testing with renderHook.
+        if (
+          /Error: Uncaught/.test(args[0]) ||
+          /The above error occurred in the/.test(args[0])
+        ) {
+          return;
+        }
+
+        originalError.call(console, ...args);
+      };
+
       expect(() => renderHook(() => useAuth())).toThrow(
         'hook must be wrapped within'
       );
+
+      // Restore the original console.error
+      console.error = originalError;
+      /* eslint-enable no-console */
     });
+
+    // it('test', () => {
+    //   const { result } = renderHook(() => useAuth(), {
+    //     wrapper: authProviderWrapper,
+    //   });
+    // });
   });
 });
