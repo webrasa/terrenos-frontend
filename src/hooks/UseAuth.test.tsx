@@ -1,14 +1,14 @@
 import { mockCurrentUserInfo } from '__mocks__/aws-amplify';
 import { mockUseRouterPush } from '__mocks__/next/router';
 import type { RenderOptions } from '@testing-library/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
-import { AuthProvider } from './UseAuth';
+import { AuthProvider, useAuth } from './UseAuth';
 
 const fetcher = async (url: string) => {
   const { data } = await axios.get(url);
@@ -110,6 +110,14 @@ describe('UseAuth', () => {
         const content = screen.queryByText('Protected');
         expect(content).toBeInTheDocument();
       });
+    });
+  });
+
+  describe('useAuth hook', () => {
+    it('should expect to wrapped around AuthProvider component', () => {
+      expect(() => renderHook(() => useAuth())).toThrow(
+        'hook must be wrapped within'
+      );
     });
   });
 });
