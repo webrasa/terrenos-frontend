@@ -4,6 +4,7 @@ import type { RenderOptions } from '@testing-library/react';
 import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { rest } from 'msw';
+import type { SetupServerApi } from 'msw/node';
 import { setupServer } from 'msw/node';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
@@ -31,8 +32,43 @@ const swrConfigRender = (ui: ReactElement, renderOptions?: RenderOptions) =>
   );
 
 const authProviderWrapper = ({ children }: IAuthProviderProps) => (
-  <AuthProvider>{children}</AuthProvider>
+  <SWRConfig
+    value={{
+      provider: () => new Map(),
+      fetcher,
+      dedupingInterval: 0,
+    }}
+  >
+    <AuthProvider>{children}</AuthProvider>
+  </SWRConfig>
 );
+
+const setMockUserInfo = () => {
+  mockCurrentUserInfo.mockReturnValueOnce({
+    attributes: {
+      sub: 'RANDOM_USER_ATTRIBUTES_SUB',
+      email: 'RANDOM_USER_ATTRIBUTES_EMAIL',
+      identities: 'RANDOM_USER_ATTRIBUTES_IDENTITIES',
+    },
+  });
+};
+
+const setUserProfileServer = (server: SetupServerApi) => {
+  server.use(
+    rest.get('/user/profile', (_req, res, ctx) => {
+      return res(
+        ctx.json({
+          teamList: [
+            {
+              id: 'RANDOM_TEAM_ID',
+              displayName: 'Team Name 1',
+            },
+          ],
+        })
+      );
+    })
+  );
+};
 
 describe('UseAuth', () => {
   const server = setupServer();
@@ -75,13 +111,7 @@ describe('UseAuth', () => {
 
   describe('AuthProvider with mocked endpoint', () => {
     beforeEach(() => {
-      mockCurrentUserInfo.mockReturnValueOnce({
-        attributes: {
-          sub: 'RANDOM_USER_ATTRIBUTES_SUB',
-          email: 'RANDOM_USER_ATTRIBUTES_EMAIL',
-          identities: 'RANDOM_USER_ATTRIBUTES_IDENTITIES',
-        },
-      });
+      setMockUserInfo();
     });
 
     it('should return null when the backend only returns an empty object', async () => {
@@ -94,20 +124,7 @@ describe('UseAuth', () => {
     });
 
     it('should return the protected content when the user is signed in', async () => {
-      server.use(
-        rest.get('/user/profile', (_req, res, ctx) => {
-          return res(
-            ctx.json({
-              teamList: [
-                {
-                  id: 'RANDOM_TEAM_ID',
-                  displayName: 'Team Name 1',
-                },
-              ],
-            })
-          );
-        })
-      );
+      setUserProfileServer(server);
 
       swrConfigRender(<AuthProvider>Protected</AuthProvider>);
 
@@ -116,7 +133,7 @@ describe('UseAuth', () => {
   });
 
   describe('useAuth hook', () => {
-    it('should expect to wrapped around AuthProvider component', () => {
+    it("should expect to wrapped around AuthProvider component and raise an exception when it isn't", () => {
       // Save original console.error
       /* eslint-disable no-console */
       const originalError = console.error;
@@ -142,10 +159,17 @@ describe('UseAuth', () => {
       /* eslint-enable no-console */
     });
 
-    // it('test', () => {
-    //   const { result } = renderHook(() => useAuth(), {
-    //     wrapper: authProviderWrapper,
-    //   });
-    // });
+    it('should be wrapped around AuthProvider component and it selects the first team', async () => {
+      setMockUserInfo();
+      setUserProfileServer(server);
+
+      const { result } = renderHook(() => useAuth(), {
+        wrapper: authProviderWrapper,
+      });
+
+      await waitFor(() => {
+        expect(result.current.currentTeamInd).toEqual(0);
+      });
+    });
   });
 });
