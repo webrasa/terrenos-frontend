@@ -21,12 +21,12 @@ const useIsMounted = (): (() => boolean) => {
  * @return result.pending - Indicates if the async is currently running.
  * @return result.value - Result returned by the async function.
  */
-export const useAsync = (
-  fn: (...args: any[]) => Promise<any>,
+export const useAsync = <T>(
+  fn: (...args: any[]) => Promise<T>,
   immediate = false
 ) => {
   const [pending, setPending] = useState(false);
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<T | null>(null);
   const isMounted = useIsMounted();
 
   // useCallback ensures useEffect is not called on every render, but only if asyncFunction changes.
@@ -36,7 +36,7 @@ export const useAsync = (
       setValue(null);
 
       return fn(...args)
-        .then((response: any) => isMounted() && setValue(response))
+        .then((response: T) => isMounted() && setValue(response))
         .finally(() => isMounted() && setPending(false));
     },
     [fn, isMounted]
