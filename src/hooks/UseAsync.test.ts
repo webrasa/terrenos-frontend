@@ -27,6 +27,23 @@ describe('UseAsync', () => {
       await waitFor(() => {
         expect(result.current.value).toEqual('RANDOM_RETURNED_VALUE');
       });
+
+      expect(result.current.pending).toBeFalsy();
+    });
+
+    it('should trigger the callback at initialization', async () => {
+      const fn = async () => {
+        return 'RANDOM_RETURNED_VALUE';
+      };
+      const { result } = renderHook(() => useAsync(fn, true));
+
+      expect(result.current.pending).toBeTruthy();
+
+      await waitFor(() => {
+        expect(result.current.value).toEqual('RANDOM_RETURNED_VALUE');
+      });
+
+      expect(result.current.pending).toBeFalsy();
     });
   });
 });
