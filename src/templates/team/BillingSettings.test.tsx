@@ -1,14 +1,9 @@
-import type { RenderOptions } from '@testing-library/react';
-import { render, screen } from '@testing-library/react';
-import type { ReactElement } from 'react';
+import { screen } from '@testing-library/react';
 
-import { TestingAuthProvider } from '@/hooks/UseAuth';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
+import { authProviderRender } from '@/utils/TestUtils';
 
 import { BillingSettings } from './BillingSettings';
-
-const authProviderRender = (ui: ReactElement, renderOptions?: RenderOptions) =>
-  render(<TestingAuthProvider>{ui}</TestingAuthProvider>, renderOptions);
 
 describe('BillingSettings', () => {
   describe('Render method', () => {

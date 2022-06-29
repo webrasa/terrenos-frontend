@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { SidebarHeader } from '@/shell/SidebarHeader';
 import { SidebarLink } from '@/shell/SidebarLink';
 
-import { AvatarMenu } from './AvatarDropdown';
+import { AvatarMenu } from './AvatarMenu';
 import { SidebarTeamSelection } from './SidebarTeamSelection';
 
 type IShellProps = {

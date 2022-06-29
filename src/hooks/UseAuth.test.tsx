@@ -1,36 +1,16 @@
 import { mockCurrentUserInfo } from '__mocks__/aws-amplify';
 import { mockUseRouterPush } from '__mocks__/next/router';
-import type { RenderOptions } from '@testing-library/react';
 import { render, renderHook, screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
 import { rest } from 'msw';
 import type { SetupServerApi } from 'msw/node';
 import { setupServer } from 'msw/node';
-import type { ReactElement } from 'react';
 import { act } from 'react-dom/test-utils';
 import { SWRConfig } from 'swr';
 
+import { fetcher, swrConfigRender } from '@/utils/TestUtils';
+
 import type { IAuthProviderProps } from './UseAuth';
 import { AuthProvider, useAuth } from './UseAuth';
-
-const fetcher = async (url: string) => {
-  const { data } = await axios.get(url);
-  return data;
-};
-
-const swrConfigRender = (ui: ReactElement, renderOptions?: RenderOptions) =>
-  render(
-    <SWRConfig
-      value={{
-        provider: () => new Map(),
-        fetcher,
-        dedupingInterval: 0,
-      }}
-    >
-      {ui}
-    </SWRConfig>,
-    renderOptions
-  );
 
 const authProviderWrapper = ({ children }: IAuthProviderProps) => (
   <SWRConfig
