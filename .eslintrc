@@ -77,7 +77,10 @@
         "plugin:jest-formatting/recommended",
         "plugin:testing-library/react",
         "plugin:jest-dom/recommended"
-      ]
+      ],
+      "rules": {
+        "jest/no-mocks-import": "off"
+      }
     }
   ]
 }

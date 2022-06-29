@@ -11,7 +11,7 @@ import { AuthState, useProviderInfo } from './UseProviderInfo';
 // React Hook Context for authentification
 const AuthContext = createContext<UserAuth | null>(null);
 
-type IAuthProviderProps = {
+export type IAuthProviderProps = {
   children: ReactNode;
 };
 
@@ -46,10 +46,13 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     return null;
   }
 
-  const currentTeam = data.teamList[currentTeamInd];
+  const currentTeam = data.teamList?.[currentTeamInd];
 
   if (!currentTeam) {
-    setCurrentTeamInd(0);
+    if (currentTeamInd !== 0) {
+      setCurrentTeamInd(0);
+    }
+
     return null;
   }
 

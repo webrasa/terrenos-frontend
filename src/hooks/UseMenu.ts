@@ -8,7 +8,7 @@ export const useMenu = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   const handleToggleMenu = () => {
-    setShowMenu(!showMenu);
+    setShowMenu((prevState) => !prevState);
   };
 
   const handleClose = () => {
