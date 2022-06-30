@@ -19,6 +19,7 @@
     "@headlessui/react": "^1.6.5",
     "@hookform/error-message": "^2.0.0",
     "@stripe/stripe-js": "^1.32.0",
+    "@types/styled-jsx": "^3.4.4",
     "avvvatars-react": "^0.4.2",
     "aws-amplify": "^4.3.26",
     "axios": "^0.27.2",
