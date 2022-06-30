@@ -72,18 +72,24 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   );
 };
 
+export type ITestingAuthProviderProps = {
+  children: ReactNode;
+  identities?: string;
+};
+
 /**
  * The Authentication provider component used in testing with mocked data.
  * @hook
  * @params props - Component props.
  * @param props.children -  Children components.
  */
-export const TestingAuthProvider = (props: IAuthProviderProps) => (
+export const TestingAuthProvider = (props: ITestingAuthProviderProps) => (
   <AuthContext.Provider
     value={{
       providerInfo: {
         email: 'RANDOM_EMAIL@gmail.com',
         id: 'RANDOM_PROFILE_INFO_ID',
+        identities: props.identities,
       },
       profile: {
         firstSignIn: 'RANDOM_FIRST_SIGN_IN',

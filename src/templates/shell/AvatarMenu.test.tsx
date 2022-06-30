@@ -13,8 +13,28 @@ describe('AvatarMenu', () => {
       const avatarButton = screen.getByText('RA');
       await userEvent.click(avatarButton);
 
-      const signOutButton = screen.getByText('Sign Out');
+      const signOutButton = screen.queryByText('Sign Out');
       expect(signOutButton).toBeInTheDocument();
+    });
+
+    it('should render a link to update the account when the user is signed in with email', async () => {
+      authProviderRender(<AvatarMenu />);
+
+      const avatarButton = screen.getByText('RA');
+      await userEvent.click(avatarButton);
+
+      const accountButton = screen.queryByText('Account');
+      expect(accountButton).toBeInTheDocument();
+    });
+
+    it("shouldn't render a link to update the account when the user is signed with OAuth (external provider)", async () => {
+      authProviderRender(<AvatarMenu />, { identities: 'RANDOM_IDENTITIES' });
+
+      const avatarButton = screen.getByText('RA');
+      await userEvent.click(avatarButton);
+
+      const accountButton = screen.queryByText('Account');
+      expect(accountButton).not.toBeInTheDocument();
     });
   });
 });

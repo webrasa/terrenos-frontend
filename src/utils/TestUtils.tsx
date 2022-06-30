@@ -6,12 +6,18 @@ import axios from 'axios';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
+import type { ITestingAuthProviderProps } from '@/hooks/UseAuth';
 import { TestingAuthProvider } from '@/hooks/UseAuth';
 
 export const authProviderRender = (
   ui: ReactElement,
+  authOptions?: Omit<ITestingAuthProviderProps, 'children'>,
   renderOptions?: RenderOptions
-) => render(<TestingAuthProvider>{ui}</TestingAuthProvider>, renderOptions);
+) =>
+  render(
+    <TestingAuthProvider {...authOptions}>{ui}</TestingAuthProvider>,
+    renderOptions
+  );
 
 export const fetcher = async (url: string) => {
   const { data } = await axios.get(url);
