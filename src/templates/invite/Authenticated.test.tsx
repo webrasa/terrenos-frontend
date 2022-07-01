@@ -29,6 +29,29 @@ describe('Authenticated', () => {
       server.resetHandlers();
     });
 
+    it('should render the error page when the user is signed in and when the verification code is incorrect', async () => {
+      mockQuery.mockReturnValue({
+        teamId: 'RANDOM_TEAM_ID',
+        verificationCode: 'RANDOM_VERIFICATION_CODE',
+      });
+      mockIsReady.mockReturnValue(true);
+      server.use(
+        rest.get(
+          '/team/RANDOM_TEAM_ID/join/RANDOM_VERIFICATION_CODE',
+          (_req, res, ctx) => {
+            return res(ctx.status(500));
+          }
+        )
+      );
+
+      swrConfigWithAuthRender(<Authenticated />);
+
+      await waitFor(() => {
+        const goDashboardButton = screen.queryByText('Go to dashboard');
+        expect(goDashboardButton).toBeInTheDocument();
+      });
+    });
+
     it('should render the accept invitation button when the user is signed in and when the verification code is correct', async () => {
       mockQuery.mockReturnValue({
         teamId: 'RANDOM_TEAM_ID',
