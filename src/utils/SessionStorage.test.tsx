@@ -10,7 +10,7 @@ describe('SessionStorage in browser environment', () => {
 
       const value = getSessionStorage('Random item');
 
-      expect(mockGetItem).toHaveBeenCalled();
+      expect(mockGetItem).toBeCalled();
       expect(mockGetItem.mock.calls[0][0]).toEqual('Random item');
       expect(value).toEqual('');
     });

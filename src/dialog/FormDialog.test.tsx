@@ -85,7 +85,7 @@ describe('FormDialog', () => {
       const saveButton = screen.getByText('Save');
       await userEvent.click(saveButton);
 
-      expect(handleSubmit).toHaveBeenCalled();
+      expect(handleSubmit).toBeCalled();
     });
 
     it("shouldn't be able to click on the buttons when the submit callback is processing", async () => {
@@ -109,13 +109,13 @@ describe('FormDialog', () => {
       expect(saveButton).toBeDisabled();
 
       await userEvent.click(saveButton);
-      expect(handleSubmit).not.toHaveBeenCalled();
+      expect(handleSubmit).not.toBeCalled();
 
       const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       expect(cancelButton).toBeDisabled();
 
       await userEvent.click(cancelButton);
-      expect(handleCancel).not.toHaveBeenCalled();
+      expect(handleCancel).not.toBeCalled();
     });
   });
 });
