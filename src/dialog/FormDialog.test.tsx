@@ -67,7 +67,11 @@ describe('FormDialog', () => {
     });
 
     it('should trigger the submit callback when the user click on save button', async () => {
-      const handleSubmit = jest.fn();
+      // `e.preventDefault` remove the following error: `Not implemented: HTMLFormElement.prototype.requestSubmit`
+      // For more information at: https://stackoverflow.com/questions/62216232/error-not-implemented-htmlformelement-prototype-submit?answertab=trending#tab-top
+      const handleSubmit = jest.fn().mockImplementation((e) => {
+        e.preventDefault();
+      });
 
       render(
         <FormDialog
@@ -92,6 +96,7 @@ describe('FormDialog', () => {
       const handleSubmit = jest.fn();
       const handleCancel = jest.fn();
 
+      // Use a random button to avoid warning related to headless-ui a11y check
       render(
         <FormDialog
           title="Random title"
@@ -101,7 +106,7 @@ describe('FormDialog', () => {
           handleCancel={handleCancel}
           handleSubmit={handleSubmit}
         >
-          Random children
+          <button>Random children</button>
         </FormDialog>
       );
 

@@ -25,7 +25,7 @@ const authProviderWrapper = ({ children }: IAuthProviderProps) => (
 );
 
 const setMockUserInfo = () => {
-  mockCurrentUserInfo.mockReturnValueOnce({
+  mockCurrentUserInfo.mockReturnValue({
     attributes: {
       sub: 'RANDOM_USER_ATTRIBUTES_SUB',
       email: 'RANDOM_USER_ATTRIBUTES_EMAIL',

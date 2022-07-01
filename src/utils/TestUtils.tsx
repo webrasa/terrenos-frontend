@@ -39,3 +39,21 @@ export const swrConfigRender = (
     </SWRConfig>,
     renderOptions
   );
+
+export const swrConfigWithAuthRender = (
+  ui: ReactElement,
+  authOptions?: Omit<ITestingAuthProviderProps, 'children'>,
+  renderOptions?: RenderOptions
+) =>
+  render(
+    <SWRConfig
+      value={{
+        provider: () => new Map(),
+        fetcher,
+        dedupingInterval: 0,
+      }}
+    >
+      <TestingAuthProvider {...authOptions}>{ui}</TestingAuthProvider>
+    </SWRConfig>,
+    renderOptions
+  );
