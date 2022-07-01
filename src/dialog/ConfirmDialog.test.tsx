@@ -22,7 +22,7 @@ describe('ConfirmDialog', () => {
       expect(title).not.toBeInTheDocument();
     });
 
-    it('should able to trigger callback when the user click on cancel button', async () => {
+    it('should trigger the callback when the user click on cancel button', async () => {
       const handleCancel = jest.fn();
 
       render(
