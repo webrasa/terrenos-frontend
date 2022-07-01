@@ -1,8 +1,8 @@
 import { mockUseRouterPush } from '__mocks__/next/router';
+import { mockSetCurrentTeamInd } from '__mocks__/UseAuth';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { mockSetCurrentTeamInd } from '@/hooks/UseAuth';
 import { authProviderRender } from '@/utils/TestUtils';
 
 import { SidebarTeamSelection } from './SidebarTeamSelection';

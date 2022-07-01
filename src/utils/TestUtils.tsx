@@ -1,13 +1,12 @@
 // This file is only used in testing environment. So, we can disable import/no-extraneous-dependencies rule.
 /* eslint-disable import/no-extraneous-dependencies */
+import type { ITestingAuthProviderProps } from '__mocks__/UseAuth';
+import { TestingAuthProvider } from '__mocks__/UseAuth';
 import type { RenderOptions } from '@testing-library/react';
 import { render } from '@testing-library/react';
 import axios from 'axios';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
-
-import type { ITestingAuthProviderProps } from '@/hooks/UseAuth';
-import { TestingAuthProvider } from '@/hooks/UseAuth';
 
 export const authProviderRender = (
   ui: ReactElement,
