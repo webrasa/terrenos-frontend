@@ -10,12 +10,7 @@ import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { FullCenterSection } from '@/layout/FullCenterSection';
-import type { ProviderInfo } from '@/types/Auth';
 import { mapInviteMessage } from '@/utils/InviteMessageMap';
-
-type IAuthenticatedProps = {
-  userInfo: ProviderInfo;
-};
 
 type IJoinInfo = {
   displayName: string;
@@ -26,7 +21,7 @@ type IJoinInfo = {
  * Invitation process can only begin when the user is signed-in.
  * @component
  */
-const Authenticated = (props: IAuthenticatedProps) => {
+const Authenticated = () => {
   const router = useRouter();
   const { data, error } = useSWR<IJoinInfo>(
     router.isReady
@@ -43,7 +38,7 @@ const Authenticated = (props: IAuthenticatedProps) => {
         `/team/${router.query.teamId}/join/${router.query.verificationCode}`,
         {
           body: {
-            email: props.userInfo.email,
+            email: providerInfo.email,
           },
         }
       );
@@ -86,7 +81,7 @@ const Authenticated = (props: IAuthenticatedProps) => {
       description={
         <div className="whitespace-pre-line">
           Currently signed in as{' '}
-          <span className="font-semibold">{props.userInfo.email}</span>,{'\n'}
+          <span className="font-semibold">{providerInfo.email}</span>,{'\n'}
           you&apos;ve been invited to join{' '}
           <span className="font-semibold">{data.displayName}</span>.
         </div>
