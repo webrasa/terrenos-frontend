@@ -72,10 +72,45 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   );
 };
 
+/**
+ * Consume React Hook Context for authentication
+ * @hook
+ */
+export const useAuth = () => {
+  const userInfo = useContext(AuthContext);
+
+  if (!userInfo) {
+    throw new Error(
+      'Auth: `useAuth` hook must be wrapped within a `AuthProvider` component'
+    );
+  }
+
+  return userInfo;
+};
+
+// --------------- BELOW ONLY USED IN TESTING ---------------
 export type ITestingAuthProviderProps = {
   children: ReactNode;
   identities?: string;
 };
+
+// Mocked team list data used in testing
+const testingMockedTeamList = [
+  {
+    displayName: 'RANDOM_TEAM_DISPLAY_NAME',
+    id: 'RANDOM_TEAM_ID',
+  },
+  {
+    displayName: 'RANDOM_TEAM_DISPLAY_NAME2',
+    id: 'RANDOM_TEAM_ID2',
+  },
+  {
+    displayName: 'RANDOM_TEAM_DISPLAY_NAME3',
+    id: 'RANDOM_TEAM_ID3',
+  },
+];
+
+export const mockSetCurrentTeamInd = jest.fn();
 
 /**
  * The Authentication provider component used in testing with mocked data.
@@ -94,10 +129,10 @@ export const TestingAuthProvider = (props: ITestingAuthProviderProps) => (
       profile: {
         firstSignIn: 'RANDOM_FIRST_SIGN_IN',
         id: 'RANDOM_PROFILE_ID',
-        teamList: [],
+        teamList: testingMockedTeamList,
       },
-      teamList: [],
-      setCurrentTeamInd: () => {},
+      teamList: testingMockedTeamList,
+      setCurrentTeamInd: mockSetCurrentTeamInd,
       currentTeamInd: 0,
       currentTeam: {
         displayName: 'RANDOM_DISPLAY_NAME',
@@ -108,19 +143,3 @@ export const TestingAuthProvider = (props: ITestingAuthProviderProps) => (
     {props.children}
   </AuthContext.Provider>
 );
-
-/**
- * Consume React Hook Context for authentication
- * @hook
- */
-export const useAuth = () => {
-  const userInfo = useContext(AuthContext);
-
-  if (!userInfo) {
-    throw new Error(
-      'Auth: `useAuth` hook must be wrapped within a `AuthProvider` component'
-    );
-  }
-
-  return userInfo;
-};
