@@ -20,7 +20,7 @@ describe('TeamSettings', () => {
         />
       );
 
-      const changeDisplayNameButton = screen.getByRole('button', {
+      const changeDisplayNameButton = screen.queryByRole('button', {
         name: 'Change',
       });
       expect(changeDisplayNameButton).toBeInTheDocument();
@@ -45,7 +45,7 @@ describe('TeamSettings', () => {
       });
       await userEvent.click(changeDisplayNameButton);
 
-      const dialogTitle = screen.getByRole('dialog', {
+      const dialogTitle = screen.queryByRole('dialog', {
         name: 'Change display name',
       });
       expect(dialogTitle).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe('TeamSettings', () => {
       const deleteButton = screen.getByRole('button', { name: 'Delete' });
       await userEvent.click(deleteButton);
 
-      const dialogTitle = screen.getByRole('dialog', { name: 'Delete team' });
+      const dialogTitle = screen.queryByRole('dialog', { name: 'Delete team' });
       expect(dialogTitle).toBeInTheDocument();
 
       const cancelButton = screen.getByRole('button', { name: 'Cancel' });
