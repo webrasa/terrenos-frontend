@@ -61,7 +61,7 @@ describe('Table', () => {
       await userEvent.click(deleteButton);
 
       // The cancel button inside the Dialog component and it only show when the user open it.
-      const cancelButton = screen.getByText('Cancel');
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       await userEvent.click(cancelButton);
 
       // After closing the dialog, it shouldn't show the cancel button anymore.

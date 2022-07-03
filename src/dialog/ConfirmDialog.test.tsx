@@ -38,7 +38,7 @@ describe('ConfirmDialog', () => {
       const title = screen.queryByText('Random title');
       expect(title).toBeInTheDocument();
 
-      const cancelButton = screen.getByText('Cancel');
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       await userEvent.click(cancelButton);
 
       expect(handleCancel).toBeCalled();

@@ -18,11 +18,13 @@ describe('BillingSettings', () => {
         />
       );
 
-      const manageButton = screen.queryByText('Manage Plan');
+      const manageButton = screen.queryByRole('button', {
+        name: 'Manage Plan',
+      });
       expect(manageButton).not.toBeInTheDocument();
 
-      const upgradeButton = screen.queryByText('Upgrade Plan');
-      expect(upgradeButton).toBeInTheDocument();
+      const upgradeLink = screen.queryByRole('link', { name: 'Upgrade Plan' });
+      expect(upgradeLink).toBeInTheDocument();
     });
 
     it("shouldn't render the upgrade button when the user isn't on the free plan", () => {
@@ -36,11 +38,13 @@ describe('BillingSettings', () => {
         />
       );
 
-      const manageButton = screen.queryByText('Manage Plan');
+      const manageButton = screen.queryByRole('button', {
+        name: 'Manage Plan',
+      });
       expect(manageButton).not.toBeInTheDocument();
 
-      const upgradeButton = screen.queryByText('Upgrade Plan');
-      expect(upgradeButton).not.toBeInTheDocument();
+      const upgradeLink = screen.queryByRole('link', { name: 'Upgrade Plan' });
+      expect(upgradeLink).not.toBeInTheDocument();
     });
 
     it('should render the manage button when the user has a Stripe ID', () => {
@@ -54,7 +58,9 @@ describe('BillingSettings', () => {
         />
       );
 
-      const manageButton = screen.queryByText('Manage Plan');
+      const manageButton = screen.queryByRole('button', {
+        name: 'Manage Plan',
+      });
       expect(manageButton).toBeInTheDocument();
     });
   });

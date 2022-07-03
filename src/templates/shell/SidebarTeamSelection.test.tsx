@@ -13,7 +13,9 @@ describe('SidebarTeamSelection', () => {
       authProviderRender(<SidebarTeamSelection />);
 
       // Click on the select button and show the option list
-      const selectButton = screen.getByText('RANDOM_DISPLAY_NAME');
+      const selectButton = screen.getByRole('button', {
+        name: 'RANDOM_DISPLAY_NAME',
+      });
       await userEvent.click(selectButton);
 
       // On the mocked data there are 3 teams in the list
@@ -27,7 +29,9 @@ describe('SidebarTeamSelection', () => {
       authProviderRender(<SidebarTeamSelection />);
 
       // Click on the select button and show the option list
-      const selectButton = screen.getByText('RANDOM_DISPLAY_NAME');
+      const selectButton = screen.getByRole('button', {
+        name: 'RANDOM_DISPLAY_NAME',
+      });
       await userEvent.click(selectButton);
 
       // Click on the create new team option
@@ -45,7 +49,9 @@ describe('SidebarTeamSelection', () => {
       authProviderRender(<SidebarTeamSelection />);
 
       // Click on the select button and show the option list
-      const selectButton = screen.getByText('RANDOM_DISPLAY_NAME');
+      const selectButton = screen.getByRole('button', {
+        name: 'RANDOM_DISPLAY_NAME',
+      });
       await userEvent.click(selectButton);
 
       // Click on the create new team option

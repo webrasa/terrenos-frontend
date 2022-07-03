@@ -27,7 +27,9 @@ describe('SidebarSelect', () => {
       );
 
       // Click on the select button and show the option list
-      const selectButton = screen.getByText('RANDOM_TEAM_LABEL');
+      const selectButton = screen.getByRole('button', {
+        name: 'RANDOM_TEAM_LABEL',
+      });
       await userEvent.click(selectButton);
 
       // Select one option from the list

@@ -41,7 +41,7 @@ describe('FormDialog', () => {
         </FormDialog>
       );
 
-      const cancelButton = screen.getByText('Cancel');
+      const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       await userEvent.click(cancelButton);
 
       expect(handleCancel).toBeCalled();
@@ -62,7 +62,7 @@ describe('FormDialog', () => {
         </FormDialog>
       );
 
-      const cancelButton = screen.queryByText('Cancel');
+      const cancelButton = screen.queryByRole('button', { name: 'Cancel' });
       expect(cancelButton).not.toBeInTheDocument();
     });
 
@@ -86,7 +86,7 @@ describe('FormDialog', () => {
         </FormDialog>
       );
 
-      const saveButton = screen.getByText('Save');
+      const saveButton = screen.getByRole('button', { name: 'Save' });
       await userEvent.click(saveButton);
 
       expect(handleSubmit).toBeCalled();
