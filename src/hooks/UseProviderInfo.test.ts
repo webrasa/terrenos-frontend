@@ -47,7 +47,7 @@ describe('UseProviderInfo', () => {
     });
 
     it('should return user information when the user is signed in', async () => {
-      mockCurrentUserInfo.mockReturnValueOnce({
+      mockCurrentUserInfo.mockReturnValue({
         attributes: {
           sub: 'RANDOM_USER_ATTRIBUTES_SUB',
           email: 'RANDOM_USER_ATTRIBUTES_EMAIL',

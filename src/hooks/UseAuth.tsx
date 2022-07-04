@@ -9,7 +9,7 @@ import type { UserAuth, UserProfile } from '@/types/Auth';
 import { AuthState, useProviderInfo } from './UseProviderInfo';
 
 // React Hook Context for authentification
-const AuthContext = createContext<UserAuth | null>(null);
+export const AuthContext = createContext<UserAuth | null>(null);
 
 export type IAuthProviderProps = {
   children: ReactNode;

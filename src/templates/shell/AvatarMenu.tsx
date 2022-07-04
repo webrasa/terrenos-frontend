@@ -11,6 +11,7 @@ import { AppConfig } from '@/utils/AppConfig';
  */
 const AvatarMenu = () => {
   const { providerInfo } = useAuth();
+  const isEmailAuth = !providerInfo.identities;
 
   return (
     <Menu>
@@ -33,7 +34,7 @@ const AvatarMenu = () => {
         </div>
 
         <div className="py-1">
-          {!providerInfo.identities && (
+          {isEmailAuth && (
             <MenuLink href="/dashboard/account">Account</MenuLink>
           )}
           <MenuLink href="/">Landing Page</MenuLink>

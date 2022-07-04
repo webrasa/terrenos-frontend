@@ -29,7 +29,7 @@ const Join = () => {
 
     content = (
       <AuthProvider>
-        <Authenticated userInfo={userInfo} />
+        <Authenticated />
       </AuthProvider>
     );
   }
