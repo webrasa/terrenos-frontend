@@ -74,6 +74,8 @@ describe('UseAuth', () => {
     it('should start by returning null and wait asynchronously for user info', async () => {
       const { container } = render(<AuthProvider>Protected</AuthProvider>);
 
+      // Technically we don't need to waitFor for updated status.
+      // But the render call setState and this is the reason we need `waitFor`
       await waitFor(() => {
         expect(mockUseRouterPush).not.toBeCalled();
       });
@@ -87,6 +89,8 @@ describe('UseAuth', () => {
     it("should return null and redirect to login page when the user isn't signed in", async () => {
       const { container } = render(<AuthProvider>Protected</AuthProvider>);
 
+      // Technically we don't need to waitFor for updated status.
+      // But the render call setState and this is the reason we need `waitFor`
       await waitFor(() => {
         expect(mockUseRouterPush).toBeCalledWith('/login');
       });

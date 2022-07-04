@@ -47,8 +47,10 @@ describe('Authenticated', () => {
       swrConfigWithAuthRender(<Authenticated />);
 
       await waitFor(() => {
-        const goDashboardButton = screen.queryByText('Go to dashboard');
-        expect(goDashboardButton).toBeInTheDocument();
+        const goDashboardLink = screen.queryByRole('link', {
+          name: 'Go to dashboard',
+        });
+        expect(goDashboardLink).toBeInTheDocument();
       });
     });
 
