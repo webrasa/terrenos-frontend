@@ -3,6 +3,7 @@ import { API } from 'aws-amplify';
 import { useRouter } from 'next/dist/client/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { mutate } from 'swr';
 
 import { Button } from '@/button/Button';
 import { FormElement } from '@/form/FormElement';
@@ -55,6 +56,8 @@ const TodoForm = (props: ITodoFormProps) => {
           body: data,
         });
       }
+
+      await mutate(`/${currentTeam.id}/todo/list`);
 
       await router.push('/dashboard');
     } catch (ex: any) {
