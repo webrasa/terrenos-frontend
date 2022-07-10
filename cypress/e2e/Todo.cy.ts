@@ -1,8 +1,22 @@
-describe('Todo', () => {
-  describe('CRUD operation', () => {
-    it('should', () => {
-      cy.visit('/dashboard');
+import { nanoid } from 'nanoid';
 
+describe('Todo', () => {
+  beforeEach(() => {
+    cy.visit('/dashboard');
+
+    // Display team selection and choose "create new team" option
+    cy.findByTestId('team-selection').click();
+    cy.findByText('Create new team').click();
+
+    // Create a new team with random name
+    cy.get('#displayName').type(nanoid());
+    cy.findByRole('button', { name: 'Create' }).click();
+
+    cy.url().should('include', '/dashboard');
+  });
+
+  describe('CRUD operation', () => {
+    it('should create, read, edit and delete todo', () => {
       // Add a new todo
       cy.findByTestId('message-state').within(() => {
         cy.findByRole('link', { name: 'Add Todo' }).click();
