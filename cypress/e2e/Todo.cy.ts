@@ -11,8 +11,6 @@ describe('Todo', () => {
     // Create a new team with random name
     cy.get('#displayName').type(nanoid());
     cy.findByRole('button', { name: 'Create' }).click();
-
-    cy.url().should('include', '/dashboard');
   });
 
   describe('CRUD operation', () => {
