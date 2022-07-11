@@ -16,9 +16,9 @@ describe('Todo', () => {
   describe('CRUD operation', () => {
     it('should create, read, edit and delete todo', () => {
       // Add a new todo
-      cy.findByTestId('message-state').within(() => {
-        cy.findByRole('link', { name: 'Add Todo' }).click();
-      });
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .click();
       cy.get('#title').type('New random todo title');
       cy.findByRole('button', { name: 'Save' }).click();
 
@@ -37,9 +37,7 @@ describe('Todo', () => {
 
       // Delete the newly created todo
       cy.findByRole('button', { name: 'Delete' }).click();
-      cy.findByRole('dialog').within(() => {
-        cy.findByRole('button', { name: 'Delete' }).click();
-      });
+      cy.findByRole('dialog').findByRole('button', { name: 'Delete' }).click();
 
       // When there is no todo, it should display the message state.
       cy.findByTestId('message-state').should('exist');
@@ -47,9 +45,9 @@ describe('Todo', () => {
 
     it('should create 5 todos, edit 2 and delete 2, simulating a complex workflow', () => {
       // Add the 1st todos
-      cy.findByTestId('message-state').within(() => {
-        cy.findByRole('link', { name: 'Add Todo' }).click();
-      });
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .click();
       cy.get('#title').type('New random todo title 1');
       cy.findByRole('button', { name: 'Save' }).click();
 
@@ -85,9 +83,7 @@ describe('Todo', () => {
         .should('have.length', 4)
         .eq(2)
         .click();
-      cy.findByRole('dialog').within(() => {
-        cy.findByRole('button', { name: 'Delete' }).click();
-      });
+      cy.findByRole('dialog').findByRole('button', { name: 'Delete' }).click();
       cy.findByText('New random todo title 3').should('not.exist');
 
       // Add the 5th todo
@@ -112,9 +108,7 @@ describe('Todo', () => {
         .should('have.length', 4)
         .eq(3)
         .click();
-      cy.findByRole('dialog').within(() => {
-        cy.findByRole('button', { name: 'Delete' }).click();
-      });
+      cy.findByRole('dialog').findByRole('button', { name: 'Delete' }).click();
       cy.findByText('New random todo edited 5').should('not.exist');
 
       // Verify the end result
