@@ -41,9 +41,8 @@ describe('Team', () => {
       // Verify the team display name is correctly edited
       cy.findAllByTestId('setting-line')
         .filter(':contains("Display name")')
-        .within(() => {
-          cy.findByText(editTeamName).should('exist');
-        });
+        .findByText(editTeamName)
+        .should('exist');
 
       // Verify the edited team display name appears in the team selection
       cy.findByTestId('team-selection').click();
@@ -118,6 +117,48 @@ describe('Team', () => {
 
       // Verify the invitation is now removed
       cy.findByText('random@email.com').should('not.exist');
+    });
+
+    it('should create 3 invitation and delete 2, simulating a complex workflow', () => {
+      // Go to the team members list
+      cy.findByRole('link', { name: 'Members' }).click();
+
+      // Invite 1st user
+      cy.findByText('Invite member').click();
+      cy.findByRole('dialog').get('#email').type('random1@email.com');
+      cy.findByRole('button', { name: 'Send' }).click();
+
+      // Invite 2nd user
+      cy.findByText('Invite member').click();
+      cy.findByRole('dialog').get('#email').type('random2@email.com');
+      cy.findByRole('button', { name: 'Send' }).click();
+
+      // Remove the 2nd invitation
+      cy.findByText('random2@email.com').should('exist');
+      cy.findAllByRole('row')
+        .filter(':contains("random2@email.com")')
+        .findByRole('button', { name: 'Remove' })
+        .click();
+      cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+
+      // Verify the invitation is now removed
+      cy.findByText('random2@email.com').should('not.exist');
+
+      // Invite 3rd user
+      cy.findByText('Invite member').click();
+      cy.findByRole('dialog').get('#email').type('random3@email.com');
+      cy.findByRole('button', { name: 'Send' }).click();
+
+      // Remove the 1st invitation
+      cy.findByText('random1@email.com').should('exist');
+      cy.findAllByRole('row')
+        .filter(':contains("random1@email.com")')
+        .findByRole('button', { name: 'Remove' })
+        .click();
+      cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+
+      // Verify the end result and the last invitation is still in the list
+      cy.findByText('random3@email.com').should('exist');
     });
   });
 });
