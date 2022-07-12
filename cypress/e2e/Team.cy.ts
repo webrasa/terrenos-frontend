@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-describe('Todo', () => {
+describe('Team', () => {
   const teamName = nanoid();
 
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe('Todo', () => {
     cy.location('pathname').should('eq', '/dashboard/');
   });
 
-  describe('CRUD operation', () => {
+  describe('Team settings', () => {
     it('should edit team display name', () => {
       const editTeamName = `${teamName}EDITED`;
 
@@ -68,6 +68,56 @@ describe('Todo', () => {
       // Verify the edited team display name not appears in the team selection
       cy.findByTestId('team-selection').click();
       cy.findByRole('listbox').findByText(teamName).should('not.exist');
+    });
+  });
+
+  describe('Team members', () => {
+    it('should remove the default user from the team', () => {
+      // Go to the team members list
+      cy.findByRole('link', { name: 'Members' }).click();
+
+      // Verify the created team appears in the team selection
+      cy.findByTestId('team-selection').click();
+      cy.findByRole('listbox').findByText(teamName).should('exist');
+
+      // `test@example.com` is the default user for development environment
+      // Remove himself from the team
+      cy.findAllByRole('row')
+        .filter(':contains("test@example.com")')
+        .findByRole('button', { name: 'Remove' })
+        .click();
+      cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+
+      // After leaving the team, the team display name shouldn't appears in the team selection
+      cy.findByTestId('team-selection').click();
+      cy.findByRole('listbox').findByText(teamName).should('not.exist');
+    });
+
+    it('should invite and delete user', () => {
+      // Go to the team members list
+      cy.findByRole('link', { name: 'Members' }).click();
+
+      // Invite new user
+      cy.findByText('Invite member').click();
+      cy.findByRole('dialog').get('#email').type('random@email.com');
+      cy.findByRole('button', { name: 'Send' }).click();
+
+      // Verify the new team member appears in the list
+      cy.findByText('random@email.com').should('exist');
+      cy.findAllByRole('row')
+        .filter(':contains("random@email.com")')
+        .findByText('PENDING')
+        .should('exist');
+
+      // Remove the invitation
+      cy.findAllByRole('row')
+        .filter(':contains("random@email.com")')
+        .findByRole('button', { name: 'Remove' })
+        .click();
+      cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+
+      // Verify the invitation is now removed
+      cy.findByText('random@email.com').should('not.exist');
     });
   });
 });
