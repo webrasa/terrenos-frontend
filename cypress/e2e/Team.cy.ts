@@ -1,5 +1,7 @@
 import { nanoid } from 'nanoid';
 
+import type { UserProfile } from '@/types/Auth';
+
 describe('Team', () => {
   const teamName = nanoid();
 
@@ -159,6 +161,33 @@ describe('Team', () => {
 
       // Verify the end result and the last invitation is still in the list
       cy.findByText('random3@email.com').should('exist');
+    });
+
+    it.only('should', () => {
+      // Go to the team members list
+      cy.findByRole('link', { name: 'Members' }).click();
+
+      // Invite new user
+      cy.findByText('Invite member').click();
+      cy.findByRole('dialog').get('#email').type('random@email.com');
+      cy.findByRole('button', { name: 'Send' }).click();
+
+      // Verify the new team member appears in the list
+      cy.findByText('random@email.com').should('exist');
+
+      // Get team ID
+      cy.request(
+        'GET',
+        `${Cypress.env('API_URL')}/user/profile?email=test@example.com`
+      )
+        .then((response: Cypress.Response<UserProfile>) => {
+          return response.body.teamList.filter(
+            (team) => team.displayName === teamName
+          );
+        })
+        .as('team');
+
+      cy.get('@team').should('equal', 'value');
     });
   });
 });
