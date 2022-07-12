@@ -14,17 +14,13 @@ describe('Todo', () => {
     cy.get('#displayName').type(teamName);
     cy.findByRole('button', { name: 'Create' }).click();
 
-    // In team, we also verify if it redirects to index dashboard
+    // In team, we also verify if it redirects to dashboard index
     cy.location('pathname').should('eq', '/dashboard/');
   });
 
   describe('CRUD operation', () => {
     it('should edit team display name', () => {
       const editTeamName = `${teamName}EDITED`;
-
-      // Verify the created team appears in the team selection
-      cy.findByTestId('team-selection').click();
-      cy.findByRole('listbox').findByText(teamName).should('exist');
 
       // Go to the settings page
       cy.findByRole('link', { name: 'Settings' }).click();
@@ -57,6 +53,21 @@ describe('Todo', () => {
     it('should delete the newly created team', () => {
       // Go to the settings page
       cy.findByRole('link', { name: 'Settings' }).click();
+
+      // Verify the created team appears in the team selection
+      cy.findByTestId('team-selection').click();
+      cy.findByRole('listbox').findByText(teamName).should('exist');
+
+      // Open the delete team dialog and confirm the deletion
+      cy.findAllByTestId('setting-line')
+        .filter(':contains("Delete team")')
+        .findByRole('button', { name: 'Delete' })
+        .click();
+      cy.findByRole('button', { name: 'Delete forever' }).click();
+
+      // Verify the edited team display name not appears in the team selection
+      cy.findByTestId('team-selection').click();
+      cy.findByRole('listbox').findByText(teamName).should('not.exist');
     });
   });
 });
