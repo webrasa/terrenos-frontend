@@ -15,7 +15,7 @@ describe('Todo', () => {
     cy.findByRole('button', { name: 'Create' }).click();
 
     // In team, we also verify if it redirects to index dashboard
-    cy.url().should('include', '/dashboard');
+    cy.location('pathname').should('eq', '/dashboard/');
   });
 
   describe('CRUD operation', () => {
@@ -52,6 +52,11 @@ describe('Todo', () => {
       // Verify the edited team display name appears in the team selection
       cy.findByTestId('team-selection').click();
       cy.findByRole('listbox').findByText(editTeamName).should('exist');
+    });
+
+    it('should delete the newly created team', () => {
+      // Go to the settings page
+      cy.findByRole('link', { name: 'Settings' }).click();
     });
   });
 });

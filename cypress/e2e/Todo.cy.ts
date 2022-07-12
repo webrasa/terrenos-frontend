@@ -23,7 +23,7 @@ describe('Todo', () => {
       cy.findByRole('button', { name: 'Save' }).click();
 
       // Verify the new todo is correctly created
-      cy.url().should('include', '/dashboard');
+      cy.location('pathname').should('eq', '/dashboard/');
       cy.findByText('New random todo title');
 
       // Edit the newly created todo
@@ -32,7 +32,7 @@ describe('Todo', () => {
       cy.findByRole('button', { name: 'Save' }).click();
 
       // Verify the todo is correctly edited
-      cy.url().should('include', '/dashboard');
+      cy.location('pathname').should('eq', '/dashboard/');
       cy.findByText('New random todo edited');
 
       // Delete the newly created todo
