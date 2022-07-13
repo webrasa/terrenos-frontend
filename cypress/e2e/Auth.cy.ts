@@ -1,6 +1,6 @@
 describe('Auth', () => {
   describe('Basic authentication', () => {
-    it('should create a new user with email', () => {
+    it('should sign up a new user using email', () => {
       // Start from the index page
       cy.visit('/');
 
@@ -37,6 +37,35 @@ describe('Auth', () => {
 
       // Verify the url after clicking the 'Go to login' link
       cy.location('pathname').should('eq', '/login/');
+    });
+
+    it('should reset a new password when the user forget his password', () => {
+      // Start with the password recovery page
+      cy.visit('/forgot-password/');
+
+      // Intercept AWS Cognito request
+      cy.intercept('POST', 'https://cognito-idp.us-east-1.amazonaws.com/', {
+        statusCode: 200,
+      });
+
+      // Fill the password recovery form
+      cy.get('#email').type('random@email.com');
+      cy.findByRole('button', { name: 'Send email' })
+        .click()
+        .should(() => {
+          // Verify the session storage is correctly set
+          expect(sessionStorage.getItem('confirm-forgot-password-email')).to.eq(
+            'random@email.com'
+          );
+        });
+
+      // Verify it has successfully redirected
+      cy.location('pathname').should('eq', '/confirm-forgot-password/');
+
+      // Fill the form
+      cy.get('#verificationCode').type('RANDOM_VERIFICATION_CODE');
+      cy.get('#password').type('RANDOM_PASSWORD_TEST');
+      cy.findByRole('button', { name: 'Reset password' }).click();
     });
   });
 });
