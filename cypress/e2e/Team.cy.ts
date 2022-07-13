@@ -1,11 +1,15 @@
 import { nanoid } from 'nanoid';
 
-import type { UserProfile } from '@/types/Auth';
+import type { IMemberList } from '@/pages/dashboard/members';
+import type { Team, UserProfile } from '@/types/Auth';
+import type { IMember } from '@/types/IMember';
 
 describe('Team', () => {
-  const teamName = nanoid();
+  let teamName: string;
 
   beforeEach(() => {
+    teamName = nanoid();
+
     cy.visit('/dashboard');
 
     // Display team selection and choose "create new team" option
@@ -159,11 +163,14 @@ describe('Team', () => {
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
 
+      // Verify the 1st invitation is removed
+      cy.findByText('random1@email.com').should('not.exist');
+
       // Verify the end result and the last invitation is still in the list
       cy.findByText('random3@email.com').should('exist');
     });
 
-    it.only('should', () => {
+    it('should go to the invitation page and display the sender email along with team display name', () => {
       // Go to the team members list
       cy.findByRole('link', { name: 'Members' }).click();
 
@@ -181,13 +188,60 @@ describe('Team', () => {
         `${Cypress.env('API_URL')}/user/profile?email=test@example.com`
       )
         .then((response: Cypress.Response<UserProfile>) => {
-          return response.body.teamList.filter(
-            (team) => team.displayName === teamName
+          const teamList = response.body.teamList.filter(
+            (elt) => elt.displayName === teamName
           );
+
+          expect(teamList).to.have.length(1);
+
+          return teamList[0];
         })
         .as('team');
 
-      cy.get('@team').should('equal', 'value');
+      // Get the new user from team member list
+      cy.get<Team>('@team')
+        .then((team) => {
+          cy.request(
+            'GET',
+            `${Cypress.env('API_URL')}/team/${team.id}/list-members`
+          ).then((response: Cypress.Response<IMemberList>) => {
+            const memberList = response.body.list.filter(
+              (elt) => elt.email === 'random@email.com'
+            );
+
+            expect(memberList).to.have.length(1);
+
+            return {
+              newMember: memberList[0],
+              teamId: team.id,
+            };
+          });
+        })
+        .as('member');
+
+      // Go to join page to accept the invitation
+      cy.get<{
+        newMember: IMember;
+        teamId: string;
+      }>('@member').then((member) => {
+        cy.visit(
+          `/join?teamId=${member.teamId}&verificationCode=${member.newMember.memberId}`
+        );
+      });
+
+      // Verify the join is correctly rendered by display useful information
+      cy.findByText('test@example.com').should('exist');
+      cy.findByText(teamName).should('exist');
+
+      // Accept the invitation
+      cy.findByRole('button', { name: 'Accept invite' }).click();
+
+      // After accepting the invitation, it should display "the user is already a team member".
+      // In development and testing environment with the default configuration, the authentication is bypassed.
+      // So, we can't change user and the error is expected.
+      // If the errors is displayed, it means the API endpoint has been called and reached.
+      // With a real authentication, the errors won't be displayed and the user will join the team.
+      cy.findByText("You're already a member of the team").should('exist');
     });
   });
 });

@@ -7,7 +7,7 @@ import { getShell } from '@/layout/Shell';
 import { TeamTable } from '@/templates/team/TeamTable';
 import type { IMember } from '@/types/IMember';
 
-type IResponse = {
+export type IMemberList = {
   list: IMember[];
 };
 
@@ -15,7 +15,7 @@ const Members = () => {
   const { currentTeam } = useAuth();
   const router = useRouter();
 
-  const { data } = useSWR<IResponse>(
+  const { data } = useSWR<IMemberList>(
     router.isReady ? `/team/${currentTeam.id}/list-members` : null
   );
 
