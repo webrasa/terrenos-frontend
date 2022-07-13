@@ -1,3 +1,5 @@
+import { interceptSignIn } from '../utils/Auth';
+
 describe('Auth', () => {
   describe('Basic authentication', () => {
     it('should sign up a new user using email', () => {
@@ -24,7 +26,7 @@ describe('Auth', () => {
           );
         });
 
-      // Verify it has successfully redirected to `confirm-signup`
+      // Verify if it has successfully redirected to `confirm-signup` page
       cy.location('pathname').should('eq', '/confirm-signup/');
 
       // Fill the confirm-sign form
@@ -35,7 +37,7 @@ describe('Auth', () => {
       cy.findByText('Your email has been verified');
       cy.findByText('Go to login').click();
 
-      // Verify the url after clicking the 'Go to login' link
+      // Verify the url after clicking the link
       cy.location('pathname').should('eq', '/login/');
     });
 
@@ -59,13 +61,20 @@ describe('Auth', () => {
           );
         });
 
-      // Verify it has successfully redirected
+      // Verify if it has successfully redirected
       cy.location('pathname').should('eq', '/confirm-forgot-password/');
+
+      // Intercept AWS Cognito request when signing in
+      // We automatically sign in the user when he has successfully changed his password
+      interceptSignIn(cy);
 
       // Fill the form
       cy.get('#verificationCode').type('RANDOM_VERIFICATION_CODE');
       cy.get('#password').type('RANDOM_PASSWORD_TEST');
       cy.findByRole('button', { name: 'Reset password' }).click();
+
+      // Verify if it has redirect to the dashboard
+      cy.location('pathname').should('eq', '/dashboard/');
     });
   });
 });
