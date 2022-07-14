@@ -73,8 +73,33 @@ describe('Auth', () => {
       cy.get('#password').type('RANDOM_PASSWORD_TEST');
       cy.findByRole('button', { name: 'Reset password' }).click();
 
-      // Verify if it has redirect to the dashboard
+      // Verify if it has redirected to the dashboard
       cy.location('pathname').should('eq', '/dashboard/');
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .should('exist');
+    });
+
+    it('should login with email and password', () => {
+      // Start from the index page
+      cy.visit('/');
+
+      // Go to login page
+      cy.findByText('Login').click();
+
+      // Intercept AWS Cognito request when signing in
+      interceptSignIn(cy);
+
+      // Fill the login form
+      cy.get('#email').type('random@email.com');
+      cy.get('#password').type('RANDOM_PASSWORD_TEST');
+      cy.findByRole('button', { name: 'Sign in' }).click();
+
+      // Verify if it has redirected to the dashboard
+      cy.location('pathname').should('eq', '/dashboard/');
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .should('exist');
     });
   });
 });
