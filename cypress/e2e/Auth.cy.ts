@@ -39,6 +39,7 @@ describe('Auth', () => {
 
       // Verify the url after clicking the link
       cy.location('pathname').should('eq', '/login/');
+      cy.findByText('Sign in to your account').should('exist');
     });
 
     it('should reset a new password when the user forget his password', () => {
@@ -100,6 +101,35 @@ describe('Auth', () => {
       cy.findByTestId('message-state')
         .findByRole('link', { name: 'Add Todo' })
         .should('exist');
+    });
+
+    it('should sign out using link in the sidebar', () => {
+      cy.visit('/dashboard');
+
+      // Click on the sign out button
+      cy.findByRole('link', { name: 'Sign Out' }).click();
+
+      // Verify if it has redirected to the landing page
+      cy.location('pathname').should('eq', '/');
+      cy.findByRole('link', { name: 'Login' }).should('exist');
+    });
+
+    it('should sign out using link in the avatar menu', () => {
+      cy.visit('/dashboard');
+
+      // Click on the avatar menu
+      // In E2E testing environment the email is mocked and the mocked email is from `NEXT_PUBLIC_COGNITO_USER_EMAIL_LOCAL`
+      // This is why the avatar text is `TE`, the two first letter.
+      cy.findByRole('button', { name: 'te' }).click();
+
+      // Click on the sign out button in the avatar menu
+      cy.findByRole('menu')
+        .findByRole('menuitem', { name: 'Sign Out' })
+        .click();
+
+      // Verify if it has redirected to the landing page
+      cy.location('pathname').should('eq', '/');
+      cy.findByRole('link', { name: 'Login' }).should('exist');
     });
   });
 });
