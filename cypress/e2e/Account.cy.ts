@@ -2,7 +2,7 @@ import { interceptChangeEmail, interceptSignIn } from 'cypress/utils/Auth';
 
 describe('Account', () => {
   describe('Account settings', () => {
-    it('should simulate the email change workflow', () => {
+    beforeEach(() => {
       // Start from the index page
       cy.visit('/');
 
@@ -24,10 +24,13 @@ describe('Account', () => {
 
       // Click on the sign out button in the avatar menu
       cy.findByRole('menu').findByRole('menuitem', { name: 'Account' }).click();
+    });
 
+    it('should simulate the email change workflow', () => {
       // Intercept AWS Cognito request for email change
       interceptChangeEmail(cy);
 
+      // Open the email change dialog
       cy.findAllByTestId('setting-line')
         .filter(':contains("Email address")')
         .within(() => {
@@ -37,6 +40,8 @@ describe('Account', () => {
           // Show the change email address dialog
           cy.findByRole('button', { name: 'Change' }).click();
         });
+
+      // Fill the form
       cy.findByRole('dialog').get('#email').type('random@email.com');
       cy.findByRole('button', { name: 'Save' }).click();
 
@@ -56,6 +61,41 @@ describe('Account', () => {
 
       // Verify if it has redirected back to account settings
       cy.location('pathname').should('eq', '/dashboard/account/');
+      cy.findAllByTestId('setting-line')
+        .findByText('Email address')
+        .should('exist');
+    });
+
+    it('should simulate the password change workflow', () => {
+      // Intercept AWS Cognito request
+      cy.intercept('POST', 'https://cognito-idp.us-east-1.amazonaws.com/', {
+        statusCode: 200,
+      });
+
+      // Open the password change dialog
+      cy.findAllByTestId('setting-line')
+        .filter(':contains("Password")')
+        .findByRole('button', { name: 'Change' })
+        .click();
+
+      // Fill the password change dialog
+      cy.findByRole('dialog').within(() => {
+        cy.get('#oldPassword').type('RANDOM_OLD_PASSWORD');
+
+        cy.get('#newPassword').type('RANDOM_NEW_PASSWORD');
+
+        cy.findByRole('button', { name: 'Save' }).click();
+      });
+
+      // Verify if it displays the success message
+      cy.findByText('Your password has been updated');
+      cy.findByText('Go back to Dashboard').click();
+
+      // Verify if it has redirected to the dashboard
+      cy.location('pathname').should('eq', '/dashboard/');
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .should('exist');
     });
   });
 });
