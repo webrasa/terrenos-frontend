@@ -49,3 +49,20 @@ export const interceptSignIn = (cy: Cypress.cy & CyEventEmitter) => {
     }
   );
 };
+
+export const interceptChangeEmail = (cy: Cypress.cy & CyEventEmitter) => {
+  cy.intercept(
+    {
+      method: 'POST',
+      url: 'https://cognito-idp.us-east-1.amazonaws.com/',
+      headers: {
+        'x-amz-target':
+          'AWSCognitoIdentityProviderService.UpdateUserAttributes',
+      },
+    },
+    {
+      statusCode: 200,
+      body: {},
+    }
+  );
+};
