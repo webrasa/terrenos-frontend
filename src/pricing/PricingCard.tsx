@@ -50,7 +50,7 @@ const PricingCard = (props: IPricingCardProps) => {
   );
 
   return (
-    <div className={pricingCardClass}>
+    <div className={pricingCardClass} data-testid="pricing-card">
       {props.popular && (
         <div className="self-center rounded-full bg-primary-200 py-1 px-3 text-sm font-semibold tracking-wider text-primary-600">
           Best Value
