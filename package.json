@@ -12,10 +12,11 @@
     "lint": "next lint",
     "build-types": "tsc --noEmit --pretty",
     "test": "jest",
-    "cypress": "cypress open",
+    "check-backend": "curl --silent http://localhost:4000/health || echo 'Please start Nextless.js backend or something goes wrong in the backend'",
+    "cypress": "cypress open --e2e",
     "cypress:headless": "cypress run",
-    "e2e": "start-server-and-test dev http://localhost:3000 cypress",
-    "e2e:headless": "start-server-and-test dev http://localhost:3000 cypress:headless",
+    "e2e": "start-server-and-test check-backend http://localhost:4000/health dev http://localhost:3000 cypress",
+    "e2e:headless": "start-server-and-test check-backend http://localhost:4000/health dev http://localhost:3000 cypress:headless",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "aws-amplify": "^4.3.27",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "nanoid": "^4.0.0",
     "next": "^12.2.1",
     "next-seo": "^5.4.0",
     "react": "^18.2.0",

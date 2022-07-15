@@ -24,7 +24,7 @@ export interface CognitoUserExt extends CognitoUser {
   };
 }
 
-type Team = {
+export type Team = {
   displayName: string;
   id: string;
 };
