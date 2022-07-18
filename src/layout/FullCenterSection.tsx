@@ -1,4 +1,4 @@
-import type { ReactChild, ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 import { Logo } from '@/templates/Logo';
 
@@ -6,7 +6,7 @@ type IFullCenterSectionProps = {
   children?: ReactNode;
   icon?: ReactNode;
   title: string;
-  description?: ReactChild;
+  description?: ReactNode;
 };
 
 /**
