@@ -31,31 +31,44 @@ On you can local environment, you can login to the dashboard by directly browse 
 
 ### File structure, most important folder
 
-```
+```sh
 .
-├── README.md                            # README file
-├── netlify.toml                         # Netlify configuration file
-├── next.config.js                       # Next JS configuration
-├── public                               # Public folder
+├── README.md                               # README file
+├── __mocks__                               # Jest mocks folder for mocking imports
+├── cypress                                 # Cypress tests folder for E2E tests
+│   ├── e2e.js                              # E2E tests
+│   ├── fixtures                            # Cypress fixtures folder
+│   ├── support                             # Cypress support folder
+│   └── utils                               # Cypress utils folder
+├── next.config.js                          # Next.js configuration
+├── public                                  # Public folder
 │   └── assets
-│       └── images                       # Image used by default template
+│       └── images                          # Image used by default template
 ├── src
-│   ├── hooks                            # React hooks
-│   ├── layout
-│   │   └── Shell.tsx                    # Dashboard layout using https://nextjs.org/docs/basic-features/layouts
-│   ├── pages                            # Next JS Page folder
-│   │   ├── _app.tsx                     # Next JS app file
-│   │   ├── dashboard
-│   │   │   └── index.tsx                # Dashboard index
-│   │   └── index.tsx                    # Landing page index
-│   ├── styles
-│   │   └── main.css                     # Tailwind CSS file
-│   ├── templates                        # Templates components are directly used by NextJS pages and they uses primitives components
-│   ├── types                            # Types for TypeScript
-│   ├── utils                            # Utility folder
-│   └── ...                              # All other folders are for primitive components.
-│                                        # Primitive components handle the visual part and the customization is done via React Props.
-└── tailwind.config.js                   # Tailwind CSS configuration
+│   ├── hooks                               # React hooks
+│   ├── layout
+│   │   └── Shell.tsx                       # Dashboard layout using https://nextjs.org/docs/basic-features/layouts
+│   ├── pages                               # Next.js pages
+│   │   ├── _app.tsx                        # Next.js app
+│   │   ├── dashboard
+│   │   │   ├── index.tsx                   # Dashboard index
+│   │   ├── index.tsx                       # Landing page index
+│   ├── pages.test                          # Next.js pages tests
+│   │   └── dashboard
+│   ├── styles
+│   │   └── global.css                      # Tailwind CSS file
+│   ├── templates                           # Templates components are directly used by NextJS pages and they uses primitives components
+│   │   ├── account                         # Templates used in the account settings page
+│   │   ├── auth                            # Templates used in the authentication process
+│   │   ├── invite                          # Templates used in the invitation process
+│   │   ├── shell                           # Templates used in the dashboard layout
+│   │   └── team                            # Templates used in the team-related page
+│   ├── types                               # Types for TypeScript
+│   └── utils                               # Utilities
+│   └── ...                                 # All other folders are for primitive components.
+│                                           # Primitive components handle the visual part and the customization is done via React Props.
+│                                           # Primitive components are used in templates and templates are used in pages.
+└── tailwind.config.js                      # Tailwind CSS configuration
 ```
 
 ### Customization
@@ -94,6 +107,26 @@ npm run build-prod
 ```
 
 Now, your frontend is ready to be deployed. All generated files are located at `out` folder and you can deploy these files to any hosting services. You should be able to deploy on Vercel, Netlify or Amplify Hosting without any issue. If you choose to host on AWS, you can read the previous section on how to deploy on Amplify Hosting. With all modern static hosting, you can setup an automated preview of every commit.
+
+### Testing
+
+All unit tests are located close to the source code in the same folder. For example, a file located at `src/layout/` with the name `RandomLayout.ts` will have a unit test file located at `src/layout/RandomLayout.test.ts`.
+
+> :warning: The behavior for Next.js pages is different. The unit tests are located at `src/pages.test/`. This avoids Next.js to consider the test as a page.
+
+In `./cypress` folder, you'll find all files related to Cypress, the E2E testing framework. To run the E2E tests, you can run the following command:
+
+```sh
+npm run e2e:headless
+```
+
+It'll run all the tests in headless mode and you can only see the final results. If you are writing a new test or editing an existing test, you can run the following command:
+
+```sh
+npm run e2e
+```
+
+It'll open the Cypress app where you can easily debug, visual see the results, time travel, and interact with the application.
 
 ### VSCode information (optional)
 
