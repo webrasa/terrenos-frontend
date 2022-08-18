@@ -38,6 +38,8 @@ describe('Todo', () => {
       // Delete the newly created todo
       cy.findByRole('button', { name: 'Delete' }).click();
       cy.findByRole('dialog').findByRole('button', { name: 'Delete' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // When there is no todo, it should display the message state.
       cy.findByTestId('message-state').should('exist');
@@ -84,6 +86,8 @@ describe('Todo', () => {
         .eq(2)
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Delete' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
       cy.findByText('New random todo title 3').should('not.exist');
 
       // Add the 5th todo
@@ -109,6 +113,8 @@ describe('Todo', () => {
         .eq(3)
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Delete' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
       cy.findByText('New random todo edited 5').should('not.exist');
 
       // Verify the end result

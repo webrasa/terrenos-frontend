@@ -41,9 +41,9 @@ describe('Team', () => {
         });
       cy.findByRole('dialog').get('#displayName').type(editTeamName);
       cy.findByRole('button', { name: 'Save' }).click();
-
       // Wait for dialog to be closed
       cy.findByRole('dialog').should('not.exist');
+
       // Verify the team display name is correctly edited
       cy.findAllByTestId('setting-line')
         .filter(':contains("Display name")')
@@ -69,6 +69,8 @@ describe('Team', () => {
         .findByRole('button', { name: 'Delete' })
         .click();
       cy.findByRole('button', { name: 'Delete forever' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Verify the edited team display name not appears in the team selection
       cy.findByTestId('team-selection').click();
@@ -92,6 +94,8 @@ describe('Team', () => {
         .findByRole('button', { name: 'Remove' })
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // After leaving the team, the team display name shouldn't appears in the team selection
       cy.findByTestId('team-selection').click();
@@ -106,6 +110,8 @@ describe('Team', () => {
       cy.findByText('Invite member').click();
       cy.findByRole('dialog').get('#email').type('random@email.com');
       cy.findByRole('button', { name: 'Send' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Verify the new team member appears in the list
       cy.findByText('random@email.com').should('exist');
@@ -120,6 +126,8 @@ describe('Team', () => {
         .findByRole('button', { name: 'Remove' })
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Verify the invitation is now removed
       cy.findByText('random@email.com').should('not.exist');
@@ -133,11 +141,15 @@ describe('Team', () => {
       cy.findByText('Invite member').click();
       cy.findByRole('dialog').get('#email').type('random1@email.com');
       cy.findByRole('button', { name: 'Send' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Invite 2nd user
       cy.findByText('Invite member').click();
       cy.findByRole('dialog').get('#email').type('random2@email.com');
       cy.findByRole('button', { name: 'Send' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Remove the 2nd invitation
       cy.findByText('random2@email.com').should('exist');
@@ -146,6 +158,8 @@ describe('Team', () => {
         .findByRole('button', { name: 'Remove' })
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Verify the invitation is now removed
       cy.findByText('random2@email.com').should('not.exist');
@@ -154,6 +168,8 @@ describe('Team', () => {
       cy.findByText('Invite member').click();
       cy.findByRole('dialog').get('#email').type('random3@email.com');
       cy.findByRole('button', { name: 'Send' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Remove the 1st invitation
       cy.findByText('random1@email.com').should('exist');
@@ -162,6 +178,8 @@ describe('Team', () => {
         .findByRole('button', { name: 'Remove' })
         .click();
       cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Verify the 1st invitation is removed
       cy.findByText('random1@email.com').should('not.exist');
@@ -178,6 +196,8 @@ describe('Team', () => {
       cy.findByText('Invite member').click();
       cy.findByRole('dialog').get('#email').type('random@email.com');
       cy.findByRole('button', { name: 'Send' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
 
       // Verify the new team member appears in the list
       cy.findByText('random@email.com').should('exist');
