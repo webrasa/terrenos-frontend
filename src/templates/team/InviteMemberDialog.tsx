@@ -10,7 +10,7 @@ import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import type { ISelectOption } from '@/shell/SidebarSelect';
 import { SidebarSelect } from '@/shell/SidebarSelect';
-import { MemberRole } from '@/types/IMember';
+import { RoleOptionList } from '@/types/TeamMembersAction';
 import { setFormError } from '@/utils/Forms';
 
 type IInviteMemberForm = {
@@ -22,11 +22,6 @@ type IInviteMemberProps = {
   show: boolean;
   handleCloseDialog: () => void;
 };
-
-const RoleOptionList: ISelectOption[] = [
-  { id: MemberRole.ADMIN, label: 'Admin' },
-  { id: MemberRole.READ_ONLY, label: 'Read only' },
-];
 
 const InviteMemberDialog = (props: IInviteMemberProps) => {
   const { currentTeam } = useAuth();
