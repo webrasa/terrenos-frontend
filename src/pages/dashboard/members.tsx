@@ -5,10 +5,11 @@ import { useAuth } from '@/hooks/UseAuth';
 import { Section } from '@/layout/Section';
 import { getShell } from '@/layout/Shell';
 import { TeamTable } from '@/templates/team/TeamTable';
-import type { IMember } from '@/types/IMember';
+import type { IMember, MemberRole } from '@/types/IMember';
 
 export type IMemberList = {
   list: IMember[];
+  role: MemberRole;
 };
 
 const Members = () => {
@@ -25,7 +26,7 @@ const Members = () => {
 
   return (
     <Section>
-      <TeamTable list={data.list} />
+      <TeamTable list={data.list} role={data.role} />
     </Section>
   );
 };

@@ -9,10 +9,13 @@ import { ConfirmDialog } from '@/dialog/ConfirmDialog';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { DetailTable } from '@/table/DetailTable';
+import { MemberRole } from '@/types/IMember';
 import type { ITodo } from '@/types/ITodo';
+import { requiredRoles } from '@/utils/Auth';
 
 type ITableProps = {
   list: ITodo[];
+  role: MemberRole;
 };
 
 /**
@@ -51,30 +54,43 @@ const Table = (props: ITableProps) => {
         head={
           <tr>
             <th>Title</th>
-            <th className="w-20 sm:w-60">Action</th>
+            {requiredRoles(
+              [MemberRole.OWNER, MemberRole.ADMIN],
+              props.role
+            ) && <th className="w-20 sm:w-60">Action</th>}
           </tr>
         }
         buttons={
           <>
-            <Link href="/dashboard/add-todo">
-              <a>
-                <Button sm>New Todo</Button>
-              </a>
-            </Link>
+            {requiredRoles(
+              [MemberRole.OWNER, MemberRole.ADMIN],
+              props.role
+            ) && (
+              <Link href="/dashboard/add-todo">
+                <a>
+                  <Button sm>New Todo</Button>
+                </a>
+              </Link>
+            )}
           </>
         }
       >
         {props.list.map((elt) => (
           <tr key={elt.id}>
             <td>{elt.title}</td>
-            <td>
-              <Link href={`/dashboard/edit-todo/${elt.id}`}>
-                <a>Edit</a>
-              </Link>
-              <button type="button" onClick={() => handleOpenDialog(elt.id)}>
-                Delete
-              </button>
-            </td>
+            {requiredRoles(
+              [MemberRole.OWNER, MemberRole.ADMIN],
+              props.role
+            ) && (
+              <td>
+                <Link href={`/dashboard/edit-todo/${elt.id}`}>
+                  <a>Edit</a>
+                </Link>
+                <button type="button" onClick={() => handleOpenDialog(elt.id)}>
+                  Delete
+                </button>
+              </td>
+            )}
           </tr>
         ))}
       </DetailTable>

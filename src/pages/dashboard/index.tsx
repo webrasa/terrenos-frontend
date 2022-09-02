@@ -8,12 +8,14 @@ import { Section } from '@/layout/Section';
 import { getShell } from '@/layout/Shell';
 import { MessageState } from '@/message/MessageState';
 import { Table } from '@/templates/Table';
+import type { MemberRole } from '@/types/IMember';
 import type { ITodo } from '@/types/ITodo';
 import type { NextPageWithLayout } from '@/utils/NextLayout';
 import { getSessionStorage } from '@/utils/SessionStorage';
 
 type IResponse = {
   list: ITodo[];
+  role: MemberRole;
 };
 
 const Index: NextPageWithLayout = () => {
@@ -46,7 +48,7 @@ const Index: NextPageWithLayout = () => {
       }
     >
       <Section>
-        <Table list={data.list} />
+        <Table list={data.list} role={data.role} />
       </Section>
     </MessageState>
   );

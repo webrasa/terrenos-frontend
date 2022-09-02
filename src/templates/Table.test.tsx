@@ -3,6 +3,7 @@ import '__mocks__/intersectionObserverMock';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { MemberRole } from '@/types/IMember';
 import type { ITodo } from '@/types/ITodo';
 import { authProviderRender } from '@/utils/TestUtils';
 
@@ -13,7 +14,7 @@ describe('Table', () => {
     it("shouldn't show any action buttons when the list is empty", () => {
       const list: ITodo[] = [];
 
-      authProviderRender(<Table list={list} />);
+      authProviderRender(<Table list={list} role={MemberRole.ADMIN} />);
 
       const editButton = screen.queryByText('Edit');
       expect(editButton).not.toBeInTheDocument();
@@ -38,7 +39,7 @@ describe('Table', () => {
         },
       ];
 
-      authProviderRender(<Table list={list} />);
+      authProviderRender(<Table list={list} role={MemberRole.ADMIN} />);
 
       const editButtons = screen.queryAllByText('Edit');
       expect(editButtons).toHaveLength(3);
@@ -55,7 +56,7 @@ describe('Table', () => {
         },
       ];
 
-      authProviderRender(<Table list={list} />);
+      authProviderRender(<Table list={list} role={MemberRole.ADMIN} />);
 
       const deleteButton = screen.getByText('Delete');
       await userEvent.click(deleteButton);

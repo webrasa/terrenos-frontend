@@ -3,9 +3,14 @@ import { useState } from 'react';
 import { Button } from '@/button/Button';
 import { DetailTable } from '@/table/DetailTable';
 import type { IMember } from '@/types/IMember';
-import { MemberRoleLabel, MemberStatusLabel } from '@/types/IMember';
+import {
+  MemberRole,
+  MemberRoleLabel,
+  MemberStatusLabel,
+} from '@/types/IMember';
 import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import { TeamMembersActionType } from '@/types/TeamMembersAction';
+import { requiredRoles } from '@/utils/Auth';
 
 import { DeleteMember } from './DeleteMember';
 import { EditMemberDialog } from './EditMemberDialog';
@@ -13,6 +18,7 @@ import { InviteMemberDialog } from './InviteMemberDialog';
 
 type ITeamTableProps = {
   list: IMember[];
+  role: MemberRole;
 };
 
 const TeamTable = (props: ITeamTableProps) => {
@@ -39,21 +45,29 @@ const TeamTable = (props: ITeamTableProps) => {
             <th>Email</th>
             <th className="w-20 md:w-40">Role</th>
             <th className="w-20 md:w-40">Status</th>
-            <th className="w-20 md:w-52">Action</th>
+            {requiredRoles(
+              [MemberRole.OWNER, MemberRole.ADMIN],
+              props.role
+            ) && <th className="w-20 md:w-52">Action</th>}
           </tr>
         }
         buttons={
           <>
-            <button
-              type="button"
-              onClick={() =>
-                handleDialogState({
-                  type: TeamMembersActionType.INVITE_MEMBER,
-                })
-              }
-            >
-              <Button sm>Invite member</Button>
-            </button>
+            {requiredRoles(
+              [MemberRole.OWNER, MemberRole.ADMIN],
+              props.role
+            ) && (
+              <button
+                type="button"
+                onClick={() =>
+                  handleDialogState({
+                    type: TeamMembersActionType.INVITE_MEMBER,
+                  })
+                }
+              >
+                <Button sm>Invite member</Button>
+              </button>
+            )}
           </>
         }
       >
@@ -62,32 +76,37 @@ const TeamTable = (props: ITeamTableProps) => {
             <td>{elt.email}</td>
             <td>{MemberRoleLabel[elt.role]}</td>
             <td>{MemberStatusLabel[elt.status]}</td>
-            <td>
-              <button
-                type="button"
-                onClick={() =>
-                  handleDialogState({
-                    type: TeamMembersActionType.EDIT_MEMBER,
-                    memberId: elt.memberId,
-                    role: elt.role,
-                  })
-                }
-              >
-                Edit
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  handleDialogState({
-                    type: TeamMembersActionType.REMOVE_MEMBER,
-                    memberId: elt.memberId,
-                    status: elt.status,
-                  })
-                }
-              >
-                Remove
-              </button>
-            </td>
+            {requiredRoles(
+              [MemberRole.OWNER, MemberRole.ADMIN],
+              props.role
+            ) && (
+              <td>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState({
+                      type: TeamMembersActionType.EDIT_MEMBER,
+                      memberId: elt.memberId,
+                      role: elt.role,
+                    })
+                  }
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState({
+                      type: TeamMembersActionType.REMOVE_MEMBER,
+                      memberId: elt.memberId,
+                      status: elt.status,
+                    })
+                  }
+                >
+                  Remove
+                </button>
+              </td>
+            )}
           </tr>
         ))}
       </DetailTable>
