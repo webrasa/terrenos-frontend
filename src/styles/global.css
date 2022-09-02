@@ -1,7 +1,15 @@
 @tailwind base;
 
 button:disabled {
+  @apply opacity-70 ;
+}
+
+a.disabled {
   @apply opacity-70 cursor-not-allowed;
+}
+
+a.disabled:active {
+  @apply pointer-events-none;
 }
 
 @tailwind components;

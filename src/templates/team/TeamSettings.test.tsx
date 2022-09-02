@@ -3,6 +3,7 @@ import '__mocks__/intersectionObserverMock';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { MemberRole } from '@/types/IMember';
 import { authProviderRender } from '@/utils/TestUtils';
 
 import { TeamSettings } from './TeamSettings';
@@ -16,6 +17,7 @@ describe('TeamSettings', () => {
             planId: 'RANDOM_PLAN_ID',
             planName: 'RANDOM_PLAN_NAME',
             hasStripeCustomerId: false,
+            role: MemberRole.ADMIN,
           }}
         />
       );
@@ -36,6 +38,7 @@ describe('TeamSettings', () => {
             planId: 'RANDOM_PLAN_ID',
             planName: 'RANDOM_PLAN_NAME',
             hasStripeCustomerId: false,
+            role: MemberRole.ADMIN,
           }}
         />
       );
@@ -63,6 +66,7 @@ describe('TeamSettings', () => {
             planId: 'RANDOM_PLAN_ID',
             planName: 'RANDOM_PLAN_NAME',
             hasStripeCustomerId: false,
+            role: MemberRole.ADMIN,
           }}
         />
       );

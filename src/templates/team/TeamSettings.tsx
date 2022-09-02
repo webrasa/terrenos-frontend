@@ -4,7 +4,9 @@ import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
 import { SettingLine } from '@/settings/SettingLine';
+import { MemberRole } from '@/types/IMember';
 import { TeamSettingsState } from '@/types/TeamSettingsState';
+import { requiredRoles } from '@/utils/Auth';
 
 import type { IBillingSettingsProps } from './BillingSettings';
 import { BillingSettings } from './BillingSettings';
@@ -37,6 +39,12 @@ const TeamSettings = (props: IBillingSettingsProps) => {
               onClick={() =>
                 handleDialogState(TeamSettingsState.CHANGE_DISPLAY_NAME)
               }
+              disabled={
+                !requiredRoles(
+                  [MemberRole.OWNER, MemberRole.ADMIN],
+                  props.settings.role
+                )
+              }
             >
               <Button sm>Change</Button>
             </button>
@@ -52,6 +60,12 @@ const TeamSettings = (props: IBillingSettingsProps) => {
             <button
               type="button"
               onClick={() => handleDialogState(TeamSettingsState.DELETE_TEAM)}
+              disabled={
+                !requiredRoles(
+                  [MemberRole.OWNER, MemberRole.ADMIN],
+                  props.settings.role
+                )
+              }
             >
               <Button sm red>
                 Delete

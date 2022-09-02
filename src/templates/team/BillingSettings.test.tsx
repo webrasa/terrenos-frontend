@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react';
 
+import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
 import { authProviderRender } from '@/utils/TestUtils';
 
@@ -14,6 +15,7 @@ describe('BillingSettings', () => {
             planId: SubscriptionPlan.FREE,
             planName: 'RANDOM_PLAN_NAME',
             hasStripeCustomerId: false,
+            role: MemberRole.ADMIN,
           }}
         />
       );
@@ -34,6 +36,7 @@ describe('BillingSettings', () => {
             planId: SubscriptionPlan.PRO,
             planName: 'RANDOM_PLAN_NAME',
             hasStripeCustomerId: false,
+            role: MemberRole.ADMIN,
           }}
         />
       );
@@ -54,6 +57,7 @@ describe('BillingSettings', () => {
             planId: SubscriptionPlan.PRO,
             planName: 'RANDOM_PLAN_NAME',
             hasStripeCustomerId: true,
+            role: MemberRole.ADMIN,
           }}
         />
       );

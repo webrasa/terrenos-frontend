@@ -1,4 +1,5 @@
 import { API } from 'aws-amplify';
+import classNames from 'classnames';
 import Link from 'next/link';
 import type { MouseEventHandler } from 'react';
 
@@ -7,12 +8,15 @@ import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
 import { UsageStats } from '@/stats/UsageStats';
+import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
+import { requiredRoles } from '@/utils/Auth';
 
 export type ISettings = {
   planId: string;
   planName: string;
   hasStripeCustomerId: boolean;
+  role: MemberRole;
 };
 
 export type IBillingSettingsProps = {
@@ -46,7 +50,12 @@ const BillingSettings = (props: IBillingSettingsProps) => {
               <button
                 type="button"
                 onClick={handleCustomerPortal}
-                disabled={customerPortalAsync.pending}
+                disabled={
+                  !requiredRoles(
+                    [MemberRole.OWNER, MemberRole.ADMIN],
+                    props.settings.role
+                  ) || customerPortalAsync.pending
+                }
               >
                 <Button sm secondary>
                   Manage Plan
@@ -56,7 +65,14 @@ const BillingSettings = (props: IBillingSettingsProps) => {
 
             {props.settings.planId === SubscriptionPlan.FREE && (
               <Link href="/dashboard/upgrade">
-                <a>
+                <a
+                  className={classNames({
+                    disabled: !requiredRoles(
+                      [MemberRole.OWNER, MemberRole.ADMIN],
+                      props.settings.role
+                    ),
+                  })}
+                >
                   <Button sm>Upgrade Plan</Button>
                 </a>
               </Link>
