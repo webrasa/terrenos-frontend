@@ -4,6 +4,7 @@ import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
 import { SettingLine } from '@/settings/SettingLine';
+import { Tooltip } from '@/tooltip/Tooltip';
 import { MemberRole } from '@/types/IMember';
 import { TeamSettingsState } from '@/types/TeamSettingsState';
 import { requiredRoles } from '@/utils/Auth';
@@ -34,20 +35,22 @@ const TeamSettings = (props: IBillingSettingsProps) => {
           name="Display name"
           description={currentTeam.displayName}
           action={
-            <button
-              type="button"
-              onClick={() =>
-                handleDialogState(TeamSettingsState.CHANGE_DISPLAY_NAME)
-              }
-              disabled={
-                !requiredRoles(
-                  [MemberRole.OWNER, MemberRole.ADMIN],
-                  props.settings.role
-                )
-              }
-            >
-              <Button sm>Change</Button>
-            </button>
+            <Tooltip label="Text">
+              <button
+                type="button"
+                onClick={() =>
+                  handleDialogState(TeamSettingsState.CHANGE_DISPLAY_NAME)
+                }
+                disabled={
+                  !requiredRoles(
+                    [MemberRole.OWNER, MemberRole.ADMIN],
+                    props.settings.role
+                  )
+                }
+              >
+                <Button sm>Change</Button>
+              </button>
+            </Tooltip>
           }
         />
       </CardSection>

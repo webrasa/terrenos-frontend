@@ -1,13 +1,13 @@
 import { API } from 'aws-amplify';
-import classNames from 'classnames';
-import Link from 'next/link';
 import type { MouseEventHandler } from 'react';
 
 import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
+import { DisableableLink } from '@/link/DisableableLink';
 import { UsageStats } from '@/stats/UsageStats';
+import { Tooltip } from '@/tooltip/Tooltip';
 import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
 import { requiredRoles } from '@/utils/Auth';
@@ -64,18 +64,19 @@ const BillingSettings = (props: IBillingSettingsProps) => {
             )}
 
             {props.settings.planId === SubscriptionPlan.FREE && (
-              <Link href="/dashboard/upgrade">
-                <a
-                  className={classNames({
-                    disabled: !requiredRoles(
+              <Tooltip label="test">
+                <DisableableLink
+                  href="/dashboard/upgrade"
+                  disabled={
+                    !requiredRoles(
                       [MemberRole.OWNER, MemberRole.ADMIN],
                       props.settings.role
-                    ),
-                  })}
+                    )
+                  }
                 >
                   <Button sm>Upgrade Plan</Button>
-                </a>
-              </Link>
+                </DisableableLink>
+              </Tooltip>
             )}
           </div>
         </div>
