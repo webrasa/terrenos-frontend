@@ -14,9 +14,15 @@ type ITooltipProps = {
   label: string;
   placement?: Placement;
   children: JSX.Element;
+  disabled: boolean;
 };
 
-const Tooltip = ({ label, placement = 'bottom', children }: ITooltipProps) => {
+const Tooltip = ({
+  label,
+  placement = 'bottom',
+  children,
+  disabled,
+}: ITooltipProps) => {
   const [open, setOpen] = useState(false);
   const { x, y, reference, floating, strategy, context } = useFloating({
     placement,
@@ -37,9 +43,10 @@ const Tooltip = ({ label, placement = 'bottom', children }: ITooltipProps) => {
       <span ref={reference} {...getReferenceProps()}>
         {children}
       </span>
-      {open && (
+      {disabled && open && (
         <div
           ref={floating}
+          className="my-1 rounded bg-gray-600 py-1 px-2 text-sm font-medium text-white"
           style={{
             position: strategy,
             top: y ?? 0,

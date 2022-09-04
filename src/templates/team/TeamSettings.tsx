@@ -4,7 +4,7 @@ import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
 import { SettingLine } from '@/settings/SettingLine';
-import { Tooltip } from '@/tooltip/Tooltip';
+import { UpgradeTooltip } from '@/tooltip/UpgradeTooltip';
 import { MemberRole } from '@/types/IMember';
 import { TeamSettingsState } from '@/types/TeamSettingsState';
 import { requiredRoles } from '@/utils/Auth';
@@ -35,22 +35,23 @@ const TeamSettings = (props: IBillingSettingsProps) => {
           name="Display name"
           description={currentTeam.displayName}
           action={
-            <Tooltip label="Text">
+            <UpgradeTooltip
+              disabled={
+                !requiredRoles(
+                  [MemberRole.OWNER, MemberRole.ADMIN],
+                  props.settings.role
+                )
+              }
+            >
               <button
                 type="button"
                 onClick={() =>
                   handleDialogState(TeamSettingsState.CHANGE_DISPLAY_NAME)
                 }
-                disabled={
-                  !requiredRoles(
-                    [MemberRole.OWNER, MemberRole.ADMIN],
-                    props.settings.role
-                  )
-                }
               >
                 <Button sm>Change</Button>
               </button>
-            </Tooltip>
+            </UpgradeTooltip>
           }
         />
       </CardSection>
@@ -60,9 +61,7 @@ const TeamSettings = (props: IBillingSettingsProps) => {
           name="Delete team"
           description="Permanently delete team and all its data."
           action={
-            <button
-              type="button"
-              onClick={() => handleDialogState(TeamSettingsState.DELETE_TEAM)}
+            <UpgradeTooltip
               disabled={
                 !requiredRoles(
                   [MemberRole.OWNER, MemberRole.ADMIN],
@@ -70,10 +69,15 @@ const TeamSettings = (props: IBillingSettingsProps) => {
                 )
               }
             >
-              <Button sm red>
-                Delete
-              </Button>
-            </button>
+              <button
+                type="button"
+                onClick={() => handleDialogState(TeamSettingsState.DELETE_TEAM)}
+              >
+                <Button sm red>
+                  Delete
+                </Button>
+              </button>
+            </UpgradeTooltip>
           }
         />
       </CardSection>

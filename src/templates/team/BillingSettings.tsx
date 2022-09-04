@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
 import { DisableableLink } from '@/link/DisableableLink';
 import { UsageStats } from '@/stats/UsageStats';
-import { Tooltip } from '@/tooltip/Tooltip';
+import { UpgradeTooltip } from '@/tooltip/UpgradeTooltip';
 import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
 import { requiredRoles } from '@/utils/Auth';
@@ -47,9 +47,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
           <div>Billing</div>
           <div className="flex flex-wrap gap-y-1 gap-x-2">
             {props.settings.hasStripeCustomerId && (
-              <button
-                type="button"
-                onClick={handleCustomerPortal}
+              <UpgradeTooltip
                 disabled={
                   !requiredRoles(
                     [MemberRole.OWNER, MemberRole.ADMIN],
@@ -57,26 +55,27 @@ const BillingSettings = (props: IBillingSettingsProps) => {
                   ) || customerPortalAsync.pending
                 }
               >
-                <Button sm secondary>
-                  Manage Plan
-                </Button>
-              </button>
+                <button type="button" onClick={handleCustomerPortal}>
+                  <Button sm secondary>
+                    Manage Plan
+                  </Button>
+                </button>
+              </UpgradeTooltip>
             )}
 
             {props.settings.planId === SubscriptionPlan.FREE && (
-              <Tooltip label="test">
-                <DisableableLink
-                  href="/dashboard/upgrade"
-                  disabled={
-                    !requiredRoles(
-                      [MemberRole.OWNER, MemberRole.ADMIN],
-                      props.settings.role
-                    )
-                  }
-                >
+              <UpgradeTooltip
+                disabled={
+                  !requiredRoles(
+                    [MemberRole.OWNER, MemberRole.ADMIN],
+                    props.settings.role
+                  )
+                }
+              >
+                <DisableableLink href="/dashboard/upgrade">
                   <Button sm>Upgrade Plan</Button>
                 </DisableableLink>
-              </Tooltip>
+              </UpgradeTooltip>
             )}
           </div>
         </div>
