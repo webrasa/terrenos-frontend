@@ -15,7 +15,7 @@ type IDeleteMemberProps = {
   handleCloseDialog: () => void;
 };
 
-const DeleteMember = (props: IDeleteMemberProps) => {
+const DeleteMemberDialog = (props: IDeleteMemberProps) => {
   const { currentTeam, providerInfo, setCurrentTeamInd } = useAuth();
 
   const deleteAsync = useAsync(async () => {
@@ -70,4 +70,4 @@ const DeleteMember = (props: IDeleteMemberProps) => {
   );
 };
 
-export { DeleteMember };
+export { DeleteMemberDialog };

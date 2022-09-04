@@ -12,7 +12,7 @@ import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import { TeamMembersActionType } from '@/types/TeamMembersAction';
 import { requiredRoles } from '@/utils/Auth';
 
-import { DeleteMember } from './DeleteMember';
+import { DeleteMemberDialog } from './DeleteMember';
 import { EditMemberDialog } from './EditMemberDialog';
 import { InviteMemberDialog } from './InviteMemberDialog';
 
@@ -119,7 +119,7 @@ const TeamTable = (props: ITeamTableProps) => {
         show={dialogState.type === TeamMembersActionType.INVITE_MEMBER}
         handleCloseDialog={handleCloseDialog}
       />
-      <DeleteMember
+      <DeleteMemberDialog
         action={dialogState}
         handleCloseDialog={handleCloseDialog}
       />

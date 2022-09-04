@@ -9,7 +9,7 @@ import { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
 import { ChangeEmailDialog } from './ChangeEmailDialog';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
-import { ConfirmChangeEmail } from './ConfirmChangeEmail';
+import { ConfirmChangeEmailDialog } from './ConfirmChangeEmail';
 
 const UserInfoSettings = () => {
   const auth = useAuth();
@@ -66,7 +66,7 @@ const UserInfoSettings = () => {
         handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}
       />
-      <ConfirmChangeEmail
+      <ConfirmChangeEmailDialog
         show={dialogState === UserInfoSettingsState.CONFIRM_CHANGE_EMAIL}
       />
       <ChangePasswordDialog
