@@ -81,30 +81,34 @@ const TeamTable = (props: ITeamTableProps) => {
               props.role
             ) && (
               <td>
-                <button
-                  type="button"
-                  onClick={() =>
-                    handleDialogState({
-                      type: TeamMembersActionType.EDIT_MEMBER,
-                      memberId: elt.memberId,
-                      role: elt.role,
-                    })
-                  }
-                >
-                  Edit
-                </button>
-                <button
-                  type="button"
-                  onClick={() =>
-                    handleDialogState({
-                      type: TeamMembersActionType.REMOVE_MEMBER,
-                      memberId: elt.memberId,
-                      status: elt.status,
-                    })
-                  }
-                >
-                  Remove
-                </button>
+                {elt.role !== MemberRole.OWNER && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleDialogState({
+                          type: TeamMembersActionType.EDIT_MEMBER,
+                          memberId: elt.memberId,
+                          role: elt.role,
+                        })
+                      }
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleDialogState({
+                          type: TeamMembersActionType.REMOVE_MEMBER,
+                          memberId: elt.memberId,
+                          status: elt.status,
+                        })
+                      }
+                    >
+                      Remove
+                    </button>
+                  </>
+                )}
               </td>
             )}
           </tr>
