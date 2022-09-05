@@ -9,7 +9,7 @@ import { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
 import { ChangeEmailDialog } from './ChangeEmailDialog';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
-import { ConfirmChangeEmailDialog } from './ConfirmChangeEmail';
+import { ConfirmChangeEmailDialog } from './ConfirmChangeEmailDialog';
 
 const UserInfoSettings = () => {
   const auth = useAuth();

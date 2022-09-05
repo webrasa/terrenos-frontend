@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { useAuth } from '@/hooks/UseAuth';
-import { SidebarSelect } from '@/shell/SidebarSelect';
+import { Select } from '@/select/Select';
 
 enum TeamOption {
   NEW = 'NEW',
@@ -42,7 +42,7 @@ const SidebarTeamSelection = () => {
   };
 
   return (
-    <SidebarSelect
+    <Select
       value={{
         id: currentTeam.id,
         label: currentTeam.displayName,

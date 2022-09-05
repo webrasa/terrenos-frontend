@@ -10,12 +10,12 @@ import { useAuth } from '@/hooks/UseAuth';
 import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import { TeamMembersActionType } from '@/types/TeamMembersAction';
 
-type IDeleteMemberProps = {
+type IDeleteMemberDialogProps = {
   action: TeamMembersAction;
   handleCloseDialog: () => void;
 };
 
-const DeleteMemberDialog = (props: IDeleteMemberProps) => {
+const DeleteMemberDialog = (props: IDeleteMemberDialogProps) => {
   const { currentTeam, providerInfo, setCurrentTeamInd } = useAuth();
 
   const deleteAsync = useAsync(async () => {

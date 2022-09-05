@@ -8,8 +8,8 @@ import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
-import type { ISelectOption } from '@/shell/SidebarSelect';
-import { SidebarSelect } from '@/shell/SidebarSelect';
+import type { ISelectOption } from '@/select/Select';
+import { Select } from '@/select/Select';
 import { RoleOptionList } from '@/types/TeamMembersAction';
 import { setFormError } from '@/utils/Forms';
 
@@ -94,7 +94,7 @@ const InviteMemberDialog = (props: IInviteMemberProps) => {
           name="roleOption"
           control={control}
           render={({ field: { value, onChange } }) => (
-            <SidebarSelect
+            <Select
               value={value}
               currentLabel={value.label}
               handleChange={onChange}

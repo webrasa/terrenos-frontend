@@ -1,14 +1,14 @@
 import { Listbox } from '@headlessui/react';
 
-import { SidebarSelectButton } from './SidebarSelectButton';
-import { SidebarSelectionOption } from './SidebarSelectOption';
+import { SelectButton } from './SelectButton';
+import { SelectionOption } from './SelectOption';
 
 export type ISelectOption = {
   id: string;
   label: string;
 };
 
-type ISidebarSelectionProps<T> = {
+type ISelectProps<T> = {
   value: T;
   currentLabel: string;
   handleChange: (value: T) => void;
@@ -24,15 +24,15 @@ type ISidebarSelectionProps<T> = {
  * @param props.handleCancel - Callback function when the value changes.
  * @param props.optionList -  Available options in the Dropdown list.
  */
-const SidebarSelect = <T,>(props: ISidebarSelectionProps<T>) => (
+const Select = <T,>(props: ISelectProps<T>) => (
   <Listbox value={props.value} onChange={props.handleChange}>
     <div className="relative">
-      <SidebarSelectButton text={props.currentLabel} />
+      <SelectButton text={props.currentLabel} />
 
       <div className="absolute mt-1 w-full rounded-md bg-white shadow-md">
         <Listbox.Options className="max-h-60 overflow-auto rounded-md border border-gray-200 py-1 leading-6 shadow-sm focus:outline-none">
           {props.optionList.map((option) => (
-            <SidebarSelectionOption
+            <SelectionOption
               key={option.id}
               value={option}
               label={option.label}
@@ -44,4 +44,4 @@ const SidebarSelect = <T,>(props: ISidebarSelectionProps<T>) => (
   </Listbox>
 );
 
-export { SidebarSelect };
+export { Select };

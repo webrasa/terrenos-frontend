@@ -7,8 +7,8 @@ import { FormDialog } from '@/dialog/FormDialog';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
-import type { ISelectOption } from '@/shell/SidebarSelect';
-import { SidebarSelect } from '@/shell/SidebarSelect';
+import type { ISelectOption } from '@/select/Select';
+import { Select } from '@/select/Select';
 import { MemberRoleLabel } from '@/types/IMember';
 import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import {
@@ -86,7 +86,7 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
           name="roleOption"
           control={control}
           render={({ field: { value, onChange } }) => (
-            <SidebarSelect
+            <Select
               value={value}
               currentLabel={value.label}
               handleChange={onChange}

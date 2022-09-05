@@ -1,7 +1,7 @@
 import { Listbox } from '@headlessui/react';
 import classNames from 'classnames';
 
-export type ISidebarSelectOptionProps<T> = {
+export type ISelectOptionProps<T> = {
   value: T;
   label: string;
 };
@@ -10,7 +10,7 @@ export type ISidebarSelectOptionProps<T> = {
  * An accessible <option> tag that will be rendered in the dropdown of SidebarSelect.
  * @component
  */
-const SidebarSelectionOption = <T,>(props: ISidebarSelectOptionProps<T>) => (
+const SelectionOption = <T,>(props: ISelectOptionProps<T>) => (
   <Listbox.Option
     value={props.value}
     className={({ active }) => {
@@ -56,4 +56,4 @@ const SidebarSelectionOption = <T,>(props: ISidebarSelectOptionProps<T>) => (
   </Listbox.Option>
 );
 
-export { SidebarSelectionOption };
+export { SelectionOption };

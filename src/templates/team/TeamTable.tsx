@@ -12,7 +12,7 @@ import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import { TeamMembersActionType } from '@/types/TeamMembersAction';
 import { requiredRoles } from '@/utils/Auth';
 
-import { DeleteMemberDialog } from './DeleteMember';
+import { DeleteMemberDialog } from './DeleteMemberDialog';
 import { EditMemberDialog } from './EditMemberDialog';
 import { InviteMemberDialog } from './InviteMemberDialog';
 
