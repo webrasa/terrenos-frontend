@@ -68,5 +68,28 @@ describe('Table', () => {
       // After closing the dialog, it shouldn't show the cancel button anymore.
       expect(cancelButton).not.toBeInTheDocument();
     });
+
+    it('should not show the action column when the user has a `READ_ONLY` role', () => {
+      const list: ITodo[] = [
+        {
+          id: 'RANDOM_TODO_ID',
+          title: 'RANDOM_TODO_TITLE',
+        },
+      ];
+
+      authProviderRender(<Table list={list} role={MemberRole.READ_ONLY} />);
+
+      const actionColumn = screen.queryByText('Action');
+      expect(actionColumn).not.toBeInTheDocument();
+
+      const newTodoButton = screen.queryByText('New Todo');
+      expect(newTodoButton).not.toBeInTheDocument();
+
+      const editButton = screen.queryByText('Edit');
+      expect(editButton).not.toBeInTheDocument();
+
+      const deleteButton = screen.queryByText('Delete');
+      expect(deleteButton).not.toBeInTheDocument();
+    });
   });
 });
