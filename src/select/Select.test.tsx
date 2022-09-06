@@ -5,6 +5,24 @@ import { Select } from './Select';
 
 describe('Select', () => {
   describe('Render method', () => {
+    it('should render without error when the option list is empty', async () => {
+      const handleChange = jest.fn();
+
+      render(
+        <Select
+          value={0}
+          currentLabel="RANDOM_TEAM_LABEL"
+          handleChange={handleChange}
+          optionList={[]}
+        />
+      );
+
+      const selectButton = screen.queryByRole('button', {
+        name: 'RANDOM_TEAM_LABEL',
+      });
+      expect(selectButton).toBeInTheDocument();
+    });
+
     it('should render the select and select one option', async () => {
       const handleChange = jest.fn();
 
