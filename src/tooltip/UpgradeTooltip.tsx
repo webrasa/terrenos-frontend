@@ -3,17 +3,17 @@ import { cloneElement } from 'react';
 import { Tooltip } from './Tooltip';
 
 type IUpgradeTooltipProps = {
-  disabled: boolean;
+  hideLabel: boolean;
   children: JSX.Element;
 };
 
 const UpgradeTooltip = (props: IUpgradeTooltipProps) => (
   <Tooltip
-    disabled={props.disabled}
+    hideLabel={props.hideLabel}
     label="You don't have permission to perform this action"
   >
     {cloneElement(props.children, {
-      disabled: props.disabled,
+      disabled: !props.hideLabel,
       ...props.children.props,
     })}
   </Tooltip>

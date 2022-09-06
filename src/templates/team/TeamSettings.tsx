@@ -36,12 +36,10 @@ const TeamSettings = (props: IBillingSettingsProps) => {
           description={currentTeam.displayName}
           action={
             <UpgradeTooltip
-              disabled={
-                !requiredRoles(
-                  [MemberRole.OWNER, MemberRole.ADMIN],
-                  props.settings.role
-                )
-              }
+              hideLabel={requiredRoles(
+                [MemberRole.OWNER, MemberRole.ADMIN],
+                props.settings.role
+              )}
             >
               <button
                 type="button"
@@ -62,12 +60,10 @@ const TeamSettings = (props: IBillingSettingsProps) => {
           description="Permanently delete team and all its data."
           action={
             <UpgradeTooltip
-              disabled={
-                !requiredRoles(
-                  [MemberRole.OWNER, MemberRole.ADMIN],
-                  props.settings.role
-                )
-              }
+              hideLabel={requiredRoles(
+                [MemberRole.OWNER, MemberRole.ADMIN],
+                props.settings.role
+              )}
             >
               <button
                 type="button"

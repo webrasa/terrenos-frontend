@@ -48,8 +48,8 @@ const BillingSettings = (props: IBillingSettingsProps) => {
           <div className="flex flex-wrap gap-y-1 gap-x-2">
             {props.settings.hasStripeCustomerId && (
               <UpgradeTooltip
-                disabled={
-                  !requiredRoles(
+                hideLabel={
+                  requiredRoles(
                     [MemberRole.OWNER, MemberRole.ADMIN],
                     props.settings.role
                   ) || customerPortalAsync.pending
@@ -65,12 +65,10 @@ const BillingSettings = (props: IBillingSettingsProps) => {
 
             {props.settings.planId === SubscriptionPlan.FREE && (
               <UpgradeTooltip
-                disabled={
-                  !requiredRoles(
-                    [MemberRole.OWNER, MemberRole.ADMIN],
-                    props.settings.role
-                  )
-                }
+                hideLabel={requiredRoles(
+                  [MemberRole.OWNER, MemberRole.ADMIN],
+                  props.settings.role
+                )}
               >
                 <DisableableLink href="/dashboard/upgrade">
                   <Button sm>Upgrade Plan</Button>
