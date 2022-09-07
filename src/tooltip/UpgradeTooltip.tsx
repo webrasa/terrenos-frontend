@@ -3,7 +3,7 @@ import { cloneElement } from 'react';
 import { Tooltip } from './Tooltip';
 
 type IUpgradeTooltipProps = {
-  hideLabel: boolean;
+  hideLabel?: boolean;
   children: JSX.Element;
 };
 

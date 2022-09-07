@@ -5,7 +5,7 @@ import { Tooltip } from './Tooltip';
 
 describe('Tooltip', () => {
   describe('Render method', () => {
-    it('should render the children', async () => {
+    it('should render the children', () => {
       render(
         <Tooltip label="Random label">
           <>Random text</>
@@ -47,7 +47,7 @@ describe('Tooltip', () => {
       expect(label).toBeInTheDocument();
     });
 
-    it('should hide tooltip label when setting `hideLabel` false', async () => {
+    it('should hide tooltip label when setting `hideLabel` true', async () => {
       render(
         <Tooltip label="Random label" hideLabel={true}>
           <>Random text</>
