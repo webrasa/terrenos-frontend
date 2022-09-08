@@ -78,7 +78,7 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
       isSubmitting={editMemberAsync.pending}
       title="Edit member"
       description="Update team member role."
-      submitText="Send"
+      submitText="Save"
     >
       <>
         <Label htmlFor="role">Role</Label>
