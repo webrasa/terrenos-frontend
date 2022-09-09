@@ -1,7 +1,7 @@
 import { mockUseRouterPush } from '__mocks__/next/router';
 import { screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import { setupServer } from 'msw/lib/node';
+import { setupServer } from 'msw/node';
 
 import Index from '@/pages/dashboard';
 import { authProviderRender, swrConfigWithAuthRender } from '@/utils/TestUtils';
@@ -41,7 +41,7 @@ describe('Dashboard Index page', () => {
     it("shouldn't redirect to invitation page when the join-team-path session storage is empty", () => {
       authProviderRender(<Index />);
 
-      expect(mockUseRouterPush).not.toBeCalled();
+      expect(mockUseRouterPush).not.toHaveBeenCalled();
     });
 
     it('should redirect to the invitation page using join-team-path data from session storage', () => {

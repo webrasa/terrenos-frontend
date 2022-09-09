@@ -12,7 +12,7 @@ describe('ToggleMenuButton', () => {
       const button = screen.getByRole('button');
       await userEvent.click(button);
 
-      expect(handler).toBeCalled();
+      expect(handler).toHaveBeenCalled();
     });
   });
 });

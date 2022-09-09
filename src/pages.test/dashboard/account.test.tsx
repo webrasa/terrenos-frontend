@@ -8,13 +8,13 @@ describe('Account page', () => {
     it('should render the account setting page for user signed in with email', () => {
       authProviderRender(<Account />);
 
-      expect(mockUseRouterPush).not.toBeCalled();
+      expect(mockUseRouterPush).not.toHaveBeenCalled();
     });
 
     it('should deny the access to user who signed in with third party auth (OAuth) and redirect to dashboard index page', () => {
       authProviderRender(<Account />, { identities: 'RANDOM_IDENTITIES' });
 
-      expect(mockUseRouterPush).toBeCalledWith('/dashboard');
+      expect(mockUseRouterPush).toHaveBeenCalledWith('/dashboard');
     });
   });
 });

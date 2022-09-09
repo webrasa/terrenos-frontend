@@ -54,7 +54,7 @@ describe('Select', () => {
       const selectOption = screen.getByText('RANDOM_TEAM_LABEL2');
       await userEvent.click(selectOption);
 
-      expect(handleChange).toBeCalled();
+      expect(handleChange).toHaveBeenCalled();
     });
   });
 });
