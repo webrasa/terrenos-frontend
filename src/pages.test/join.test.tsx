@@ -51,7 +51,7 @@ describe('Join page', () => {
         expect(goLoginLink).toBeInTheDocument();
       });
 
-      expect(mockSetItem).not.toBeCalled();
+      expect(mockSetItem).not.toHaveBeenCalled();
     });
 
     it('should render a page inviting the user to sign in and save the query in session storage', async () => {
@@ -73,7 +73,7 @@ describe('Join page', () => {
         expect(goLoginLink).toBeInTheDocument();
       });
 
-      expect(mockSetItem).toBeCalled();
+      expect(mockSetItem).toHaveBeenCalled();
       expect(mockSetItem.mock.calls[0][0]).toEqual('join-team-path');
       expect(mockSetItem.mock.calls[0][1]).toContain('RANDOM_TEAM_ID');
       expect(mockSetItem.mock.calls[0][1]).toContain(
@@ -97,7 +97,7 @@ describe('Join page', () => {
       render(<Join />);
 
       await waitFor(() => {
-        expect(mockRemoveItem).toBeCalledWith('join-team-path');
+        expect(mockRemoveItem).toHaveBeenCalledWith('join-team-path');
       });
 
       const authenticated = screen.queryByText(

@@ -77,7 +77,7 @@ describe('UseAuth', () => {
       // Technically we don't need to waitFor for updated status.
       // But the render call setState and this is the reason we need `waitFor`
       await waitFor(() => {
-        expect(mockUseRouterPush).not.toBeCalled();
+        expect(mockUseRouterPush).not.toHaveBeenCalled();
       });
 
       expect(container).toBeEmptyDOMElement();
@@ -92,7 +92,7 @@ describe('UseAuth', () => {
       // Technically we don't need to waitFor for updated status.
       // But the render call setState and this is the reason we need `waitFor`
       await waitFor(() => {
-        expect(mockUseRouterPush).toBeCalledWith('/login');
+        expect(mockUseRouterPush).toHaveBeenCalledWith('/login');
       });
 
       expect(container).toBeEmptyDOMElement();

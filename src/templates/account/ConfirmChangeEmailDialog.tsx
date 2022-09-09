@@ -13,7 +13,7 @@ type IConfirmChangeEmailForm = {
   verificationCode: string;
 };
 
-type IConfirmChangeEmailProps = {
+type IConfirmChangeEmailDialogProps = {
   show: boolean;
 };
 
@@ -22,7 +22,7 @@ type IConfirmChangeEmailProps = {
  * He needs to confirm his new email address by entering the verification code.
  * @component
  */
-const ConfirmChangeEmail = (props: IConfirmChangeEmailProps) => {
+const ConfirmChangeEmailDialog = (props: IConfirmChangeEmailDialogProps) => {
   const { register, handleSubmit } = useForm<IConfirmChangeEmailForm>();
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
@@ -74,4 +74,4 @@ const ConfirmChangeEmail = (props: IConfirmChangeEmailProps) => {
   );
 };
 
-export { ConfirmChangeEmail };
+export { ConfirmChangeEmailDialog };

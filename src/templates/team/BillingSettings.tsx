@@ -1,18 +1,22 @@
 import { API } from 'aws-amplify';
-import Link from 'next/link';
 import type { MouseEventHandler } from 'react';
 
 import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { CardSection } from '@/layout/CardSection';
+import { DisableableLink } from '@/link/DisableableLink';
 import { UsageStats } from '@/stats/UsageStats';
+import { UpgradeTooltip } from '@/tooltip/UpgradeTooltip';
+import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
+import { requiredRoles } from '@/utils/Auth';
 
 export type ISettings = {
   planId: string;
   planName: string;
   hasStripeCustomerId: boolean;
+  role: MemberRole;
 };
 
 export type IBillingSettingsProps = {
@@ -43,23 +47,33 @@ const BillingSettings = (props: IBillingSettingsProps) => {
           <div>Billing</div>
           <div className="flex flex-wrap gap-y-1 gap-x-2">
             {props.settings.hasStripeCustomerId && (
-              <button
-                type="button"
-                onClick={handleCustomerPortal}
-                disabled={customerPortalAsync.pending}
+              <UpgradeTooltip
+                hideLabel={
+                  requiredRoles(
+                    [MemberRole.OWNER, MemberRole.ADMIN],
+                    props.settings.role
+                  ) || customerPortalAsync.pending
+                }
               >
-                <Button sm secondary>
-                  Manage Plan
-                </Button>
-              </button>
+                <button type="button" onClick={handleCustomerPortal}>
+                  <Button sm secondary>
+                    Manage Plan
+                  </Button>
+                </button>
+              </UpgradeTooltip>
             )}
 
             {props.settings.planId === SubscriptionPlan.FREE && (
-              <Link href="/dashboard/upgrade">
-                <a>
+              <UpgradeTooltip
+                hideLabel={requiredRoles(
+                  [MemberRole.OWNER, MemberRole.ADMIN],
+                  props.settings.role
+                )}
+              >
+                <DisableableLink href="/dashboard/upgrade">
                   <Button sm>Upgrade Plan</Button>
-                </a>
-              </Link>
+                </DisableableLink>
+              </UpgradeTooltip>
             )}
           </div>
         </div>

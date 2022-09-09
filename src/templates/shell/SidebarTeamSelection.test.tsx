@@ -42,7 +42,7 @@ describe('SidebarTeamSelection', () => {
       // All information displayed on the dashboard are coming from this second team.
       // The setCurrentTeam handler will be called with the second team index.
       // In testing, the list is mocked and `RANDOM_TEAM_DISPLAY_NAME2` is the second in the list (`1` in code).
-      expect(mockSetCurrentTeamInd).toBeCalledWith(1);
+      expect(mockSetCurrentTeamInd).toHaveBeenCalledWith(1);
     });
 
     it('should have the last option for creating a new team', async () => {
@@ -59,7 +59,7 @@ describe('SidebarTeamSelection', () => {
       await userEvent.click(createButton);
 
       // It should redirect the user to `/dashboard/create-team`
-      expect(mockUseRouterPush).toBeCalledWith('/dashboard/create-team');
+      expect(mockUseRouterPush).toHaveBeenCalledWith('/dashboard/create-team');
     });
   });
 });

@@ -1,6 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
 import { FormDialog } from '@/dialog/FormDialog';
@@ -8,10 +8,14 @@ import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
+import type { ISelectOption } from '@/select/Select';
+import { Select } from '@/select/Select';
+import { RoleOptionList } from '@/types/TeamMembersAction';
 import { setFormError } from '@/utils/Forms';
 
 type IInviteMemberForm = {
   email: string;
+  roleOption: ISelectOption;
 };
 
 type IInviteMemberProps = {
@@ -26,13 +30,21 @@ const InviteMemberDialog = (props: IInviteMemberProps) => {
     handleSubmit,
     setError,
     reset,
+    control,
     formState: { errors },
-  } = useForm<IInviteMemberForm>();
+  } = useForm<IInviteMemberForm>({
+    defaultValues: {
+      roleOption: RoleOptionList[0],
+    },
+  });
 
   const inviteMemberAsync = useAsync(async (data: IInviteMemberForm) => {
     try {
       await API.post('backend', `/team/${currentTeam.id}/invite`, {
-        body: data,
+        body: {
+          email: data.email,
+          role: data.roleOption.id,
+        },
       });
 
       await mutate(`/team/${currentTeam.id}/list-members`);
@@ -62,7 +74,6 @@ const InviteMemberDialog = (props: IInviteMemberProps) => {
         <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" {...register('email')} />
-
           <ErrorMessage
             errors={errors}
             name="email"
@@ -77,6 +88,20 @@ const InviteMemberDialog = (props: IInviteMemberProps) => {
             }}
           />
         </FormElement>
+
+        <Label htmlFor="role">Role</Label>
+        <Controller
+          name="roleOption"
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <Select
+              value={value}
+              currentLabel={value.label}
+              handleChange={onChange}
+              optionList={RoleOptionList}
+            />
+          )}
+        />
       </>
     </FormDialog>
   );

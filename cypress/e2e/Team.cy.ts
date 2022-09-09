@@ -3,6 +3,12 @@ import { nanoid } from 'nanoid';
 import type { IMemberList } from '@/pages/dashboard/members';
 import type { Team, UserProfile } from '@/types/Auth';
 import type { IMember } from '@/types/IMember';
+import {
+  MemberRole,
+  MemberRoleLabel,
+  MemberStatus,
+  MemberStatusLabel,
+} from '@/types/IMember';
 
 describe('Team', () => {
   let teamName: string;
@@ -79,30 +85,7 @@ describe('Team', () => {
   });
 
   describe('Team members', () => {
-    it('should remove the default user from the team', () => {
-      // Go to the team members list
-      cy.findByRole('link', { name: 'Members' }).click();
-
-      // Verify the created team appears in the team selection
-      cy.findByTestId('team-selection').click();
-      cy.findByRole('listbox').findByText(teamName).should('exist');
-
-      // `test@example.com` is the default user for development environment
-      // Remove himself from the team
-      cy.findAllByRole('row')
-        .filter(':contains("test@example.com")')
-        .findByRole('button', { name: 'Remove' })
-        .click();
-      cy.findByRole('dialog').findByRole('button', { name: 'Remove' }).click();
-      // Wait for dialog to be closed
-      cy.findByRole('dialog').should('not.exist');
-
-      // After leaving the team, the team display name shouldn't appears in the team selection
-      cy.findByTestId('team-selection').click();
-      cy.findByRole('listbox').findByText(teamName).should('not.exist');
-    });
-
-    it('should invite and delete user', () => {
+    it('should invite with the default role and delete the newly created user', () => {
       // Go to the team members list
       cy.findByRole('link', { name: 'Members' }).click();
 
@@ -117,7 +100,7 @@ describe('Team', () => {
       cy.findByText('random@email.com').should('exist');
       cy.findAllByRole('row')
         .filter(':contains("random@email.com")')
-        .findByText('PENDING')
+        .findByText(MemberStatusLabel[MemberStatus.PENDING])
         .should('exist');
 
       // Remove the invitation
@@ -133,6 +116,47 @@ describe('Team', () => {
       cy.findByText('random@email.com').should('not.exist');
     });
 
+    it('should invite with the `READ_ONLY` role and update the role to `ADMIN`', () => {
+      // Go to the team members list
+      cy.findByRole('link', { name: 'Members' }).click();
+
+      // Invite new user
+      cy.findByText('Invite member').click();
+      cy.findByRole('dialog').get('#email').type('random@email.com');
+      cy.findByText('Admin').click();
+      cy.findByText('Read only').click();
+      cy.findByRole('button', { name: 'Send' }).click();
+      // Wait for dialog to be closed
+      cy.findByRole('dialog').should('not.exist');
+
+      // Verify the new team member appears in the list
+      cy.findByText('random@email.com').should('exist');
+      cy.findAllByRole('row')
+        .filter(':contains("random@email.com")')
+        .findByText(MemberRoleLabel[MemberRole.READ_ONLY])
+        .should('exist');
+
+      // Edit team member role
+      cy.findAllByRole('row')
+        .filter(':contains("random@email.com")')
+        .findByRole('button', { name: 'Edit' })
+        .click();
+
+      cy.findByRole('dialog').within(() => {
+        cy.findByText('Read only').click();
+
+        cy.findByText('Admin').click();
+
+        cy.findByText('Save').click();
+      });
+
+      // Verify the role is updated
+      cy.findAllByRole('row')
+        .filter(':contains("random@email.com")')
+        .findByText(MemberRoleLabel[MemberRole.ADMIN])
+        .should('exist');
+    });
+
     it('should create 3 invitation and delete 2, simulating a complex workflow', () => {
       // Go to the team members list
       cy.findByRole('link', { name: 'Members' }).click();
@@ -143,6 +167,20 @@ describe('Team', () => {
       cy.findByRole('button', { name: 'Send' }).click();
       // Wait for dialog to be closed
       cy.findByRole('dialog').should('not.exist');
+
+      // Edit 1st user role
+      cy.findAllByRole('row')
+        .filter(':contains("random1@email.com")')
+        .findByRole('button', { name: 'Edit' })
+        .click();
+
+      cy.findByRole('dialog').within(() => {
+        cy.findByText('Admin').click();
+
+        cy.findByText('Read only').click();
+
+        cy.findByText('Save').click();
+      });
 
       // Invite 2nd user
       cy.findByText('Invite member').click();

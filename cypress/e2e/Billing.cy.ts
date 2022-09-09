@@ -1,5 +1,6 @@
 import { nanoid } from 'nanoid';
 
+import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
 
 describe('Billing', () => {
@@ -64,6 +65,8 @@ describe('Billing', () => {
         body: {
           hasStripeCustomerId: true,
           planId: SubscriptionPlan.PRO,
+          planName: 'Pro',
+          role: MemberRole.OWNER,
         },
       });
       cy.intercept(

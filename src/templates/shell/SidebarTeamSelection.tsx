@@ -1,11 +1,17 @@
 import { useRouter } from 'next/router';
 
 import { useAuth } from '@/hooks/UseAuth';
-import { SidebarSelect } from '@/shell/SidebarSelect';
+import { Select } from '@/select/Select';
 
 enum TeamOption {
   NEW = 'NEW',
 }
+
+type ITeamOption = {
+  id: string;
+  ind: number;
+  label: string;
+};
 
 /**
  * A <select>-equivalent to choose a team for multi-tenancy or add a new one.
@@ -16,27 +22,32 @@ const SidebarTeamSelection = () => {
     useAuth();
   const router = useRouter();
 
-  const optionTeamList = teamList
+  const optionTeamList: ITeamOption[] = teamList
     .concat({
       id: TeamOption.NEW,
       displayName: 'Create new team',
     })
-    .map((elt) => ({
+    .map((elt, ind) => ({
       id: elt.id,
+      ind,
       label: elt.displayName,
     }));
 
-  const handleTeamChange = async (teamInd: number) => {
-    if (teamInd >= optionTeamList.length - 1) {
+  const handleTeamChange = async (team: ITeamOption) => {
+    if (team.ind >= optionTeamList.length - 1) {
       await router.push('/dashboard/create-team');
     } else {
-      setCurrentTeamInd(teamInd);
+      setCurrentTeamInd(team.ind);
     }
   };
 
   return (
-    <SidebarSelect
-      value={currentTeamInd}
+    <Select
+      value={{
+        id: currentTeam.id,
+        label: currentTeam.displayName,
+        ind: currentTeamInd,
+      }}
       currentLabel={currentTeam.displayName}
       handleChange={handleTeamChange}
       optionList={optionTeamList}

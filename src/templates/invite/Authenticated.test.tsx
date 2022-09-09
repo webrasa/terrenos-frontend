@@ -1,7 +1,7 @@
 import { mockIsReady, mockQuery } from '__mocks__/next/router';
 import { screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import { setupServer } from 'msw/lib/node';
+import { setupServer } from 'msw/node';
 
 import { authProviderRender, swrConfigWithAuthRender } from '@/utils/TestUtils';
 

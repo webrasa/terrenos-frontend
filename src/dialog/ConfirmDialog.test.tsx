@@ -41,7 +41,7 @@ describe('ConfirmDialog', () => {
       const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       await userEvent.click(cancelButton);
 
-      expect(handleCancel).toBeCalled();
+      expect(handleCancel).toHaveBeenCalled();
     });
   });
 });
