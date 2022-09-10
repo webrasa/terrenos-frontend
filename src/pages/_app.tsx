@@ -5,7 +5,7 @@ import type { AppProps } from 'next/app';
 import type { ReactElement } from 'react';
 import { SWRConfig } from 'swr';
 
-import { PoweredBy } from '@/badge/PoweredBy';
+import { DemoBadge } from '@/badge/DemoBadge';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
@@ -29,7 +29,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
     >
       {getLayout(<Component {...pageProps} />)}
 
-      <PoweredBy />
+      <DemoBadge />
     </SWRConfig>
   );
 };

@@ -30,7 +30,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
   const { data } = useSWR<UserProfile>(
     userInfo !== AuthState.UNAUTHENTICATED &&
       userInfo !== AuthState.AUTHENTICATING
-      ? `/user/profile?email=${userInfo.email}`
+      ? `/user/profile?email=${encodeURIComponent(userInfo.email)}`
       : null
   );
 
