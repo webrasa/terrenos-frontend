@@ -7,4 +7,5 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
   },
+  video: false, // Enable it when needed
 });
