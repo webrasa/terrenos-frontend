@@ -43,7 +43,9 @@ const Authenticated = () => {
         }
       );
 
-      await mutate(`/user/profile?email=${providerInfo.email}`);
+      await mutate(
+        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+      );
       setCurrentTeamInd(teamList.length);
       await router.push('/dashboard');
     } catch (err) {

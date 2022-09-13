@@ -243,7 +243,7 @@ describe('Team', () => {
       // Get team ID
       cy.request(
         'GET',
-        `${Cypress.env('API_URL')}/user/profile?email=test@example.com`
+        `${Cypress.env('API_URL')}/user/profile?email=test%40example.com`
       )
         .then((response: Cypress.Response<UserProfile>) => {
           const teamList = response.body.teamList.filter(

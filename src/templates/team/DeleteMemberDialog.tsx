@@ -33,7 +33,9 @@ const DeleteMemberDialog = (props: IDeleteMemberDialogProps) => {
 
     if (providerInfo.id === props.action.memberId) {
       // When the user leaves the team/when the user remove himself from the team
-      await mutate(`/user/profile?email=${providerInfo.email}`);
+      await mutate(
+        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+      );
       setCurrentTeamInd(0);
       await router.push('/dashboard');
     } else {

@@ -35,7 +35,9 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
           body: data,
         });
 
-        await mutate(`/user/profile?email=${providerInfo.email}`);
+        await mutate(
+          `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+        );
         props.handleCloseDialog();
       } catch (err) {
         setFormError(setError, err);
