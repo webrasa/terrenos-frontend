@@ -9,8 +9,8 @@ type ISubscriptionPrice = {
 // Please check the `Nextless-Quick-Start` repo on how to generate the `priceId` from Stripe.
 export const SubscriptionPrice: ISubscriptionPrice = {
   dev: {
-    pro: 'price_1KTXGwDxtHLZXYoxfKzwYezO', // FIXME: Add your Stripe Subscription `priceId`
-    business: 'price_1KTXHuDxtHLZXYoxwOIhEfD1', // FIXME: Add your Stripe Subscription `priceId`
+    pro: 'price_1Lhe5VJztsvICaDpnUaplpXS', // FIXME: Add your Stripe Subscription `priceId`
+    business: 'price_1Lhe85JztsvICaDpukHyV8hQ', // FIXME: Add your Stripe Subscription `priceId`
     // You can add more subscription plan for example `enterprise`
   },
   prod: {
