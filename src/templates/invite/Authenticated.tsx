@@ -10,6 +10,8 @@ import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { FullCenterSection } from '@/layout/FullCenterSection';
+import type { UserProfile } from '@/types/Auth';
+import { findTeamInd } from '@/utils/Auth';
 import { mapInviteMessage } from '@/utils/InviteMessageMap';
 
 type IJoinInfo = {
@@ -29,7 +31,7 @@ const Authenticated = () => {
       : null
   );
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
-  const { providerInfo, teamList, setCurrentTeamInd } = useAuth();
+  const { providerInfo, setCurrentTeamInd } = useAuth();
 
   const joinTeamAsync = useAsync(async () => {
     try {
@@ -43,10 +45,11 @@ const Authenticated = () => {
         }
       );
 
-      await mutate(
+      const profile = await mutate<UserProfile>(
         `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
       );
-      setCurrentTeamInd(teamList.length);
+      const ind = findTeamInd(profile?.teamList, router.query.teamId);
+      setCurrentTeamInd(ind);
       await router.push('/dashboard');
     } catch (err) {
       setErrorMsg(mapInviteMessage(err));
