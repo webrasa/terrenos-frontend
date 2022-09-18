@@ -14,6 +14,8 @@ import { useAuth } from '@/hooks/UseAuth';
 import type { ITodo } from '@/types/ITodo';
 import { setFormError } from '@/utils/Forms';
 
+import { FormGlobalError } from './FormGlobalError';
+
 type ITodoFormProps = {
   id?: string;
   defaultValues?: ITodo;
@@ -78,6 +80,10 @@ const TodoForm = (props: ITodoFormProps) => {
       className="grid grid-cols-1 gap-y-2 sm:grid-cols-6 sm:gap-y-5 lg:grid-cols-8"
       onSubmit={handleSave}
     >
+      <div className="col-span-full">
+        <FormGlobalError error={formGlobalError} />
+      </div>
+
       <Label htmlFor="title" colSpanSize="sm:col-span-2">
         Todo title *
       </Label>

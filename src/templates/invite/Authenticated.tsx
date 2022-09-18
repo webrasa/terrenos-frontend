@@ -30,7 +30,7 @@ const Authenticated = () => {
       ? `/team/${router.query.teamId}/join/${router.query.verificationCode}`
       : null
   );
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
   const { providerInfo, setCurrentTeamInd } = useAuth();
 
   const joinTeamAsync = useAsync(async () => {
@@ -52,7 +52,7 @@ const Authenticated = () => {
       setCurrentTeamInd(ind);
       await router.push('/dashboard');
     } catch (err) {
-      setErrorMsg(mapInviteMessage(err));
+      setFormGlobalError(mapInviteMessage(err));
     }
   });
 
@@ -92,7 +92,7 @@ const Authenticated = () => {
         </div>
       }
     >
-      {errorMsg && <Alert text={errorMsg} />}
+      {formGlobalError && <Alert text={formGlobalError} />}
 
       <button
         type="button"

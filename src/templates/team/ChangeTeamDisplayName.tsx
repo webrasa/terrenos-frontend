@@ -1,5 +1,6 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
+import { useState } from 'react';
 import { useErrorHandler } from 'react-error-boundary';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
@@ -10,6 +11,8 @@ import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { setFormError } from '@/utils/Forms';
+
+import { FormGlobalError } from '../FormGlobalError';
 
 type IChangeDisplayNameForm = {
   displayName: string;
@@ -29,6 +32,7 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
     formState: { errors },
   } = useForm<IChangeDisplayNameForm>();
   const handleGlobalError = useErrorHandler();
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const changeTeamDisplayNameAsync = useAsync(
     async (data: IChangeDisplayNameForm) => {
@@ -42,7 +46,7 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
         );
         props.handleCloseDialog();
       } catch (err) {
-        setFormError(setError, err, handleGlobalError);
+        setFormError(setError, err, setFormGlobalError, handleGlobalError);
       }
     }
   );
@@ -61,6 +65,8 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
       description="The display name helps you identify the right team."
     >
       <>
+        <FormGlobalError error={formGlobalError} />
+
         <Label htmlFor="displayName">Display name</Label>
         <FormElement>
           <input id="displayName" type="text" {...register('displayName')} />
