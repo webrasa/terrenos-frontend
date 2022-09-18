@@ -20,7 +20,7 @@ type ISignUpForm = {
 const SignUpForm = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ISignUpForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const signUpAsync = useAsync(async (data: ISignUpForm) => {
     try {
@@ -33,7 +33,7 @@ const SignUpForm = () => {
 
       await router.push('/confirm-signup');
     } catch (err) {
-      setError(mapAmplifyMessage(err));
+      setFormGlobalError(mapAmplifyMessage(err));
     }
   });
 
@@ -46,7 +46,7 @@ const SignUpForm = () => {
       title="Create your account"
       description="Sign up with your email address and password."
     >
-      {error && <Alert text={error} />}
+      {formGlobalError && <Alert text={formGlobalError} />}
 
       <form className="grid gap-y-2" onSubmit={handleSignUp}>
         <Label htmlFor="email">Email</Label>

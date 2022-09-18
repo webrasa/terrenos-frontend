@@ -1,6 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/router';
+import { useErrorHandler } from 'react-error-boundary';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
@@ -25,6 +26,7 @@ const CreateTeamForm = () => {
   } = useForm<ICreateTeamForm>();
   const { providerInfo, setCurrentTeamInd, teamList } = useAuth();
   const router = useRouter();
+  const handleGlobalError = useErrorHandler();
 
   const createTeamAsync = useAsync(async (data: ICreateTeamForm) => {
     try {
@@ -42,7 +44,7 @@ const CreateTeamForm = () => {
       await router.push('/dashboard');
     } catch (ex) {
       // Retrieves error from the server and display them in the UI.
-      setFormError(setError, ex);
+      setFormError(setError, ex, handleGlobalError);
     }
   });
 

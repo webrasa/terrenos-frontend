@@ -20,7 +20,7 @@ const ConfirmSignUpForm = () => {
   const router = useRouter();
   const email = getSessionStorage('confirm-signup-email');
   const { register, handleSubmit } = useForm<IConfirmSignUpForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const verifyAsync = useAsync(async (data: IConfirmSignUpForm) => {
     try {
@@ -28,7 +28,7 @@ const ConfirmSignUpForm = () => {
 
       await router.push('/confirm-signup-success');
     } catch (err) {
-      setError(mapAmplifyMessage(err));
+      setFormGlobalError(mapAmplifyMessage(err));
     }
   });
 
@@ -41,7 +41,7 @@ const ConfirmSignUpForm = () => {
       title="Verify your email"
       description="Enter the 6-digit verification code sent to your email to complete the signup."
     >
-      {error && <Alert text={error} />}
+      {formGlobalError && <Alert text={formGlobalError} />}
 
       <form className="grid gap-y-2" onSubmit={handleVerify}>
         <Label htmlFor="verificationCode">Verification code</Label>

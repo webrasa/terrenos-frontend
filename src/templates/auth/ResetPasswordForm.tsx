@@ -19,7 +19,7 @@ type IResetPasswordForm = {
 const ResetPasswordForm = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<IResetPasswordForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const sendAsync = useAsync(async (data: IResetPasswordForm) => {
     try {
@@ -29,7 +29,7 @@ const ResetPasswordForm = () => {
 
       await router.push('/confirm-forgot-password');
     } catch (err) {
-      setError(mapAmplifyMessage(err));
+      setFormGlobalError(mapAmplifyMessage(err));
     }
   });
 
@@ -42,7 +42,7 @@ const ResetPasswordForm = () => {
       title="Forgot your password?"
       description="Enter your email and we'll send you a verification code."
     >
-      {error && <Alert text={error} />}
+      {formGlobalError && <Alert text={formGlobalError} />}
 
       <form className="grid gap-y-2" onSubmit={handleSend}>
         <Label htmlFor="email">Email</Label>

@@ -23,7 +23,7 @@ type ILoginForm = {
 const LoginForm = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ILoginForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const handleSignInGoogle = () => {
     Auth.federatedSignIn({ provider: CognitoHostedUIIdentityProvider.Google });
@@ -43,7 +43,7 @@ const LoginForm = () => {
 
       await router.push('/confirm-signup');
     } catch (err: any) {
-      setError(mapAmplifyMessage(err));
+      setFormGlobalError(mapAmplifyMessage(err));
     }
   };
 
@@ -59,7 +59,7 @@ const LoginForm = () => {
       if (err.code === 'UserNotConfirmedException') {
         await resendVerificationCode(data);
       } else {
-        setError(mapAmplifyMessage(err));
+        setFormGlobalError(mapAmplifyMessage(err));
       }
     }
   });
@@ -124,7 +124,7 @@ const LoginForm = () => {
       </div>
       <Divider>Or continue with</Divider>
 
-      {error && <Alert text={error} />}
+      {formGlobalError && <Alert text={formGlobalError} />}
       <form className="grid gap-y-2" onSubmit={handleLogin}>
         <Label htmlFor="email">Email</Label>
         <FormElement>
