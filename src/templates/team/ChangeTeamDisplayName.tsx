@@ -12,8 +12,6 @@ import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { setFormError } from '@/utils/Forms';
 
-import { FormGlobalError } from '../FormGlobalError';
-
 type IChangeDisplayNameForm = {
   displayName: string;
 };
@@ -60,13 +58,12 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
       show={props.show}
       handleCancel={props.handleCloseDialog}
       handleSubmit={handleSubmitDialog}
+      formGlobalError={formGlobalError}
       isSubmitting={changeTeamDisplayNameAsync.pending}
       title="Change display name"
       description="The display name helps you identify the right team."
     >
       <>
-        <FormGlobalError error={formGlobalError} />
-
         <Label htmlFor="displayName">Display name</Label>
         <FormElement>
           <input id="displayName" type="text" {...register('displayName')} />

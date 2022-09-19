@@ -1,12 +1,15 @@
 import { Dialog } from '@headlessui/react';
 import type { ReactNode } from 'react';
 
+import { FormGlobalError } from '@/templates/FormGlobalError';
+
 import { Button } from '../button/Button';
 import { BaseDialog } from './BaseDialog';
 
 type IConfirmDialogProps = {
   title: string;
   description: string;
+  formGlobalError?: string | null;
   show: boolean;
   handleCancel: () => void;
   button: ReactNode;
@@ -45,6 +48,10 @@ const ConfirmDialog = (props: IConfirmDialogProps) => (
         </Dialog.Title>
 
         <div className="mt-2 text-sm text-gray-600">{props.description}</div>
+
+        {props.formGlobalError && (
+          <FormGlobalError error={props.formGlobalError} />
+        )}
 
         <div className="mt-4 flex justify-end space-x-2">
           <button type="button" onClick={props.handleCancel}>

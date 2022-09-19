@@ -58,7 +58,9 @@ const CreateTeamForm = () => {
 
   return (
     <form className="grid grid-cols-1 gap-y-2" onSubmit={handleCreateTeam}>
-      <FormGlobalError error={formGlobalError} />
+      <div className="col-span-full">
+        <FormGlobalError error={formGlobalError} />
+      </div>
 
       <Label htmlFor="displayName">Display name</Label>
 

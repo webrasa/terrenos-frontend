@@ -12,6 +12,7 @@ import { DetailTable } from '@/table/DetailTable';
 import { MemberRole } from '@/types/IMember';
 import type { ITodo } from '@/types/ITodo';
 import { requiredRoles } from '@/utils/Auth';
+import { setExceptionToFormGlobal } from '@/utils/Forms';
 
 type ITableProps = {
   list: ITodo[];
@@ -25,6 +26,7 @@ type ITableProps = {
 const Table = (props: ITableProps) => {
   const { currentTeam } = useAuth();
   const [openDialogId, setOpenDialogId] = useState('');
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const handleOpenDialog = (id: string) => {
     setOpenDialogId(id);
@@ -35,11 +37,15 @@ const Table = (props: ITableProps) => {
   };
 
   const deleteAsync = useAsync(async (openId: string) => {
-    await API.del('backend', `/${currentTeam.id}/todo/${openId}`, {});
+    try {
+      await API.del('backend', `/${currentTeam.id}/todo/${openId}`, {});
 
-    await mutate(`/${currentTeam.id}/todo/list`);
+      await mutate(`/${currentTeam.id}/todo/list`);
 
-    handleCloseDialog();
+      handleCloseDialog();
+    } catch (err) {
+      setExceptionToFormGlobal(setFormGlobalError, err);
+    }
   });
 
   const handleDelete: MouseEventHandler = async (event) => {
@@ -100,6 +106,7 @@ const Table = (props: ITableProps) => {
         title="Your title here"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur purus. In laoreet tincidunt libero vitae sagittis."
         handleCancel={handleCloseDialog}
+        formGlobalError={formGlobalError}
         button={
           <button
             type="button"

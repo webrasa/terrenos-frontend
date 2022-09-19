@@ -48,3 +48,18 @@ export const setFormError = <T>(
 
   throw exception;
 };
+
+export const setExceptionToFormGlobal = (
+  setFormGlobalError: Dispatch<SetStateAction<string | null>>,
+  exception: any
+) => {
+  const errors = exception?.response?.data?.errors;
+
+  if (errors) {
+    if (typeof errors === 'string') {
+      setFormGlobalError(errors);
+    }
+  }
+
+  throw exception;
+};
