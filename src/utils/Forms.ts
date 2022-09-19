@@ -43,10 +43,12 @@ export const setFormError = <T>(
       handleGlobalError(exception);
     } else if (typeof errors === 'string') {
       setFormGlobalError(errors);
+    } else {
+      throw exception;
     }
+  } else {
+    throw exception;
   }
-
-  throw exception;
 };
 
 export const setExceptionToFormGlobal = (
@@ -58,8 +60,10 @@ export const setExceptionToFormGlobal = (
   if (errors) {
     if (typeof errors === 'string') {
       setFormGlobalError(errors);
+    } else {
+      throw exception;
     }
+  } else {
+    throw exception;
   }
-
-  throw exception;
 };
