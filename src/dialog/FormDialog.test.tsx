@@ -47,6 +47,46 @@ describe('FormDialog', () => {
       expect(handleCancel).toHaveBeenCalled();
     });
 
+    it('should display error without modifying it', async () => {
+      render(
+        <FormDialog
+          title="Random title"
+          description="Random description"
+          isSubmitting={false}
+          show={true}
+          error="random_error_message"
+          handleCancel={() => {}}
+          handleSubmit={() => {}}
+        >
+          Random children
+        </FormDialog>
+      );
+
+      const error = screen.queryByText('random_error_message');
+      expect(error).toBeInTheDocument();
+    });
+
+    it('should display Form Global Error', () => {
+      render(
+        <FormDialog
+          title="Random title"
+          description="Random description"
+          isSubmitting={false}
+          show={true}
+          formGlobalError="random_form_global_error"
+          handleCancel={() => {}}
+          handleSubmit={() => {}}
+        >
+          Random children
+        </FormDialog>
+      );
+
+      const error = screen.queryByText(
+        'Unexpected error occurred, please try again'
+      );
+      expect(error).toBeInTheDocument();
+    });
+
     it('should hide the cancel button', async () => {
       render(
         <FormDialog

@@ -1,4 +1,4 @@
-import { setFormError } from './Forms';
+import { setExceptionToFormGlobal, setFormError } from './Forms';
 
 describe('Forms', () => {
   describe('setFormError function', () => {
@@ -22,19 +22,15 @@ describe('Forms', () => {
         )
       ).toThrow();
 
-      expect(() =>
-        setFormError(
-          jest.fn(),
-          {
-            response: {
-              data: {
-                errors: 10,
-              },
-            },
+      const response = {
+        response: {
+          data: {
+            errors: 10,
           },
-          jest.fn(),
-          jest.fn()
-        )
+        },
+      };
+      expect(() =>
+        setFormError(jest.fn(), response, jest.fn(), jest.fn())
       ).toThrow();
     });
 
@@ -96,6 +92,40 @@ describe('Forms', () => {
       };
 
       setFormError(jest.fn(), response, mockSetFormGlobalError, jest.fn());
+
+      expect(mockSetFormGlobalError).toHaveBeenCalledWith(
+        'random_error_string'
+      );
+    });
+  });
+
+  describe('setExceptionToFormGlobal function', () => {
+    it("should throw the input as an exception when the errors doesn't follow the expected schema", () => {
+      expect(() =>
+        setExceptionToFormGlobal(jest.fn(), 'random parameter')
+      ).toThrow('random parameter');
+
+      const response = {
+        response: {
+          data: {
+            errors: 10,
+          },
+        },
+      };
+      expect(() => setExceptionToFormGlobal(jest.fn(), response)).toThrow();
+    });
+
+    it('should call setFormGlobalError when the error is a string', () => {
+      const mockSetFormGlobalError = jest.fn();
+      const response = {
+        response: {
+          data: {
+            errors: 'random_error_string',
+          },
+        },
+      };
+
+      setExceptionToFormGlobal(mockSetFormGlobalError, response);
 
       expect(mockSetFormGlobalError).toHaveBeenCalledWith(
         'random_error_string'

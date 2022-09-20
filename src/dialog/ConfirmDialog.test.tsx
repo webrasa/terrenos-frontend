@@ -43,5 +43,23 @@ describe('ConfirmDialog', () => {
 
       expect(handleCancel).toHaveBeenCalled();
     });
+
+    it('should display form global error when an error occurs', () => {
+      render(
+        <ConfirmDialog
+          title="Random title"
+          description="Random description"
+          show={true}
+          formGlobalError="random_global_error"
+          handleCancel={() => {}}
+          button={'button'}
+        />
+      );
+
+      const formGlobalError = screen.queryByText(
+        'Unexpected error occurred, please try again'
+      );
+      expect(formGlobalError).toBeInTheDocument();
+    });
   });
 });
