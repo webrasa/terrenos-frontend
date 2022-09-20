@@ -2,14 +2,12 @@ import '../styles/global.css';
 
 import { Amplify, API } from 'aws-amplify';
 import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
 import { DemoBadge } from '@/badge/DemoBadge';
-import { Button } from '@/button/Button';
-import { FullCenterSection } from '@/layout/FullCenterSection';
+import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
@@ -47,35 +45,10 @@ const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
   );
 };
 
-const MyApp = (props: AppPropsWithLayout) => {
-  const router = useRouter();
-
-  return (
-    <ErrorBoundary
-      fallbackRender={() => {
-        const handleReloadPage = () => {
-          router.reload();
-        };
-
-        return (
-          <FullCenterSection
-            title="An error occurred"
-            description={
-              <div className="text-red-600">
-                You aren&apos;t a member of the team.
-              </div>
-            }
-          >
-            <button type="button" className="w-full" onClick={handleReloadPage}>
-              <Button full>Reload the page and switch team</Button>
-            </button>
-          </FullCenterSection>
-        );
-      }}
-    >
-      <MyAppSWRConfig {...props} />
-    </ErrorBoundary>
-  );
-};
+const MyApp = (props: AppPropsWithLayout) => (
+  <ErrorBoundary fallbackRender={() => <FallbackErrorBoundary />}>
+    <MyAppSWRConfig {...props} />
+  </ErrorBoundary>
+);
 
 export default MyApp;
