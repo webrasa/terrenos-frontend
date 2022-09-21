@@ -46,7 +46,7 @@ describe('Join page', () => {
 
       await waitFor(() => {
         const goLoginLink = screen.queryByRole('link', {
-          name: 'Go to login page',
+          name: 'Create an account or login to join',
         });
         expect(goLoginLink).toBeInTheDocument();
       });
@@ -68,7 +68,7 @@ describe('Join page', () => {
 
       await waitFor(() => {
         const goLoginLink = screen.queryByRole('link', {
-          name: 'Go to login page',
+          name: 'Create an account or login to join',
         });
         expect(goLoginLink).toBeInTheDocument();
       });

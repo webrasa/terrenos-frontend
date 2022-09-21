@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
@@ -15,6 +15,7 @@ import {
   RoleOptionList,
   TeamMembersActionType,
 } from '@/types/TeamMembersAction';
+import { setExceptionToFormGlobal } from '@/utils/Forms';
 
 type IEditMemberForm = {
   roleOption: ISelectOption;
@@ -32,6 +33,7 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
       roleOption: RoleOptionList[0],
     },
   });
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   useEffect(() => {
     if (props.action.type === TeamMembersActionType.EDIT_MEMBER) {
@@ -51,19 +53,23 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
       );
     }
 
-    await API.put(
-      'backend',
-      `/team/${currentTeam.id}/edit/${props.action.memberId}`,
-      {
-        body: {
-          role: data.roleOption.id,
-        },
-      }
-    );
+    try {
+      await API.put(
+        'backend',
+        `/team/${currentTeam.id}/edit/${props.action.memberId}`,
+        {
+          body: {
+            role: data.roleOption.id,
+          },
+        }
+      );
 
-    await mutate(`/team/${currentTeam.id}/list-members`);
+      await mutate(`/team/${currentTeam.id}/list-members`);
 
-    props.handleCloseDialog();
+      props.handleCloseDialog();
+    } catch (err) {
+      setExceptionToFormGlobal(setFormGlobalError, err);
+    }
   });
 
   const handleSubmitDialog = handleSubmit(async (data) => {
@@ -76,6 +82,7 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
       handleCancel={props.handleCloseDialog}
       handleSubmit={handleSubmitDialog}
       isSubmitting={editMemberAsync.pending}
+      formGlobalError={formGlobalError}
       title="Edit member"
       description="Update team member role."
       submitText="Save"

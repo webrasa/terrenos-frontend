@@ -1,5 +1,7 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
+import { useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
@@ -27,6 +29,8 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
     setError,
     formState: { errors },
   } = useForm<IChangeDisplayNameForm>();
+  const handleGlobalError = useErrorHandler();
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const changeTeamDisplayNameAsync = useAsync(
     async (data: IChangeDisplayNameForm) => {
@@ -40,7 +44,7 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
         );
         props.handleCloseDialog();
       } catch (err) {
-        setFormError(setError, err);
+        setFormError(setError, err, setFormGlobalError, handleGlobalError);
       }
     }
   );
@@ -54,6 +58,7 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
       show={props.show}
       handleCancel={props.handleCloseDialog}
       handleSubmit={handleSubmitDialog}
+      formGlobalError={formGlobalError}
       isSubmitting={changeTeamDisplayNameAsync.pending}
       title="Change display name"
       description="The display name helps you identify the right team."

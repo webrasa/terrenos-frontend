@@ -24,7 +24,7 @@ type IConfirmChangeEmailDialogProps = {
  */
 const ConfirmChangeEmailDialog = (props: IConfirmChangeEmailDialogProps) => {
   const { register, handleSubmit } = useForm<IConfirmChangeEmailForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
   const router = useRouter();
 
   const confirmChangeEmailAsync = useAsync(
@@ -37,7 +37,7 @@ const ConfirmChangeEmailDialog = (props: IConfirmChangeEmailDialogProps) => {
 
         router.reload();
       } catch (err) {
-        setError(mapAmplifyMessageSettings(err));
+        setFormGlobalError(mapAmplifyMessageSettings(err));
       }
     }
   );
@@ -55,7 +55,7 @@ const ConfirmChangeEmailDialog = (props: IConfirmChangeEmailDialogProps) => {
       handleCancel={handleCancelDisabled}
       handleSubmit={handleSubmitDialog}
       isSubmitting={confirmChangeEmailAsync.pending}
-      error={error}
+      error={formGlobalError}
       hideCancelButton={true}
       title="Verify your email"
       description="Enter the 6-digit verification code sent to your new email to verify it."

@@ -23,7 +23,7 @@ type IChangePasswordDialogProps = {
 const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
   const { register, handleSubmit, reset, clearErrors } =
     useForm<IChangePasswordForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const clearForm = () => {
     reset(); // Clear the form for security reason
@@ -39,7 +39,7 @@ const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
       clearForm();
       props.handleDialogState(UserInfoSettingsState.CHANGE_PASSWORD_SUCCESS);
     } catch (err) {
-      setError(mapAmplifyMessageSettings(err));
+      setFormGlobalError(mapAmplifyMessageSettings(err));
     }
   });
 
@@ -58,7 +58,7 @@ const ChangePasswordDialog = (props: IChangePasswordDialogProps) => {
       handleCancel={handleCancelAndReset}
       handleSubmit={handleSubmitDialog}
       isSubmitting={changePasswordAsync.pending}
-      error={error}
+      error={formGlobalError}
       title="Change password"
       description="Need to change your password?"
     >

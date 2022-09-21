@@ -1,3 +1,4 @@
+import type { Dispatch, SetStateAction } from 'react';
 import type { ErrorOption } from 'react-hook-form';
 
 export type IError<T> = {
@@ -29,13 +30,39 @@ const setServerError = <T>(
  */
 export const setFormError = <T>(
   setError: (fieldName: keyof T, error: ErrorOption) => void,
+  exception: any,
+  setFormGlobalError: Dispatch<SetStateAction<string | null>>,
+  handleGlobalError: (error: any) => void
+) => {
+  const errors = exception?.response?.data?.errors;
+
+  if (errors) {
+    if (Array.isArray(errors)) {
+      setServerError(setError, errors);
+    } else if (errors === 'not_member') {
+      handleGlobalError(exception);
+    } else if (typeof errors === 'string') {
+      setFormGlobalError(errors);
+    } else {
+      throw exception;
+    }
+  } else {
+    throw exception;
+  }
+};
+
+export const setExceptionToFormGlobal = (
+  setFormGlobalError: Dispatch<SetStateAction<string | null>>,
   exception: any
 ) => {
-  if (
-    exception?.response?.data?.errors &&
-    Array.isArray(exception?.response?.data?.errors)
-  ) {
-    setServerError(setError, exception.response.data.errors);
+  const errors = exception?.response?.data?.errors;
+
+  if (errors) {
+    if (typeof errors === 'string') {
+      setFormGlobalError(errors);
+    } else {
+      throw exception;
+    }
   } else {
     throw exception;
   }

@@ -11,7 +11,7 @@ type IAlertProps = {
  * @param props.text - Text message to display.
  */
 const Alert = (props: IAlertProps) => (
-  <div className="mb-2 rounded-lg bg-red-100 p-4 text-sm text-red-700">
+  <div className="my-2 rounded-lg bg-red-100 p-4 text-sm text-red-700">
     {props.text}
   </div>
 );

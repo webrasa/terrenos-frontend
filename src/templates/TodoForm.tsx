@@ -1,7 +1,8 @@
 import { ErrorMessage } from '@hookform/error-message';
 import { API } from 'aws-amplify';
 import { useRouter } from 'next/dist/client/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useErrorHandler } from 'react-error-boundary';
 import { useForm } from 'react-hook-form';
 import { mutate } from 'swr';
 
@@ -12,6 +13,8 @@ import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import type { ITodo } from '@/types/ITodo';
 import { setFormError } from '@/utils/Forms';
+
+import { FormGlobalError } from './FormGlobalError';
 
 type ITodoFormProps = {
   id?: string;
@@ -35,6 +38,8 @@ const TodoForm = (props: ITodoFormProps) => {
     reset,
     formState: { errors },
   } = useForm<ITodo>();
+  const handleGlobalError = useErrorHandler();
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   // For async value, `defaultValues` attribute from useForm doesn't work due to cache issue
   // Please refer to https://github.com/react-hook-form/react-hook-form/issues/2492#issuecomment-771578524
@@ -62,7 +67,7 @@ const TodoForm = (props: ITodoFormProps) => {
       await router.push('/dashboard');
     } catch (ex: any) {
       // Retrieves error from the server and display them in the UI.
-      setFormError(setError, ex);
+      setFormError(setError, ex, setFormGlobalError, handleGlobalError);
     }
   });
 
@@ -75,6 +80,10 @@ const TodoForm = (props: ITodoFormProps) => {
       className="grid grid-cols-1 gap-y-2 sm:grid-cols-6 sm:gap-y-5 lg:grid-cols-8"
       onSubmit={handleSave}
     >
+      <div className="col-span-full">
+        <FormGlobalError error={formGlobalError} />
+      </div>
+
       <Label htmlFor="title" colSpanSize="sm:col-span-2">
         Todo title *
       </Label>

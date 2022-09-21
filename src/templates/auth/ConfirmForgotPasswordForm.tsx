@@ -22,7 +22,7 @@ const ConfirmForgotPasswordForm = () => {
   const router = useRouter();
   const email = getSessionStorage('confirm-forgot-password-email');
   const { register, handleSubmit } = useForm<IConfirmForgotPasswordForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const verifyAsync = useAsync(async (data: IConfirmForgotPasswordForm) => {
     try {
@@ -39,7 +39,7 @@ const ConfirmForgotPasswordForm = () => {
 
       await router.push('/dashboard');
     } catch (err) {
-      setError(mapAmplifyMessage(err));
+      setFormGlobalError(mapAmplifyMessage(err));
     }
   });
 
@@ -52,7 +52,7 @@ const ConfirmForgotPasswordForm = () => {
       title="Reset your password"
       description="Enter the 6-digit verification code sent to your email and set your new password."
     >
-      {error && <Alert text={error} />}
+      {formGlobalError && <Alert text={formGlobalError} />}
 
       <form className="grid gap-y-2 text-left" onSubmit={handleVerify}>
         <Label htmlFor="verificationCode">Verification code</Label>

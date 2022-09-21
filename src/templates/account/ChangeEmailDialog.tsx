@@ -21,7 +21,7 @@ type IChangeEmailDialogProps = {
 
 const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
   const { register, handleSubmit } = useForm<IChangeEmailForm>();
-  const [error, setError] = useState<string | null>(null);
+  const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   const changeEmailAsync = useAsync(async (data: IChangeEmailForm) => {
     try {
@@ -36,7 +36,7 @@ const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
 
       props.handleDialogState(UserInfoSettingsState.CONFIRM_CHANGE_EMAIL);
     } catch (err) {
-      setError(mapAmplifyMessageSettings(err));
+      setFormGlobalError(mapAmplifyMessageSettings(err));
     }
   });
 
@@ -50,7 +50,7 @@ const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
       handleCancel={props.handleCloseDialog}
       handleSubmit={handleSubmitDialog}
       isSubmitting={changeEmailAsync.pending}
-      error={error}
+      error={formGlobalError}
       title="Change email"
       description="Update your new email and we'll send you a verification code to
       verify it."

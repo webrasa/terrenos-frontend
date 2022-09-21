@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 
 import { Alert } from '@/alert/Alert';
 import { Button } from '@/button/Button';
+import { FormGlobalError } from '@/templates/FormGlobalError';
 
 import { BaseDialog } from './BaseDialog';
 
@@ -13,6 +14,7 @@ type IFormDialogProps = {
   children: ReactNode;
   isSubmitting: boolean;
   error?: string | null;
+  formGlobalError?: string | null;
   title: string;
   description: string;
   hideCancelButton?: boolean;
@@ -42,6 +44,7 @@ const FormDialog = (props: IFormDialogProps) => (
     <div className="my-2 text-gray-600">{props.description}</div>
 
     {props.error && <Alert text={props.error} />}
+    {props.formGlobalError && <FormGlobalError error={props.formGlobalError} />}
 
     <form className="grid gap-y-2" onSubmit={props.handleSubmit}>
       {props.children}
