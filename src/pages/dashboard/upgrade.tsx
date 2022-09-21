@@ -1,5 +1,6 @@
 import { API } from 'aws-amplify';
 
+import { Alert } from '@/alert/Alert';
 import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
@@ -47,7 +48,9 @@ const Upgrade: NextPageWithLayout = () => {
 
   return (
     <CenterSection>
-      <div className="grid w-full max-w-4xl grid-cols-1 gap-y-12 md:grid-cols-3">
+      <Alert text="Test mode: you can use '4242 4242 4242 4242' as your credit card number for Stripe." />
+
+      <div className="mt-5 grid w-full max-w-4xl grid-cols-1 gap-y-12 md:grid-cols-3">
         <PricingModel
           button={
             <Button full secondary>

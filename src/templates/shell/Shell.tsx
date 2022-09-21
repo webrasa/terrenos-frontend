@@ -63,6 +63,28 @@ const Shell = (props: IShellProps) => (
             </SidebarLink>
           </a>
         </Link>
+
+        <Link href="/dashboard/another-example">
+          <a>
+            <SidebarLink
+              icon={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M0 0h24v24H0z" stroke="none" />
+                  <rect x="7" y="3" width="14" height="14" rx="2" />
+                  <path d="M17 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2" />
+                </svg>
+              }
+            >
+              Another example
+            </SidebarLink>
+          </a>
+        </Link>
       </>
     }
     bottomLinks={
