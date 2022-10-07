@@ -12,9 +12,10 @@ The Dashboard displays all Todos created by the user in the table component. It 
 
 Run the following command on your local environment after cloning the project:
 
-```
+```sh
 cd my-project-name
 npm install
+code . # Open VSCode with command line or open it manually. Please make sure that the file `package.json` is at the root of the project in VSCode. `package.json` should NOT be in a subfolder.
 ```
 
 Then, you can run locally in development mode with live reload:
