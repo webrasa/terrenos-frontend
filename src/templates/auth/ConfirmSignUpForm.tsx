@@ -8,7 +8,7 @@ import { Button } from '@/button/Button';
 import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
-import { FullCenterSection } from '@/layout/FullCenterSection';
+import { FullCenterSection } from '@/layouts/FullCenterSection';
 import { mapAmplifyMessage } from '@/utils/AmplifyMessageMap';
 import { getSessionStorage } from '@/utils/SessionStorage';
 

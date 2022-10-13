@@ -1,6 +1,6 @@
-import { CenterSection } from '@/layout/CenterSection';
-import { Section } from '@/layout/Section';
-import { getShell } from '@/layout/Shell';
+import { CenterSection } from '@/layouts/CenterSection';
+import { Section } from '@/layouts/Section';
+import { getShell } from '@/layouts/Shell';
 import { CreateTeamForm } from '@/templates/team/CreateTeamForm';
 import type { NextPageWithLayout } from '@/utils/NextLayout';
 

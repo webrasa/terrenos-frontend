@@ -1,4 +1,4 @@
-import { Meta } from '@/layout/Meta';
+import { Meta } from '@/layouts/Meta';
 import { Banner } from '@/templates/Banner';
 import { FAQ } from '@/templates/FAQ';
 import { Features } from '@/templates/Features';

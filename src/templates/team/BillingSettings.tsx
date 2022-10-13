@@ -4,7 +4,7 @@ import type { MouseEventHandler } from 'react';
 import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
-import { CardSection } from '@/layout/CardSection';
+import { CardSection } from '@/layouts/CardSection';
 import { DisableableLink } from '@/link/DisableableLink';
 import { UsageStats } from '@/stats/UsageStats';
 import { UpgradeTooltip } from '@/tooltip/UpgradeTooltip';

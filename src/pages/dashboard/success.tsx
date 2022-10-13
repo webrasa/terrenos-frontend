@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Button } from '@/button/Button';
-import { getShell } from '@/layout/Shell';
+import { getShell } from '@/layouts/Shell';
 import { MessageState } from '@/message/MessageState';
 import type { NextPageWithLayout } from '@/utils/NextLayout';
 

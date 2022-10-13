@@ -1,4 +1,4 @@
-import { Meta } from '@/layout/Meta';
+import { Meta } from '@/layouts/Meta';
 import { ConfirmForgotPasswordForm } from '@/templates/auth/ConfirmForgotPasswordForm';
 import { AppConfig } from '@/utils/AppConfig';
 

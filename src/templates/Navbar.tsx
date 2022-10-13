@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Background } from '@/background/Background';
 import { Button } from '@/button/Button';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 import { NavbarMenuCenter } from '@/navigation/NavbarMenuCenter';
 
 import { Logo } from './Logo';

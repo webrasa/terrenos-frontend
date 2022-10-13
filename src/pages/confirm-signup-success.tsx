@@ -1,4 +1,4 @@
-import { Meta } from '@/layout/Meta';
+import { Meta } from '@/layouts/Meta';
 import { ConfirmSignUpSuccess } from '@/templates/auth/ConfirmSignUpSuccess';
 import { AppConfig } from '@/utils/AppConfig';
 

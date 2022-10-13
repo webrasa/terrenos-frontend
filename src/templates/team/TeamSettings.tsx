@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
-import { CardSection } from '@/layout/CardSection';
+import { CardSection } from '@/layouts/CardSection';
 import { SettingLine } from '@/settings/SettingLine';
 import { UpgradeTooltip } from '@/tooltip/UpgradeTooltip';
 import { MemberRole } from '@/types/IMember';

@@ -1,5 +1,5 @@
 import { FeatureElement } from '@/feature/FeatureElement';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 
 /**
  * List of feature shown visually in grid.
