@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Background } from '@/background/Background';
 import { Button } from '@/button/Button';
 import { HeroOneButton } from '@/hero/HeroOneButton';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 
 const Hero = () => (
   <Background color="bg-primary-100">

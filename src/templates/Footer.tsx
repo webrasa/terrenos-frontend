@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { Background } from '@/background/Background';
 import { FooterLinks } from '@/footer/FooterLinks';
 import { FooterTwoRowsCopyright } from '@/footer/FooterTwoRowsCopyright';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 import { AppConfig } from '@/utils/AppConfig';
 
 import { Logo } from './Logo';

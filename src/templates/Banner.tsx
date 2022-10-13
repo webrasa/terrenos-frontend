@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Button } from '@/button/Button';
 import { CTABanner } from '@/cta/CTABanner';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 
 const Banner = () => (
   <LandingSection yPadding="pb-16">

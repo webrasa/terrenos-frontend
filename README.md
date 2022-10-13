@@ -47,7 +47,7 @@ On you can local environment, you can login to the dashboard by directly browse 
 │       └── images                          # Image used by default template
 ├── src
 │   ├── hooks                               # React hooks
-│   ├── layout
+│   ├── layouts
 │   │   └── Shell.tsx                       # Dashboard layout using https://nextjs.org/docs/basic-features/layouts
 │   ├── pages                               # Next.js pages
 │   │   ├── _app.tsx                        # Next.js app
@@ -111,7 +111,7 @@ Now, your frontend is ready to be deployed. All generated files are located at `
 
 ### Testing
 
-All unit tests are located close to the source code in the same folder. For example, a file located at `src/layout/` with the name `RandomLayout.ts` will have a unit test file located at `src/layout/RandomLayout.test.ts`.
+All unit tests are located close to the source code in the same folder. For example, a file located at `src/layouts/` with the name `RandomLayout.ts` will have a unit test file located at `src/layouts/RandomLayout.test.ts`.
 
 > :warning: The behavior for Next.js pages is different. The unit tests are located at `src/pages.test/`. This avoids Next.js to consider the test as a page.
 

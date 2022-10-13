@@ -1,5 +1,5 @@
-import { Section } from '@/layout/Section';
-import { getShell } from '@/layout/Shell';
+import { Section } from '@/layouts/Section';
+import { getShell } from '@/layouts/Shell';
 import { TodoForm } from '@/templates/TodoForm';
 import type { NextPageWithLayout } from '@/utils/NextLayout';
 

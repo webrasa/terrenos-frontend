@@ -2,7 +2,7 @@ import { Background } from '@/background/Background';
 import { VerticalFeatureElement } from '@/feature/VerticalFeatureElement';
 import { VerticalFeatureElementColumn } from '@/feature/VerticalFeatureElementColumn';
 import { VerticalFeatureRow } from '@/feature/VerticalFeatureRow';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 
 /**
  * List of features shown vertically with a complete description.

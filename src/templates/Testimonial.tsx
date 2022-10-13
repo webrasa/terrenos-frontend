@@ -1,5 +1,5 @@
 import { Background } from '@/background/Background';
-import { LandingSection } from '@/layout/LandingSection';
+import { LandingSection } from '@/layouts/LandingSection';
 import { TestimonialCard } from '@/testimonial/TestimonialCard';
 
 const Testimonial = () => (

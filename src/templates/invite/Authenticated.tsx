@@ -9,7 +9,7 @@ import { Alert } from '@/alert/Alert';
 import { Button } from '@/button/Button';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
-import { FullCenterSection } from '@/layout/FullCenterSection';
+import { FullCenterSection } from '@/layouts/FullCenterSection';
 import type { UserProfile } from '@/types/Auth';
 import { findTeamInd } from '@/utils/Auth';
 import { mapInviteMessage } from '@/utils/InviteMessageMap';

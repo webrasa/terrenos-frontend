@@ -3,8 +3,8 @@ import useSWR from 'swr';
 
 import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
-import { Section } from '@/layout/Section';
-import { getShell } from '@/layout/Shell';
+import { Section } from '@/layouts/Section';
+import { getShell } from '@/layouts/Shell';
 import { DisableableLink } from '@/link/DisableableLink';
 import { MessageState } from '@/message/MessageState';
 import { Table } from '@/templates/Table';

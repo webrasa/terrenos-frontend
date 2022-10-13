@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Button } from '../../button/Button';
-import { FullCenterSection } from '../../layout/FullCenterSection';
+import { FullCenterSection } from '../../layouts/FullCenterSection';
 
 const ConfirmSignUpSuccess = () => (
   <FullCenterSection
