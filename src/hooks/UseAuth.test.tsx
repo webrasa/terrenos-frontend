@@ -7,7 +7,7 @@ import { setupServer } from 'msw/node';
 import { act } from 'react-dom/test-utils';
 import { SWRConfig } from 'swr';
 
-import { fetcher, swrConfigRender } from '@/utils/TestUtils';
+import { fetcher, swrConfigRender } from '@/utils/TestUtils.test';
 
 import type { IAuthProviderProps } from './UseAuth';
 import { AuthProvider, useAuth } from './UseAuth';

@@ -3,7 +3,7 @@ import { mockSetCurrentTeamInd } from '__mocks__/UseAuth';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { authProviderRender } from '@/utils/TestUtils';
+import { authProviderRender } from '@/utils/TestUtils.test';
 
 import { SidebarTeamSelection } from './SidebarTeamSelection';
 

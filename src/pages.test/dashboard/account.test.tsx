@@ -1,7 +1,7 @@
 import { mockUseRouterPush } from '__mocks__/next/router';
 
 import Account from '@/pages/dashboard/account';
-import { authProviderRender } from '@/utils/TestUtils';
+import { authProviderRender } from '@/utils/TestUtils.test';
 
 describe('Account page', () => {
   describe('Render method', () => {

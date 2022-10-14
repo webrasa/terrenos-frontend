@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 
 import { MemberRole } from '@/types/IMember';
 import { SubscriptionPlan } from '@/types/SubscriptionPlan';
-import { authProviderRender } from '@/utils/TestUtils';
+import { authProviderRender } from '@/utils/TestUtils.test';
 
 import { BillingSettings } from './BillingSettings';
 

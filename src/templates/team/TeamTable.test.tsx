@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import type { IMember } from '@/types/IMember';
 import { MemberRole, MemberStatus } from '@/types/IMember';
-import { authProviderRender } from '@/utils/TestUtils';
+import { authProviderRender } from '@/utils/TestUtils.test';
 
 import { TeamTable } from './TeamTable';
 

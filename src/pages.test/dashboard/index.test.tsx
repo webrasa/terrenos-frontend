@@ -4,7 +4,10 @@ import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
 import Index from '@/pages/dashboard';
-import { authProviderRender, swrConfigWithAuthRender } from '@/utils/TestUtils';
+import {
+  authProviderRender,
+  swrConfigWithAuthRender,
+} from '@/utils/TestUtils.test';
 
 describe('Dashboard Index page', () => {
   describe('Render method with endpoint', () => {

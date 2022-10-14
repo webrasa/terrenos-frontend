@@ -3,7 +3,10 @@ import { screen, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
-import { authProviderRender, swrConfigWithAuthRender } from '@/utils/TestUtils';
+import {
+  authProviderRender,
+  swrConfigWithAuthRender,
+} from '@/utils/TestUtils.test';
 
 import { Authenticated } from './Authenticated';
 
