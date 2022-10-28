@@ -11,9 +11,7 @@ const Banner = () => (
       subtitle="Start your Free Trial."
       button={
         <Link href="/signup">
-          <a>
-            <Button>Get Started</Button>
-          </a>
+          <Button>Get Started</Button>
         </Link>
       }
     />

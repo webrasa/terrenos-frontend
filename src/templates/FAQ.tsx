@@ -18,11 +18,7 @@ const FAQ = () => (
         <p>
           Fusce sed nunc ultrices, sollicitudin dui eu, laoreet lacus. Nullam
           mollis nisi ac turpis maximus, posuere viverra lectus tristique.
-          Checkout{' '}
-          <Link href="/">
-            <a>this example</a>
-          </Link>
-          .
+          Checkout <Link href="/">this example</Link>.
         </p>
       </QuestionAnswer>
       <QuestionAnswer question="Lorem ipsum dolor sit amet, consectetur adipiscing elit?">
@@ -41,10 +37,7 @@ const FAQ = () => (
         <p>
           Etiam malesuada massa id sapien eleifend congue. Curabitur tempus urna
           molestie lacus dictum faucibus. Read our{' '}
-          <Link href="/">
-            <a>blog post</a>
-          </Link>
-          .
+          <Link href="/">blog post</Link>.
         </p>
       </QuestionAnswer>
       <QuestionAnswer question="Lorem ipsum dolor sit amet, consectetur adipiscing elit?">

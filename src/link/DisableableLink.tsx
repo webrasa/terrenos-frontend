@@ -14,11 +14,7 @@ const DisableableLink = (
     return <button disabled>{children}</button>;
   }
 
-  return (
-    <Link {...rest}>
-      <a>{children}</a>
-    </Link>
-  );
+  return <Link {...rest}>{children}</Link>;
 };
 
 export { DisableableLink };

@@ -68,9 +68,7 @@ const Authenticated = () => {
         description={<div className="text-red-600">Incorrect invite link.</div>}
       >
         <Link href="/dashboard">
-          <a>
-            <Button full>Go to dashboard</Button>
-          </a>
+          <Button full>Go to dashboard</Button>
         </Link>
       </FullCenterSection>
     );

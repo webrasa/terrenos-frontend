@@ -26,9 +26,7 @@ const Hero = () => (
         }
         button={
           <Link href="/signup">
-            <a>
-              <Button xl>Get Started for Free</Button>
-            </a>
+            <Button xl>Get Started for Free</Button>
           </Link>
         }
         image={{

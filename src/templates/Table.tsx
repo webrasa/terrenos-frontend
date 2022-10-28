@@ -73,9 +73,7 @@ const Table = (props: ITableProps) => {
               props.role
             ) && (
               <Link href="/dashboard/add-todo">
-                <a>
-                  <Button sm>New Todo</Button>
-                </a>
+                <Button sm>New Todo</Button>
               </Link>
             )}
           </>
@@ -89,9 +87,7 @@ const Table = (props: ITableProps) => {
               props.role
             ) && (
               <td>
-                <Link href={`/dashboard/edit-todo/${elt.id}`}>
-                  <a>Edit</a>
-                </Link>
+                <Link href={`/dashboard/edit-todo/${elt.id}`}>Edit</Link>
                 <button type="button" onClick={() => handleOpenDialog(elt.id)}>
                   Delete
                 </button>

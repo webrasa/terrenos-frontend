@@ -36,9 +36,7 @@ const ChangePasswordSuccess = (props: IChangePasswordSuccessProps) => (
 
       <div className="mt-6">
         <Link href="/dashboard">
-          <a>
-            <Button sm>Go back to Dashboard</Button>
-          </a>
+          <Button sm>Go back to Dashboard</Button>
         </Link>
       </div>
     </div>
