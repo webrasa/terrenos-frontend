@@ -11,23 +11,17 @@ const Pricing = () => (
       <PricingModel
         button={
           <Link href="/signup">
-            <a>
-              <Button full>Get Started</Button>
-            </a>
+            <Button full>Get Started</Button>
           </Link>
         }
         button2={
           <Link href="/signup">
-            <a>
-              <Button full>Get Started</Button>
-            </a>
+            <Button full>Get Started</Button>
           </Link>
         }
         button3={
           <Link href="/signup">
-            <a>
-              <Button full>Get Started</Button>
-            </a>
+            <Button full>Get Started</Button>
           </Link>
         }
       />

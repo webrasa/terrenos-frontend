@@ -26,9 +26,7 @@ const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
   return (
     <div className="flex flex-wrap items-center justify-between">
       <div>
-        <Link href="/">
-          <a>{props.logo}</a>
-        </Link>
+        <Link href="/">{props.logo}</Link>
       </div>
 
       <div className="md:hidden">

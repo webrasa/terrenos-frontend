@@ -26,9 +26,7 @@ const Success: NextPageWithLayout = () => (
     description="Thank you for your subscription, you can now enjoy your new plan."
     cta={
       <Link href="/dashboard/settings">
-        <a>
-          <Button>Go back to Settings</Button>
-        </a>
+        <Button>Go back to Settings</Button>
       </Link>
     }
   />

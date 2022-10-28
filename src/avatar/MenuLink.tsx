@@ -19,7 +19,7 @@ const MenuInternalLink = (
   const { href, children, active, ...rest } = props;
 
   return (
-    <Link href={href}>
+    <Link href={href} legacyBehavior>
       <a
         ref={ref}
         className={classNames(

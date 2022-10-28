@@ -15,39 +15,27 @@ const Navbar = () => (
         rightMenu={
           <>
             <li>
-              <Link href="/login">
-                <a>Login</a>
-              </Link>
+              <Link href="/login">Login</Link>
             </li>
             <li>
               <Link href="/signup">
-                <a>
-                  <Button>Start Free Trial</Button>
-                </a>
+                <Button>Start Free Trial</Button>
               </Link>
             </li>
           </>
         }
       >
         <li>
-          <Link href="/login">
-            <a>Products</a>
-          </Link>
+          <Link href="/login">Products</Link>
         </li>
         <li>
-          <Link href="/login">
-            <a>Examples</a>
-          </Link>
+          <Link href="/login">Examples</Link>
         </li>
         <li>
-          <Link href="/login">
-            <a>Blog</a>
-          </Link>
+          <Link href="/login">Blog</Link>
         </li>
         <li>
-          <Link href="/login">
-            <a>Contact</a>
-          </Link>
+          <Link href="/login">Contact</Link>
         </li>
       </NavbarMenuCenter>
     </LandingSection>

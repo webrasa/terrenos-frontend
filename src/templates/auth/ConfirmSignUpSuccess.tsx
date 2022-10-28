@@ -25,9 +25,7 @@ const ConfirmSignUpSuccess = () => (
   >
     <div className="mt-6 text-center">
       <Link href="/login">
-        <a>
-          <Button>Go to login</Button>
-        </a>
+        <Button>Go to login</Button>
       </Link>
     </div>
   </FullCenterSection>
