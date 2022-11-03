@@ -18,6 +18,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        // You can change the following color (primary) to match your branding
         primary: {
           100: '#EBF4FF',
           200: '#C3DAFE',
