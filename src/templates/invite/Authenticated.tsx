@@ -11,6 +11,7 @@ import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
 import { FullCenterSection } from '@/layouts/FullCenterSection';
 import type { UserProfile } from '@/types/Auth';
+import { AppConfig } from '@/utils/AppConfig';
 import { findTeamInd } from '@/utils/Auth';
 import { mapInviteMessage } from '@/utils/InviteMessageMap';
 
@@ -86,7 +87,8 @@ const Authenticated = () => {
           Currently signed in as{' '}
           <span className="font-semibold">{providerInfo.email}</span>,{'\n'}
           you&apos;ve been invited to join{' '}
-          <span className="font-semibold">{data.displayName}</span>.
+          <span className="font-semibold">{data.displayName}</span> on{' '}
+          {AppConfig.site_name}.
         </div>
       }
     >
