@@ -129,6 +129,10 @@ npm run e2e
 
 It'll open the Cypress app where you can easily debug, visual see the results, time travel, and interact with the application.
 
+### Server-side rendering (SSR)
+
+All the Next.js pages are statically generated for the marketing pages and also for the dashboard pages. So, all the pages are pre-rendered for SEO and performance. If you need to enable SSR for a specific page, you can do it by adding `getServerSideProps` method to your page.
+
 ### VSCode information (optional)
 
 If you are VSCode users, you can have a better integration with VSCode by installing the suggested extension in `.vscode/extension.json`. The starter code comes up with Settings for a seamless integration with VSCode. The Debug configuration is also provided for frontend and backend debugging experience.
