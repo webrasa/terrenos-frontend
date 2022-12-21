@@ -93,9 +93,6 @@ describe('Account', () => {
 
       // Verify if it has redirected to the dashboard
       cy.location('pathname').should('eq', '/dashboard/');
-      cy.findByTestId('message-state')
-        .findByRole('link', { name: 'Add Todo' })
-        .should('exist');
     });
   });
 });
