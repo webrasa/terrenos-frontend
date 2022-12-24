@@ -152,14 +152,10 @@ describe('FormDialog', () => {
 
       const saveButton = screen.getByRole('button', { name: 'Save' });
       expect(saveButton).toBeDisabled();
-
-      await userEvent.click(saveButton);
       expect(handleSubmit).not.toHaveBeenCalled();
 
       const cancelButton = screen.getByRole('button', { name: 'Cancel' });
       expect(cancelButton).toBeDisabled();
-
-      await userEvent.click(cancelButton);
       expect(handleCancel).not.toHaveBeenCalled();
     });
   });
