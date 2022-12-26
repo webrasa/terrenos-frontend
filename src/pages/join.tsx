@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router';
 
 import { AuthProvider } from '@/hooks/UseAuth';
-import { AuthState, useProviderInfo } from '@/hooks/UseProviderInfo';
+import { useProviderInfo } from '@/hooks/UseProviderInfo';
 import { Meta } from '@/layouts/Meta';
 import { Authenticated } from '@/templates/invite/Authenticated';
 import { Unauthenticated } from '@/templates/invite/Unauthenticated';
+import { AuthState } from '@/types/Auth';
 import { AppConfig } from '@/utils/AppConfig';
 
 const Join = () => {

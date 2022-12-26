@@ -2,11 +2,7 @@ import { Auth } from 'aws-amplify';
 import { useEffect, useState } from 'react';
 
 import type { CognitoUserExt, ProviderInfo } from '@/types/Auth';
-
-export enum AuthState {
-  AUTHENTICATING = 'AUTHENTICATING',
-  UNAUTHENTICATED = 'UNAUTHENTICATED',
-}
+import { AuthState } from '@/types/Auth';
 
 export const useProviderInfo = () => {
   const [userInfo, setUserInfo] = useState<ProviderInfo | AuthState>(

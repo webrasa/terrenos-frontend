@@ -45,3 +45,8 @@ export type UserAuth = {
   currentTeamInd: number;
   currentTeam: Team;
 };
+
+export enum AuthState {
+  AUTHENTICATING = 'AUTHENTICATING',
+  UNAUTHENTICATED = 'UNAUTHENTICATED',
+}

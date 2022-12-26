@@ -2,7 +2,9 @@ import { mockCurrentUserInfo } from '__mocks__/aws-amplify';
 import { renderHook, waitFor } from '@testing-library/react';
 import assert from 'assert';
 
-import { AuthState, useProviderInfo } from './UseProviderInfo';
+import { AuthState } from '@/types/Auth';
+
+import { useProviderInfo } from './UseProviderInfo';
 
 describe('UseProviderInfo', () => {
   describe('Render hook', () => {
