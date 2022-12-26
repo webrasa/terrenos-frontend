@@ -14,19 +14,16 @@ describe('UserInfoSettings', () => {
       authProviderRender(<UserInfoSettings />);
 
       const settingLine = screen.getAllByTestId('setting-line');
+      const changeEmailAddress = settingLine.find((elt) =>
+        within(elt).queryByText('Email address')
+      );
       assert(
-        settingLine[0] !== undefined,
-        'Changing email address should be available'
+        changeEmailAddress !== undefined,
+        'Change email address settings not found'
       );
-
-      // Changing the email address is the first setting.
-      const changeEmailAddress = within(settingLine[0]).queryByText(
-        'Email address'
-      );
-      expect(changeEmailAddress).toBeInTheDocument();
 
       // Should open the change email dialog
-      const changeButton = within(settingLine[0]).getByRole('button', {
+      const changeButton = within(changeEmailAddress).getByRole('button', {
         name: 'Change',
       });
       await userEvent.click(changeButton);
@@ -49,17 +46,16 @@ describe('UserInfoSettings', () => {
       authProviderRender(<UserInfoSettings />);
 
       const settingLine = screen.getAllByTestId('setting-line');
+      const changePassword = settingLine.find((elt) =>
+        within(elt).queryByText('Password')
+      );
       assert(
-        settingLine[1] !== undefined,
-        'Changing password should be available'
+        changePassword !== undefined,
+        'Change password settings not found'
       );
 
-      // Changing the password is the second setting.
-      const changePassword = within(settingLine[1]).queryByText('Password');
-      expect(changePassword).toBeInTheDocument();
-
       // Should open the change password dialog
-      const changeButton = within(settingLine[1]).getByRole('button', {
+      const changeButton = within(changePassword).getByRole('button', {
         name: 'Change',
       });
       await userEvent.click(changeButton);
