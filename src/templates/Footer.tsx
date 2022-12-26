@@ -16,10 +16,10 @@ const Footer = () => (
         verticalLinks={
           <>
             <li>
-              <Link href="/">Terms Of Service</Link>
+              <Link href="/privacy-policy">Terms Of Service</Link>
             </li>
             <li>
-              <Link href="/">Privacy Policy</Link>
+              <Link href="/terms-of-use">Privacy Policy</Link>
             </li>
           </>
         }
