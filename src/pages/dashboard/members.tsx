@@ -9,6 +9,7 @@ import type { IMember, MemberRole } from '@/types/IMember';
 
 export type IMemberList = {
   list: IMember[];
+  inviteList: IMember[];
   role: MemberRole;
 };
 
@@ -26,7 +27,11 @@ const Members = () => {
 
   return (
     <Section>
-      <TeamTable list={data.list} role={data.role} />
+      <TeamTable
+        list={data.list}
+        inviteList={data.inviteList}
+        role={data.role}
+      />
     </Section>
   );
 };

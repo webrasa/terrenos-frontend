@@ -12,7 +12,9 @@ import { TeamTable } from './TeamTable';
 describe('TeamTable', () => {
   describe('Render method', () => {
     it("shouldn't show any action buttons when the list is empty", () => {
-      authProviderRender(<TeamTable list={[]} role={MemberRole.ADMIN} />);
+      authProviderRender(
+        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />
+      );
 
       const editButton = screen.queryByText('Edit');
       expect(editButton).not.toBeInTheDocument();
@@ -43,7 +45,9 @@ describe('TeamTable', () => {
         },
       ];
 
-      authProviderRender(<TeamTable list={list} role={MemberRole.ADMIN} />);
+      authProviderRender(
+        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />
+      );
 
       const editButtons = screen.queryAllByText('Edit');
       expect(editButtons).toHaveLength(3);
@@ -62,7 +66,9 @@ describe('TeamTable', () => {
         },
       ];
 
-      authProviderRender(<TeamTable list={list} role={MemberRole.ADMIN} />);
+      authProviderRender(
+        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />
+      );
 
       // Invite member
       const inviteButton = screen.getByText('Invite member');
@@ -123,7 +129,9 @@ describe('TeamTable', () => {
         },
       ];
 
-      authProviderRender(<TeamTable list={list} role={MemberRole.READ_ONLY} />);
+      authProviderRender(
+        <TeamTable list={list} inviteList={[]} role={MemberRole.READ_ONLY} />
+      );
 
       const actionColumn = screen.queryByText('Action');
       expect(actionColumn).not.toBeInTheDocument();

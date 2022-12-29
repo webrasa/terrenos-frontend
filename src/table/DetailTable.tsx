@@ -3,7 +3,7 @@ import type { ReactNode } from 'react';
 type IDetailTableProps = {
   title: string;
   head: ReactNode;
-  buttons: ReactNode;
+  buttons?: ReactNode;
   children: ReactNode;
 };
 
