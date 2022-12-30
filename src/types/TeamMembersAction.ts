@@ -9,6 +9,7 @@ export enum TeamMembersActionType {
   INVITE_MEMBER = 'INVITE_MEMBER',
   EDIT_MEMBER = 'EDIT_MEMBER',
   REMOVE_MEMBER = 'REMOVE_MEMBER',
+  TRANSFER_OWNERSHIP = 'TRANSFER_OWNERSHIP',
 }
 
 export const RoleOptionList: ISelectOption[] = [
@@ -36,10 +37,15 @@ interface IRemoveMember {
   status: MemberStatus;
 }
 
+interface ITransferOwnership {
+  type: TeamMembersActionType.TRANSFER_OWNERSHIP;
+}
+
 // Tracking Action in team member listing.
 // `Action` is like `State` but also need to track parameters like `memberId` and `status`.
 export type TeamMembersAction =
   | INone
   | IInviteMember
   | IEditMember
-  | IRemoveMember;
+  | IRemoveMember
+  | ITransferOwnership;

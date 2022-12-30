@@ -11,6 +11,7 @@ import { requiredRoles } from '@/utils/Auth';
 import { DeleteMemberDialog } from './DeleteMemberDialog';
 import { EditMemberDialog } from './EditMemberDialog';
 import { InviteMemberDialog } from './InviteMemberDialog';
+import { TeamTransferOwnership } from './TeamTransferOwnership';
 
 type ITeamTableProps = {
   list: IMember[];
@@ -162,6 +163,8 @@ const TeamTable = (props: ITeamTableProps) => {
             </tr>
           ))}
         </DetailTable>
+
+        <TeamTransferOwnership handleDialogState={handleDialogState} />
       </div>
 
       <InviteMemberDialog
