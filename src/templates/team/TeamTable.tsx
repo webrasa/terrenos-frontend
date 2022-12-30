@@ -48,29 +48,10 @@ const TeamTable = (props: ITeamTableProps) => {
               ) && <th className="w-20 md:w-52">Action</th>}
             </tr>
           }
-          buttons={
-            <>
-              {requiredRoles(
-                [MemberRole.OWNER, MemberRole.ADMIN],
-                props.role
-              ) && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    handleDialogState({
-                      type: TeamMembersActionType.INVITE_MEMBER,
-                    })
-                  }
-                >
-                  <Button sm>Invite member</Button>
-                </button>
-              )}
-            </>
-          }
         >
           {props.list.map((elt) => (
             <tr key={elt.memberId}>
-              <td>{elt.email}</td>
+              <td className="font-semibold text-gray-800">{elt.email}</td>
               <td>{MemberRoleLabel[elt.role]}</td>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
@@ -122,10 +103,30 @@ const TeamTable = (props: ITeamTableProps) => {
               ) && <th className="w-20 md:w-52">Action</th>}
             </tr>
           }
+          buttons={
+            <>
+              {requiredRoles(
+                [MemberRole.OWNER, MemberRole.ADMIN],
+                props.role
+              ) && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState({
+                      type: TeamMembersActionType.INVITE_MEMBER,
+                    })
+                  }
+                >
+                  <Button sm>Invite member</Button>
+                </button>
+              )}
+            </>
+          }
+          emptyDataText="There are no pending invitation."
         >
           {props.inviteList.map((elt) => (
             <tr key={elt.memberId}>
-              <td>{elt.email}</td>
+              <td className="font-semibold text-gray-800">{elt.email}</td>
               <td>{MemberRoleLabel[elt.role]}</td>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
