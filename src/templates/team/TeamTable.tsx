@@ -24,6 +24,7 @@ const TeamTable = (props: ITeamTableProps) => {
   const [dialogState, setDialogState] = useState<TeamMembersAction>({
     type: TeamMembersActionType.NONE,
   });
+  const canTransferOwnership = props.list.length >= 2; // It should have at least to 2 team members to perform a transfer
 
   const handleDialogState = (state: TeamMembersAction) => {
     setDialogState(state);
@@ -163,7 +164,10 @@ const TeamTable = (props: ITeamTableProps) => {
           ))}
         </DetailTable>
 
-        <TeamTransferOwnership handleDialogState={handleDialogState} />
+        <TeamTransferOwnership
+          enableTransfer={canTransferOwnership}
+          handleDialogState={handleDialogState}
+        />
       </div>
 
       <InviteMemberDialog
@@ -178,10 +182,12 @@ const TeamTable = (props: ITeamTableProps) => {
         action={dialogState}
         handleCloseDialog={handleCloseDialog}
       />
-      <TransferOwnershipDialog
-        show={dialogState.type === TeamMembersActionType.TRANSFER_OWNERSHIP}
-        handleCloseDialog={handleCloseDialog}
-      />
+      {canTransferOwnership && (
+        <TransferOwnershipDialog
+          show={dialogState.type === TeamMembersActionType.TRANSFER_OWNERSHIP}
+          handleCloseDialog={handleCloseDialog}
+        />
+      )}
     </>
   );
 };

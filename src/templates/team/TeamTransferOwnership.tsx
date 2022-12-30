@@ -1,8 +1,10 @@
 import { Button } from '@/button/Button';
+import { DisabledTooltip } from '@/tooltip/DisabledTooltip';
 import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import { TeamMembersActionType } from '@/types/TeamMembersAction';
 
 type ITeamTransferOwnershipProps = {
+  enableTransfer: boolean;
   handleDialogState: (state: TeamMembersAction) => void;
 };
 
@@ -19,16 +21,22 @@ const TeamTransferOwnership = (props: ITeamTransferOwnershipProps) => (
     </div>
 
     <div>
-      <button
-        type="button"
-        onClick={() =>
-          props.handleDialogState({
-            type: TeamMembersActionType.TRANSFER_OWNERSHIP,
-          })
-        }
+      <DisabledTooltip
+        hideLabel={props.enableTransfer}
+        label="Please add another team member before transferring ownership"
+        placement="left"
       >
-        <Button sm>Transfer ownership</Button>
-      </button>
+        <button
+          type="button"
+          onClick={() =>
+            props.handleDialogState({
+              type: TeamMembersActionType.TRANSFER_OWNERSHIP,
+            })
+          }
+        >
+          <Button sm>Transfer ownership</Button>
+        </button>
+      </DisabledTooltip>
     </div>
   </div>
 );
