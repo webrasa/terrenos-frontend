@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import type { IMember } from '@/types/IMember';
-import { MemberRole, MemberStatus } from '@/types/IMember';
+import { MemberRole } from '@/types/IMember';
 import { authProviderRender } from '@/utils/TestUtils.test';
 
 import { TeamTable } from './TeamTable';
@@ -29,19 +29,16 @@ describe('TeamTable', () => {
           memberId: 'member-1',
           email: 'random@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.ACTIVE,
         },
         {
           memberId: 'member-2',
           email: 'random2@example.com',
           role: MemberRole.READ_ONLY,
-          status: MemberStatus.PENDING,
         },
         {
           memberId: 'member-3',
           email: 'random3@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.PENDING,
         },
       ];
 
@@ -62,7 +59,6 @@ describe('TeamTable', () => {
           memberId: 'member-1',
           email: 'random@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.ACTIVE,
         },
       ];
 
@@ -125,7 +121,6 @@ describe('TeamTable', () => {
           memberId: 'member-1',
           email: 'random@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.ACTIVE,
         },
       ];
 

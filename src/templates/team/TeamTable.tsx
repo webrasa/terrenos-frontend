@@ -12,6 +12,7 @@ import { DeleteMemberDialog } from './DeleteMemberDialog';
 import { EditMemberDialog } from './EditMemberDialog';
 import { InviteMemberDialog } from './InviteMemberDialog';
 import { TeamTransferOwnership } from './TeamTransferOwnership';
+import { TransferOwnershipDialog } from './TransferOwnershipDialog';
 
 type ITeamTableProps = {
   list: IMember[];
@@ -79,7 +80,6 @@ const TeamTable = (props: ITeamTableProps) => {
                           handleDialogState({
                             type: TeamMembersActionType.REMOVE_MEMBER,
                             memberId: elt.memberId,
-                            status: elt.status,
                           })
                         }
                       >
@@ -152,7 +152,6 @@ const TeamTable = (props: ITeamTableProps) => {
                       handleDialogState({
                         type: TeamMembersActionType.REMOVE_MEMBER,
                         memberId: elt.memberId,
-                        status: elt.status,
                       })
                     }
                   >
@@ -177,6 +176,10 @@ const TeamTable = (props: ITeamTableProps) => {
       />
       <EditMemberDialog
         action={dialogState}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <TransferOwnershipDialog
+        show={dialogState.type === TeamMembersActionType.TRANSFER_OWNERSHIP}
         handleCloseDialog={handleCloseDialog}
       />
     </>

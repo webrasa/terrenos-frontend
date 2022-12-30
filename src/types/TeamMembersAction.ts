@@ -1,6 +1,5 @@
 import type { ISelectOption } from '@/select/Select';
 
-import type { MemberStatus } from './IMember';
 import { MemberRole, MemberRoleLabel } from './IMember';
 
 // List of action possible in team member listing.
@@ -34,7 +33,6 @@ interface IEditMember {
 interface IRemoveMember {
   type: TeamMembersActionType.REMOVE_MEMBER;
   memberId: string;
-  status: MemberStatus;
 }
 
 interface ITransferOwnership {

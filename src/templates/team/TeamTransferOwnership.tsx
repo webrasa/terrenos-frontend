@@ -2,11 +2,11 @@ import { Button } from '@/button/Button';
 import type { TeamMembersAction } from '@/types/TeamMembersAction';
 import { TeamMembersActionType } from '@/types/TeamMembersAction';
 
-type ITeamTransferOwnershipType = {
+type ITeamTransferOwnershipProps = {
   handleDialogState: (state: TeamMembersAction) => void;
 };
 
-const TeamTransferOwnership = (props: ITeamTransferOwnershipType) => (
+const TeamTransferOwnership = (props: ITeamTransferOwnershipProps) => (
   <div className="flex items-center justify-between">
     <div>
       <div className="text-lg font-semibold text-gray-800">
