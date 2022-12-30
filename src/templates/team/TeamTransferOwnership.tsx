@@ -12,6 +12,7 @@ type ITeamTransferOwnershipProps = {
 };
 
 const TeamTransferOwnership = (props: ITeamTransferOwnershipProps) => {
+  // Display the option only for OWNER
   if (!requiredRoles([MemberRole.OWNER], props.role)) {
     return null;
   }
