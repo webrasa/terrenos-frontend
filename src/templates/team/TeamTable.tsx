@@ -24,7 +24,8 @@ const TeamTable = (props: ITeamTableProps) => {
   const [dialogState, setDialogState] = useState<TeamMembersAction>({
     type: TeamMembersActionType.NONE,
   });
-  const canTransferOwnership = props.list.length >= 2; // It should have at least to 2 team members to perform a transfer
+  const canTransferOwnership =
+    requiredRoles([MemberRole.OWNER], props.role) && props.list.length >= 2; // It should have at least to 2 team members to perform a transfer
 
   const handleDialogState = (state: TeamMembersAction) => {
     setDialogState(state);
@@ -167,6 +168,7 @@ const TeamTable = (props: ITeamTableProps) => {
         <TeamTransferOwnership
           enableTransfer={canTransferOwnership}
           handleDialogState={handleDialogState}
+          role={props.role}
         />
       </div>
 
