@@ -186,6 +186,7 @@ const TeamTable = (props: ITeamTableProps) => {
       />
       {canTransferOwnership && (
         <TransferOwnershipDialog
+          list={props.list}
           show={dialogState.type === TeamMembersActionType.TRANSFER_OWNERSHIP}
           handleCloseDialog={handleCloseDialog}
         />
