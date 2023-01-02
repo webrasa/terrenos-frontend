@@ -67,12 +67,12 @@ const TransferOwnershipDialog = (props: ITransferOwnershipDialogProps) => {
       handleSubmit={handleSubmitDialog}
       isSubmitting={transferOwnershipAsync.pending}
       formGlobalError={formGlobalError}
-      title="Edit member"
-      description="Update team member role."
-      submitText="Save"
+      title="Transfer team ownership"
+      description="After the transfer, you will be downgraded to Admin role of this team."
+      submitText="Transfer ownership"
     >
       <>
-        <Label htmlFor="role">Role</Label>
+        <Label htmlFor="member">Transfer ownership to</Label>
         <Controller
           name="member"
           control={control}
