@@ -11,6 +11,7 @@ import { requiredRoles } from '@/utils/Auth';
 import { DeleteMemberDialog } from './DeleteMemberDialog';
 import { EditMemberDialog } from './EditMemberDialog';
 import { InviteMemberDialog } from './InviteMemberDialog';
+import { TeamTableAction } from './TeamTableAction';
 import { TeamTransferOwnership } from './TeamTransferOwnership';
 import { TransferOwnershipDialog } from './TransferOwnershipDialog';
 
@@ -63,31 +64,10 @@ const TeamTable = (props: ITeamTableProps) => {
               ) && (
                 <td>
                   {elt.role !== MemberRole.OWNER && (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleDialogState({
-                            type: TeamMembersActionType.EDIT_MEMBER,
-                            memberId: elt.memberId,
-                            role: elt.role,
-                          })
-                        }
-                      >
-                        Edit
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() =>
-                          handleDialogState({
-                            type: TeamMembersActionType.REMOVE_MEMBER,
-                            memberId: elt.memberId,
-                          })
-                        }
-                      >
-                        Remove
-                      </button>
-                    </>
+                    <TeamTableAction
+                      handleDialogState={handleDialogState}
+                      elt={elt}
+                    />
                   )}
                 </td>
               )}
@@ -136,29 +116,10 @@ const TeamTable = (props: ITeamTableProps) => {
                 props.role
               ) && (
                 <td>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleDialogState({
-                        type: TeamMembersActionType.EDIT_MEMBER,
-                        memberId: elt.memberId,
-                        role: elt.role,
-                      })
-                    }
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      handleDialogState({
-                        type: TeamMembersActionType.REMOVE_MEMBER,
-                        memberId: elt.memberId,
-                      })
-                    }
-                  >
-                    Remove
-                  </button>
+                  <TeamTableAction
+                    handleDialogState={handleDialogState}
+                    elt={elt}
+                  />
                 </td>
               )}
             </tr>
