@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import type { IMember } from '@/types/IMember';
-import { MemberRole, MemberStatus } from '@/types/IMember';
+import { MemberRole } from '@/types/IMember';
 import { authProviderRender } from '@/utils/TestUtils.test';
 
 import { TeamTable } from './TeamTable';
@@ -12,7 +12,9 @@ import { TeamTable } from './TeamTable';
 describe('TeamTable', () => {
   describe('Render method', () => {
     it("shouldn't show any action buttons when the list is empty", () => {
-      authProviderRender(<TeamTable list={[]} role={MemberRole.ADMIN} />);
+      authProviderRender(
+        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />
+      );
 
       const editButton = screen.queryByText('Edit');
       expect(editButton).not.toBeInTheDocument();
@@ -27,23 +29,52 @@ describe('TeamTable', () => {
           memberId: 'member-1',
           email: 'random@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.ACTIVE,
         },
         {
           memberId: 'member-2',
           email: 'random2@example.com',
           role: MemberRole.READ_ONLY,
-          status: MemberStatus.PENDING,
         },
         {
           memberId: 'member-3',
           email: 'random3@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.PENDING,
         },
       ];
 
-      authProviderRender(<TeamTable list={list} role={MemberRole.ADMIN} />);
+      authProviderRender(
+        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />
+      );
+
+      const editButtons = screen.queryAllByText('Edit');
+      expect(editButtons).toHaveLength(3);
+
+      const deleteButtons = screen.queryAllByText('Remove');
+      expect(deleteButtons).toHaveLength(3);
+    });
+
+    it('should show action buttons when the invite list contains data', () => {
+      const inviteList: IMember[] = [
+        {
+          memberId: 'member-1',
+          email: 'random@example.com',
+          role: MemberRole.ADMIN,
+        },
+        {
+          memberId: 'member-2',
+          email: 'random2@example.com',
+          role: MemberRole.READ_ONLY,
+        },
+        {
+          memberId: 'member-3',
+          email: 'random3@example.com',
+          role: MemberRole.ADMIN,
+        },
+      ];
+
+      authProviderRender(
+        <TeamTable list={[]} inviteList={inviteList} role={MemberRole.ADMIN} />
+      );
 
       const editButtons = screen.queryAllByText('Edit');
       expect(editButtons).toHaveLength(3);
@@ -58,11 +89,12 @@ describe('TeamTable', () => {
           memberId: 'member-1',
           email: 'random@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.ACTIVE,
         },
       ];
 
-      authProviderRender(<TeamTable list={list} role={MemberRole.ADMIN} />);
+      authProviderRender(
+        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />
+      );
 
       // Invite member
       const inviteButton = screen.getByText('Invite member');
@@ -113,17 +145,93 @@ describe('TeamTable', () => {
       expect(cancelButton).not.toBeInTheDocument();
     });
 
+    it('should not display the transfer option when the user is not the owner', () => {
+      authProviderRender(
+        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />
+      );
+
+      const transferOwnershipButton = screen.queryByRole('button', {
+        name: 'Transfer ownership',
+      });
+      expect(transferOwnershipButton).not.toBeInTheDocument();
+    });
+
+    it('should not display the transfer option when the team does not have at least 2 members', () => {
+      authProviderRender(
+        <TeamTable
+          list={[
+            {
+              email: 'user@example.com',
+              memberId: 'user1',
+              role: MemberRole.OWNER,
+            },
+          ]}
+          inviteList={[]}
+          role={MemberRole.OWNER}
+        />
+      );
+
+      const transferOwnershipButton = screen.queryByRole('button', {
+        name: 'Transfer ownership',
+      });
+      expect(transferOwnershipButton).toBeDisabled();
+    });
+
+    it('should display the transfer option and open the transfer dialog', async () => {
+      authProviderRender(
+        <TeamTable
+          list={[
+            {
+              email: 'user@example.com',
+              memberId: 'user1',
+              role: MemberRole.OWNER,
+            },
+            {
+              email: 'user2@example.com',
+              memberId: 'user2',
+              role: MemberRole.ADMIN,
+            },
+          ]}
+          inviteList={[]}
+          role={MemberRole.OWNER}
+        />
+      );
+
+      const transferOwnershipButton = screen.getByRole('button', {
+        name: 'Transfer ownership',
+      });
+      await userEvent.click(transferOwnershipButton);
+
+      const dialogTitle = screen.queryByRole('dialog', {
+        name: 'Transfer team ownership',
+      });
+      expect(dialogTitle).toBeInTheDocument();
+    });
+
     it('should not show the action column when the user has a `READ_ONLY` role', () => {
       const list: IMember[] = [
         {
           memberId: 'member-1',
           email: 'random@example.com',
           role: MemberRole.ADMIN,
-          status: MemberStatus.ACTIVE,
         },
       ];
 
-      authProviderRender(<TeamTable list={list} role={MemberRole.READ_ONLY} />);
+      const inviteList: IMember[] = [
+        {
+          memberId: 'member-2',
+          email: 'random2@example.com',
+          role: MemberRole.ADMIN,
+        },
+      ];
+
+      authProviderRender(
+        <TeamTable
+          list={list}
+          inviteList={inviteList}
+          role={MemberRole.READ_ONLY}
+        />
+      );
 
       const actionColumn = screen.queryByText('Action');
       expect(actionColumn).not.toBeInTheDocument();

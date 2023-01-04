@@ -1,6 +1,5 @@
 import type { ISelectOption } from '@/select/Select';
 
-import type { MemberStatus } from './IMember';
 import { MemberRole, MemberRoleLabel } from './IMember';
 
 // List of action possible in team member listing.
@@ -9,6 +8,7 @@ export enum TeamMembersActionType {
   INVITE_MEMBER = 'INVITE_MEMBER',
   EDIT_MEMBER = 'EDIT_MEMBER',
   REMOVE_MEMBER = 'REMOVE_MEMBER',
+  TRANSFER_OWNERSHIP = 'TRANSFER_OWNERSHIP',
 }
 
 export const RoleOptionList: ISelectOption[] = [
@@ -33,7 +33,10 @@ interface IEditMember {
 interface IRemoveMember {
   type: TeamMembersActionType.REMOVE_MEMBER;
   memberId: string;
-  status: MemberStatus;
+}
+
+interface ITransferOwnership {
+  type: TeamMembersActionType.TRANSFER_OWNERSHIP;
 }
 
 // Tracking Action in team member listing.
@@ -42,4 +45,5 @@ export type TeamMembersAction =
   | INone
   | IInviteMember
   | IEditMember
-  | IRemoveMember;
+  | IRemoveMember
+  | ITransferOwnership;

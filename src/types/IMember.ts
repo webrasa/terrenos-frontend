@@ -25,5 +25,4 @@ export type IMember = {
   memberId: string;
   email: string;
   role: MemberRole;
-  status: MemberStatus;
 };

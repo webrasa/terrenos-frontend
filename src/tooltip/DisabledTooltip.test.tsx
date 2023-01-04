@@ -1,15 +1,15 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { UpgradeTooltip } from './UpgradeTooltip';
+import { DisabledTooltip } from './DisabledTooltip';
 
-describe('UpgradeTooltip', () => {
+describe('DisabledTooltip', () => {
   describe('Render method', () => {
     it('should render the children', () => {
       render(
-        <UpgradeTooltip>
+        <DisabledTooltip label="Random label">
           <>Random text</>
-        </UpgradeTooltip>
+        </DisabledTooltip>
       );
 
       const children = screen.queryByText('Random text');
@@ -18,9 +18,9 @@ describe('UpgradeTooltip', () => {
 
     it('should hide tooltip label when setting `hideLabel` true', async () => {
       render(
-        <UpgradeTooltip hideLabel={true}>
+        <DisabledTooltip label="Random label" hideLabel={true}>
           <>Random text</>
-        </UpgradeTooltip>
+        </DisabledTooltip>
       );
 
       const children = screen.getByText('Random text');

@@ -3,12 +3,7 @@ import { nanoid } from 'nanoid';
 import type { IMemberList } from '@/pages/dashboard/members';
 import type { Team, UserProfile } from '@/types/Auth';
 import type { IMember } from '@/types/IMember';
-import {
-  MemberRole,
-  MemberRoleLabel,
-  MemberStatus,
-  MemberStatusLabel,
-} from '@/types/IMember';
+import { MemberRole, MemberRoleLabel } from '@/types/IMember';
 
 describe('Team', () => {
   let teamName: string;
@@ -37,7 +32,7 @@ describe('Team', () => {
       // Go to the settings page
       cy.findByRole('link', { name: 'Settings' }).click();
       cy.findAllByTestId('setting-line')
-        .filter(':contains("Display name")')
+        .filter(':contains("Team display name")')
         .within(() => {
           // In the settings, it should display correctly the team name
           cy.findByText(teamName).should('exist');
@@ -52,7 +47,7 @@ describe('Team', () => {
 
       // Verify the team display name is correctly edited
       cy.findAllByTestId('setting-line')
-        .filter(':contains("Display name")')
+        .filter(':contains("Team display name")')
         .findByText(editTeamName)
         .should('exist');
 
@@ -96,15 +91,17 @@ describe('Team', () => {
       // Wait for dialog to be closed
       cy.findByRole('dialog').should('not.exist');
 
-      // Verify the new team member appears in the list
+      // Verify the new team member appears in the invite list
       cy.findByText('random@email.com').should('exist');
-      cy.findAllByRole('row')
-        .filter(':contains("random@email.com")')
-        .findByText(MemberStatusLabel[MemberStatus.PENDING])
-        .should('exist');
+      cy.findAllByTestId('detail-table')
+        .filter(':contains("Pending invites")')
+        .findAllByRole('row')
+        .contains('random@email.com');
 
       // Remove the invitation
-      cy.findAllByRole('row')
+      cy.findAllByTestId('detail-table')
+        .filter(':contains("Pending invites")')
+        .findAllByRole('row')
         .filter(':contains("random@email.com")')
         .findByRole('button', { name: 'Remove' })
         .click();
@@ -263,7 +260,7 @@ describe('Team', () => {
             'GET',
             `${Cypress.env('API_URL')}/team/${team.id}/list-members`
           ).then((response: Cypress.Response<IMemberList>) => {
-            const memberList = response.body.list.filter(
+            const memberList = response.body.inviteList.filter(
               (elt) => elt.email === 'random@email.com'
             );
 

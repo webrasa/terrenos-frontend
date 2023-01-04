@@ -32,7 +32,7 @@ const TeamSettings = (props: IBillingSettingsProps) => {
     <>
       <CardSection title="General">
         <SettingLine
-          name="Display name"
+          name="Team display name"
           description={currentTeam.displayName}
           action={
             <UpgradeTooltip

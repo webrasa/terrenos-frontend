@@ -81,7 +81,7 @@ const Table = (props: ITableProps) => {
       >
         {props.list.map((elt) => (
           <tr key={elt.id}>
-            <td>{elt.title}</td>
+            <td className="font-semibold text-gray-800">{elt.title}</td>
             {requiredRoles(
               [MemberRole.OWNER, MemberRole.ADMIN],
               props.role
