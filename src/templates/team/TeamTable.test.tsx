@@ -145,6 +145,69 @@ describe('TeamTable', () => {
       expect(cancelButton).not.toBeInTheDocument();
     });
 
+    it('should not display the transfer option when the user is not the owner', () => {
+      authProviderRender(
+        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />
+      );
+
+      const transferOwnershipButton = screen.queryByRole('button', {
+        name: 'Transfer ownership',
+      });
+      expect(transferOwnershipButton).not.toBeInTheDocument();
+    });
+
+    it('should not display the transfer option when the team does not have at least 2 members', () => {
+      authProviderRender(
+        <TeamTable
+          list={[
+            {
+              email: 'user@example.com',
+              memberId: 'user1',
+              role: MemberRole.OWNER,
+            },
+          ]}
+          inviteList={[]}
+          role={MemberRole.OWNER}
+        />
+      );
+
+      const transferOwnershipButton = screen.queryByRole('button', {
+        name: 'Transfer ownership',
+      });
+      expect(transferOwnershipButton).toBeDisabled();
+    });
+
+    it('should display the transfer option and open the transfer dialog', async () => {
+      authProviderRender(
+        <TeamTable
+          list={[
+            {
+              email: 'user@example.com',
+              memberId: 'user1',
+              role: MemberRole.OWNER,
+            },
+            {
+              email: 'user2@example.com',
+              memberId: 'user2',
+              role: MemberRole.ADMIN,
+            },
+          ]}
+          inviteList={[]}
+          role={MemberRole.OWNER}
+        />
+      );
+
+      const transferOwnershipButton = screen.getByRole('button', {
+        name: 'Transfer ownership',
+      });
+      await userEvent.click(transferOwnershipButton);
+
+      const dialogTitle = screen.queryByRole('dialog', {
+        name: 'Transfer team ownership',
+      });
+      expect(dialogTitle).toBeInTheDocument();
+    });
+
     it('should not show the action column when the user has a `READ_ONLY` role', () => {
       const list: IMember[] = [
         {
