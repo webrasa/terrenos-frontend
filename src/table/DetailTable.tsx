@@ -35,7 +35,7 @@ const DetailTable = (props: IDetailTableProps) => {
   }
 
   return (
-    <div>
+    <div data-testid="detail-table">
       <div className="flex items-center justify-between">
         <div className="text-lg font-semibold text-gray-800">{props.title}</div>
 
