@@ -53,6 +53,36 @@ describe('TeamTable', () => {
       expect(deleteButtons).toHaveLength(3);
     });
 
+    it('should show action buttons when the invite list contains data', () => {
+      const inviteList: IMember[] = [
+        {
+          memberId: 'member-1',
+          email: 'random@example.com',
+          role: MemberRole.ADMIN,
+        },
+        {
+          memberId: 'member-2',
+          email: 'random2@example.com',
+          role: MemberRole.READ_ONLY,
+        },
+        {
+          memberId: 'member-3',
+          email: 'random3@example.com',
+          role: MemberRole.ADMIN,
+        },
+      ];
+
+      authProviderRender(
+        <TeamTable list={[]} inviteList={inviteList} role={MemberRole.ADMIN} />
+      );
+
+      const editButtons = screen.queryAllByText('Edit');
+      expect(editButtons).toHaveLength(3);
+
+      const deleteButtons = screen.queryAllByText('Remove');
+      expect(deleteButtons).toHaveLength(3);
+    });
+
     it('should open and close dialogs correctly', async () => {
       const list: IMember[] = [
         {
@@ -124,8 +154,20 @@ describe('TeamTable', () => {
         },
       ];
 
+      const inviteList: IMember[] = [
+        {
+          memberId: 'member-2',
+          email: 'random2@example.com',
+          role: MemberRole.ADMIN,
+        },
+      ];
+
       authProviderRender(
-        <TeamTable list={list} inviteList={[]} role={MemberRole.READ_ONLY} />
+        <TeamTable
+          list={list}
+          inviteList={inviteList}
+          role={MemberRole.READ_ONLY}
+        />
       );
 
       const actionColumn = screen.queryByText('Action');
