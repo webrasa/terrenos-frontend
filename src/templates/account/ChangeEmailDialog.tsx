@@ -52,7 +52,7 @@ const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
       isSubmitting={changeEmailAsync.pending}
       error={formGlobalError}
       title="Change email"
-      description="Update your new email and we'll send you a verification code to
+      description="Update your new email and we will send you a verification code to
       verify it."
     >
       <>

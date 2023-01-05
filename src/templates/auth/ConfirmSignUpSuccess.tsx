@@ -21,11 +21,11 @@ const ConfirmSignUpSuccess = () => (
       </svg>
     }
     title="Your email has been verified"
-    description="You can now log into your account with your email."
+    description="Please wait while you will be redirected to your dashboard."
   >
     <div className="mt-6 text-center">
-      <Link href="/login">
-        <Button>Go to login</Button>
+      <Link href="/dashboard">
+        <Button>Go to dashboard</Button>
       </Link>
     </div>
   </FullCenterSection>
