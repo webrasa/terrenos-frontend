@@ -29,17 +29,22 @@ describe('Auth', () => {
       // Verify if it has successfully redirected to `confirm-signup` page
       cy.location('pathname').should('eq', '/confirm-signup/');
 
+      // Intercept AWS Cognito request when signing in
+      // We automatically sign in the user when he has successfully confirm the email after signing up
+      interceptSignIn(cy);
+
       // Fill the confirm-sign form
       cy.get('#verificationCode').type('RANDOM_VERIFICATION_CODE');
       cy.findByRole('button', { name: 'Confirm' }).click();
 
       // Display the success page for email confirmation
       cy.findByText('Your email has been verified');
-      cy.findByText('Go to login').click();
 
       // Verify the url after clicking the link
-      cy.location('pathname').should('eq', '/login/');
-      cy.findByText('Sign in to your account').should('exist');
+      cy.location('pathname').should('eq', '/dashboard/');
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .should('exist');
     });
 
     it('should reset a new password when the user forget his password', () => {
