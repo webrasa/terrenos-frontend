@@ -72,7 +72,7 @@ const InviteMemberDialog = (props: IInviteMemberProps) => {
       isSubmitting={inviteMemberAsync.pending}
       error={formGlobalError}
       title="Invite member"
-      description="Enter new member email address and we'll send him an email with a link to join your team."
+      description="Enter new member email address and we will send him an email with a link to join your team."
       submitText="Send"
     >
       <>

@@ -38,7 +38,7 @@ describe('SidebarTeamSelection', () => {
       const anotherTeamOption = screen.getByText('RANDOM_TEAM_DISPLAY_NAME2');
       await userEvent.click(anotherTeamOption);
 
-      // When the user selects one team in the list, he'll switch to another team.
+      // When the user selects one team in the list, he will switch to another team.
       // All information displayed on the dashboard are coming from this second team.
       // The setCurrentTeam handler will be called with the second team index.
       // In testing, the list is mocked and `RANDOM_TEAM_DISPLAY_NAME2` is the second in the list (`1` in code).

@@ -40,7 +40,7 @@ const ResetPasswordForm = () => {
   return (
     <FullCenterSection
       title="Forgot your password?"
-      description="Enter your email and we'll send you a verification code."
+      description="Enter your email and we will send you a verification code."
     >
       {formGlobalError && <Alert text={formGlobalError} />}
 

@@ -27,6 +27,9 @@ const SignUpForm = () => {
       await Auth.signUp({
         username: data.email,
         password: data.password,
+        autoSignIn: {
+          enabled: true,
+        },
       });
 
       sessionStorage.setItem('confirm-signup-email', data.email);
