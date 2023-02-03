@@ -58,6 +58,21 @@ const UserInfoSettings = () => {
               </button>
             }
           />
+
+          <SettingLine
+            name="Two-Factor Authentication"
+            description="Add an extra layer of security to your account."
+            action={
+              <button
+                type="button"
+                onClick={() =>
+                  handleDialogState(UserInfoSettingsState.CHANGE_PASSWORD)
+                }
+              >
+                <Button sm>Enable</Button>
+              </button>
+            }
+          />
         </div>
       </CardSection>
 
