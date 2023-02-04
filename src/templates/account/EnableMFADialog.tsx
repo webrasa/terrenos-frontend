@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import QRCode from 'react-qr-code';
 
 import { FormDialog } from '@/dialog/FormDialog';
 import { FormElement } from '@/form/FormElement';
@@ -35,9 +36,11 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
       isSubmitting={enableMFAAsync.pending}
       error={formGlobalError}
       title="Enable Two-Factor Authentication"
-      description=""
+      description="Use an authenticator app to scan the QR code, then enter the 6-digit code in the field below."
     >
       <>
+        <QRCode value="Test" size={128} />
+
         <Label htmlFor="code">Two-Factor code</Label>
         <FormElement>
           <input id="code" type="text" {...register('code')} />
