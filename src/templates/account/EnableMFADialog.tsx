@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import QRCode from 'react-qr-code';
 
@@ -21,6 +22,17 @@ type IEnableMFADialogProps = {
 const EnableMFADialog = (props: IEnableMFADialogProps) => {
   const { register, handleSubmit } = useForm<IEnableMFAForm>();
   const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
+  const [qrCodeValue, setQrCodeValue] = useState<string>('');
+
+  useEffect(() => {
+    const setupTOTP = async () => {
+      const user = await Auth.currentAuthenticatedUser();
+
+      setQrCodeValue(await Auth.setupTOTP(user));
+    };
+
+    setupTOTP();
+  }, []);
 
   const enableMFAAsync = useAsync(async (data: IEnableMFAForm) => {});
 
@@ -39,7 +51,7 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
       description="Use an authenticator app to scan the QR code, then enter the 6-digit code in the field below."
     >
       <>
-        <QRCode value="Test" size={128} />
+        <QRCode value={qrCodeValue} size={128} />
 
         <Label htmlFor="code">Two-Factor code</Label>
         <FormElement>
