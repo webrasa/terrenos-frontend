@@ -10,6 +10,7 @@ import { ChangeEmailDialog } from './ChangeEmailDialog';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
 import { ConfirmChangeEmailDialog } from './ConfirmChangeEmailDialog';
+import { EnableMFADialog } from './EnableMFADialog';
 
 const UserInfoSettings = () => {
   const auth = useAuth();
@@ -66,7 +67,7 @@ const UserInfoSettings = () => {
               <button
                 type="button"
                 onClick={() =>
-                  handleDialogState(UserInfoSettingsState.CHANGE_PASSWORD)
+                  handleDialogState(UserInfoSettingsState.ENABLE_MFA)
                 }
               >
                 <Button sm>Enable</Button>
@@ -91,6 +92,11 @@ const UserInfoSettings = () => {
       />
       <ChangePasswordSuccess
         show={dialogState === UserInfoSettingsState.CHANGE_PASSWORD_SUCCESS}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <EnableMFADialog
+        show={dialogState === UserInfoSettingsState.ENABLE_MFA}
+        handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}
       />
     </>
