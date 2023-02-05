@@ -7,8 +7,10 @@ import { FormDialog } from '@/dialog/FormDialog';
 import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
 import type { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
 import { mapAmplifyMessageSettings } from '@/utils/AmplifyMessageMap';
+import { AppConfig } from '@/utils/AppConfig';
 
 type IEnableMFAForm = {
   code: string;
@@ -24,6 +26,7 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
   const { register, handleSubmit } = useForm<IEnableMFAForm>();
   const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
   const [qrCodeValue, setQrCodeValue] = useState<string>('');
+  const { providerInfo } = useAuth();
 
   useEffect(() => {
     const setupTOTP = async () => {
@@ -68,7 +71,10 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
     >
       <>
         <div className="mt-3">
-          <QRCode value={qrCodeValue} size={128} />
+          <QRCode
+            value={`otpauth://totp/${AppConfig.site_name}:${providerInfo.email}?secret=${qrCodeValue}&issuer=${AppConfig.site_name}`}
+            size={128}
+          />
         </div>
 
         <Label htmlFor="code">Two-Factor code</Label>

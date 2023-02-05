@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
@@ -17,6 +18,17 @@ const UserInfoSettings = () => {
   const [dialogState, setDialogState] = useState<UserInfoSettingsState>(
     UserInfoSettingsState.NONE
   );
+  const [preferredMFA, setPreferredMFA] = useState<string>('NOMFA');
+
+  useEffect(() => {
+    const getPreferredMFA = async () => {
+      const user = await Auth.currentAuthenticatedUser();
+
+      setPreferredMFA(await Auth.getPreferredMFA(user));
+    };
+
+    getPreferredMFA();
+  }, []);
 
   const handleDialogState = (state: UserInfoSettingsState) => {
     setDialogState(state);
@@ -64,14 +76,25 @@ const UserInfoSettings = () => {
             name="Two-Factor Authentication"
             description="Add an extra layer of security to your account."
             action={
-              <button
-                type="button"
-                onClick={() =>
-                  handleDialogState(UserInfoSettingsState.ENABLE_MFA)
-                }
-              >
-                <Button sm>Enable</Button>
-              </button>
+              preferredMFA === 'NOMFA' ? (
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState(UserInfoSettingsState.ENABLE_MFA)
+                  }
+                >
+                  <Button sm>Enable</Button>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState(UserInfoSettingsState.ENABLE_MFA)
+                  }
+                >
+                  <Button sm>Disable</Button>
+                </button>
+              )
             }
           />
         </div>
