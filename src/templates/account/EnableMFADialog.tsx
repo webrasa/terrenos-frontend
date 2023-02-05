@@ -8,6 +8,7 @@ import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
 import type { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
+import { mapAmplifyMessageSettings } from '@/utils/AmplifyMessageMap';
 
 type IEnableMFAForm = {
   code: string;
@@ -28,13 +29,28 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
     const setupTOTP = async () => {
       const user = await Auth.currentAuthenticatedUser();
 
+      await Auth.setPreferredMFA(user, 'NOMFA');
+
       setQrCodeValue(await Auth.setupTOTP(user));
     };
 
-    setupTOTP();
-  }, []);
+    if (props.show) {
+      setupTOTP();
+    }
+  }, [props.show]);
 
-  const enableMFAAsync = useAsync(async (data: IEnableMFAForm) => {});
+  const enableMFAAsync = useAsync(async (data: IEnableMFAForm) => {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      await Auth.verifyTotpToken(user, data.code);
+
+      await Auth.setPreferredMFA(user, 'TOTP');
+
+      props.handleCloseDialog();
+    } catch (err) {
+      setFormGlobalError(mapAmplifyMessageSettings(err));
+    }
+  });
 
   const handleSubmitDialog = handleSubmit(async (data) => {
     await enableMFAAsync.execute(data);
@@ -51,7 +67,9 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
       description="Use an authenticator app to scan the QR code, then enter the 6-digit code in the field below."
     >
       <>
-        <QRCode value={qrCodeValue} size={128} />
+        <div className="mt-3">
+          <QRCode value={qrCodeValue} size={128} />
+        </div>
 
         <Label htmlFor="code">Two-Factor code</Label>
         <FormElement>

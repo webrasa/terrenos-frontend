@@ -34,8 +34,24 @@ export const mapAmplifyMessage = (err: any) => {
  */
 export const mapAmplifyMessageSettings = (err: any) => {
   if (err.message) {
-    if (/Incorrect username or password/i.test(err.message)) {
+    if (
+      /Incorrect username or password/i.test(err.message) ||
+      /at 'previousPassword' failed to satisfy constraint/i.test(err.message)
+    ) {
       return 'Incorrect old password';
+    }
+
+    if (
+      /at 'proposedPassword' failed to satisfy constraint/i.test(err.message)
+    ) {
+      return 'Password did not conform with policy: Password not long enough';
+    }
+
+    if (
+      /at 'userCode' failed to satisfy constraint/i.test(err.message) ||
+      /Code mismatch/i.test(err.message)
+    ) {
+      return 'Incorrect Two-Factor code';
     }
 
     return err.message;
