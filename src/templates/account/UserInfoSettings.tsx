@@ -12,6 +12,7 @@ import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
 import { ConfirmChangeEmailDialog } from './ConfirmChangeEmailDialog';
 import { EnableMFADialog } from './EnableMFADialog';
+import { EnableMFASuccess } from './EnableMFASuccess';
 
 const UserInfoSettings = () => {
   const auth = useAuth();
@@ -92,7 +93,9 @@ const UserInfoSettings = () => {
                     handleDialogState(UserInfoSettingsState.ENABLE_MFA)
                   }
                 >
-                  <Button sm>Disable</Button>
+                  <Button sm red>
+                    Disable
+                  </Button>
                 </button>
               )
             }
@@ -121,6 +124,9 @@ const UserInfoSettings = () => {
         show={dialogState === UserInfoSettingsState.ENABLE_MFA}
         handleDialogState={handleDialogState}
         handleCloseDialog={handleCloseDialog}
+      />
+      <EnableMFASuccess
+        show={dialogState === UserInfoSettingsState.ENABLE_MFA_SUCCESS}
       />
     </>
   );

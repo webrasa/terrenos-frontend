@@ -8,7 +8,7 @@ import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import { useAsync } from '@/hooks/UseAsync';
 import { useAuth } from '@/hooks/UseAuth';
-import type { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
+import { UserInfoSettingsState } from '@/types/UserInfoSettingsState';
 import { mapAmplifyMessageSettings } from '@/utils/AmplifyMessageMap';
 import { AppConfig } from '@/utils/AppConfig';
 
@@ -49,7 +49,7 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
 
       await Auth.setPreferredMFA(user, 'TOTP');
 
-      props.handleCloseDialog();
+      props.handleDialogState(UserInfoSettingsState.ENABLE_MFA_SUCCESS);
     } catch (err) {
       setFormGlobalError(mapAmplifyMessageSettings(err));
     }
@@ -68,6 +68,7 @@ const EnableMFADialog = (props: IEnableMFADialogProps) => {
       error={formGlobalError}
       title="Enable Two-Factor Authentication"
       description="Use an authenticator app to scan the QR code, then enter the 6-digit code in the field below."
+      submitText="Enable"
     >
       <>
         <div className="mt-3">
