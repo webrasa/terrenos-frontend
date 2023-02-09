@@ -11,6 +11,7 @@ import { ChangeEmailDialog } from './ChangeEmailDialog';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
 import { ConfirmChangeEmailDialog } from './ConfirmChangeEmailDialog';
+import { DisableMFADialog } from './DisableMFADialog';
 import { EnableMFADialog } from './EnableMFADialog';
 import { EnableMFASuccess } from './EnableMFASuccess';
 
@@ -90,7 +91,7 @@ const UserInfoSettings = () => {
                 <button
                   type="button"
                   onClick={() =>
-                    handleDialogState(UserInfoSettingsState.ENABLE_MFA)
+                    handleDialogState(UserInfoSettingsState.DISABLE_MFA)
                   }
                 >
                   <Button sm red>
@@ -127,6 +128,10 @@ const UserInfoSettings = () => {
       />
       <EnableMFASuccess
         show={dialogState === UserInfoSettingsState.ENABLE_MFA_SUCCESS}
+      />
+      <DisableMFADialog
+        show={dialogState === UserInfoSettingsState.DISABLE_MFA}
+        handleCloseDialog={handleCloseDialog}
       />
     </>
   );

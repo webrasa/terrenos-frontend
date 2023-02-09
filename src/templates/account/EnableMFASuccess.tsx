@@ -22,7 +22,7 @@ const EnableMFASuccess = (props: IEnableMFASuccessProps) => {
       description="Your account security is our top priority. Any sign-in attempts will require both your password and a Two-Factor code."
       action={
         // eslint-disable-next-line @next/next/no-html-link-for-pages
-        <a href="/">
+        <a href="/dashboard/account">
           <Button sm>Go back to Account Settings</Button>
         </a>
       }
