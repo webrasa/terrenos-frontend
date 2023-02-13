@@ -1,7 +1,9 @@
+import type { CognitoUser } from '@aws-amplify/auth';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import { Auth } from 'aws-amplify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import type { Dispatch, SetStateAction } from 'react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -20,7 +22,11 @@ type ILoginForm = {
   password: string;
 };
 
-const LoginForm = () => {
+type ILoginFormProps = {
+  setChallengeMfaUser: Dispatch<SetStateAction<CognitoUser | null>>;
+};
+
+const LoginForm = (props: ILoginFormProps) => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<ILoginForm>();
   const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
@@ -49,12 +55,19 @@ const LoginForm = () => {
 
   const loginAsync = useAsync(async (data: ILoginForm) => {
     try {
-      await Auth.signIn({
+      const user: CognitoUser = await Auth.signIn({
         username: data.email,
         password: data.password,
       });
 
-      await router.push('/dashboard');
+      if (
+        user.challengeName === 'SOFTWARE_TOKEN_MFA' ||
+        user.challengeName === 'SMS_MFA'
+      ) {
+        props.setChallengeMfaUser(user);
+      } else {
+        await router.push('/dashboard');
+      }
     } catch (err: any) {
       if (err.code === 'UserNotConfirmedException') {
         await resendVerificationCode(data);

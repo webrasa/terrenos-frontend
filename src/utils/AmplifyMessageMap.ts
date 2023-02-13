@@ -20,6 +20,10 @@ export const mapAmplifyMessage = (err: any) => {
       return 'Incorrect username or password';
     }
 
+    if (/Invalid code received for user/i.test(err.message)) {
+      return 'Incorrect Two-Factor code';
+    }
+
     return err.message;
   }
 
