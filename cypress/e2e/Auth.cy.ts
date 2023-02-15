@@ -1,4 +1,8 @@
-import { interceptSignIn } from '../utils/Auth';
+import {
+  interceptMfaSignIn,
+  interceptSignIn,
+  interceptSuccessfullySignIn,
+} from '../utils/Auth';
 
 describe('Auth', () => {
   describe('Basic authentication', () => {
@@ -32,6 +36,7 @@ describe('Auth', () => {
       // Intercept AWS Cognito request when signing in
       // We automatically sign in the user when he has successfully confirm the email after signing up
       interceptSignIn(cy);
+      interceptSuccessfullySignIn(cy);
 
       // Fill the confirm-sign form
       cy.get('#verificationCode').type('RANDOM_VERIFICATION_CODE');
@@ -47,7 +52,7 @@ describe('Auth', () => {
         .should('exist');
     });
 
-    it.only('should sign up a new user using email and manually redirect to dashboard', () => {
+    it('should sign up a new user using email and manually redirect to dashboard', () => {
       // Start from the index page
       cy.visit('/');
 
@@ -115,6 +120,7 @@ describe('Auth', () => {
       // Intercept AWS Cognito request when signing in
       // We automatically sign in the user when he has successfully changed his password
       interceptSignIn(cy);
+      interceptSuccessfullySignIn(cy);
 
       // Fill the form
       cy.get('#verificationCode').type('RANDOM_VERIFICATION_CODE');
@@ -137,11 +143,43 @@ describe('Auth', () => {
 
       // Intercept AWS Cognito request when signing in
       interceptSignIn(cy);
+      interceptSuccessfullySignIn(cy);
 
       // Fill the login form
       cy.get('#email').type('random@email.com');
       cy.get('#password').type('RANDOM_PASSWORD_TEST');
       cy.findByRole('button', { name: 'Sign in' }).click();
+
+      // Verify if it has redirected to the dashboard
+      cy.location('pathname').should('eq', '/dashboard/');
+      cy.findByTestId('message-state')
+        .findByRole('link', { name: 'Add Todo' })
+        .should('exist');
+    });
+
+    it('should login with email and password with multi-factor authentication', () => {
+      // Start from the index page
+      cy.visit('/');
+
+      // Go to login page
+      cy.findByText('Login').click();
+
+      // Intercept AWS Cognito request when signing in
+      interceptSignIn(cy);
+      interceptMfaSignIn(cy);
+
+      // Fill the login form
+      cy.get('#email').type('random@email.com');
+      cy.get('#password').type('RANDOM_PASSWORD_TEST');
+      cy.findByRole('button', { name: 'Sign in' }).click();
+
+      cy.findByText('Two-Factor Authentication').should('exist');
+
+      interceptSuccessfullySignIn(cy);
+
+      // Fill the MFA form
+      cy.get('#mfaCode').type('123123');
+      cy.findByRole('button', { name: 'Verify' }).click();
 
       // Verify if it has redirected to the dashboard
       cy.location('pathname').should('eq', '/dashboard/');

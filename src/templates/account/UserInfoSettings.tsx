@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { Auth } from 'aws-amplify';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/button/Button';
 import { useAuth } from '@/hooks/UseAuth';
@@ -10,12 +11,26 @@ import { ChangeEmailDialog } from './ChangeEmailDialog';
 import { ChangePasswordDialog } from './ChangePasswordDialog';
 import { ChangePasswordSuccess } from './ChangePasswordSuccess';
 import { ConfirmChangeEmailDialog } from './ConfirmChangeEmailDialog';
+import { DisableMFADialog } from './DisableMFADialog';
+import { EnableMFADialog } from './EnableMFADialog';
+import { EnableMFASuccess } from './EnableMFASuccess';
 
 const UserInfoSettings = () => {
   const auth = useAuth();
   const [dialogState, setDialogState] = useState<UserInfoSettingsState>(
     UserInfoSettingsState.NONE
   );
+  const [preferredMFA, setPreferredMFA] = useState<string>('NOMFA');
+
+  useEffect(() => {
+    const getPreferredMFA = async () => {
+      const user = await Auth.currentAuthenticatedUser();
+
+      setPreferredMFA(await Auth.getPreferredMFA(user));
+    };
+
+    getPreferredMFA();
+  }, []);
 
   const handleDialogState = (state: UserInfoSettingsState) => {
     setDialogState(state);
@@ -58,6 +73,34 @@ const UserInfoSettings = () => {
               </button>
             }
           />
+
+          <SettingLine
+            name="Two-Factor Authentication"
+            description="Add an extra layer of security to your account."
+            action={
+              preferredMFA === 'NOMFA' ? (
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState(UserInfoSettingsState.ENABLE_MFA)
+                  }
+                >
+                  <Button sm>Enable</Button>
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleDialogState(UserInfoSettingsState.DISABLE_MFA)
+                  }
+                >
+                  <Button sm red>
+                    Disable
+                  </Button>
+                </button>
+              )
+            }
+          />
         </div>
       </CardSection>
 
@@ -76,6 +119,18 @@ const UserInfoSettings = () => {
       />
       <ChangePasswordSuccess
         show={dialogState === UserInfoSettingsState.CHANGE_PASSWORD_SUCCESS}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <EnableMFADialog
+        show={dialogState === UserInfoSettingsState.ENABLE_MFA}
+        handleDialogState={handleDialogState}
+        handleCloseDialog={handleCloseDialog}
+      />
+      <EnableMFASuccess
+        show={dialogState === UserInfoSettingsState.ENABLE_MFA_SUCCESS}
+      />
+      <DisableMFADialog
+        show={dialogState === UserInfoSettingsState.DISABLE_MFA}
         handleCloseDialog={handleCloseDialog}
       />
     </>

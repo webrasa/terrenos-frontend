@@ -25,6 +25,10 @@ const ChangeEmailDialog = (props: IChangeEmailDialogProps) => {
 
   const changeEmailAsync = useAsync(async (data: IChangeEmailForm) => {
     try {
+      if (data.email === '') {
+        throw new Error('Invalid email address format.');
+      }
+
       const user = await Auth.currentAuthenticatedUser();
       await Auth.updateUserAttributes(user, { email: data.email });
 
