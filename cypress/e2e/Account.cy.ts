@@ -3,6 +3,7 @@ import {
   interceptDiableMfa,
   interceptEnableMfa,
   interceptSignIn,
+  interceptSuccessfullySignIn,
 } from 'cypress/utils/Auth';
 
 describe('Account', () => {
@@ -16,6 +17,7 @@ describe('Account', () => {
 
       // Intercept AWS Cognito request when signing in
       interceptSignIn(cy);
+      interceptSuccessfullySignIn(cy);
 
       // Fill the login form
       cy.get('#email').type('random@email.com');
