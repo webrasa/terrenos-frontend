@@ -47,7 +47,7 @@ describe('Auth', () => {
         .should('exist');
     });
 
-    it.only('should sign up a new user using email and manually redirect to dashboard', () => {
+    it('should sign up a new user using email and manually redirect to dashboard', () => {
       // Start from the index page
       cy.visit('/');
 

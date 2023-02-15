@@ -1,4 +1,9 @@
-import { interceptChangeEmail, interceptSignIn } from 'cypress/utils/Auth';
+import {
+  interceptChangeEmail,
+  interceptDiableMfa,
+  interceptEnableMfa,
+  interceptSignIn,
+} from 'cypress/utils/Auth';
 
 describe('Account', () => {
   describe('Account settings', () => {
@@ -93,6 +98,46 @@ describe('Account', () => {
 
       // Verify if it has redirected to the dashboard
       cy.location('pathname').should('eq', '/dashboard/');
+    });
+
+    it('should simulate the MFA workflow', () => {
+      // Intercept AWS Cognito request
+      interceptEnableMfa(cy);
+
+      // Open the MFA dialog
+      cy.findAllByTestId('setting-line')
+        .filter(':contains("Two-Factor Authentication")')
+        .findByRole('button', { name: 'Enable' })
+        .click();
+
+      // Fill the MFA dialog
+      cy.findByRole('dialog').within(() => {
+        cy.get('#code').type('123123');
+
+        cy.findByRole('button', { name: 'Enable' }).click();
+
+        // Verify if it displays the success message
+        cy.findByText('Two-Factor Authentication has been enabled');
+        cy.findByText('Go back to Account Settings').click();
+      });
+
+      interceptDiableMfa(cy);
+
+      // Open the dialog to disable MFA
+      cy.findAllByTestId('setting-line')
+        .filter(':contains("Two-Factor Authentication")')
+        .findByRole('button', { name: 'Disable' })
+        .click();
+
+      // Diable the MFA dialog
+      cy.findByRole('dialog').within(() => {
+        cy.findByRole('button', { name: 'Disable' }).click();
+      });
+
+      // The MFA button should be back to enable state
+      cy.findAllByTestId('setting-line')
+        .filter(':contains("Two-Factor Authentication")')
+        .findByRole('button', { name: 'Enable' });
     });
   });
 });
