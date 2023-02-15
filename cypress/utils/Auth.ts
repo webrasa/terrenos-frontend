@@ -97,22 +97,6 @@ export const interceptEnableMfa = (cy: Cypress.cy & CyEventEmitter) => {
       method: 'POST',
       url: 'https://cognito-idp.us-east-1.amazonaws.com/',
       headers: {
-        'x-amz-target':
-          'AWSCognitoIdentityProviderService.AssociateSoftwareToken',
-      },
-    },
-    {
-      statusCode: 200,
-      body: {
-        Status: 'SUCCESS',
-      },
-    }
-  );
-  cy.intercept(
-    {
-      method: 'POST',
-      url: 'https://cognito-idp.us-east-1.amazonaws.com/',
-      headers: {
         'x-amz-target': 'AWSCognitoIdentityProviderService.VerifySoftwareToken',
       },
     },
