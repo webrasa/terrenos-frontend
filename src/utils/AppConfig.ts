@@ -1,9 +1,9 @@
 // FIXME: Update this configuration file
 export const AppConfig = {
-  site_name: 'Nextless',
-  title: 'Next JS SaaS Boilerplate | Nextless JS',
+  site_name: 'Modern MERN',
+  title: 'Node JS SaaS Boilerplate | Modern MERN',
   description:
-    'Building your SaaS faster with React SaaS Boilerplate Template with Nextless JS',
+    'Building your SaaS faster with React SaaS Boilerplate Template with Modern MERN',
   locale: 'en',
   mailto_contact: 'contact@creativedesignsguru.com',
 };

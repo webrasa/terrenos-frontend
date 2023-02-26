@@ -1,6 +1,6 @@
-# Nextless.js frontend for SaaS 🚀
+# Modern MERN frontend for SaaS 🚀
 
-Nextless.js frontend code for marketing website and user dashboard for your SaaS. It includes example code to build a Todo SaaS application. The landing page includes 9 components blocks: Navbar, Hero, Features, VerticalFeatures, Testimonial, Pricing, FAQ, Banner and Footer. All components are highly customizable so you can modify to meet your requirements.
+Modern MERN frontend code for marketing website and user dashboard for your SaaS. It includes example code to build a Todo SaaS application. The landing page includes 9 components blocks: Navbar, Hero, Features, VerticalFeatures, Testimonial, Pricing, FAQ, Banner and Footer. All components are highly customizable so you can modify to meet your requirements.
 
 The Dashboard displays all Todos created by the user in the table component. It also comes up with CRUD operation: you can create, read, update and delete a Todo with the provided code. And the most important things, the frontend is integrated to Stripe with some backend help.
 
@@ -74,7 +74,7 @@ On you can local environment, you can login to the dashboard by directly browse 
 
 ### Customization
 
-You can easily configure Nextless by making a search in the whole project with `FIXME:` for making quick customization. You also need to change the following files:
+You can easily configure Modern MERN by making a search in the whole project with `FIXME:` for making quick customization. You also need to change the following files:
 
 - `public/apple-touch-icon.png`, `public/favicon.ico`, `public/favicon-16x16.png` and `public/favicon-32x32.png`: your favicon, you can generate from https://favicon.io/favicon-converter/
 
@@ -82,7 +82,7 @@ You have access to the whole code source if you need further customization. The 
 
 ### Deploy to production with Amplify Hosting (like Vercel or Netlify on AWS)
 
-If you deploy for the first time, please checkout [this guide](https://github.com/Nextlessjs/Quick-Start/blob/main/PRODUCTION_DEPLOYMENT.md).
+If you deploy for the first time, please checkout [this guide](https://github.com/Nextlessjs/Modern-MERN-Quick-Start/blob/main/PRODUCTION_DEPLOYMENT.md).
 
 You can host the frontend on Vercel, Netlify or Cloudflare Pages without any issue. But, if you want to have everything inside your AWS account, you can host easily on Amplify Hosting. And, here is the steps.
 

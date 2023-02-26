@@ -20,15 +20,15 @@ module.exports = {
       colors: {
         // You can change the following color (primary) to match your branding
         primary: {
-          100: '#EBF4FF',
-          200: '#C3DAFE',
-          300: '#A3BFFA',
-          400: '#7F9CF5',
-          500: '#667EEA',
-          600: '#5A67D8',
-          700: '#4C51BF',
-          800: '#434190',
-          900: '#3C366B',
+          100: '#FFF5F5',
+          200: '#FED7D7',
+          300: '#FEB2B2',
+          400: '#FC8181',
+          500: '#F56565',
+          600: '#E53E3E',
+          700: '#C53030',
+          800: '#9B2C2C',
+          900: '#742A2A',
         },
         gray: {
           100: '#f7fafc',

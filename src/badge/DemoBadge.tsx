@@ -4,10 +4,10 @@
  */
 const DemoBadge = () => (
   <div className="fixed right-0 bottom-0 z-10">
-    <a href="https://nextlessjs.com" target="_blank" rel="noopener noreferrer">
+    <a href="https://modernmern.com" target="_blank" rel="noopener noreferrer">
       <div className="rounded-md bg-gray-900 py-2 px-3 font-semibold text-gray-100">
-        This is only a <span className="text-gray-500">demo</span> for
-        Nextless.js
+        This is only a <span className="text-gray-500">demo</span> for Modern
+        MERN
       </div>
     </a>
   </div>

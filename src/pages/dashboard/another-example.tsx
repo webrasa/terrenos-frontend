@@ -6,7 +6,7 @@ import type { NextPageWithLayout } from '../../utils/NextLayout';
 const AnotherExample: NextPageWithLayout = () => (
   <MessageState
     title="Another live demo"
-    description="Find another live demo in production built on top of Nextless.js"
+    description="Find another live demo in production built on top of Modern MERN / Nextless.js"
     cta={
       <a href="https://postmage.com" target="_blank" rel="noopener noreferrer">
         <Button>Go to Postmage.com</Button>

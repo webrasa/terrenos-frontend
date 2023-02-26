@@ -12,7 +12,7 @@ const Hero = () => (
         title={
           <>
             Build your SaaS faster with{'\n'}
-            <span className="text-primary-500">Nextless.js</span>
+            <span className="text-primary-500">Modern MERN</span>
           </>
         }
         description={
