@@ -10,3 +10,5 @@ export const intersectionObserverMock = () => ({
 window.IntersectionObserver = jest
   .fn()
   .mockImplementation(intersectionObserverMock);
+
+window.ResizeObserver = jest.fn().mockImplementation(intersectionObserverMock);

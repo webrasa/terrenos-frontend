@@ -26,6 +26,7 @@ jest.mock('@/templates/invite/Authenticated', () => ({
 describe('Join page', () => {
   describe('Render page', () => {
     it('should start with empty content and wait asynchronously to check if the user is signed in or not', async () => {
+      mockQuery.mockReturnValue({});
       const { container } = render(<Join />);
 
       // Technically we don't need to waitFor for updated status.
