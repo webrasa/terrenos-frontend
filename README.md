@@ -82,7 +82,7 @@ You have access to the whole code source if you need further customization. The 
 
 ### Deploy to production with Amplify Hosting (like Vercel or Netlify on AWS)
 
-If you deploy for the first time, please checkout [this guide](https://github.com/Nextlessjs/Modern-MERN-Quick-Start/blob/main/PRODUCTION_DEPLOYMENT.md).
+If you deploy for the first time, please checkout [this guide](https://github.com/Nextlessjs/Quick-Start-sql/blob/main/PRODUCTION_DEPLOYMENT.md).
 
 You can host the frontend on Vercel, Netlify or Cloudflare Pages without any issue. But, if you want to have everything inside your AWS account, you can host easily on Amplify Hosting. And, here is the steps.
 
