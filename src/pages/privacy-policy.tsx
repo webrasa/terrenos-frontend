@@ -11,7 +11,7 @@ const PrivacyPolicy = () => (
     <Navbar />
     <Background color="bg-primary-100">
       <Section>
-        <div className="prose mx-auto max-w-5xl rounded-sm bg-white py-12 px-4 shadow-md sm:px-16">
+        <div className="prose mx-auto max-w-5xl rounded-sm bg-white px-4 py-12 shadow-md sm:px-16">
           <h1>EXAMPLE PRIVACY POLICY - NEED TO UPDATE</h1>
           <p>Effective date: XX/XX/20XX</p>
           <h2>Information Collection and Use</h2>

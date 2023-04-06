@@ -28,7 +28,8 @@ describe('Todo', () => {
 
       // Edit the newly created todo
       cy.findByRole('link', { name: 'Edit' }).click();
-      cy.get('#title').clear().type('New random todo edited');
+      cy.get('#title').clear();
+      cy.get('#title').type('New random todo edited');
       cy.findByRole('button', { name: 'Save' }).click();
 
       // Verify the todo is correctly edited
@@ -68,7 +69,8 @@ describe('Todo', () => {
         .should('have.length', 3)
         .eq(1)
         .click();
-      cy.get('#title').clear().type('New random todo edited 2');
+      cy.get('#title').clear();
+      cy.get('#title').type('New random todo edited 2');
       cy.findByRole('button', { name: 'Save' }).click();
 
       // Verify the 2nd todo is correctly edited
@@ -100,7 +102,8 @@ describe('Todo', () => {
         .should('have.length', 4)
         .eq(3)
         .click();
-      cy.get('#title').clear().type('New random todo edited 5');
+      cy.get('#title').clear();
+      cy.get('#title').type('New random todo edited 5');
       cy.findByRole('button', { name: 'Save' }).click();
 
       // Verify the newly created is correctly edited

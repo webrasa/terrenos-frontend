@@ -21,14 +21,13 @@ describe('Auth', () => {
       // Fill the signup form
       cy.get('#email').type('random@email.com');
       cy.get('#password').type('RANDOM_PASSWORD_TEST');
-      cy.findByRole('button', { name: 'Sign up' })
-        .click()
-        .should(() => {
-          // Verify the session storage is correctly set
-          expect(sessionStorage.getItem('confirm-signup-email')).to.eq(
-            'random@email.com'
-          );
-        });
+      cy.findByRole('button', { name: 'Sign up' }).click();
+      cy.findByRole('button', { name: 'Sign up' }).should(() => {
+        // Verify the session storage is correctly set
+        expect(sessionStorage.getItem('confirm-signup-email')).to.eq(
+          'random@email.com'
+        );
+      });
 
       // Verify if it has successfully redirected to `confirm-signup` page
       cy.location('pathname').should('eq', '/confirm-signup/');
@@ -67,14 +66,13 @@ describe('Auth', () => {
       // Fill the signup form
       cy.get('#email').type('random@email.com');
       cy.get('#password').type('RANDOM_PASSWORD_TEST');
-      cy.findByRole('button', { name: 'Sign up' })
-        .click()
-        .should(() => {
-          // Verify the session storage is correctly set
-          expect(sessionStorage.getItem('confirm-signup-email')).to.eq(
-            'random@email.com'
-          );
-        });
+      cy.findByRole('button', { name: 'Sign up' }).click();
+      cy.findByRole('button', { name: 'Sign up' }).should(() => {
+        // Verify the session storage is correctly set
+        expect(sessionStorage.getItem('confirm-signup-email')).to.eq(
+          'random@email.com'
+        );
+      });
 
       // Verify if it has successfully redirected to `confirm-signup` page
       cy.location('pathname').should('eq', '/confirm-signup/');
@@ -105,14 +103,13 @@ describe('Auth', () => {
 
       // Fill the password recovery form
       cy.get('#email').type('random@email.com');
-      cy.findByRole('button', { name: 'Send email' })
-        .click()
-        .should(() => {
-          // Verify the session storage is correctly set
-          expect(sessionStorage.getItem('confirm-forgot-password-email')).to.eq(
-            'random@email.com'
-          );
-        });
+      cy.findByRole('button', { name: 'Send email' }).click();
+      cy.findByRole('button', { name: 'Send email' }).should(() => {
+        // Verify the session storage is correctly set
+        expect(sessionStorage.getItem('confirm-forgot-password-email')).to.eq(
+          'random@email.com'
+        );
+      });
 
       // Verify if it has successfully redirected
       cy.location('pathname').should('eq', '/confirm-forgot-password/');

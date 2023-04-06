@@ -46,7 +46,7 @@ const Tooltip = ({
       {!hideLabel && open && (
         <div
           ref={floating}
-          className="my-1 rounded bg-gray-600 py-1 px-2 text-sm font-medium text-white"
+          className="my-1 rounded bg-gray-600 px-2 py-1 text-sm font-medium text-white"
           style={{
             position: strategy,
             top: y ?? 0,

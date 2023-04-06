@@ -18,7 +18,7 @@ const FullCenterSection = (props: IFullCenterSectionProps) => (
     <div className="w-full max-w-md text-center">
       <Logo xl />
 
-      <div className="mt-5 rounded-md bg-white py-7 px-6">
+      <div className="mt-5 rounded-md bg-white px-6 py-7">
         {props.icon && <div className="mb-1">{props.icon}</div>}
 
         <h1 className="text-xl font-semibold">{props.title}</h1>

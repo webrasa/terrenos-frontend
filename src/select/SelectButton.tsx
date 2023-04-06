@@ -13,7 +13,7 @@ type ISelectButtonProps = {
  */
 const SelectButton = (props: ISelectButtonProps) => (
   <Listbox.Button
-    className="relative w-full cursor-default rounded-md border border-gray-300 py-2 pr-10 pl-3 text-left font-semibold text-gray-800 shadow-sm focus:border-primary-300 focus:outline-none focus:ring focus:ring-primary-200/50"
+    className="relative w-full cursor-default rounded-md border border-gray-300 py-2 pl-3 pr-10 text-left font-semibold text-gray-800 shadow-sm focus:border-primary-300 focus:outline-none focus:ring focus:ring-primary-200/50"
     data-testid="team-selection"
   >
     <span className="block truncate">{props.text}</span>
