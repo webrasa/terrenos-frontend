@@ -23,7 +23,7 @@ const ConfirmSignUpForm = () => {
   const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
 
   useEffect(() => {
-    Hub.listen('auth', ({ payload }) => {
+    const unsubscribe = Hub.listen('auth', ({ payload }) => {
       const { event } = payload;
 
       if (event === 'autoSignIn') {
@@ -32,6 +32,8 @@ const ConfirmSignUpForm = () => {
         router.push('/login');
       }
     });
+
+    return unsubscribe;
   }, []);
 
   const verifyAsync = useAsync(async (data: IConfirmSignUpForm) => {
