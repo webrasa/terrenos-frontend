@@ -17,7 +17,7 @@ describe('DetailTable', () => {
           <tr>
             <td>Content</td>
           </tr>
-        </DetailTable>
+        </DetailTable>,
       );
 
       const children = screen.queryByText('Content');
@@ -36,7 +36,7 @@ describe('DetailTable', () => {
           }
         >
           {[]}
-        </DetailTable>
+        </DetailTable>,
       );
 
       const children = screen.queryByText('No data to display');
@@ -56,7 +56,7 @@ describe('DetailTable', () => {
           emptyDataText={'Empty data text'}
         >
           {[]}
-        </DetailTable>
+        </DetailTable>,
       );
 
       const children = screen.queryByText('Empty data text');

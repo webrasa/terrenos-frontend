@@ -11,7 +11,7 @@ type IMenuInternalLinkProps = {
 
 const MenuInternalLink = (
   props: React.PropsWithChildren<LinkProps> & IMenuInternalLinkProps,
-  ref: ForwardedRef<HTMLAnchorElement>
+  ref: ForwardedRef<HTMLAnchorElement>,
 ) => {
   const { href, children, active, ...rest } = props;
 
@@ -21,7 +21,7 @@ const MenuInternalLink = (
       href={href}
       className={classNames(
         'flex w-full justify-between py-2 px-4 text-left text-sm font-semibold leading-5',
-        active ? 'bg-primary-500 text-white' : 'text-gray-700'
+        active ? 'bg-primary-500 text-white' : 'text-gray-700',
       )}
       {...rest}
     >

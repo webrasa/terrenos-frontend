@@ -14,7 +14,7 @@ describe('FormGlobalError', () => {
       render(<FormGlobalError error="RANDOM_ERROR_MESSAGE" />);
 
       const errorMessage = screen.queryByText(
-        'Unexpected error occurred, please try again'
+        'Unexpected error occurred, please try again',
       );
       expect(errorMessage).toBeInTheDocument();
     });
@@ -23,7 +23,7 @@ describe('FormGlobalError', () => {
       render(<FormGlobalError error="incorrect_member_id" />);
 
       const errorMessage = screen.queryByText(
-        "You can't perform this action, the member doesn't exist"
+        "You can't perform this action, the member doesn't exist",
       );
       expect(errorMessage).toBeInTheDocument();
     });

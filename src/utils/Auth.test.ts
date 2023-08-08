@@ -12,14 +12,14 @@ describe('Auth utils', () => {
       expect(
         requiredRoles(
           [MemberRole.OWNER, MemberRole.ADMIN],
-          MemberRole.READ_ONLY
-        )
+          MemberRole.READ_ONLY,
+        ),
       ).toBeFalsy();
     });
 
     it('should return true when the user match the required role', () => {
       expect(
-        requiredRoles([MemberRole.OWNER, MemberRole.ADMIN], MemberRole.ADMIN)
+        requiredRoles([MemberRole.OWNER, MemberRole.ADMIN], MemberRole.ADMIN),
       ).toBeTruthy();
     });
   });
@@ -53,7 +53,7 @@ describe('Auth utils', () => {
             displayName: 'display_name_3',
           },
         ],
-        'RANDOM_ID'
+        'RANDOM_ID',
       );
 
       expect(ind).toEqual(-1);
@@ -75,7 +75,7 @@ describe('Auth utils', () => {
             displayName: 'display_name_3',
           },
         ],
-        'id_2'
+        'id_2',
       );
 
       expect(ind).toEqual(1);

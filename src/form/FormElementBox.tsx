@@ -22,7 +22,7 @@ const FormElementBox = (props: IFormElementBoxProps) => {
     'form-element-box',
     'flex',
     'items-center',
-    props.colSpanSize
+    props.colSpanSize,
   );
 
   return (

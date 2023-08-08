@@ -32,7 +32,7 @@ describe('Section', () => {
       render(
         <Section title="Random title" description="Random description">
           Children
-        </Section>
+        </Section>,
       );
 
       const children = screen.queryByText('Children');

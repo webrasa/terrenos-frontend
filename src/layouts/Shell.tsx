@@ -10,12 +10,11 @@ import { Meta } from './Meta';
 // You can also do the same the landing pages if needed.
 
 // eslint-disable-next-line react/display-name
-export const getShell = (title: string) => (page: ReactElement) =>
-  (
-    <>
-      <Meta title={AppConfig.title} description={AppConfig.description} />
-      <AuthProvider>
-        <Shell title={title}>{page}</Shell>
-      </AuthProvider>
-    </>
-  );
+export const getShell = (title: string) => (page: ReactElement) => (
+  <>
+    <Meta title={AppConfig.title} description={AppConfig.description} />
+    <AuthProvider>
+      <Shell title={title}>{page}</Shell>
+    </AuthProvider>
+  </>
+);

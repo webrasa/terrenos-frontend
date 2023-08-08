@@ -45,7 +45,7 @@ const Index: NextPageWithLayout = () => {
         <UpgradeTooltip
           hideLabel={requiredRoles(
             [MemberRole.OWNER, MemberRole.ADMIN],
-            data.role
+            data.role,
           )}
         >
           <DisableableLink href="/dashboard/add-todo">

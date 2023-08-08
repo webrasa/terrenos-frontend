@@ -15,7 +15,7 @@ describe('ConfirmDialog', () => {
           show={false}
           handleCancel={() => {}}
           button={'button'}
-        />
+        />,
       );
 
       const title = screen.queryByText('Random title');
@@ -32,7 +32,7 @@ describe('ConfirmDialog', () => {
           show={true}
           handleCancel={handleCancel}
           button={'button'}
-        />
+        />,
       );
 
       const title = screen.queryByText('Random title');
@@ -53,11 +53,11 @@ describe('ConfirmDialog', () => {
           formGlobalError="random_global_error"
           handleCancel={() => {}}
           button={'button'}
-        />
+        />,
       );
 
       const formGlobalError = screen.queryByText(
-        'Unexpected error occurred, please try again'
+        'Unexpected error occurred, please try again',
       );
       expect(formGlobalError).toBeInTheDocument();
     });

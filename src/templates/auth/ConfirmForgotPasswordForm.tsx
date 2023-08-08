@@ -29,7 +29,7 @@ const ConfirmForgotPasswordForm = () => {
       await Auth.forgotPasswordSubmit(
         email,
         data.verificationCode,
-        data.password
+        data.password,
       );
 
       await Auth.signIn({

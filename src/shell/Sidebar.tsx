@@ -42,7 +42,7 @@ const Sidebar = (props: ISidebarProps) => {
       'translate-x-0': props.show,
       '-translate-x-full': !props.show,
     },
-    'lg:translate-x-0'
+    'lg:translate-x-0',
   );
 
   return (

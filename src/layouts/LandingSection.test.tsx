@@ -22,7 +22,7 @@ describe('LandingSection', () => {
 
     it('should always render children even if the subtitle is defined', () => {
       render(
-        <LandingSection subtitle="Random subtitle">Children</LandingSection>
+        <LandingSection subtitle="Random subtitle">Children</LandingSection>,
       );
 
       const children = screen.queryByText('Children');
@@ -34,7 +34,7 @@ describe('LandingSection', () => {
       render(
         <LandingSection description="Random description">
           Children
-        </LandingSection>
+        </LandingSection>,
       );
 
       const children = screen.queryByText('Children');
@@ -50,7 +50,7 @@ describe('LandingSection', () => {
           description="Random description"
         >
           Children
-        </LandingSection>
+        </LandingSection>,
       );
 
       const children = screen.queryByText('Children');

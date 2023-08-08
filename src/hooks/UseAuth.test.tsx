@@ -53,9 +53,9 @@ const setUserProfileServer = (server: SetupServerApi) => {
               displayName: 'Team Name 3',
             },
           ],
-        })
+        }),
       );
-    })
+    }),
   );
 };
 
@@ -144,7 +144,7 @@ describe('UseAuth', () => {
       };
 
       expect(() => renderHook(() => useAuth())).toThrow(
-        'hook must be wrapped within'
+        'hook must be wrapped within',
       );
 
       // Restore the original console.error

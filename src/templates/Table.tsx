@@ -62,7 +62,7 @@ const Table = (props: ITableProps) => {
             <th>Title</th>
             {requiredRoles(
               [MemberRole.OWNER, MemberRole.ADMIN],
-              props.role
+              props.role,
             ) && <th className="w-20 sm:w-60">Action</th>}
           </tr>
         }
@@ -70,7 +70,7 @@ const Table = (props: ITableProps) => {
           <>
             {requiredRoles(
               [MemberRole.OWNER, MemberRole.ADMIN],
-              props.role
+              props.role,
             ) && (
               <Link href="/dashboard/add-todo">
                 <Button sm>New Todo</Button>
@@ -84,7 +84,7 @@ const Table = (props: ITableProps) => {
             <td className="font-semibold text-gray-800">{elt.title}</td>
             {requiredRoles(
               [MemberRole.OWNER, MemberRole.ADMIN],
-              props.role
+              props.role,
             ) && (
               <td>
                 <Link href={`/dashboard/edit-todo/${elt.id}`}>Edit</Link>

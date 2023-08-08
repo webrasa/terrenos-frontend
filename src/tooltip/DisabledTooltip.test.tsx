@@ -9,7 +9,7 @@ describe('DisabledTooltip', () => {
       render(
         <DisabledTooltip label="Random label">
           <>Random text</>
-        </DisabledTooltip>
+        </DisabledTooltip>,
       );
 
       const children = screen.queryByText('Random text');
@@ -20,7 +20,7 @@ describe('DisabledTooltip', () => {
       render(
         <DisabledTooltip label="Random label" hideLabel={true}>
           <>Random text</>
-        </DisabledTooltip>
+        </DisabledTooltip>,
       );
 
       const children = screen.getByText('Random text');

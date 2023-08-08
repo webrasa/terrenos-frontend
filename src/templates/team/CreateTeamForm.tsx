@@ -42,7 +42,7 @@ const CreateTeamForm = () => {
       });
 
       await mutate(
-        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`,
       );
       setCurrentTeamInd(teamList.length);
       await router.push('/dashboard');

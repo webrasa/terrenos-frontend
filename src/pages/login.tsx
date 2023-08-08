@@ -8,7 +8,7 @@ import { AppConfig } from '@/utils/AppConfig';
 
 const Login = () => {
   const [challengeMfa, setChallengeMfaUser] = useState<CognitoUser | null>(
-    null
+    null,
   );
 
   return (

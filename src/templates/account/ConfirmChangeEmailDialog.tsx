@@ -32,14 +32,14 @@ const ConfirmChangeEmailDialog = (props: IConfirmChangeEmailDialogProps) => {
       try {
         await Auth.verifyCurrentUserAttributeSubmit(
           'email',
-          data.verificationCode
+          data.verificationCode,
         );
 
         router.reload();
       } catch (err) {
         setFormGlobalError(mapAmplifyMessageSettings(err));
       }
-    }
+    },
   );
 
   const handleSubmitDialog = handleSubmit(async (data) => {

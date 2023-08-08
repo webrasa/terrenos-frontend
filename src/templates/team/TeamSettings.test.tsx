@@ -19,7 +19,7 @@ describe('TeamSettings', () => {
             hasStripeCustomerId: false,
             role: MemberRole.ADMIN,
           }}
-        />
+        />,
       );
 
       const changeDisplayNameButton = screen.queryByRole('button', {
@@ -40,7 +40,7 @@ describe('TeamSettings', () => {
             hasStripeCustomerId: false,
             role: MemberRole.ADMIN,
           }}
-        />
+        />,
       );
 
       const changeDisplayNameButton = screen.getByRole('button', {
@@ -68,7 +68,7 @@ describe('TeamSettings', () => {
             hasStripeCustomerId: false,
             role: MemberRole.ADMIN,
           }}
-        />
+        />,
       );
 
       const deleteButton = screen.getByRole('button', { name: 'Delete' });

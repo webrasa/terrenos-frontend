@@ -29,7 +29,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
     const customerPortalResult = await API.post(
       'backend',
       `/${currentTeam.id}/billing/customer-portal`,
-      {}
+      {},
     );
 
     window.location.assign(customerPortalResult.url);
@@ -51,7 +51,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
                 hideLabel={
                   requiredRoles(
                     [MemberRole.OWNER, MemberRole.ADMIN],
-                    props.settings.role
+                    props.settings.role,
                   ) || customerPortalAsync.pending
                 }
               >
@@ -67,7 +67,7 @@ const BillingSettings = (props: IBillingSettingsProps) => {
               <UpgradeTooltip
                 hideLabel={requiredRoles(
                   [MemberRole.OWNER, MemberRole.ADMIN],
-                  props.settings.role
+                  props.settings.role,
                 )}
               >
                 <DisableableLink href="/dashboard/upgrade">

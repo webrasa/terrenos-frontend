@@ -29,7 +29,7 @@ const Authenticated = () => {
   const { data, error } = useSWR<IJoinInfo>(
     router.isReady
       ? `/team/${router.query.teamId}/join/${router.query.verificationCode}`
-      : null
+      : null,
   );
   const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
   const { providerInfo, setCurrentTeamInd } = useAuth();
@@ -43,11 +43,11 @@ const Authenticated = () => {
           body: {
             email: providerInfo.email,
           },
-        }
+        },
       );
 
       const profile = await mutate<UserProfile>(
-        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`,
       );
       const ind = findTeamInd(profile?.teamList, router.query.teamId);
       setCurrentTeamInd(ind);

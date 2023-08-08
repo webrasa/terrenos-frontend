@@ -6,7 +6,7 @@ type IDisableableLinkProps = {
 };
 
 const DisableableLink = (
-  props: React.PropsWithChildren<LinkProps> & IDisableableLinkProps
+  props: React.PropsWithChildren<LinkProps> & IDisableableLinkProps,
 ) => {
   const { disabled, children, ...rest } = props;
 

@@ -17,7 +17,7 @@ describe('DisableableLink', () => {
       render(
         <DisableableLink href="/" disabled>
           Homepage
-        </DisableableLink>
+        </DisableableLink>,
       );
 
       const button = screen.queryByRole('button', {

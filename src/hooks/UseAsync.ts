@@ -26,7 +26,7 @@ const useIsMounted = (): (() => boolean) => {
  */
 export const useAsync = <T>(
   fn: (...args: any[]) => Promise<T>,
-  immediate = false
+  immediate = false,
 ) => {
   const [pending, setPending] = useState(false);
   const [value, setValue] = useState<T | null>(null);
@@ -42,7 +42,7 @@ export const useAsync = <T>(
         .then((response: T) => isMounted() && setValue(response))
         .finally(() => isMounted() && setPending(false));
     },
-    [fn, isMounted]
+    [fn, isMounted],
   );
 
   useEffect(() => {

@@ -12,7 +12,7 @@ const EditTodo: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { data } = useSWR(
-    router.isReady ? `/${currentTeam.id}/todo/${router.query.id}` : null
+    router.isReady ? `/${currentTeam.id}/todo/${router.query.id}` : null,
   );
 
   if (!data) {

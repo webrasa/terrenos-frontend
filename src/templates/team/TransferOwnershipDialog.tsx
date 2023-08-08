@@ -44,7 +44,7 @@ const TransferOwnershipDialog = (props: ITransferOwnershipDialogProps) => {
         await API.put(
           'backend',
           `/team/${currentTeam.id}/transfer-ownership/${data.member.id}`,
-          {}
+          {},
         );
 
         await mutate(`/team/${currentTeam.id}/list-members`);
@@ -53,7 +53,7 @@ const TransferOwnershipDialog = (props: ITransferOwnershipDialogProps) => {
       } catch (err) {
         setExceptionToFormGlobal(setFormGlobalError, err);
       }
-    }
+    },
   );
 
   const handleSubmitDialog = handleSubmit(async (data) => {

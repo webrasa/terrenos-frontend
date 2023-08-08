@@ -49,7 +49,7 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
   const editMemberAsync = useAsync(async (data: IEditMemberForm) => {
     if (props.action.type !== TeamMembersActionType.EDIT_MEMBER) {
       throw new Error(
-        'The edit dialog should only appears when the user selects one user to edit'
+        'The edit dialog should only appears when the user selects one user to edit',
       );
     }
 
@@ -61,7 +61,7 @@ const EditMemberDialog = (props: IEditMemberDialogProps) => {
           body: {
             role: data.roleOption.id,
           },
-        }
+        },
       );
 
       await mutate(`/team/${currentTeam.id}/list-members`);

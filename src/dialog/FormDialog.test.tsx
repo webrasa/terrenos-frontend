@@ -18,7 +18,7 @@ describe('FormDialog', () => {
           handleSubmit={() => {}}
         >
           Random children
-        </FormDialog>
+        </FormDialog>,
       );
 
       const title = screen.queryByText('Random title');
@@ -38,7 +38,7 @@ describe('FormDialog', () => {
           handleSubmit={() => {}}
         >
           Random children
-        </FormDialog>
+        </FormDialog>,
       );
 
       const cancelButton = screen.getByRole('button', { name: 'Cancel' });
@@ -59,7 +59,7 @@ describe('FormDialog', () => {
           handleSubmit={() => {}}
         >
           Random children
-        </FormDialog>
+        </FormDialog>,
       );
 
       const error = screen.queryByText('random_error_message');
@@ -78,11 +78,11 @@ describe('FormDialog', () => {
           handleSubmit={() => {}}
         >
           Random children
-        </FormDialog>
+        </FormDialog>,
       );
 
       const error = screen.queryByText(
-        'Unexpected error occurred, please try again'
+        'Unexpected error occurred, please try again',
       );
       expect(error).toBeInTheDocument();
     });
@@ -99,7 +99,7 @@ describe('FormDialog', () => {
           hideCancelButton={true}
         >
           Random children
-        </FormDialog>
+        </FormDialog>,
       );
 
       const cancelButton = screen.queryByRole('button', { name: 'Cancel' });
@@ -123,7 +123,7 @@ describe('FormDialog', () => {
           handleSubmit={handleSubmit}
         >
           Random children
-        </FormDialog>
+        </FormDialog>,
       );
 
       const saveButton = screen.getByRole('button', { name: 'Save' });
@@ -147,7 +147,7 @@ describe('FormDialog', () => {
           handleSubmit={handleSubmit}
         >
           <button>Random children</button>
-        </FormDialog>
+        </FormDialog>,
       );
 
       const saveButton = screen.getByRole('button', { name: 'Save' });

@@ -17,7 +17,7 @@ describe('BillingSettings', () => {
             hasStripeCustomerId: false,
             role: MemberRole.ADMIN,
           }}
-        />
+        />,
       );
 
       const manageButton = screen.queryByRole('button', {
@@ -38,7 +38,7 @@ describe('BillingSettings', () => {
             hasStripeCustomerId: false,
             role: MemberRole.ADMIN,
           }}
-        />
+        />,
       );
 
       const manageButton = screen.queryByRole('button', {
@@ -59,7 +59,7 @@ describe('BillingSettings', () => {
             hasStripeCustomerId: true,
             role: MemberRole.ADMIN,
           }}
-        />
+        />,
       );
 
       const manageButton = screen.queryByRole('button', {

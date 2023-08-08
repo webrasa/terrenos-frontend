@@ -7,5 +7,5 @@ export const requiredRoles = (roleList: MemberRole[], role: MemberRole) => {
 
 export const findTeamInd = (
   teamList: Team[] | undefined,
-  teamId: string | string[] | undefined
+  teamId: string | string[] | undefined,
 ) => teamList?.findIndex((team) => team.id === teamId) || 0;

@@ -40,13 +40,13 @@ const ChangeTeamDisplayName = (props: IChangeTeamDisplayNameProps) => {
         });
 
         await mutate(
-          `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+          `/user/profile?email=${encodeURIComponent(providerInfo.email)}`,
         );
         props.handleCloseDialog();
       } catch (err) {
         setFormError(setError, err, setFormGlobalError, handleGlobalError);
       }
-    }
+    },
   );
 
   const handleSubmitDialog = handleSubmit(async (data) => {

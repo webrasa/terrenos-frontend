@@ -240,11 +240,11 @@ describe('Team', () => {
       // Get team ID
       cy.request(
         'GET',
-        `${Cypress.env('API_URL')}/user/profile?email=test%40example.com`
+        `${Cypress.env('API_URL')}/user/profile?email=test%40example.com`,
       )
         .then((response: Cypress.Response<UserProfile>) => {
           const teamList = response.body.teamList.filter(
-            (elt) => elt.displayName === teamName
+            (elt) => elt.displayName === teamName,
           );
 
           expect(teamList).to.have.length(1);
@@ -258,10 +258,10 @@ describe('Team', () => {
         .then((team) => {
           cy.request(
             'GET',
-            `${Cypress.env('API_URL')}/team/${team.id}/list-members`
+            `${Cypress.env('API_URL')}/team/${team.id}/list-members`,
           ).then((response: Cypress.Response<IMemberList>) => {
             const memberList = response.body.inviteList.filter(
-              (elt) => elt.email === 'random@email.com'
+              (elt) => elt.email === 'random@email.com',
             );
 
             expect(memberList).to.have.length(1);
@@ -280,7 +280,7 @@ describe('Team', () => {
         teamId: string;
       }>('@member').then((member) => {
         cy.visit(
-          `/join?teamId=${member.teamId}&verificationCode=${member.newMember.memberId}`
+          `/join?teamId=${member.teamId}&verificationCode=${member.newMember.memberId}`,
         );
       });
 

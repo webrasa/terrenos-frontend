@@ -26,7 +26,7 @@ const DeleteTeamDialog = (props: IDeleteTeamDialogProps) => {
       await API.del('backend', `/team/${currentTeam.id}`, {});
 
       await mutate(
-        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+        `/user/profile?email=${encodeURIComponent(providerInfo.email)}`,
       );
       setCurrentTeamInd(0);
       await router.push('/dashboard');

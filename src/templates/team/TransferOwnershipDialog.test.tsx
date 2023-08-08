@@ -16,7 +16,7 @@ describe('TransferOwnershipDialog', () => {
           show={false}
           list={[]}
           handleCloseDialog={() => {}}
-        />
+        />,
       );
 
       const title = screen.queryByText('Transfer team ownership');
@@ -45,7 +45,7 @@ describe('TransferOwnershipDialog', () => {
             },
           ]}
           handleCloseDialog={() => {}}
-        />
+        />,
       );
 
       const selectButton = screen.getByRole('button', {

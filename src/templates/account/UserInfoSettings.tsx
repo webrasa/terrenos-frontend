@@ -18,7 +18,7 @@ import { EnableMFASuccess } from './EnableMFASuccess';
 const UserInfoSettings = () => {
   const auth = useAuth();
   const [dialogState, setDialogState] = useState<UserInfoSettingsState>(
-    UserInfoSettingsState.NONE
+    UserInfoSettingsState.NONE,
   );
   const [preferredMFA, setPreferredMFA] = useState<string>('NOMFA');
 

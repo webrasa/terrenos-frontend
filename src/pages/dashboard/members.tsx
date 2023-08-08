@@ -18,7 +18,7 @@ const Members = () => {
   const router = useRouter();
 
   const { data } = useSWR<IMemberList>(
-    router.isReady ? `/team/${currentTeam.id}/list-members` : null
+    router.isReady ? `/team/${currentTeam.id}/list-members` : null,
   );
 
   if (!data) {
