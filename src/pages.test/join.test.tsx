@@ -78,7 +78,7 @@ describe('Join page', () => {
       expect(mockSetItem.mock.calls[0][0]).toEqual('join-team-path');
       expect(mockSetItem.mock.calls[0][1]).toContain('RANDOM_TEAM_ID');
       expect(mockSetItem.mock.calls[0][1]).toContain(
-        'RANDOM_VERIFICATION_CODE'
+        'RANDOM_VERIFICATION_CODE',
       );
     });
 
@@ -102,7 +102,7 @@ describe('Join page', () => {
       });
 
       const authenticated = screen.queryByText(
-        'Authenticated component mocked'
+        'Authenticated component mocked',
       );
       expect(authenticated).toBeInTheDocument();
     });

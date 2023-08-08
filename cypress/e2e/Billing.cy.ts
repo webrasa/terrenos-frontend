@@ -38,7 +38,7 @@ describe('Billing', () => {
 
             res.send({ statusCode: 200, body: {} });
           });
-        }
+        },
       );
 
       // Select the PRO plan
@@ -77,7 +77,7 @@ describe('Billing', () => {
           body: {
             url: 'RANDOM_REDIRECT_URL',
           },
-        }
+        },
       );
 
       // Verify upgrade button is hidden for non-FREE user
@@ -90,7 +90,7 @@ describe('Billing', () => {
       // Only in testing environment, it redirects to a random url
       cy.location('pathname').should(
         'eq',
-        '/dashboard/settings/RANDOM_REDIRECT_URL/'
+        '/dashboard/settings/RANDOM_REDIRECT_URL/',
       );
     });
   });

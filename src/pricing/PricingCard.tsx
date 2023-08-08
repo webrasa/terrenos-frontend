@@ -36,7 +36,7 @@ const PricingCard = (props: IPricingCardProps) => {
       transform: props.popular,
       'scale-105': props.popular,
       'z-10': props.popular,
-    }
+    },
   );
 
   const cardNameClass = classNames(
@@ -46,7 +46,7 @@ const PricingCard = (props: IPricingCardProps) => {
     'text-gray-700',
     {
       'mt-4': props.popular,
-    }
+    },
   );
 
   return (

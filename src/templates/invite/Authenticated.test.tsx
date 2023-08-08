@@ -43,8 +43,8 @@ describe('Authenticated', () => {
           '/team/RANDOM_TEAM_ID/join/RANDOM_VERIFICATION_CODE',
           (_req, res, ctx) => {
             return res(ctx.status(500));
-          }
-        )
+          },
+        ),
       );
 
       swrConfigWithAuthRender(<Authenticated />);
@@ -70,10 +70,10 @@ describe('Authenticated', () => {
             return res(
               ctx.json({
                 displayName: 'RANDOM_TEAM_DISPLAY_NAME',
-              })
+              }),
             );
-          }
-        )
+          },
+        ),
       );
 
       swrConfigWithAuthRender(<Authenticated />);

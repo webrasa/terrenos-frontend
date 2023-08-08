@@ -14,7 +14,7 @@ export type IError<T> = {
  */
 const setServerError = <T>(
   setError: (fieldName: keyof T, error: ErrorOption) => void,
-  error: Array<IError<T>>
+  error: Array<IError<T>>,
 ) =>
   error.forEach((elt) => {
     setError(elt.param, {
@@ -32,7 +32,7 @@ export const setFormError = <T>(
   setError: (fieldName: keyof T, error: ErrorOption) => void,
   exception: any,
   setFormGlobalError: Dispatch<SetStateAction<string | null>>,
-  handleGlobalError: (error: any) => void
+  handleGlobalError: (error: any) => void,
 ) => {
   const errors = exception?.response?.data?.errors;
 
@@ -53,7 +53,7 @@ export const setFormError = <T>(
 
 export const setExceptionToFormGlobal = (
   setFormGlobalError: Dispatch<SetStateAction<string | null>>,
-  exception: any
+  exception: any,
 ) => {
   const errors = exception?.response?.data?.errors;
 

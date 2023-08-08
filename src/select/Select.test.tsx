@@ -14,7 +14,7 @@ describe('Select', () => {
           currentLabel="RANDOM_TEAM_LABEL"
           handleChange={handleChange}
           optionList={[]}
-        />
+        />,
       );
 
       const selectButton = screen.queryByRole('button', {
@@ -41,7 +41,7 @@ describe('Select', () => {
               label: 'RANDOM_TEAM_LABEL2',
             },
           ]}
-        />
+        />,
       );
 
       // Click on the select button and show the option list

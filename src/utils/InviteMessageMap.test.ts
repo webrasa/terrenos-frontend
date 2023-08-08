@@ -4,7 +4,7 @@ describe('InviteMessageMap', () => {
   describe('mapInviteMessage function', () => {
     it("should throw the input as an exception when the errors doesn't follow the expected schema", () => {
       expect(() => mapInviteMessage('random parameter')).toThrow(
-        'random parameter'
+        'random parameter',
       );
     });
 

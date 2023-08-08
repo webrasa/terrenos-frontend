@@ -14,7 +14,7 @@ describe('SuccessDialog', () => {
           title="Random title"
           description="Random description"
           action={<button>Button</button>}
-        />
+        />,
       );
 
       const title = screen.queryByText('Random title');
@@ -29,7 +29,7 @@ describe('SuccessDialog', () => {
           title="Random title"
           description="Random description"
           action={<button>Button</button>}
-        />
+        />,
       );
 
       const title = screen.queryByText('Random title');

@@ -13,7 +13,7 @@ describe('TeamTable', () => {
   describe('Render method', () => {
     it("shouldn't show any action buttons when the list is empty", () => {
       authProviderRender(
-        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />
+        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />,
       );
 
       const editButton = screen.queryByText('Edit');
@@ -43,7 +43,7 @@ describe('TeamTable', () => {
       ];
 
       authProviderRender(
-        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />
+        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />,
       );
 
       const editButtons = screen.queryAllByText('Edit');
@@ -73,7 +73,7 @@ describe('TeamTable', () => {
       ];
 
       authProviderRender(
-        <TeamTable list={[]} inviteList={inviteList} role={MemberRole.ADMIN} />
+        <TeamTable list={[]} inviteList={inviteList} role={MemberRole.ADMIN} />,
       );
 
       const editButtons = screen.queryAllByText('Edit');
@@ -93,7 +93,7 @@ describe('TeamTable', () => {
       ];
 
       authProviderRender(
-        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />
+        <TeamTable list={list} inviteList={[]} role={MemberRole.ADMIN} />,
       );
 
       // Invite member
@@ -147,7 +147,7 @@ describe('TeamTable', () => {
 
     it('should not display the transfer option when the user is not the owner', () => {
       authProviderRender(
-        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />
+        <TeamTable list={[]} inviteList={[]} role={MemberRole.ADMIN} />,
       );
 
       const transferOwnershipButton = screen.queryByRole('button', {
@@ -168,7 +168,7 @@ describe('TeamTable', () => {
           ]}
           inviteList={[]}
           role={MemberRole.OWNER}
-        />
+        />,
       );
 
       const transferOwnershipButton = screen.queryByRole('button', {
@@ -194,7 +194,7 @@ describe('TeamTable', () => {
           ]}
           inviteList={[]}
           role={MemberRole.OWNER}
-        />
+        />,
       );
 
       const transferOwnershipButton = screen.getByRole('button', {
@@ -230,7 +230,7 @@ describe('TeamTable', () => {
           list={list}
           inviteList={inviteList}
           role={MemberRole.READ_ONLY}
-        />
+        />,
       );
 
       const actionColumn = screen.queryByText('Action');

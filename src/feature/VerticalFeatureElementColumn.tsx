@@ -12,7 +12,7 @@ type IVerticalFeatureElementColumnProps = {
  * @component
  */
 const VerticalFeatureElementColumn = (
-  props: IVerticalFeatureElementColumnProps
+  props: IVerticalFeatureElementColumnProps,
 ) => (
   <div className="vertical-feature-element-column flex flex-col">
     <div className="flex items-center">

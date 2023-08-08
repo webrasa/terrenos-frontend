@@ -4,7 +4,7 @@ describe('Forms', () => {
   describe('setFormError function', () => {
     it("should throw the input as an exception when the errors doesn't follow the expected schema", () => {
       expect(() =>
-        setFormError(jest.fn(), 'random parameter', jest.fn(), jest.fn())
+        setFormError(jest.fn(), 'random parameter', jest.fn(), jest.fn()),
       ).toThrow('random parameter');
 
       expect(() =>
@@ -18,8 +18,8 @@ describe('Forms', () => {
             },
           },
           jest.fn(),
-          jest.fn()
-        )
+          jest.fn(),
+        ),
       ).toThrow();
 
       const response = {
@@ -30,7 +30,7 @@ describe('Forms', () => {
         },
       };
       expect(() =>
-        setFormError(jest.fn(), response, jest.fn(), jest.fn())
+        setFormError(jest.fn(), response, jest.fn(), jest.fn()),
       ).toThrow();
     });
 
@@ -56,7 +56,7 @@ describe('Forms', () => {
           },
         },
         jest.fn(),
-        jest.fn()
+        jest.fn(),
       );
 
       expect(mockSetError).toHaveBeenCalledTimes(2);
@@ -94,7 +94,7 @@ describe('Forms', () => {
       setFormError(jest.fn(), response, mockSetFormGlobalError, jest.fn());
 
       expect(mockSetFormGlobalError).toHaveBeenCalledWith(
-        'random_error_string'
+        'random_error_string',
       );
     });
   });
@@ -102,7 +102,7 @@ describe('Forms', () => {
   describe('setExceptionToFormGlobal function', () => {
     it("should throw the input as an exception when the errors doesn't follow the expected schema", () => {
       expect(() =>
-        setExceptionToFormGlobal(jest.fn(), 'random parameter')
+        setExceptionToFormGlobal(jest.fn(), 'random parameter'),
       ).toThrow('random parameter');
 
       const response = {
@@ -128,7 +128,7 @@ describe('Forms', () => {
       setExceptionToFormGlobal(mockSetFormGlobalError, response);
 
       expect(mockSetFormGlobalError).toHaveBeenCalledWith(
-        'random_error_string'
+        'random_error_string',
       );
     });
   });

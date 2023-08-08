@@ -16,7 +16,7 @@ export const interceptSignIn = (cy: Cypress.cy & CyEventEmitter) => {
           USER_ID_FOR_SRP: 'XXXXX',
         },
       },
-    }
+    },
   );
   cy.intercept(
     {
@@ -32,7 +32,7 @@ export const interceptSignIn = (cy: Cypress.cy & CyEventEmitter) => {
         UserAttributes: [],
         Username: '8c27d077-fd80-4cda-9b49-b4745d10037d',
       },
-    }
+    },
   );
 };
 
@@ -51,12 +51,12 @@ export const interceptMfaSignIn = (cy: Cypress.cy & CyEventEmitter) => {
       body: {
         ChallengeName: 'SOFTWARE_TOKEN_MFA',
       },
-    }
+    },
   );
 };
 
 export const interceptSuccessfullySignIn = (
-  cy: Cypress.cy & CyEventEmitter
+  cy: Cypress.cy & CyEventEmitter,
 ) => {
   cy.intercept(
     {
@@ -70,7 +70,7 @@ export const interceptSuccessfullySignIn = (
     {
       statusCode: 200,
       fixture: 'auth/CognitoAuthChallenge.json',
-    }
+    },
   );
 };
 
@@ -87,7 +87,7 @@ export const interceptChangeEmail = (cy: Cypress.cy & CyEventEmitter) => {
     {
       statusCode: 200,
       body: {},
-    }
+    },
   );
 };
 
@@ -105,7 +105,7 @@ export const interceptEnableMfa = (cy: Cypress.cy & CyEventEmitter) => {
       body: {
         Status: 'SUCCESS',
       },
-    }
+    },
   );
   cy.intercept(
     {
@@ -119,7 +119,7 @@ export const interceptEnableMfa = (cy: Cypress.cy & CyEventEmitter) => {
     {
       statusCode: 200,
       body: {},
-    }
+    },
   );
   cy.intercept(
     {
@@ -137,7 +137,7 @@ export const interceptEnableMfa = (cy: Cypress.cy & CyEventEmitter) => {
         UserAttributes: [],
         Username: '8c27d077-fd80-4cda-9b49-b4745d10037d',
       },
-    }
+    },
   );
 };
 
@@ -156,6 +156,6 @@ export const interceptDiableMfa = (cy: Cypress.cy & CyEventEmitter) => {
         UserAttributes: [],
         Username: '8c27d077-fd80-4cda-9b49-b4745d10037d',
       },
-    }
+    },
   );
 };

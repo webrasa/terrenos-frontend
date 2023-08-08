@@ -9,11 +9,11 @@ import { SWRConfig } from 'swr';
 export const authProviderRender = (
   ui: ReactElement,
   authOptions?: Omit<ITestingAuthProviderProps, 'children'>,
-  renderOptions?: RenderOptions
+  renderOptions?: RenderOptions,
 ) =>
   render(
     <TestingAuthProvider {...authOptions}>{ui}</TestingAuthProvider>,
-    renderOptions
+    renderOptions,
   );
 
 export const fetcher = async (url: string) => {
@@ -23,7 +23,7 @@ export const fetcher = async (url: string) => {
 
 export const swrConfigRender = (
   ui: ReactElement,
-  renderOptions?: RenderOptions
+  renderOptions?: RenderOptions,
 ) =>
   render(
     <SWRConfig
@@ -35,13 +35,13 @@ export const swrConfigRender = (
     >
       {ui}
     </SWRConfig>,
-    renderOptions
+    renderOptions,
   );
 
 export const swrConfigWithAuthRender = (
   ui: ReactElement,
   authOptions?: Omit<ITestingAuthProviderProps, 'children'>,
-  renderOptions?: RenderOptions
+  renderOptions?: RenderOptions,
 ) =>
   render(
     <SWRConfig
@@ -53,5 +53,5 @@ export const swrConfigWithAuthRender = (
     >
       <TestingAuthProvider {...authOptions}>{ui}</TestingAuthProvider>
     </SWRConfig>,
-    renderOptions
+    renderOptions,
   );

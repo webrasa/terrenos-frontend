@@ -14,7 +14,7 @@ describe('TeamTransferOwnership', () => {
           enableTransfer={true}
           handleDialogState={() => {}}
           role={MemberRole.ADMIN}
-        />
+        />,
       );
 
       const content = screen.queryByText('Transfer ownership');
@@ -29,7 +29,7 @@ describe('TeamTransferOwnership', () => {
           enableTransfer={false}
           handleDialogState={handleDialogState}
           role={MemberRole.OWNER}
-        />
+        />,
       );
 
       const content = screen.queryAllByText('Transfer ownership');
@@ -55,7 +55,7 @@ describe('TeamTransferOwnership', () => {
           enableTransfer={true}
           handleDialogState={handleDialogState}
           role={MemberRole.OWNER}
-        />
+        />,
       );
 
       const content = screen.queryAllByText('Transfer ownership');

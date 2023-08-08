@@ -12,11 +12,11 @@ describe('FooterTwoRowsCopyright', () => {
           verticalLinks={null}
         >
           Random children
-        </FooterTwoRowsCopyright>
+        </FooterTwoRowsCopyright>,
       );
 
       const copyrightText = screen.queryByText(
-        /© Copyright.*All Rights Reserved./
+        /© Copyright.*All Rights Reserved./,
       );
 
       expect(copyrightText).toBeInTheDocument();

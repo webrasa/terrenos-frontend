@@ -10,7 +10,7 @@ describe('MessageState', () => {
           title="Random title"
           description="Long random description"
           cta={<div>CTA</div>}
-        />
+        />,
       );
 
       const title = screen.queryByText('Random title');
@@ -30,7 +30,7 @@ describe('MessageState', () => {
           description="Long random description"
           cta={<div>CTA</div>}
           shouldDisplay={() => false}
-        />
+        />,
       );
 
       const title = screen.queryByText('Random title');
@@ -46,7 +46,7 @@ describe('MessageState', () => {
           shouldDisplay={() => true}
         >
           <>Children</>
-        </MessageState>
+        </MessageState>,
       );
 
       const title = screen.queryByText('Random title');
@@ -61,7 +61,7 @@ describe('MessageState', () => {
           cta={<div>CTA</div>}
         >
           <>Children</>
-        </MessageState>
+        </MessageState>,
       );
 
       const children = screen.queryByText('Children');
@@ -77,7 +77,7 @@ describe('MessageState', () => {
           shouldDisplay={() => false}
         >
           <>Children</>
-        </MessageState>
+        </MessageState>,
       );
 
       const children = screen.queryByText('Children');

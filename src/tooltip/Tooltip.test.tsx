@@ -9,7 +9,7 @@ describe('Tooltip', () => {
       render(
         <Tooltip label="Random label">
           <>Random text</>
-        </Tooltip>
+        </Tooltip>,
       );
 
       const children = screen.queryByText('Random text');
@@ -23,7 +23,7 @@ describe('Tooltip', () => {
       render(
         <Tooltip label="Random label">
           <>Random text</>
-        </Tooltip>
+        </Tooltip>,
       );
 
       const children = screen.getByText('Random text');
@@ -37,7 +37,7 @@ describe('Tooltip', () => {
       render(
         <Tooltip label="Random label">
           <>Random text</>
-        </Tooltip>
+        </Tooltip>,
       );
 
       const children = screen.getByText('Random text');
@@ -51,7 +51,7 @@ describe('Tooltip', () => {
       render(
         <Tooltip label="Random label" hideLabel={true}>
           <>Random text</>
-        </Tooltip>
+        </Tooltip>,
       );
 
       const children = screen.getByText('Random text');

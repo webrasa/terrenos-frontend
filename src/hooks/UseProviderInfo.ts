@@ -6,7 +6,7 @@ import { AuthState } from '@/types/Auth';
 
 export const useProviderInfo = () => {
   const [userInfo, setUserInfo] = useState<ProviderInfo | AuthState>(
-    AuthState.AUTHENTICATING
+    AuthState.AUTHENTICATING,
   );
 
   useEffect(() => {

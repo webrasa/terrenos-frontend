@@ -39,7 +39,7 @@ describe('UseProviderInfo', () => {
       assert(
         userInfo !== AuthState.AUTHENTICATING &&
           userInfo !== AuthState.UNAUTHENTICATED,
-        'user should be authenticated in local environment when process.env are set up correctly'
+        'user should be authenticated in local environment when process.env are set up correctly',
       );
       expect(userInfo.id).toEqual('RANDOM_COGNITO_USER_ID_LOCAL');
       expect(userInfo.email).toEqual('RANDOM_COGNITO_USER_EMAIL_LOCAL');
@@ -64,7 +64,7 @@ describe('UseProviderInfo', () => {
             id: 'RANDOM_USER_ATTRIBUTES_SUB',
             email: 'RANDOM_USER_ATTRIBUTES_EMAIL',
             identities: 'RANDOM_USER_ATTRIBUTES_IDENTITIES',
-          })
+          }),
         );
       });
     });

@@ -25,7 +25,7 @@ describe('Auth', () => {
       cy.findByRole('button', { name: 'Sign up' }).should(() => {
         // Verify the session storage is correctly set
         expect(sessionStorage.getItem('confirm-signup-email')).to.eq(
-          'random@email.com'
+          'random@email.com',
         );
       });
 
@@ -70,7 +70,7 @@ describe('Auth', () => {
       cy.findByRole('button', { name: 'Sign up' }).should(() => {
         // Verify the session storage is correctly set
         expect(sessionStorage.getItem('confirm-signup-email')).to.eq(
-          'random@email.com'
+          'random@email.com',
         );
       });
 
@@ -107,7 +107,7 @@ describe('Auth', () => {
       cy.findByRole('button', { name: 'Send email' }).should(() => {
         // Verify the session storage is correctly set
         expect(sessionStorage.getItem('confirm-forgot-password-email')).to.eq(
-          'random@email.com'
+          'random@email.com',
         );
       });
 

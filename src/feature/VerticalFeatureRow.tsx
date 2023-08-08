@@ -28,7 +28,7 @@ const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
     'space-y-8',
     {
       'flex-row-reverse': props.reverse,
-    }
+    },
   );
 
   return (

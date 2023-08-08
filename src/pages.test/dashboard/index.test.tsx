@@ -27,9 +27,9 @@ describe('Dashboard Index page', () => {
           return res(
             ctx.json({
               list: [],
-            })
+            }),
           );
-        })
+        }),
       );
       swrConfigWithAuthRender(<Index />);
 
@@ -57,7 +57,7 @@ describe('Dashboard Index page', () => {
 
       expect(container).toBeEmptyDOMElement();
       expect(mockUseRouterPush.mock.calls[0][0]).toContain(
-        'RANDOM_JOIN_TEAM_PATH'
+        'RANDOM_JOIN_TEAM_PATH',
       );
     });
   });

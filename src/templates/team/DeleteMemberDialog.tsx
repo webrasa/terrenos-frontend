@@ -24,7 +24,7 @@ const DeleteMemberDialog = (props: IDeleteMemberDialogProps) => {
   const deleteAsync = useAsync(async () => {
     if (props.action.type !== TeamMembersActionType.REMOVE_MEMBER) {
       throw new Error(
-        'The delete dialog should only appears when the user selects one user to delete'
+        'The delete dialog should only appears when the user selects one user to delete',
       );
     }
 
@@ -32,13 +32,13 @@ const DeleteMemberDialog = (props: IDeleteMemberDialogProps) => {
       await API.del(
         'backend',
         `/team/${currentTeam.id}/remove/${props.action.memberId}`,
-        {}
+        {},
       );
 
       if (providerInfo.id === props.action.memberId) {
         // When the user leaves the team/when the user remove himself from the team
         await mutate(
-          `/user/profile?email=${encodeURIComponent(providerInfo.email)}`
+          `/user/profile?email=${encodeURIComponent(providerInfo.email)}`,
         );
         setCurrentTeamInd(0);
         await router.push('/dashboard');

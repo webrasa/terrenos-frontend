@@ -22,7 +22,7 @@ const Upgrade: NextPageWithLayout = () => {
         body: {
           priceId,
         },
-      }
+      },
     );
 
     const stripe = await getStripe();
@@ -31,7 +31,7 @@ const Upgrade: NextPageWithLayout = () => {
       await stripe.redirectToCheckout({ sessionId: checkoutResult.sessionId });
 
       throw new Error(
-        'redirectToCheckout fails due to a browser or network error'
+        'redirectToCheckout fails due to a browser or network error',
       );
     } else {
       throw new Error('Impossible to load Stripe');
@@ -40,7 +40,7 @@ const Upgrade: NextPageWithLayout = () => {
 
   const handleSubscribe = async (
     event: React.MouseEvent<HTMLElement>,
-    plan: string
+    plan: string,
   ) => {
     event.preventDefault();
     await subscribeAsync.execute(getPriceIdFromName(plan));

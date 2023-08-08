@@ -49,7 +49,7 @@ const TeamTable = (props: ITeamTableProps) => {
               <th className="w-20 md:w-40">Role</th>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.role
+                props.role,
               ) && <th className="w-20 md:w-52">Action</th>}
             </tr>
           }
@@ -60,7 +60,7 @@ const TeamTable = (props: ITeamTableProps) => {
               <td>{MemberRoleLabel[elt.role]}</td>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.role
+                props.role,
               ) && (
                 <td>
                   {elt.role !== MemberRole.OWNER && (
@@ -82,7 +82,7 @@ const TeamTable = (props: ITeamTableProps) => {
               <th className="w-20 md:w-40">Role</th>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.role
+                props.role,
               ) && <th className="w-20 md:w-52">Action</th>}
             </tr>
           }
@@ -90,7 +90,7 @@ const TeamTable = (props: ITeamTableProps) => {
             <>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.role
+                props.role,
               ) && (
                 <button
                   type="button"
@@ -113,7 +113,7 @@ const TeamTable = (props: ITeamTableProps) => {
               <td>{MemberRoleLabel[elt.role]}</td>
               {requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.role
+                props.role,
               ) && (
                 <td>
                   <TeamTableAction

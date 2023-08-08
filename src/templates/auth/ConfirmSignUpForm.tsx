@@ -1,6 +1,6 @@
-import { Auth, Hub } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Alert } from '@/alert/Alert';
@@ -21,20 +21,6 @@ const ConfirmSignUpForm = () => {
   const email = getSessionStorage('confirm-signup-email');
   const { register, handleSubmit } = useForm<IConfirmSignUpForm>();
   const [formGlobalError, setFormGlobalError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const unsubscribe = Hub.listen('auth', ({ payload }) => {
-      const { event } = payload;
-
-      if (event === 'autoSignIn') {
-        router.push('/dashboard');
-      } else if (event === 'autoSignIn_failure') {
-        router.push('/login');
-      }
-    });
-
-    return unsubscribe;
-  }, []);
 
   const verifyAsync = useAsync(async (data: IConfirmSignUpForm) => {
     try {

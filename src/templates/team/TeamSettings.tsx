@@ -17,7 +17,7 @@ import { DeleteTeamDialog } from './DeleteTeamDialog';
 const TeamSettings = (props: IBillingSettingsProps) => {
   const { currentTeam } = useAuth();
   const [dialogState, setDialogState] = useState<TeamSettingsState>(
-    TeamSettingsState.NONE
+    TeamSettingsState.NONE,
   );
 
   const handleDialogState = (state: TeamSettingsState) => {
@@ -38,7 +38,7 @@ const TeamSettings = (props: IBillingSettingsProps) => {
             <UpgradeTooltip
               hideLabel={requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.settings.role
+                props.settings.role,
               )}
             >
               <button
@@ -62,7 +62,7 @@ const TeamSettings = (props: IBillingSettingsProps) => {
             <UpgradeTooltip
               hideLabel={requiredRoles(
                 [MemberRole.OWNER, MemberRole.ADMIN],
-                props.settings.role
+                props.settings.role,
               )}
             >
               <button

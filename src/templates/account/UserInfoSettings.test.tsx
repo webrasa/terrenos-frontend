@@ -16,11 +16,11 @@ describe('UserInfoSettings', () => {
 
       const settingLine = screen.getAllByTestId('setting-line');
       const changeEmailAddress = settingLine.find((elt) =>
-        within(elt).queryByText('Email address')
+        within(elt).queryByText('Email address'),
       );
       assert(
         changeEmailAddress !== undefined,
-        'Change email address settings not found'
+        'Change email address settings not found',
       );
 
       // Should open the change email dialog
@@ -48,11 +48,11 @@ describe('UserInfoSettings', () => {
 
       const settingLine = screen.getAllByTestId('setting-line');
       const changePassword = settingLine.find((elt) =>
-        within(elt).queryByText('Password')
+        within(elt).queryByText('Password'),
       );
       assert(
         changePassword !== undefined,
-        'Change password settings not found'
+        'Change password settings not found',
       );
 
       // Should open the change password dialog
@@ -81,7 +81,7 @@ describe('UserInfoSettings', () => {
 
       const settingLine = screen.getAllByTestId('setting-line');
       const enableTwoFactor = settingLine.find((elt) =>
-        within(elt).queryByText('Two-Factor Authentication')
+        within(elt).queryByText('Two-Factor Authentication'),
       );
       assert(enableTwoFactor !== undefined, 'Enable MFA not found');
 
@@ -111,7 +111,7 @@ describe('UserInfoSettings', () => {
 
       const settingLine = screen.getAllByTestId('setting-line');
       const enableTwoFactor = settingLine.find((elt) =>
-        within(elt).queryByText('Two-Factor Authentication')
+        within(elt).queryByText('Two-Factor Authentication'),
       );
       assert(enableTwoFactor !== undefined, 'Enable MFA not found');
 

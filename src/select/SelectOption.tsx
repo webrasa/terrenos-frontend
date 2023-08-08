@@ -16,7 +16,7 @@ const SelectionOption = <T,>(props: ISelectOptionProps<T>) => (
     className={({ active }) => {
       return classNames(
         'relative cursor-default select-none py-2 pr-9 pl-3 focus:outline-none',
-        active ? 'bg-primary-500 text-white' : 'text-gray-900'
+        active ? 'bg-primary-500 text-white' : 'text-gray-900',
       );
     }}
   >
@@ -25,7 +25,7 @@ const SelectionOption = <T,>(props: ISelectOptionProps<T>) => (
         <span
           className={classNames(
             'block truncate',
-            selected ? 'font-semibold' : 'font-normal'
+            selected ? 'font-semibold' : 'font-normal',
           )}
         >
           {props.label}
@@ -35,7 +35,7 @@ const SelectionOption = <T,>(props: ISelectOptionProps<T>) => (
           <span
             className={classNames(
               'absolute inset-y-0 right-0 flex items-center pr-4',
-              active ? 'text-white' : 'text-primary-600'
+              active ? 'text-white' : 'text-primary-600',
             )}
           >
             <svg

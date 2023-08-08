@@ -50,7 +50,7 @@ const SidebarHeader = (props: ISidebarHeaderProps) => {
     {
       hidden: !showMenu,
     },
-    'lg:hidden'
+    'lg:hidden',
   );
 
   return (

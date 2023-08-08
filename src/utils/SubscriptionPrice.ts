@@ -40,7 +40,7 @@ export const getPriceIdFromName = (plan: string) => {
 
   if (!priceId) {
     throw new Error(
-      "Subscription Price: this plan doesn't exists in this environment"
+      "Subscription Price: this plan doesn't exists in this environment",
     );
   }
 

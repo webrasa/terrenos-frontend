@@ -20,7 +20,7 @@ const Join = () => {
     if (router.query.teamId && router.query.verificationCode) {
       sessionStorage.setItem(
         'join-team-path',
-        `teamId=${router.query.teamId}&verificationCode=${router.query.verificationCode}`
+        `teamId=${router.query.teamId}&verificationCode=${router.query.verificationCode}`,
       );
     }
 

@@ -32,7 +32,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     userInfo !== AuthState.UNAUTHENTICATED &&
       userInfo !== AuthState.AUTHENTICATING
       ? `/user/profile?email=${encodeURIComponent(userInfo.email)}`
-      : null
+      : null,
   );
 
   if (
@@ -82,7 +82,7 @@ export const useAuth = () => {
 
   if (!userInfo) {
     throw new Error(
-      'Auth: `useAuth` hook must be wrapped within a `AuthProvider` component'
+      'Auth: `useAuth` hook must be wrapped within a `AuthProvider` component',
     );
   }
 
