@@ -17,6 +17,6 @@ const CreateTeam: NextPageWithLayout = () => (
   </CenterSection>
 );
 
-CreateTeam.getLayout = getShell('New team');
+CreateTeam.getLayout = getShell('New Team');
 
 export default CreateTeam;

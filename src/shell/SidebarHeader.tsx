@@ -10,11 +10,11 @@ import { useMenu } from '@/hooks/UseMenu';
 import { Sidebar } from './Sidebar';
 
 type ISidebarHeaderProps = {
-  select: ReactNode;
+  select?: ReactNode;
   topLinks: ReactNode;
   bottomLinks: ReactNode;
   title: string;
-  leftContent: ReactNode;
+  leftContent?: ReactNode;
   children: ReactNode;
 };
 
@@ -78,7 +78,9 @@ const SidebarHeader = (props: ISidebarHeaderProps) => {
 
           <div className="text-lg font-bold text-gray-900">{props.title}</div>
 
-          <div className="ml-auto">{props.leftContent}</div>
+          {props.leftContent && (
+            <div className="ml-auto">{props.leftContent}</div>
+          )}
         </header>
 
         <div className="flex-1 overflow-y-auto overflow-x-hidden py-8">

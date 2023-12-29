@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 type IDetailTableProps = {
-  title: string;
+  title?: string;
   head: ReactNode;
   emptyDataText?: string;
   buttons?: ReactNode;

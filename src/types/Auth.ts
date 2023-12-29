@@ -33,6 +33,7 @@ export type Team = {
 export type UserProfile = {
   id: string;
   firstSignIn: string;
+  globalRole: GlobalRole;
   teamList: Team[];
 };
 
@@ -45,6 +46,11 @@ export type UserAuth = {
   currentTeamInd: number;
   currentTeam: Team;
 };
+
+export enum GlobalRole {
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  CUSTOMER = 'CUSTOMER',
+}
 
 export enum AuthState {
   AUTHENTICATING = 'AUTHENTICATING',

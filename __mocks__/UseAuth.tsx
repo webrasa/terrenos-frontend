@@ -1,10 +1,12 @@
 import type { ReactNode } from 'react';
 
 import { AuthContext } from '@/hooks/UseAuth';
+import { GlobalRole } from '@/types/Auth';
 
 export type ITestingAuthProviderProps = {
   children: ReactNode;
   identities?: string;
+  globalRole?: GlobalRole;
 };
 
 // Mocked team list data used in testing
@@ -24,6 +26,7 @@ const testingMockedTeamList = [
 ];
 
 export const mockSetCurrentTeamInd = jest.fn();
+export const mockGlobalRole = jest.fn();
 
 /**
  * The Authentication provider component used in testing with mocked data.
@@ -42,6 +45,7 @@ export const TestingAuthProvider = (props: ITestingAuthProviderProps) => (
       profile: {
         firstSignIn: 'RANDOM_FIRST_SIGN_IN',
         id: 'RANDOM_PROFILE_ID',
+        globalRole: props.globalRole ?? GlobalRole.CUSTOMER,
         teamList: testingMockedTeamList,
       },
       teamList: testingMockedTeamList,
