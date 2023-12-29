@@ -5,7 +5,7 @@ import { Logo } from '@/templates/Logo';
 
 type ISidebarProps = {
   show?: boolean;
-  select: ReactNode;
+  select?: ReactNode;
   topLinks: ReactNode;
   bottomLinks: ReactNode;
 };
@@ -51,7 +51,7 @@ const Sidebar = (props: ISidebarProps) => {
         <Logo />
       </div>
 
-      <div className="relative mt-3">{props.select}</div>
+      {props.select && <div className="relative mt-3">{props.select}</div>}
 
       <div className="mt-5 flex-1">{props.topLinks}</div>
 
