@@ -38,7 +38,7 @@ const Index: NextPageWithLayout = () => {
 
   return (
     <MessageState
-      title="Add message here when the list if empty"
+      title="Add a message here when the list is empty"
       description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu consectetur purus. In laoreet tincidunt libero vitae sagittis."
       shouldDisplay={() => data.list.length === 0}
       cta={

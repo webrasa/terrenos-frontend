@@ -39,7 +39,7 @@ const AvatarMenu = () => {
           )}
           <MenuLink href="/">Landing Page</MenuLink>
           <MenuLink href={`mailto:${AppConfig.mailto_contact}`}>
-            Need Helps?
+            Need Help?
           </MenuLink>
         </div>
 
