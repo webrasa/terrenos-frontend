@@ -34,6 +34,7 @@ const customJestConfig = {
   },
   testEnvironment: 'jest-environment-jsdom',
   testEnvironmentOptions: {
+    // Used by MSW 2.0 to avoid errors JSDOM: https://mswjs.io/docs/migrations/1.x-to-2.x#cannot-find-module-mswnode-jsdom
     customExportConditions: [''],
   },
   modulePathIgnorePatterns: ['<rootDir>/src/utils/TestUtils.test.tsx'],

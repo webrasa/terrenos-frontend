@@ -1,4 +1,5 @@
 /* eslint-disable no-undef, import/no-extraneous-dependencies */
+// Used by MSW 2.0 to work with Jest: https://mswjs.io/docs/migrations/1.x-to-2.x#requestresponsetextencoder-is-not-defined-jest
 /**
  * @note The block below contains polyfills for Node.js globals
  * required for Jest to function when running JSDOM tests.
