@@ -20,7 +20,7 @@ const TestimonialCard = (props: ITestimonialCardProps) => (
 
     <div className="mt-6 flex items-center justify-center">
       <img
-        className="h-16 w-16 rounded-full bg-primary-400"
+        className="size-16 rounded-full bg-primary-400"
         src={props.image.src}
         alt={props.image.alt}
       />

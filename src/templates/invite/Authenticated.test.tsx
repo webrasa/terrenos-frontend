@@ -1,6 +1,6 @@
 import { mockIsReady, mockQuery } from '__mocks__/next/router';
 import { screen, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 import {
@@ -39,12 +39,9 @@ describe('Authenticated', () => {
       });
       mockIsReady.mockReturnValue(true);
       server.use(
-        rest.get(
-          '/team/RANDOM_TEAM_ID/join/RANDOM_VERIFICATION_CODE',
-          (_req, res, ctx) => {
-            return res(ctx.status(500));
-          },
-        ),
+        http.get('/team/RANDOM_TEAM_ID/join/RANDOM_VERIFICATION_CODE', () => {
+          return new HttpResponse(null, { status: 500 });
+        }),
       );
 
       swrConfigWithAuthRender(<Authenticated />);
@@ -64,16 +61,11 @@ describe('Authenticated', () => {
       });
       mockIsReady.mockReturnValue(true);
       server.use(
-        rest.get(
-          '/team/RANDOM_TEAM_ID/join/RANDOM_VERIFICATION_CODE',
-          (_req, res, ctx) => {
-            return res(
-              ctx.json({
-                displayName: 'RANDOM_TEAM_DISPLAY_NAME',
-              }),
-            );
-          },
-        ),
+        http.get('/team/RANDOM_TEAM_ID/join/RANDOM_VERIFICATION_CODE', () => {
+          return HttpResponse.json({
+            displayName: 'RANDOM_TEAM_DISPLAY_NAME',
+          });
+        }),
       );
 
       swrConfigWithAuthRender(<Authenticated />);

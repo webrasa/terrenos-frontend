@@ -13,7 +13,7 @@ type IVerticalFeatureElementProps = {
  */
 const VerticalFeatureElement = (props: IVerticalFeatureElementProps) => (
   <div className="vertical-feature-element mt-8 flex">
-    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-primary-400">
+    <div className="flex size-12 shrink-0 items-center justify-center rounded-md bg-primary-400">
       {props.icon}
     </div>
 

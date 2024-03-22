@@ -45,7 +45,7 @@ const Button = (props: IButtonProps) => {
       {props.loading && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="mr-1 h-5 w-5 animate-spin text-white"
+          className="mr-1 size-5 animate-spin text-white"
           fill="none"
           viewBox="0 0 24 24"
         >

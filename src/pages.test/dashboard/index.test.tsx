@@ -1,6 +1,6 @@
 import { mockUseRouterPush } from '__mocks__/next/router';
 import { screen, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
 import Index from '@/pages/dashboard';
@@ -23,12 +23,10 @@ describe('Dashboard Index page', () => {
 
     it('should render the add button when the todo list is empty', async () => {
       server.use(
-        rest.get('/RANDOM_TEAM_ID/todo/list', (_req, res, ctx) => {
-          return res(
-            ctx.json({
-              list: [],
-            }),
-          );
+        http.get('/RANDOM_TEAM_ID/todo/list', () => {
+          return HttpResponse.json({
+            list: [],
+          });
         }),
       );
       swrConfigWithAuthRender(<Index />);

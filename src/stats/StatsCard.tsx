@@ -8,7 +8,7 @@ type IStatsCardProps = {
 
 const StatsCard = (props: IStatsCardProps) => (
   <div className="stats-card flex items-center rounded-md border border-gray-200 bg-white p-4">
-    <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-primary-400">
+    <div className="flex size-16 shrink-0 items-center justify-center rounded-full bg-primary-400">
       {props.icon}
     </div>
 

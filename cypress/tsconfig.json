@@ -5,6 +5,7 @@
     "lib": ["es5", "dom"],
     "types": ["node", "cypress", "@testing-library/cypress"],
 
+    "sourceMap": false,
     "isolatedModules": false
   },
   "include": ["**/*.ts"],

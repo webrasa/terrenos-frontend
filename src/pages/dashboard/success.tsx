@@ -10,7 +10,7 @@ const Success: NextPageWithLayout = () => (
     icon={
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="inline-block h-16 w-16 stroke-current text-primary-500"
+        className="inline-block size-16 stroke-current text-primary-500"
         viewBox="0 0 24 24"
         fill="none"
         strokeWidth="1.5"
