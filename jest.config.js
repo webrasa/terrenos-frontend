@@ -14,7 +14,8 @@ const customJestConfig = {
 
     '^__mocks__/(.*)$': '<rootDir>/__mocks__/$1',
   },
-  setupFilesAfterEnv: ['./jest.setup.js'],
+  setupFiles: ['./jest.polyfills.js'],
+  setupFilesAfterEnv: ['./jest.setup.ts'],
   clearMocks: true,
   collectCoverage: true,
   collectCoverageFrom: [
@@ -32,6 +33,9 @@ const customJestConfig = {
     },
   },
   testEnvironment: 'jest-environment-jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
   modulePathIgnorePatterns: ['<rootDir>/src/utils/TestUtils.test.tsx'],
 };
 

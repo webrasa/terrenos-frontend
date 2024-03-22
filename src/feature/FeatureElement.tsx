@@ -13,7 +13,7 @@ type IFeatureElementProps = {
  */
 const FeatureElement = (props: IFeatureElementProps) => (
   <div className="feature-element flex flex-col">
-    <div className="mx-auto flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-gray-100">
+    <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full border border-gray-300 bg-gray-100">
       {props.icon}
     </div>
 

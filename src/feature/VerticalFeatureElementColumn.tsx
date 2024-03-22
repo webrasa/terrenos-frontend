@@ -16,7 +16,7 @@ const VerticalFeatureElementColumn = (
 ) => (
   <div className="vertical-feature-element-column flex flex-col">
     <div className="flex items-center">
-      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-primary-400">
+      <div className="flex size-12 shrink-0 items-center justify-center rounded-md bg-primary-400">
         {props.icon}
       </div>
 

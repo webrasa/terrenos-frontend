@@ -21,7 +21,7 @@ const SelectButton = (props: ISelectButtonProps) => (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className="h-5 w-5 stroke-current stroke-2 text-gray-500"
+        className="size-5 stroke-current stroke-2 text-gray-500"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"

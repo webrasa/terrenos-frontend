@@ -9,7 +9,7 @@ type IPricingFeatureProps = {
 const PricingFeature = (props: IPricingFeatureProps) => (
   <li className="mt-2 flex items-center">
     <svg
-      className="mr-2 h-6 w-6 stroke-current stroke-2 text-green-500"
+      className="mr-2 size-6 stroke-current stroke-2 text-green-500"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"

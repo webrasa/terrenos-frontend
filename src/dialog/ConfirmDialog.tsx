@@ -28,10 +28,10 @@ type IConfirmDialogProps = {
 const ConfirmDialog = (props: IConfirmDialogProps) => (
   <BaseDialog show={props.show} handleClose={props.handleCancel}>
     <div className="flex">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-red-100">
+      <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-red-100">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 stroke-current stroke-2 text-red-600"
+          className="size-6 stroke-current stroke-2 text-red-600"
           viewBox="0 0 24 24"
           fill="none"
           strokeLinecap="round"

@@ -1,7 +1,7 @@
 import { mockCurrentUserInfo } from '__mocks__/aws-amplify';
 import { mockUseRouterPush } from '__mocks__/next/router';
 import { render, renderHook, screen, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import type { SetupServerApi } from 'msw/node';
 import { setupServer } from 'msw/node';
 import { act } from 'react-dom/test-utils';
@@ -36,25 +36,23 @@ const setMockUserInfo = () => {
 
 const setUserProfileServer = (server: SetupServerApi) => {
   server.use(
-    rest.get('/user/profile', (_req, res, ctx) => {
-      return res(
-        ctx.json({
-          teamList: [
-            {
-              id: 'RANDOM_TEAM_ID',
-              displayName: 'Team Name 1',
-            },
-            {
-              id: 'RANDOM_TEAM_ID2',
-              displayName: 'Team Name 2',
-            },
-            {
-              id: 'RANDOM_TEAM_ID3',
-              displayName: 'Team Name 3',
-            },
-          ],
-        }),
-      );
+    http.get('/user/profile', () => {
+      return HttpResponse.json({
+        teamList: [
+          {
+            id: 'RANDOM_TEAM_ID',
+            displayName: 'Team Name 1',
+          },
+          {
+            id: 'RANDOM_TEAM_ID2',
+            displayName: 'Team Name 2',
+          },
+          {
+            id: 'RANDOM_TEAM_ID3',
+            displayName: 'Team Name 3',
+          },
+        ],
+      });
     }),
   );
 };
@@ -62,7 +60,13 @@ const setUserProfileServer = (server: SetupServerApi) => {
 describe('UseAuth', () => {
   const server = setupServer();
 
-  beforeAll(() => server.listen());
+  beforeAll(() =>
+    server.listen({
+      // This is going to perform unhandled requests
+      // but print no warning whatsoever when they happen.
+      onUnhandledRequest: 'bypass',
+    }),
+  );
 
   afterAll(() => server.close());
 

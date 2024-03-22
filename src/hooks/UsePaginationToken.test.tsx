@@ -1,6 +1,6 @@
 import { mockIsReady } from '__mocks__/next/router';
 import { act, renderHook, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import type { SetupServerApi } from 'msw/node';
 import { setupServer } from 'msw/node';
 import type { ReactNode } from 'react';
@@ -28,12 +28,10 @@ const swrConfigWrapper = (props: ISwrConfigProps) => (
 
 const setServer = (server: SetupServerApi) => {
   server.use(
-    rest.get('/url', (_req, res, ctx) => {
-      return res(
-        ctx.json({
-          paginationToken: 'nextToken',
-        }),
-      );
+    http.get('/url', () => {
+      return HttpResponse.json({
+        paginationToken: 'nextToken',
+      });
     }),
   );
 };
