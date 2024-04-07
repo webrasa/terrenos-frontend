@@ -9,7 +9,9 @@ type IButtonProps = {
   red?: boolean;
   green?: boolean;
   full?: boolean;
+  square?: boolean;
   children: string;
+  puffy?: boolean;
 };
 
 /**
@@ -38,6 +40,8 @@ const Button = (props: IButtonProps) => {
     'btn-red': props.red,
     'btn-green': props.green,
     'w-full': props.full,
+    'btn-square': props.square,
+    'btn-puffy': props.puffy,
   });
 
   return (
@@ -82,15 +86,17 @@ const Button = (props: IButtonProps) => {
           }
 
           .btn-primary {
-            @apply text-white bg-primary-500 border-gray-100;
+            @apply text-white;
+            background: #009f52;
+            border-radius: 14px;
           }
 
           .btn-primary:hover {
-            @apply bg-primary-600;
+            background: #009f52cc;
           }
 
           .btn-primary:active {
-            @apply bg-primary-500;
+            background: #007a3f;
           }
 
           .btn-secondary {
@@ -127,6 +133,12 @@ const Button = (props: IButtonProps) => {
 
           .btn-green:active {
             @apply bg-green-600;
+          }
+          .btn-square {
+            @apply rounded-none;
+          }
+          .btn-puffy {
+            @apply p-4;
           }
         `}
       </style>
