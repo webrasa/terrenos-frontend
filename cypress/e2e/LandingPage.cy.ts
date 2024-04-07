@@ -7,7 +7,7 @@ describe('Landing page', () => {
       cy.findByRole('link', { name: 'Login' })
         .should('exist')
         .invoke('attr', 'href')
-        .should('include', '/login');
+        .should('include', '/signin');
 
       cy.findByRole('link', { name: 'Start Free Trial' })
         .should('exist')

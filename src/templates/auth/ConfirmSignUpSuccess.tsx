@@ -14,7 +14,7 @@ const ConfirmSignUpSuccess = () => {
       if (event === 'autoSignIn') {
         router.push('/dashboard');
       } else if (event === 'autoSignIn_failure') {
-        router.push('/login');
+        router.push('/signin');
       }
     });
 

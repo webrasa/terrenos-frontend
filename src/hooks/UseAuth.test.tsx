@@ -96,7 +96,7 @@ describe('UseAuth', () => {
       // Technically we don't need to waitFor for updated status.
       // But the render call setState and this is the reason we need `waitFor`
       await waitFor(() => {
-        expect(mockUseRouterPush).toHaveBeenCalledWith('/login');
+        expect(mockUseRouterPush).toHaveBeenCalledWith('/signin');
       });
 
       expect(container).toBeEmptyDOMElement();

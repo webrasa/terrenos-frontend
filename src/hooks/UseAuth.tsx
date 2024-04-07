@@ -41,7 +41,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     !data
   ) {
     if (userInfo === AuthState.UNAUTHENTICATED) {
-      router.push('/login');
+      router.push('/signin');
     }
 
     return null;

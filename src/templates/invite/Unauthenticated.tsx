@@ -13,7 +13,7 @@ const Unauthenticated = () => (
     title="Join team"
     description={`You've been invited to join a team on ${AppConfig.site_name}.`}
   >
-    <Link href="/login">
+    <Link href="/signin">
       <Button full>Create an account or login to join</Button>
     </Link>
   </FullCenterSection>
