@@ -9,9 +9,11 @@ type IButtonProps = {
   red?: boolean;
   green?: boolean;
   full?: boolean;
-  square?: boolean;
   children: string;
+  square?: boolean;
   puffy?: boolean;
+  disabled?: boolean;
+  greenBorder?: boolean;
 };
 
 /**
@@ -27,6 +29,10 @@ type IButtonProps = {
  * @param props.green - Indicates if the button is a green button.
  * @param props.full - Indicates if the button takes 100% width.
  * @param props.children - Children components.
+ * @param props.square - Indicates if the button have square edges.
+ * @param props.puffy - Indicates if the button has padding.
+ * @param props.disabled - Indicates if the button is disabled.
+ * @param props.greenBorder - Indicates if the button have green border, created to be used with secondary button.
  */
 const Button = (props: IButtonProps) => {
   const btnClass = classNames({
@@ -42,6 +48,8 @@ const Button = (props: IButtonProps) => {
     'w-full': props.full,
     'btn-square': props.square,
     'btn-puffy': props.puffy,
+    'btn-disabled': props.disabled,
+    'btn-green-border': props.greenBorder,
   });
 
   return (
@@ -70,7 +78,7 @@ const Button = (props: IButtonProps) => {
           }
 
           .btn-base {
-            @apply text-lg font-semibold py-2 px-4;
+            @apply text-lg font-bold py-2 px-4;
           }
 
           .btn-xl {
@@ -100,7 +108,7 @@ const Button = (props: IButtonProps) => {
           }
 
           .btn-secondary {
-            @apply bg-white text-gray-700 border-gray-400;
+            @apply bg-white text-black border-black;
           }
 
           .btn-secondary:hover {
@@ -139,6 +147,13 @@ const Button = (props: IButtonProps) => {
           }
           .btn-puffy {
             @apply p-4;
+          }
+          .btn-disabled {
+            cursor: not-allowed;
+            background: #009f52cc;
+          }
+          .btn-green-border {
+            border: 1px solid #009f52;
           }
         `}
       </style>

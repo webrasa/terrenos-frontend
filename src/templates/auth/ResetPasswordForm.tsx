@@ -52,7 +52,7 @@ const ResetPasswordForm = () => {
 
         <div className="mt-3">
           <button type="submit" className="w-full" disabled={sendAsync.pending}>
-            <Button full loading={sendAsync.pending}>
+            <Button secondary greenBorder full loading={sendAsync.pending}>
               Send email
             </Button>
           </button>
