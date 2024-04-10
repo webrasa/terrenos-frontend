@@ -6,7 +6,6 @@ import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
-import { DemoBadge } from '@/badge/DemoBadge';
 import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
@@ -39,8 +38,6 @@ const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
       }}
     >
       {getLayout(<Component {...pageProps} />)}
-
-      <DemoBadge />
     </SWRConfig>
   );
 };
