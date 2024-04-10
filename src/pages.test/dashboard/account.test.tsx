@@ -5,7 +5,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import assert from 'assert';
 
-import Account from '@/pages/dashboard/account';
+import Account from '@/pages-copy/dashboard/account';
 import { authProviderRender } from '@/utils/TestUtils.test';
 
 describe('Account page', () => {

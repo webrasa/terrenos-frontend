@@ -3,7 +3,7 @@ import { screen, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 
-import Index from '@/pages/dashboard';
+import Index from '@/pages-copy/dashboard';
 import {
   authProviderRender,
   swrConfigWithAuthRender,

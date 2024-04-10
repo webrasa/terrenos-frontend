@@ -3,7 +3,7 @@ import { mockQuery } from '__mocks__/next/router';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import type { IAuthProviderProps } from '@/hooks/UseAuth';
-import Join from '@/pages/join';
+import Join from '@/pages-copy/join';
 
 // Usually in testing, we use `TestingAuthProvider` to wrap component that use `useAuth`.
 // But, in `join` page, it uses `AuthProvider` in the render method.

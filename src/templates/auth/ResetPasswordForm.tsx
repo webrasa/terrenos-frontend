@@ -60,7 +60,10 @@ const ResetPasswordForm = () => {
       </form>
 
       <div className="mt-5 text-center text-xs">
-        <Link href="/login" className="text-primary-500 hover:text-primary-600">
+        <Link
+          href="/signin"
+          className="text-primary-500 hover:text-primary-600"
+        >
           Go back to login
         </Link>
       </div>
