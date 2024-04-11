@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 import { createContext, useContext } from 'react';
-import { useSessionStorage } from 'react-use';
 import useSWR from 'swr';
 
 import type { UserAuth, UserProfile } from '@/types/Auth';
@@ -25,7 +24,6 @@ export type IAuthProviderProps = {
 export const AuthProvider = (props: IAuthProviderProps) => {
   const router = useRouter();
   const { userInfo } = useProviderInfo();
-  const [currentTeamInd, setCurrentTeamInd] = useSessionStorage('team-ind', 0);
 
   // Retrieves User information and if it's the first sign in, it creates a new data entry for the user.
   const { data } = useSWR<UserProfile>(
@@ -47,25 +45,11 @@ export const AuthProvider = (props: IAuthProviderProps) => {
     return null;
   }
 
-  const currentTeam = data.teamList?.[currentTeamInd];
-
-  if (!currentTeam) {
-    if (currentTeamInd !== 0) {
-      setCurrentTeamInd(0);
-    }
-
-    return null;
-  }
-
   return (
     <AuthContext.Provider
       value={{
         providerInfo: userInfo,
         profile: data,
-        teamList: data.teamList,
-        setCurrentTeamInd,
-        currentTeamInd,
-        currentTeam,
       }}
     >
       {props.children}
