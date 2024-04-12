@@ -41,10 +41,6 @@ export type UserProfile = {
 export type UserAuth = {
   providerInfo: ProviderInfo;
   profile: UserProfile;
-  teamList: Team[];
-  setCurrentTeamInd: (teamInd: number) => void;
-  currentTeamInd: number;
-  currentTeam: Team;
 };
 
 export enum GlobalRole {
