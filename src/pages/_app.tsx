@@ -2,6 +2,7 @@ import '../styles/global.css';
 
 import { Amplify, API } from 'aws-amplify';
 import type { AppProps } from 'next/app';
+import { appWithTranslation } from 'next-i18next';
 import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
@@ -48,4 +49,4 @@ const MyApp = (props: AppPropsWithLayout) => (
   </ErrorBoundary>
 );
 
-export default MyApp;
+export default appWithTranslation(MyApp);
