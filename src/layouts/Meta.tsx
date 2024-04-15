@@ -6,6 +6,7 @@ import { AppConfig } from '@/utils/AppConfig';
 type IMetaProps = {
   title: string;
   description: string;
+  image: string;
   canonical?: string;
 };
 

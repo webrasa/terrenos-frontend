@@ -8,6 +8,10 @@ const Index: NextPageWithLayout = () => {
   return <Section title="Property">Property</Section>;
 };
 
-Index.getLayout = getShell('Property');
+Index.getLayout = getShell({
+  title: 'Property',
+  description: 'This is property description',
+  image: 'imageURL',
+});
 
 export default Index;

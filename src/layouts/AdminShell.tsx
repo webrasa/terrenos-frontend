@@ -13,7 +13,11 @@ import { RequiredSuperAdmin } from './RequiredSuperAdmin';
 // eslint-disable-next-line react/display-name
 export const getAdminShell = (title: string) => (page: ReactElement) => (
   <>
-    <Meta title={AppConfig.title} description={AppConfig.description} />
+    <Meta
+      title={AppConfig.title}
+      description={AppConfig.description}
+      image={'imageURL'}
+    />
     <AuthProvider>
       <RequiredSuperAdmin>
         <AdminShell title={title}>{page}</AdminShell>
