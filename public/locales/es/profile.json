@@ -1,0 +1,21 @@
+{
+  "general": {
+    "title": "Perfil | Terranoss",
+    "description": "Terranoss - description"
+  },
+  "menuSection": {
+    "currentListingsTitle": "Listados actuales",
+    "draftsTitle": "Borradores",
+    "myWatchListTitle": "Mi lista de vigilancia",
+    "offTheMarketTitle": "Fuera del mercado",
+    "inboxTitle": "Bandeja de entrada",
+    "accountTitle": "Cuenta"
+  },
+  "inboxSection": {
+    "myListingsSubtitle": "Mis listados",
+    "sentByYouSubtitle": "Enviado por ti",
+    "sendMessagePlaceholder": "Escribe tu mensaje aquí",
+    "sendButtonTitle": "Enviar"
+  }
+
+}

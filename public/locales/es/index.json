@@ -1,3 +1,21 @@
 {
-  "mainPage": "Pagina principal"
+  "general": {
+    "title": "Terranoss - Aterriza tu sueño",
+    "description": "Terranoss - description"
+  },
+  "heroSection": {
+    "title": "Aterriza tu sueño",
+    "inputPlaceholder": "Introduzca un país, pueblo o ciudad"
+  },
+  "sliderSection": {
+    "title": "Ubicaciones cerca de ti"
+  },
+  "tripSection": {
+    "title": "Este podría ser tuyo",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    "ctaTitle": "En venta cerca de mí"
+  },
+  "searchSection": {
+    "title": "Buscar por atributos o por país"
+  }
 }

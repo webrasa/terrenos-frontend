@@ -1,15 +1,8 @@
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 
+import type { IMetaProps } from '@/types/iMetaProps';
 import { AppConfig } from '@/utils/AppConfig';
-
-type IMetaProps = {
-  title: string;
-  description: string;
-  image: string;
-  canonical?: string;
-};
-
 /**
  * Adding element in the <head> of the page.
  * @component
