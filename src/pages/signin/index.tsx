@@ -13,7 +13,11 @@ const Signin = () => {
 
   return (
     <div className="text-gray-900 antialiased">
-      <Meta title={AppConfig.title} description={AppConfig.description} />
+      <Meta
+        title={AppConfig.title}
+        description={AppConfig.description}
+        image={'imageURL'}
+      />
       {challengeMfa ? (
         <ChallengeMFAForm user={challengeMfa} />
       ) : (

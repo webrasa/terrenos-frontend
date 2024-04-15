@@ -4,7 +4,11 @@ import { AppConfig } from '@/utils/AppConfig';
 
 const ForgotPassword = () => (
   <div className="text-gray-900 antialiased">
-    <Meta title={AppConfig.title} description={AppConfig.description} />
+    <Meta
+      title={AppConfig.title}
+      description={AppConfig.description}
+      image={'imageURL'}
+    />
     <ResetPasswordForm />
   </div>
 );
