@@ -147,11 +147,10 @@ const Button = (props: IButtonProps) => {
             @apply p-4;
           }
           .btn-disabled {
-            cursor: not-allowed;
-            background: #009f52cc;
+            @apply cursor-not-allowed bg-primary-300;
           }
           .btn-green-border {
-            border: 1px solid #009f52;
+            @apply border-solid border border-primary-600;
           }
         `}
       </style>
