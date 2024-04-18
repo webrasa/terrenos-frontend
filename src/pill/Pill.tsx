@@ -28,12 +28,7 @@ const Pill = (props: IPillProps) => {
       <style jsx>
         {`
           .pill-base {
-            @apply inline-flex items-center ring-1 ring-inset text-black bg-white text-sm font-medium;
-            justify-content: center;
-            border-radius: 24px;
-            width: fit-content;
-            height: 34px;
-            padding: 6px 11px;
+            @apply inline-flex items-center rounded-3xl justify-center ring-1 ring-inset text-black bg-white text-sm font-medium px-3 py-1.5 h-8 w-fit; 
           }
 
           .pill-green-border {
