@@ -94,17 +94,15 @@ const Button = (props: IButtonProps) => {
           }
 
           .btn-primary {
-            @apply text-white;
-            background: #009f52;
-            border-radius: 14px;
+            @apply text-white bg-primary-600 rounded-1.5xl;
           }
 
           .btn-primary:hover {
-            background: #009f52cc;
+            @apply bg-primary-400;
           }
 
           .btn-primary:active {
-            background: #007a3f;
+            @apply bg-primary-800;
           }
 
           .btn-secondary {
@@ -149,11 +147,10 @@ const Button = (props: IButtonProps) => {
             @apply p-4;
           }
           .btn-disabled {
-            cursor: not-allowed;
-            background: #009f52cc;
+            @apply cursor-not-allowed bg-primary-300;
           }
           .btn-green-border {
-            border: 1px solid #009f52;
+            @apply border-solid border border-primary-600;
           }
         `}
       </style>
