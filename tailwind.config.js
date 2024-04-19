@@ -16,19 +16,20 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
     },
+
     extend: {
       colors: {
         // You can change the following color (primary) to match your branding
         primary: {
-          100: '#FFF5F5',
-          200: '#FED7D7',
-          300: '#FEB2B2',
-          400: '#FC8181',
-          500: '#F56565',
-          600: '#E53E3E',
-          700: '#C53030',
-          800: '#9B2C2C',
-          900: '#742A2A',
+          100: '#c0e6cd',
+          200: '#97d6ad',
+          300: '#6bc68c',
+          400: '#46ba74',
+          500: '#0eae5c',
+          600: '#009f52',
+          700: '#008d46',
+          800: '#007c3b',
+          900: '#005d27',
         },
         gray: {
           100: '#f7fafc',
@@ -52,6 +53,9 @@ module.exports = {
           800: '#2c5282',
           900: '#2a4365',
         },
+      },
+      borderRadius: {
+        '1.5xl': '0.875rem',
       },
       lineHeight: {
         hero: '3.7rem',
