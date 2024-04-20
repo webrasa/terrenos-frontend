@@ -1,27 +1,30 @@
 // ** Layouts
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-
 import { Section } from '@/layouts/Section';
 import { getShell } from '@/layouts/Shell';
-//* * Utils */
-import type { NextPageWithLayout } from '@/utils/NextLayout';
+import type { NextPageWithLayoutAndProps } from '@/types/Layout';
+import type { ProfileTranslations } from '@/types/Translation';
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['search'])),
-    },
-  };
-}
-
-const Index: NextPageWithLayout = () => {
-  return <Section title="Profile">Profile</Section>;
+const Index: NextPageWithLayoutAndProps<ProfileTranslations> = ({
+  general,
+  menuSection,
+  inboxSection,
+}: ProfileTranslations) => {
+  return (
+    <Section title={general.title}>
+      Translation experiment: {menuSection.currentListingsTitle}{' '}
+      {inboxSection.myListingsSubtitle}{' '}
+    </Section>
+  );
 };
 
-Index.getLayout = getShell({
-  title: 'Profile',
-  description: 'This is profile description',
-  image: 'imageURL',
-});
+Index.getLayout = (page) => {
+  const { general } = page.props;
+
+  return getShell({
+    title: general.title,
+    description: general.description,
+    image: 'imageURL',
+  })(page);
+};
 
 export default Index;
