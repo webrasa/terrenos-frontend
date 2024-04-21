@@ -1,0 +1,21 @@
+{
+  "general": {
+    "title": "Profile | Terranoss",
+    "description": "Terranoss - description"
+  },
+  "menuSection": {
+    "currentListingsTitle": "Current listings",
+    "draftsTitle": "Drafts",
+    "myWatchListTitle": "My Watch list",
+    "offTheMarketTitle": "Off the market",
+    "inboxTitle": "Inbox",
+    "accountTitle": "Account"
+  },
+  "inboxSection": {
+    "myListingsSubtitle": "My Listings",
+    "sentByYouSubtitle": "Sent by you",
+    "sendMessagePlaceholder": "Type your message here",
+    "sendButtonTitle": "Send"
+  }
+
+}

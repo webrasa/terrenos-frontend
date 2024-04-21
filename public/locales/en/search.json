@@ -1,0 +1,28 @@
+{
+  "general": {
+    "title": "Search or sell your properties | Terranoss",
+    "description": "Terranoss - description"
+  },
+  "searchSection": {
+    "inputPlaceholder": "Enter your location"
+  },
+  "filtersSection": {
+    "priceRangeLabel": "Price range",
+    "squareMetersLabel": "Square meters",
+    "acresLabel": "Acres",
+    "attributePlaceholder": "Search by Attribute",
+    "attributeModalTitle": "Select which attributes you would like to see in your search",
+    "attributeModalSubTitle": "Select all that apply",
+    "attributeModalButtonTitle": "Confirm"
+  },
+  "sortSection": {
+    "newsetLabel": "Newest",
+    "priceHighToLowLabel": "Price high to low",
+    "priceLowToHighLabel": "Price low to high",
+    "updatedRecentlyLabel": "Updated recently",
+    "trendingLabel": "Trending"
+  },
+  "resultsSection": {
+    "title": "Results"
+  }
+}
