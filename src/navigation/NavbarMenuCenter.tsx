@@ -1,9 +1,7 @@
-import classNames from 'classnames';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
-import { ToggleMenuButton } from '@/button/ToggleMenuButton';
-import { useMenu } from '@/hooks/UseMenu';
+import DropdownMenu from './DropdownMenu';
 
 type INavbarMenuCenterProps = {
   logo: ReactNode;
@@ -17,34 +15,26 @@ type INavbarMenuCenterProps = {
  * @component
  */
 const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
-  const { showMenu, handleToggleMenu } = useMenu();
-
-  const navClass = classNames('w-full', 'md:w-auto', 'md:block', {
-    hidden: !showMenu,
-  });
-
   return (
     <div className="flex flex-wrap items-center justify-between">
-      <div>
+      <div className="navbarLeft inline-flex w-3/12  items-center md:w-1/2">
         <Link href="/">{props.logo}</Link>
+
+        <nav className="mt-2 hidden md:mt-0 md:block">
+          <ul className="navbar rounded-t">{props.children}</ul>
+        </nav>
       </div>
-
-      <div className="md:hidden">
-        <ToggleMenuButton onClick={handleToggleMenu} />
-      </div>
-
-      <nav className={`mt-2 md:mt-0 ${navClass}`}>
-        <ul className="navbar rounded-t">{props.children}</ul>
-      </nav>
-
-      <div className={`border-t border-gray-200 ${navClass}`}>
-        <ul className="navbar rounded-b">{props.rightMenu}</ul>
+      <div className="navbarRight inline-flex w-7/12 items-center md:w-1/2 ">
+        <div className={`mr-5 border-t border-gray-200 md:ml-auto`}>
+          <ul className="navbar rounded-b">{props.rightMenu}</ul>
+        </div>
+        <DropdownMenu></DropdownMenu>
       </div>
 
       <style jsx>
         {`
           .navbar {
-            @apply flex flex-col font-medium text-xl text-gray-700 p-5 bg-white;
+            @apply flex flex-col font-medium text-xl text-black;
           }
 
           .navbar :global(a) {
