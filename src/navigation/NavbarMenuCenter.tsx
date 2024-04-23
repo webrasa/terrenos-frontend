@@ -25,7 +25,7 @@ const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
         </nav>
       </div>
       <div className="navbarRight inline-flex w-7/12 items-center md:w-1/2 ">
-        <div className={`mr-5 border-t border-gray-200 md:ml-auto`}>
+        <div className={`mr-5 md:ml-auto`}>
           <ul className="navbar rounded-b">{props.rightMenu}</ul>
         </div>
         <DropdownMenu></DropdownMenu>

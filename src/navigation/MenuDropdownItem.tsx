@@ -20,7 +20,7 @@ const MenuDropdownItem = (props: IMenuDropdownItemProps) => {
       <select
         id={props.id}
         onChange={props.onChangeHandler}
-        className="w-full border-none text-black focus:ring-0"
+        className="w-full border-none pl-2 text-black focus:ring-0"
       >
         {props.items.map((item) => (
           <option key={item.value} value={item.value}>

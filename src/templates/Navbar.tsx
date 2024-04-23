@@ -12,7 +12,7 @@ const Navbar = () => (
         logo={<Logo xl />}
         rightMenu={
           <>
-            <li className="rounded-1.5xl bg-primary-600 p-2 font-medium text-white">
+            <li className="rounded-1.5xl bg-primary-600 p-2 text-center font-medium text-white md:px-10">
               <Link href="/profile">Add a property</Link>
             </li>
           </>
