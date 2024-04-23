@@ -1,9 +1,7 @@
 import '../styles/global.css';
 
 import { Amplify, API } from 'aws-amplify';
-import type { AppContext, AppProps } from 'next/app';
-import App from 'next/app';
-import type { NextPageContext } from 'next/types';
+import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
 import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
@@ -19,18 +17,9 @@ Amplify.configure({ ...AwsConfig });
 // Next JS App props with the shared layout support.
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
-  Translations: Object;
 };
 
-interface Context extends NextPageContext, AppContext {
-  ctx: NextPageContext;
-}
-
-const MyAppSWRConfig = ({
-  Component,
-  pageProps,
-  Translations,
-}: AppPropsWithLayout) => {
+const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
   const handleError = useErrorHandler();
 
@@ -49,29 +38,15 @@ const MyAppSWRConfig = ({
         },
       }}
     >
-      {getLayout(<Component {...pageProps} {...Translations} />)}
+      {getLayout(<Component {...pageProps} />)}
     </SWRConfig>
   );
 };
 
-const MyApp = (props: AppPropsWithLayout) => {
-  return (
-    <ErrorBoundary fallbackRender={() => <FallbackErrorBoundary />}>
-      <MyAppSWRConfig {...props} />
-    </ErrorBoundary>
-  );
-};
-
-MyApp.getInitialProps = async (appContext: Context) => {
-  const { ctx } = appContext;
-  const { pathname } = ctx;
-  const initialProps = await App.getInitialProps(appContext);
-  const path = pathname === '/' ? '/index' : pathname;
-
-  const Translations = await import(
-    `../../public/locales/${ctx.locale}${path}.json`
-  );
-  return { ...initialProps, Translations };
-};
+const MyApp = (props: AppPropsWithLayout) => (
+  <ErrorBoundary fallbackRender={() => <FallbackErrorBoundary />}>
+    <MyAppSWRConfig {...props} />
+  </ErrorBoundary>
+);
 
 export default appWithTranslation(MyApp);
