@@ -1,10 +1,10 @@
 // ** Layouts
 import { Section } from '@/layouts/Section';
-import type { NotFoundTranslations } from '@/types/Translation';
 //* * Utils */
+import type { NextPageWithLayout } from '@/utils/NextLayout';
 
-const Index = ({ notFound }: NotFoundTranslations) => {
-  return <Section>404 {notFound}</Section>;
+const Index: NextPageWithLayout = () => {
+  return <Section>404 page not found</Section>;
 };
 
 export default Index;
