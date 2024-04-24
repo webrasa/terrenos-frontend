@@ -1,4 +1,6 @@
 import { Menu, Transition } from '@headlessui/react';
+import type { CookieValueTypes } from 'cookies-next';
+import { getCookie, hasCookie, setCookie } from 'cookies-next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 
@@ -6,9 +8,25 @@ import { MenuDropdownItem } from './MenuDropdownItem';
 
 export default function DropdownMenu() {
   const [customOpen, setCustomOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] =
+    useState<CookieValueTypes>('en');
+  const [selectedCurrency, setSelectedCurrency] =
+    useState<CookieValueTypes>('usd');
+  const [selectedUnit, setSelectedUnit] = useState<CookieValueTypes>('sqm');
 
   function buttonClicked() {
     setCustomOpen((prev: boolean) => !prev);
+    if (!customOpen) {
+      if (hasCookie('language')) {
+        setSelectedLanguage(getCookie('language'));
+      }
+      if (hasCookie('currency')) {
+        setSelectedCurrency(getCookie('currency'));
+      }
+      if (hasCookie('unit')) {
+        setSelectedUnit(getCookie('unit'));
+      }
+    }
   }
   return (
     <div className="w-10">
@@ -99,12 +117,14 @@ export default function DropdownMenu() {
                 <div className="p-1">
                   <MenuDropdownItem
                     onChangeHandler={(val) => {
-                      console.log(`SELECTED LANGAUGE is: ${val.target.value}`);
+                      setCookie('language', val.target.value);
+                      setSelectedLanguage(val.target.value);
                     }}
                     items={[
                       { value: 'en', name: 'English' },
                       { value: 'es', name: 'Spanish' },
                     ]}
+                    selected={selectedLanguage}
                     icon={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -125,13 +145,15 @@ export default function DropdownMenu() {
                   ></MenuDropdownItem>
                   <MenuDropdownItem
                     onChangeHandler={(val) => {
-                      console.log(`SELECTED CURRENCY is: ${val.target.value}`);
+                      setCookie('currency', val.target.value);
+                      setSelectedCurrency(val.target.value);
                     }}
                     items={[
                       { value: 'usd', name: 'USD' },
                       { value: 'eur', name: 'EUR' },
                       { value: 'rsd', name: 'RSD' },
                     ]}
+                    selected={selectedCurrency}
                     icon={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -152,13 +174,15 @@ export default function DropdownMenu() {
                   ></MenuDropdownItem>
                   <MenuDropdownItem
                     onChangeHandler={(val) => {
-                      console.log(`SELECTED UNIT is: ${val.target.value}`);
+                      setCookie('unit', val.target.value);
+                      setSelectedUnit(val.target.value);
                     }}
                     items={[
                       { value: 'acres', name: 'Acres' },
                       { value: 'sqm', name: 'Square meters' },
                       { value: 'hectares', name: 'Hectares' },
                     ]}
+                    selected={selectedUnit}
                     icon={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

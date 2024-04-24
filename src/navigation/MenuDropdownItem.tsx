@@ -1,3 +1,4 @@
+import type { CookieValueTypes } from 'cookies-next';
 import type { ChangeEventHandler, ReactNode } from 'react';
 
 type DropdownItem = {
@@ -8,6 +9,7 @@ type IMenuDropdownItemProps = {
   items: DropdownItem[];
   id: string;
   icon?: ReactNode;
+  selected: CookieValueTypes;
   onChangeHandler?: ChangeEventHandler<HTMLSelectElement>;
 };
 
@@ -23,7 +25,11 @@ const MenuDropdownItem = (props: IMenuDropdownItemProps) => {
         className="w-full border-none pl-2 text-black focus:ring-0"
       >
         {props.items.map((item) => (
-          <option key={item.value} value={item.value}>
+          <option
+            key={item.value}
+            value={item.value}
+            selected={props.selected === item.value}
+          >
             {item.name}
           </option>
         ))}

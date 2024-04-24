@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu from './Menu';
 
 type INavbarMenuCenterProps = {
   logo: ReactNode;
