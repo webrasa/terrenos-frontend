@@ -6,6 +6,8 @@ import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import { AppConfig } from '@/utils/AppConfig';
 
+import { Header } from '@/header/header';
+
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
@@ -23,6 +25,7 @@ const Index = () => {
         image={AppConfig.image_url}
       />
       <Navbar />
+      <Header/>
       {t('general.title')}
       <Footer />
     </div>
