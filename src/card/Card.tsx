@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import { useSwipeable } from 'react-swipeable';
-import { FavoriteBorder, Favorite, ExpandLess } from '@mui/icons-material';
-import { IconButton, Menu, MenuItem, Button } from '@mui/material';
+import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
+import { Button } from '@/button/Button';
 
 type IPropertyCardProps = {
   images: string[];
@@ -13,6 +13,9 @@ type IPropertyCardProps = {
   secondLocation: string;
   showDropdown?: boolean;
   showEditButton?: boolean;
+  numberOfDays?: number;
+  numberOfViews?: number;
+  numberOfFavorites?: number;
 };
 
 /**
@@ -27,6 +30,9 @@ type IPropertyCardProps = {
  * @param {string} props.secondLocation - Secondary location of the property.
  * @param {boolean} [props.showDropdown=false] - Determines if the dropdown should be displayed.
  * @param {boolean} [props.showEditButton=false] - Determines if the edit button should be displayed.
+ * @param {number} [props.numberOfDays=0] - Number of days since the property was listed.
+ * @param {number} [props.numberOfViews=0] - Number of views the property has received.
+ * @param {number} [props.numberOfFavorites=0] - Number of times the property has been favorited.
  */
 
 const PropertyCard = ({
@@ -38,10 +44,12 @@ const PropertyCard = ({
   secondLocation,
   showDropdown = false,
   showEditButton = false,
+  numberOfDays = 0,
+  numberOfViews = 0,
+  numberOfFavorites = 0
 }: IPropertyCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => setActiveIndex((current) => (current + 1) % images.length),
@@ -51,15 +59,6 @@ const PropertyCard = ({
   });
 
   const toggleFavorite = () => setIsFavorited(!isFavorited);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget);
-  const handleClose = () => setAnchorEl(null);
-
-  const [dropdownTitle, setDropdownTitle] = useState('Mark as sold');
-
-  const handleMenuItemClick = (title: string) => {
-    setDropdownTitle(title);
-    handleClose();
-  };
 
   const cardClass = classNames({
     'rounded-lg': true,
@@ -89,9 +88,15 @@ const PropertyCard = ({
             />
           ))}
         </div>
-        <IconButton className="absolute top-2 right-2 scale-125 text-primary-600" onClick={toggleFavorite}>
-          {isFavorited ? <Favorite /> : <FavoriteBorder />}
-        </IconButton>
+        <button className="absolute top-2 right-2 scale-125 text-primary-600" onClick={toggleFavorite}>
+          {isFavorited ? <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+          </svg>
+          : <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+          </svg>
+          }
+        </button>
       </div>
       <div className="p-4">
         <div className="flex align-center justify-between">
@@ -104,44 +109,25 @@ const PropertyCard = ({
           {(showDropdown && showEditButton) && (
           <>
             <div className="flex justify-between items-center text-sm text-black space-x-2">
-              <span><strong>10 days</strong> on Terrenoss</span>
-              <span><strong>12</strong> Views</span>
-              <span> 
-                <IconButton>{<FavoriteBorder />}</IconButton><strong>2</strong> favorites</span>
+              <span><strong>{numberOfDays} days</strong> on Terrenoss</span>
+              <span><strong>{numberOfViews}</strong> Views</span>
+              <span className="flex gap-x-1"> 
+                <button><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg></button><strong>{numberOfFavorites}</strong> favorites</span>
             </div>
             <div className="flex justify-end space-x-2 mt-3">
-              <Button 
-                endIcon={<ExpandLess />}
-                onClick={handleClick}
-                variant="outlined"
-                color="success"
-                className="rounded-xl min-w-[235px] normal-case text-black"
-              >
-                {dropdownTitle}
-              </Button>
-              <Menu
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-                classes={{ paper: "min-w-[235px] rounded-lg" }}
-              >
-                <MenuItem onClick={() => handleMenuItemClick('Mark as sold')}>
-                  Mark as sold
-                </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick('Set to pending')}>
-                  Set to pending
-                </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick('Take off the market')}>
-                  Take off the market
-                </MenuItem>
-              </Menu>
-              <Button
-                onClick={() => { /* edit logic */ }}
-                variant="contained"
-                className="normal-case bg-white hover:bg-white text-primary-600 p-2 border-none shadow-none hover:border-none hover:shadow-none"
-                startIcon={<img src="/assets/images/edit_square_FILL0_wght400_GRAD0_opsz24.png" alt="Edit" />}
-              >
+              <div className='border border-primary-600 rounded w-full'>
+                <MenuDropdownItem
+                      items={[
+                        { value: 'markAsSold', name: 'Mark as sold' },
+                        { value: 'setToPending', name: 'Set to pending' },
+                        { value: 'takeOffTheMarket', name: 'Take off the market' }
+                      ]}
+                      id="cardDropdown"
+                      ></MenuDropdownItem>
+              </div> 
+              <Button>
                 Edit
               </Button>
             </div>
