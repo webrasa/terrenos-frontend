@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, SetStateAction, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 
 const people = [
@@ -23,6 +23,12 @@ export default function AutoComplete() {
             .replace(/\s+/g, "")
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
+        
+        const handleSelect = (person: SetStateAction<{ id: number; name: string; } | undefined>) => {
+          setSelected(person);
+          setQuery("");
+          console.log("Selected:", person);
+        };
 
   return (
     <div className="top-16 w-96 md:w-full">
@@ -31,7 +37,7 @@ export default function AutoComplete() {
           <div className="relative w-full h-14 cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-10 text-gray-900 focus:ring-0 bg-white"
-              displayValue={(person) => person.name}
+              displayValue={(person: { id: number; name: string }) => person.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center m-1">
@@ -72,6 +78,7 @@ export default function AutoComplete() {
                       }`
                     }
                     value={person}
+                    onClick={() => handleSelect(person)}
                   >
                     {({ selected, active }) => (
                       <>
