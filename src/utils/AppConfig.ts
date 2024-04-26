@@ -1,7 +1,7 @@
 // FIXME: Update this configuration file
 export const AppConfig = {
-  site_name: 'Modern MERN',
-  title: 'Node JS SaaS Boilerplate | Modern MERN',
+  site_name: 'Terrenoss',
+  title: 'Land your dream | Terrenoss',
   description:
     'Building your SaaS faster with React SaaS Boilerplate Template with Modern MERN',
   locale: 'en',
