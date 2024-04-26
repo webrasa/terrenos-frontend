@@ -6,8 +6,8 @@ import { LandingSection } from '@/layouts/LandingSection';
 import { AppConfig } from '@/utils/AppConfig';
 
 const Footer = () => (
-  <Background color="bg-gray-100">
-    <LandingSection>
+  <Background color="bg-gray-900">
+    <LandingSection yPadding="py-6">
       <FooterTwoRowsCopyright
         siteName={AppConfig.site_name}
         verticalLinks={
