@@ -2,7 +2,9 @@ import { Combobox, Transition } from '@headlessui/react';
 import type { SetStateAction } from 'react';
 import { Fragment, useState } from 'react';
 
-const locations = [
+import type { DropdownItem } from '@/types/DropdownItem';
+
+const locations: DropdownItem[] = [
   { value: '1-1', name: 'Srbija' },
   { value: '3-55', name: 'Beograd' },
   { value: '2-544', name: 'Branicevski okrug' },
@@ -12,37 +14,36 @@ const locations = [
 ];
 
 export default function AutoComplete() {
-  const [selected, setSelected] = useState<String>({});
+  const [selectedLocation, setSelectedLocation] = useState<DropdownItem>({
+    value: '',
+    name: '',
+  });
   const [query, setQuery] = useState('');
 
-  const filteredPeople =
+  const filteredLocations =
     query === ''
-      ? people
-      : people.filter((person) =>
-          person.name
+      ? locations
+      : locations.filter((location) =>
+          location.name
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
 
-  const handleSelect = (
-    person: SetStateAction<{ id: number; name: string } | undefined>,
-  ) => {
-    setSelected(person);
+  const handleSelect = (location: SetStateAction<DropdownItem>) => {
+    setSelectedLocation(location);
     setQuery('');
-    console.log('Selected:', person);
+    console.log('Selected:', location);
   };
 
   return (
     <div className="top-16 w-96 md:w-full">
-      <Combobox value={selected} onChange={setSelected}>
+      <Combobox value={selectedLocation} onChange={setSelectedLocation}>
         <div className="relative">
           <div className="relative h-14 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="w-full border-none bg-white py-2 pl-3 pr-10 text-sm leading-10 text-gray-900 focus:ring-0"
-              displayValue={(person: { id: number; name: string }) =>
-                person.name
-              }
+              displayValue={(location: DropdownItem) => location.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 m-1 flex items-center">
@@ -54,9 +55,9 @@ export default function AutoComplete() {
               >
                 <path d="M8.25 10.875a2.625 2.625 0 1 1 5.25 0 2.625 2.625 0 0 1-5.25 0Z" />
                 <path
-                  fill-rule="evenodd"
+                  fillRule="evenodd"
                   d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.125 4.5a4.125 4.125 0 1 0 2.338 7.524l2.007 2.006a.75.75 0 1 0 1.06-1.06l-2.006-2.007a4.125 4.125 0 0 0-3.399-6.463Z"
-                  clip-rule="evenodd"
+                  clipRule="evenodd"
                 />
               </svg>
             </Combobox.Button>
@@ -69,21 +70,21 @@ export default function AutoComplete() {
             afterLeave={() => setQuery('')}
           >
             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {filteredPeople.length === 0 && query !== '' ? (
+              {filteredLocations.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   Nothing found.
                 </div>
               ) : (
-                filteredPeople.map((person) => (
+                filteredLocations.map((location) => (
                   <Combobox.Option
-                    key={person.id}
+                    key={location.value}
                     className={({ active }) =>
                       `relative cursor-default select-none py-2 pl-10 pr-4 ${
                         active ? 'bg-primary-600 text-white' : 'text-gray-900'
                       }`
                     }
-                    value={person}
-                    onClick={() => handleSelect(person)}
+                    value={location}
+                    onClick={() => handleSelect(location)}
                   >
                     {({ selected, active }) => (
                       <>
@@ -92,7 +93,7 @@ export default function AutoComplete() {
                             selected ? 'font-medium' : 'font-normal'
                           }`}
                         >
-                          {person.name}
+                          {location.name}
                         </span>
                         {selected ? (
                           <span
