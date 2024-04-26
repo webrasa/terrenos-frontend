@@ -6,6 +6,7 @@ import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import { AppConfig } from '@/utils/AppConfig';
 import { PropertyCard } from '@/card/Card';
+import Section from '@/section/section';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -44,7 +45,7 @@ const Index = () => {
         showDropdown={true}
         showEditButton={true}
       />
-      
+      <Section/>
       <Footer />
     </div>
   );
