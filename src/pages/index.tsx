@@ -3,7 +3,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { PropertyCard } from '@/card/Card';
 import { Meta } from '@/layouts/Meta';
-import Section from '@/promo';
+import Promo from '@/promo';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import { AppConfig } from '@/utils/AppConfig';
@@ -53,7 +53,7 @@ const Index = () => {
         showDropdown={true}
         showEditButton={true}
       />
-      <Section />
+      <Promo />
       <Footer />
     </div>
   );

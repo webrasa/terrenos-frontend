@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 import { Button } from '@/button/Button';
 
-const Section = () => {
+const Promo = () => {
+
   return (
     <div className="my-8 flex h-auto w-full flex-col-reverse md:flex-row">
       <div className="text-center md:w-1/2 md:justify-center md:pl-9 md:pr-20 md:text-left">
@@ -21,17 +22,18 @@ const Section = () => {
           </Button>
         </Link>
       </div>
-      <div className="flex justify-center md:w-1/2 md:pr-9">
+      <div className="relative h-auto w-auto md:pr-9">
         <Image
-          src="/assets/images/section.png"
-          width={711}
-          height={410}
+          src="/assets/images/promoNature.jpg"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="center"
           alt="Section"
-          className="rounded-none md:rounded"
+          className="rounded-none md:rounded relative"
         />
       </div>
     </div>
   );
 };
 
-export default Section;
+export default Promo;

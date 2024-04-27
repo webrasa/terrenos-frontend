@@ -32,16 +32,17 @@ type IButtonProps = {
  * @param props.green - Indicates if the button is a green button.
  * @param props.full - Indicates if the button takes 100% width.
  * @param props.children - Children components.
- * @param props.square - Indicates if the button have square edges.
+ * @param props.square - Indicates if the button has square edges.
  * @param props.puffy - Indicates if the button has padding.
  * @param props.disabled - Indicates if the button is disabled.
- * @param props.greenBorder - Indicates if the button have green border, created to be used with secondary button.
+ * @param props.greenBorder - Indicates if the button has green border, created to be used with secondary button.
+ * @param props.thinFont - Indicates if the button is thin or bold.
+ * @param props.onClickHandler - Indicates that the button has Mouse event.
  */
 const Button = (props: IButtonProps) => {
-  const bold = !props.thinFont;
   const btnClass = classNames({
     btn: true,
-    'btn-bold': bold,
+    'btn-bold': !props.thinFont,
     'btn-xs': props.xs,
     'btn-sm': props.sm,
     'btn-xl': props.xl,
