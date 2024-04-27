@@ -1,39 +1,39 @@
-import { Combobox, Transition } from '@headlessui/react';
-import type { SetStateAction } from 'react';
-import { Fragment, useState } from 'react';
+import { Combobox, Transition } from "@headlessui/react";
+import type { SetStateAction } from "react";
+import { Fragment, useState } from "react";
 
-import type { DropdownItem } from '@/types/DropdownItem';
+import type { DropdownItem } from "@/types/DropdownItem";
 
 const locations: DropdownItem[] = [
-  { value: '1-1', name: 'Srbija' },
-  { value: '3-55', name: 'Beograd' },
-  { value: '2-544', name: 'Branicevski okrug' },
-  { value: '4-9889', name: 'Busije' },
-  { value: '4-2', name: 'Vozdovac' },
-  { value: '3-7', name: 'Pozarevac' },
+  { value: "1-1", name: "Srbija" },
+  { value: "3-55", name: "Beograd" },
+  { value: "2-544", name: "Branicevski okrug" },
+  { value: "4-9889", name: "Busije" },
+  { value: "4-2", name: "Vozdovac" },
+  { value: "3-7", name: "Pozarevac" },
 ];
 
 export default function AutoComplete() {
   const [selectedLocation, setSelectedLocation] = useState<DropdownItem>({
-    value: '',
-    name: '',
+    value: "",
+    name: "",
   });
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const filteredLocations =
-    query === ''
+    query === ""
       ? locations
       : locations.filter((location) =>
           location.name
             .toLowerCase()
-            .replace(/\s+/g, '')
-            .includes(query.toLowerCase().replace(/\s+/g, '')),
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
   const handleSelect = (location: SetStateAction<DropdownItem>) => {
     setSelectedLocation(location);
-    setQuery('');
-    console.log('Selected:', location);
+    setQuery("");
+    console.log("Selected:", location);
   };
 
   return (
@@ -42,6 +42,7 @@ export default function AutoComplete() {
         <div className="relative">
           <div className="relative h-14 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
+              autoComplete="off"
               className="w-full border-none bg-white py-2 pl-3 pr-10 text-sm leading-10 text-gray-900 focus:ring-0"
               displayValue={(location: DropdownItem) => location.name}
               onChange={(event) => setQuery(event.target.value)}
@@ -67,10 +68,10 @@ export default function AutoComplete() {
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            afterLeave={() => setQuery('')}
+            afterLeave={() => setQuery("")}
           >
             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {filteredLocations.length === 0 && query !== '' ? (
+              {filteredLocations.length === 0 && query !== "" ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   Nothing found.
                 </div>
@@ -82,7 +83,7 @@ export default function AutoComplete() {
                   // Define SVG element based on the first digit
                   let svgElement: JSX.Element;
                   switch (firstDigit) {
-                    case '1':
+                    case "1":
                       svgElement = (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +100,7 @@ export default function AutoComplete() {
                         </svg>
                       );
                       break;
-                    case '2':
+                    case "2":
                       svgElement = (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -116,29 +117,24 @@ export default function AutoComplete() {
                         </svg>
                       );
                       break;
-                    case '3':
+                    case "3":
                       svgElement = (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
-                          className="size-6"
+                          className="w-6 h-6"
                         >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                          />
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                            d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z"
                           />
                         </svg>
                       );
                       break;
-                    case '4':
+                    case "4":
                       svgElement = (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -162,12 +158,18 @@ export default function AutoComplete() {
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
-                          className="size-6"
+                          stroke="currentColor"
+                          className="w-6 h-6"
                         >
                           <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
                           />
                         </svg>
                       );
@@ -178,7 +180,7 @@ export default function AutoComplete() {
                       key={location.value}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active ? 'bg-primary-600 text-white' : 'text-gray-900'
+                          active ? "bg-primary-600 text-white" : "text-gray-900"
                         }`
                       }
                       value={location}
@@ -192,7 +194,7 @@ export default function AutoComplete() {
                           {
                             <span
                               className={`absolute inset-y-0 left-0 flex items-center pl-3  text-black ${
-                                active ? 'stroke-white' : 'stroke-primary-600'
+                                active ? "stroke-white" : "stroke-primary-600"
                               }`}
                             >
                               {svgElement}
@@ -204,6 +206,48 @@ export default function AutoComplete() {
                   );
                 })
               )}
+              <Combobox.Option
+                value={{ value: "currentLocation", name: "Current location" }}
+                className={({ active }) =>
+                  `relative cursor-default select-none py-2 pl-10 border-t border-gray-400 pr-4 ${
+                    active ? "bg-primary-600 text-white" : "text-gray-900"
+                  }`
+                }
+              >
+                {({ active }) => (
+                  <>
+                    <span className="block truncate font-normal">
+                      Use my current location
+                    </span>
+                    {
+                      <span
+                        className={`absolute inset-y-0 left-0 flex items-center pl-3  text-black ${
+                          active ? "stroke-white" : "stroke-primary-600"
+                        }`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          className="w-6 h-6"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                          />
+                        </svg>
+                      </span>
+                    }
+                  </>
+                )}
+              </Combobox.Option>
             </Combobox.Options>
           </Transition>
         </div>
