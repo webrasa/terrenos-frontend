@@ -4,6 +4,9 @@ import { Fragment, useState } from 'react';
 
 import type { DropdownItem } from '@/types/DropdownItem';
 
+type ISearchProps = {
+  indexTranslations: Function;
+};
 const locations: DropdownItem[] = [
   { value: '1-1', name: 'Srbija' },
   { value: '3-55', name: 'Beograd' },
@@ -13,7 +16,7 @@ const locations: DropdownItem[] = [
   { value: '3-7', name: 'Pozarevac' },
 ];
 
-export default function AutoComplete() {
+export default function AutoComplete(props: ISearchProps) {
   const [selectedLocation, setSelectedLocation] = useState<DropdownItem>({
     value: '',
     name: '',
@@ -73,7 +76,7 @@ export default function AutoComplete() {
             <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {filteredLocations.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
-                  Nothing found.
+                  {props.indexTranslations('heroSection.nothingFound')}
                 </div>
               ) : (
                 filteredLocations.slice(0, 3).map((location) => {
