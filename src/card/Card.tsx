@@ -1,9 +1,11 @@
-import React, { useEffect, useState, ChangeEventHandler } from "react";
-import classNames from "classnames";
-import { useSwipeable } from "react-swipeable";
-import { MenuDropdownItem } from "@/navigation/MenuDropdownItem";
-import { Button } from "@/button/Button";
-import { getCookie, setCookie } from "cookies-next";
+import classNames from 'classnames';
+import { getCookie, setCookie } from 'cookies-next';
+import type { ChangeEventHandler } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSwipeable } from 'react-swipeable';
+
+import { Button } from '@/button/Button';
+import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
 
 type IPropertyCardProps = {
   id: string;
@@ -62,18 +64,18 @@ const PropertyCard = ({
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length
+        (current) => (current - 1 + images.length) % images.length,
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
 
-  let [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
+  const [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
 
   const toggleFavorite = () => {
-    let idsString = getCookie("likedProperties") || "";
+    let idsString = getCookie('likedProperties') || '';
 
-    let ids = idsString ? idsString.split(",") : [];
+    let ids = idsString ? idsString.split('-') : [];
 
     if (ids.includes(id)) {
       ids = ids.filter((currentId: any) => currentId !== id);
@@ -81,26 +83,26 @@ const PropertyCard = ({
       ids.push(id);
     }
 
-    idsString = ids.join(",");
+    idsString = ids.join('-');
 
-    setCookie("likedProperties", idsString);
+    setCookie('likedProperties', idsString);
     setFavoditeCookie(ids);
 
     setIsFavorited(!isFavorited);
   };
 
   const cardClass = classNames({
-    "rounded-lg": true,
-    "overflow-hidden": true,
-    "shadow-lg": true,
-    "border-2": true,
-    "w-80": true,
+    'rounded-lg': true,
+    'overflow-hidden': true,
+    'shadow-lg': true,
+    'border-2': true,
+    'w-80': true,
   });
 
   const updateFavoriteCookie = () => {
-    let idsString = getCookie("likedProperties") || "";
+    const idsString = getCookie('likedProperties') || '';
 
-    let ids = idsString ? idsString.split(",") : [];
+    const ids = idsString ? idsString.split('-') : [];
 
     setFavoditeCookie(ids);
   };
@@ -117,21 +119,21 @@ const PropertyCard = ({
             key={index}
             src={img}
             alt={`Slide ${index}`}
-            className={`${index === activeIndex ? "image imageVisible" : "image imageHidden"}`}
+            className={`${index === activeIndex ? 'image imageVisible' : 'image imageHidden'}`}
           />
         ))}
-        <div className="absolute bottom-2 w-full flex justify-center">
+        <div className="absolute bottom-2 flex w-full justify-center">
           {images.map((_, index) => (
             <span
               key={index}
               onClick={() => setActiveIndex(index)}
-              className={`indicator ${index === activeIndex ? "indicatorActive" : ""}`}
+              className={`indicator ${index === activeIndex ? 'indicatorActive' : ''}`}
             />
           ))}
         </div>
         {!showDropdown && !showEditButton && (
           <button
-            className="absolute top-2 right-2 scale-125 text-primary-600"
+            className="absolute right-2 top-2 scale-125 text-primary-600"
             onClick={toggleFavorite}
           >
             {!favoriteCookie.includes(id) ? (
@@ -141,7 +143,7 @@ const PropertyCard = ({
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="size-6"
               >
                 <path
                   strokeLinecap="round"
@@ -154,7 +156,7 @@ const PropertyCard = ({
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 fill="currentColor"
-                className="w-6 h-6"
+                className="size-6"
               >
                 <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
               </svg>
@@ -163,18 +165,18 @@ const PropertyCard = ({
         )}
       </div>
       <div className="p-2.5">
-        <div className="flex align-center justify-between">
+        <div className="align-center flex justify-between">
           <h3 className="text-lg font-bold text-black">{price}</h3>
           <p className="text-sm text-black">{`${sizeMeters} Sq Meters | ${sizeAcres} Acres`}</p>
         </div>
-        <p className="text-sm text-black mt-2">{location}</p>
-        <p className="text-sm text-black mt-2">
+        <p className="mt-2 text-sm text-black">{location}</p>
+        <p className="mt-2 text-sm text-black">
           <b>{secondLocation}</b>
         </p>
         <>
           {showDropdown && showEditButton && (
             <>
-              <div className="flex justify-between items-center text-sm text-black">
+              <div className="flex items-center justify-between text-sm text-black">
                 <span>
                   <strong>{numberOfDays} days</strong> on Terrenoss
                 </span>
@@ -188,7 +190,7 @@ const PropertyCard = ({
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-6 h-6"
+                    className="size-6"
                   >
                     <path
                       strokeLinecap="round"
@@ -199,15 +201,16 @@ const PropertyCard = ({
                   <strong>{numberOfFavorites}</strong> favorites
                 </span>
               </div>
-              <div className="flex justify-end space-x-2 mt-3">
-                <div className="border border-primary-600 rounded-lg w-full">
+              <div className="mt-3 flex justify-end space-x-2">
+                <div className="w-full rounded-lg border border-primary-600">
                   <MenuDropdownItem
+                    selected="markAsSold"
                     items={[
-                      { value: "markAsSold", name: "Mark as sold" },
-                      { value: "setToPending", name: "Set to pending" },
+                      { value: 'markAsSold', name: 'Mark as sold' },
+                      { value: 'setToPending', name: 'Set to pending' },
                       {
-                        value: "takeOffTheMarket",
-                        name: "Take off the market",
+                        value: 'takeOffTheMarket',
+                        name: 'Take off the market',
                       },
                     ]}
                     onChangeHandler={onChangeHandler}
@@ -215,7 +218,7 @@ const PropertyCard = ({
                     id="cardDropdown"
                   ></MenuDropdownItem>
                 </div>
-                <Button cursorPointer={true}>Edit</Button>
+                <Button>Edit</Button>
               </div>
             </>
           )}

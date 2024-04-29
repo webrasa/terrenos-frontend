@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollMenu, VisibilityContext } from "react-horizontal-scrolling-menu";
+import React from 'react';
+import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
 type ScrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
@@ -10,7 +10,7 @@ type ISliderProps = {
 export default function CardSlider(props: ISliderProps) {
   const onWheel = (
     apiObj: ScrollVisibilityApiType,
-    ev: React.WheelEvent
+    ev: React.WheelEvent,
   ): void => {
     const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
 
@@ -32,13 +32,13 @@ export default function CardSlider(props: ISliderProps) {
     return (
       <div
         onClick={() => visibility.scrollPrev()}
-        className="absolute top-0 right-16 border border-gray-400 p-1 rounded cursor-pointer"
+        className="absolute right-16 top-0 cursor-pointer rounded border border-gray-400 p-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="#000"
-          className="w-6 h-6"
+          className="size-6"
         >
           <path
             fillRule="evenodd"
@@ -56,13 +56,13 @@ export default function CardSlider(props: ISliderProps) {
     return (
       <div
         onClick={() => visibility.scrollNext()}
-        className="absolute top-0 right-6 border border-gray-400 p-1 rounded cursor-pointer"
+        className="absolute right-6 top-0 cursor-pointer rounded border border-gray-400 p-1"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="#000"
-          className="w-6 h-6"
+          className="size-6"
         >
           <path
             fillRule="evenodd"
@@ -82,7 +82,7 @@ export default function CardSlider(props: ISliderProps) {
       <ScrollMenu
         LeftArrow={LeftArrow}
         RightArrow={RightArrow}
-        scrollContainerClassName={"gap-4 hide-scrollbar"}
+        scrollContainerClassName={'gap-4 hide-scrollbar'}
         onWheel={onWheel}
       >
         {props.children}

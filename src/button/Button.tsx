@@ -14,7 +14,7 @@ type IButtonProps = {
   puffy?: boolean;
   disabled?: boolean;
   greenBorder?: boolean;
-  cursorPointer? :boolean;
+  disableCursorPointer?: boolean;
 };
 
 /**
@@ -34,7 +34,7 @@ type IButtonProps = {
  * @param props.puffy - Indicates if the button has padding.
  * @param props.disabled - Indicates if the button is disabled.
  * @param props.greenBorder - Indicates if the button have green border, created to be used with secondary button.
- * @param props.cursorPointer - Indicates if the cursor is pointer.
+ * @param props.disableCursorPointer - Disables indication if the cursor is pointer.
  */
 const Button = (props: IButtonProps) => {
   const btnClass = classNames({
@@ -52,7 +52,7 @@ const Button = (props: IButtonProps) => {
     'btn-puffy': props.puffy,
     'btn-disabled': props.disabled,
     'btn-green-border': props.greenBorder,
-    'cursor-pointer': props.cursorPointer
+    'cursor-pointer': !props.disableCursorPointer,
   });
 
   return (
