@@ -36,7 +36,6 @@ export default function AutoComplete(props: ISearchProps) {
   const handleSelect = (location: SetStateAction<DropdownItem>) => {
     setSelectedLocation(location);
     setQuery('');
-    console.log('Selected:', location);
   };
 
   return (
