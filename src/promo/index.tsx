@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Button } from '@/button/Button';
 
 const Promo = () => {
-
   return (
     <div className="my-8 flex h-auto w-full flex-col-reverse md:flex-row">
       <div className="text-center md:w-1/2 md:justify-center md:pl-9 md:pr-20 md:text-left">
@@ -22,14 +21,14 @@ const Promo = () => {
           </Button>
         </Link>
       </div>
-      <div className="relative h-auto w-auto md:pr-9">
+      <div className="relative size-auto w-full md:pr-9">
         <Image
           src="/assets/images/promoNature.jpg"
           layout="fill"
-          objectFit="cover"
+          objectFit="contain"
           objectPosition="center"
           alt="Section"
-          className="rounded-none md:rounded relative"
+          className="!relative rounded-none md:rounded"
         />
       </div>
     </div>
