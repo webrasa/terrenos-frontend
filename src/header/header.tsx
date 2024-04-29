@@ -16,7 +16,7 @@ const Header = () => {
 
         {/* Background image */}
         <div
-          className="absolute top-16 h-72 w-full pl-1 md:left-96 md:top-2 md:h-80 md:w-3/4"
+          className="absolute top-16 h-72 w-full pl-1 md:left-80 md:top-1 md:h-80 md:w-3/4"
           style={{
             backgroundImage: `url('/assets/images/lineHeader.png')`,
             backgroundSize: 'cover',
@@ -36,9 +36,9 @@ const Header = () => {
               alt="place"
             />
           </div>
-          <div className="relative inset-0 top-12 z-10 justify-center md:left-80 md:top-44 md:flex">
+          <div className="relative inset-0 top-12 z-10 justify-center md:top-44 md:flex">
             <Image
-              className="h-18 absolute left-32 w-14 md:h-14 md:w-11"
+              className="h-18 relative left-32 w-14 md:h-14 md:w-11"
               src="/assets/images/locationHeader.png"
               width={500}
               height={500}
