@@ -9,13 +9,16 @@ type IVerticalFooterLinksProps = {
  * @param component
  */
 const VerticalFooterLinks = (props: IVerticalFooterLinksProps) => (
-  <ul className="vertical-footer-links grid grid-cols-2 gap-x-2 divide-x divide-gray-300 text-center">
+  <ul className="vertical-footer-links grid grid-cols-2 gap-x-2 divide-x divide-white text-center">
     {props.children}
 
     <style jsx>
       {`
         .vertical-footer-links :global(li) {
-          display: block;
+          @apply text-white block;
+        }
+        .vertical-footer-links :global(li:hover) {
+          @apply text-gray-600;
         }
       `}
     </style>
