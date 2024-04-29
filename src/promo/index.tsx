@@ -21,7 +21,7 @@ const Promo = () => {
           </Button>
         </Link>
       </div>
-      <div className="relative size-auto w-full md:pr-9">
+      <div className="relative size-auto md:pr-9">
         <Image
           src="/assets/images/promoNature.jpg"
           layout="fill"
