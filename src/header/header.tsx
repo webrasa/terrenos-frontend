@@ -2,16 +2,20 @@ import Image from 'next/image';
 
 import AutoComplete from './search';
 
-const Header = () => {
+type IHeaderProps = {
+  indexTranslations: Function;
+};
+
+const Header = (props: IHeaderProps) => {
   return (
     <div className="container relative mx-auto h-96">
       {/* Header content */}
       <div className="relative h-auto md:flex md:flex-row">
         <div className="relative left-5 top-8 z-20 w-full md:left-10 md:top-36 md:h-40 md:w-1/2">
           <h1 className="relative bottom-4 text-3xl font-semibold text-black md:text-6xl">
-            Land your dream
+            {props.indexTranslations('heroSection.title')}
           </h1>
-          <AutoComplete />
+          <AutoComplete indexTranslations={props.indexTranslations} />
         </div>
 
         {/* Background image */}

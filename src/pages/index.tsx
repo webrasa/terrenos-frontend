@@ -1,13 +1,12 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
+import { PropertyCard } from '@/card/Card';
+import { Header } from '@/header/header';
 import { Meta } from '@/layouts/Meta';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import { AppConfig } from '@/utils/AppConfig';
-import { PropertyCard } from '@/card/Card';
-
-import { Header } from '@/header/header';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -26,7 +25,7 @@ const Index = () => {
         image={AppConfig.image_url}
       />
       <Navbar />
-      <Header/>
+      <Header indexTranslations={t} />
       {t('general.title')}
 
       <PropertyCard
@@ -35,7 +34,11 @@ const Index = () => {
         sizeAcres={2.6}
         location={'Alajuela provincia, Alajuela, Carrizal Costa'}
         secondLocation={'Rica, Alajuela provincia'}
-        images={['https://picsum.photos/200/300', 'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg', 'https://picsum.photos/200/300']}
+        images={[
+          'https://picsum.photos/200/300',
+          'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
+          'https://picsum.photos/200/300',
+        ]}
       />
       <PropertyCard
         price={'$55,000'}
@@ -43,11 +46,15 @@ const Index = () => {
         sizeAcres={2.6}
         location={'Alajuela provincia, Alajuela, Carrizal Costa'}
         secondLocation={'Rica, Alajuela provincia'}
-        images={['https://picsum.photos/200/300', 'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg', 'https://picsum.photos/200/300']}
+        images={[
+          'https://picsum.photos/200/300',
+          'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
+          'https://picsum.photos/200/300',
+        ]}
         showDropdown={true}
         showEditButton={true}
       />
-      
+
       <Footer />
     </div>
   );
