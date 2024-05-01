@@ -11,7 +11,7 @@ const Header = (props: IHeaderProps) => {
     <div className="container relative mx-auto h-96">
       {/* Header content */}
       <div className="relative h-auto md:flex md:flex-row">
-        <div className="relative left-5 top-8 z-20 w-full md:left-10 md:top-36 md:h-40 md:w-1/2">
+        <div className="relative top-8 z-20 w-full pl-5 md:left-10 md:top-36 md:h-40 md:w-1/2">
           <h1 className="relative bottom-4 text-3xl font-semibold text-black md:text-6xl">
             {props.indexTranslations('heroSection.title')}
           </h1>
