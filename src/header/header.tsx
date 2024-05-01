@@ -2,21 +2,25 @@ import Image from 'next/image';
 
 import AutoComplete from './search';
 
-const Header = () => {
+type IHeaderProps = {
+  indexTranslations: Function;
+};
+
+const Header = (props: IHeaderProps) => {
   return (
     <div className="container relative mx-auto h-96">
       {/* Header content */}
       <div className="relative h-auto md:flex md:flex-row">
-        <div className="relative left-5 top-8 z-10 w-full md:left-10 md:top-36 md:h-40 md:w-1/2">
+        <div className="relative top-8 z-20 w-full pl-5 md:left-10 md:top-36 md:h-40 md:w-1/2">
           <h1 className="relative bottom-4 text-3xl font-semibold text-black md:text-6xl">
-            Land your dream
+            {props.indexTranslations('heroSection.title')}
           </h1>
-          <AutoComplete />
+          <AutoComplete indexTranslations={props.indexTranslations} />
         </div>
 
         {/* Background image */}
         <div
-          className="absolute top-16 h-72 w-full pl-1 md:left-96 md:top-2 md:h-80 md:w-3/4"
+          className="absolute top-16 h-72 w-full pl-1 md:left-80 md:top-1 md:h-80 md:w-3/4"
           style={{
             backgroundImage: `url('/assets/images/lineHeader.png')`,
             backgroundSize: 'cover',
@@ -36,9 +40,9 @@ const Header = () => {
               alt="place"
             />
           </div>
-          <div className="relative inset-0 top-12 z-10 justify-center md:left-80 md:top-44 md:flex">
+          <div className="relative inset-0 top-12 z-10 justify-center md:top-44 md:flex">
             <Image
-              className="h-18 absolute left-32 w-14 md:h-14 md:w-11"
+              className="h-18 relative left-32 w-14 md:h-14 md:w-11"
               src="/assets/images/locationHeader.png"
               width={500}
               height={500}
