@@ -7,6 +7,7 @@ import { PropertyCard } from '@/card/Card';
 import CardSlider from '@/card-slider/CardSlider';
 import { Header } from '@/header/header';
 import { Meta } from '@/layouts/Meta';
+import Promo from '@/promo';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import { AppConfig } from '@/utils/AppConfig';
