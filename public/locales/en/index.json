@@ -1,11 +1,12 @@
 {
   "general": {
-    "title": "Terranoss - Land your dream",
+    "title": "Terranoss | Land your dream",
     "description": "Terranoss - description"
   },
   "heroSection": {
     "title": "Land your dream",
-    "inputPlaceholder": "Enter a country, town or city"
+    "inputPlaceholder": "Enter a country, town or city",
+    "nothingFound": "Nothing found"
   },
   "sliderSection": {
     "title": "Locations near you"

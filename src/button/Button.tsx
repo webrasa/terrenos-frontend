@@ -17,6 +17,7 @@ type IButtonProps = {
   greenBorder?: boolean;
   thinFont?: boolean;
   onClickHandler?: MouseEventHandler<HTMLDivElement>;
+  disableCursorPointer?: boolean;
 };
 
 /**
@@ -38,6 +39,8 @@ type IButtonProps = {
  * @param props.greenBorder - Indicates if the button has green border, created to be used with secondary button.
  * @param props.thinFont - Indicates if the button is thin or bold.
  * @param props.onClickHandler - Indicates that the button has Mouse event.
+ * @param props.greenBorder - Indicates if the button have green border, created to be used with secondary button.
+ * @param props.disableCursorPointer - Disables indication if the cursor is pointer.
  */
 const Button = (props: IButtonProps) => {
   const btnClass = classNames({
@@ -56,6 +59,7 @@ const Button = (props: IButtonProps) => {
     'btn-puffy': props.puffy,
     'btn-disabled': props.disabled,
     'btn-green-border': props.greenBorder,
+    'cursor-pointer': !props.disableCursorPointer,
   });
 
   return (

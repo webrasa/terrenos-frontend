@@ -29,7 +29,7 @@ export default function DropdownMenu() {
     }
   }
   return (
-    <div className="w-10">
+    <div className="z-50 w-10 ">
       <Menu as="div">
         {({ open }) => (
           <>

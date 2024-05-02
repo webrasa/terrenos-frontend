@@ -5,7 +5,8 @@
   },
   "heroSection": {
     "title": "Aterriza tu sueño",
-    "inputPlaceholder": "Introduzca un país, pueblo o ciudad"
+    "inputPlaceholder": "Introduzca un país, pueblo o ciudad",
+    "nothingFound": "Nada Encontrado"
   },
   "sliderSection": {
     "title": "Ubicaciones cerca de ti"
