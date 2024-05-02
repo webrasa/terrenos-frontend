@@ -52,6 +52,7 @@ const Index = () => {
           );
         })}
       </CardSlider>
+      <Promo></Promo>
       <Footer />
     </div>
   );

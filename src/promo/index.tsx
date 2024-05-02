@@ -2,11 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/button/Button';
+import { LandingSection } from '@/layouts/LandingSection';
 
 const Promo = () => {
   return (
-    <div className="my-8 flex h-auto w-full flex-col-reverse md:flex-row">
-      <div className="text-center md:w-1/2 md:justify-center md:pl-9 md:pr-20 md:text-left">
+    <LandingSection yPadding="py-4">
+    <div className="flex md:gap-x-24 h-auto w-full flex-col-reverse md:flex-row">
+      <div className="text-center md:justify-center md:text-left">
         <h1 className="pb-4 pt-6 font-sans text-4xl font-semibold text-black md:pt-20">
           This could be yours
         </h1>
@@ -32,6 +34,7 @@ const Promo = () => {
         />
       </div>
     </div>
+    </LandingSection>
   );
 };
 
