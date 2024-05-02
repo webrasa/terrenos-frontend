@@ -21,13 +21,13 @@ const Promo = () => {
           </Button>
         </Link>
       </div>
-      <div className="relative size-auto md:pr-9">
+      <div className="relative size-auto">
         <Image
           src="/assets/images/promoNature.jpg"
           layout="fill"
           objectFit="contain"
           objectPosition="center"
-          alt="Section"
+          alt="Mountain view"
           className="!relative rounded-none md:rounded"
         />
       </div>
