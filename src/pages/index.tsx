@@ -5,6 +5,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { PropertyCard } from '@/card/Card';
 import CardSlider from '@/card-slider/CardSlider';
+import Discover from '@/discover';
 import { Header } from '@/header/header';
 import { Meta } from '@/layouts/Meta';
 import Promo from '@/promo';
@@ -53,6 +54,7 @@ const Index = () => {
         })}
       </CardSlider>
       <Promo></Promo>
+      <Discover></Discover>
       <Footer />
     </div>
   );
