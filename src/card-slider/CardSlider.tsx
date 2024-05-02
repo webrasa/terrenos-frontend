@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollMenu, VisibilityContext } from 'react-horizontal-scrolling-menu';
 
+import { LandingSection } from '@/layouts/LandingSection';
+
 type ScrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
 type ISliderProps = {
@@ -75,18 +77,20 @@ export default function CardSlider(props: ISliderProps) {
   };
 
   return (
-    <div className="relative pl-8">
-      <div className="mb-4 text-2xl font-bold text-black">
-        <h1>Locations near you</h1>
+    <LandingSection yPadding="py-4">
+      <div className="relative">
+        <div className="mb-4 text-2xl font-bold text-black">
+          <h1>Locations near you</h1>
+        </div>
+        <ScrollMenu
+          LeftArrow={LeftArrow}
+          RightArrow={RightArrow}
+          scrollContainerClassName={'gap-4 hide-scrollbar'}
+          onWheel={onWheel}
+        >
+          {props.children}
+        </ScrollMenu>
       </div>
-      <ScrollMenu
-        LeftArrow={LeftArrow}
-        RightArrow={RightArrow}
-        scrollContainerClassName={'gap-4 hide-scrollbar'}
-        onWheel={onWheel}
-      >
-        {props.children}
-      </ScrollMenu>
-    </div>
+    </LandingSection>
   );
 }

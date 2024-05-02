@@ -39,7 +39,7 @@ export default function AutoComplete(props: ISearchProps) {
   };
 
   return (
-    <div className="top-16 w-96 md:w-full">
+    <div className="top-16 md:w-full">
       <Combobox value={selectedLocation} onChange={setSelectedLocation}>
         <div className="relative">
           <div className="relative h-14 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
