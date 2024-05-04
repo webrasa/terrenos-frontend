@@ -18,9 +18,11 @@ const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
   return (
     <div className="flex flex-wrap items-center justify-between">
       <div className="navbarLeft inline-flex w-3/12  items-center md:w-1/2">
-        <Link href="/">{props.logo}</Link>
+        <Link className="md:w-1/2" href="/">
+          {props.logo}
+        </Link>
 
-        <nav className="mt-2 hidden md:mt-0 md:block">
+        <nav className="mt-2 hidden md:mt-0 md:block md:w-1/2">
           <ul className="navbar rounded-t">{props.children}</ul>
         </nav>
       </div>

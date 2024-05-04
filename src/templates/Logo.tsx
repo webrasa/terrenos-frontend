@@ -5,7 +5,7 @@ type ILogoProps = {
 const Logo = (props: ILogoProps) => {
   const size = props.xl ? '44' : '32';
   return (
-    <span className={'inline-flex items-center md:w-8/12'}>
+    <span className={'inline-flex items-center md:w-9/12'}>
       <img src="/assets/images/logo.png" alt="Terrenoss logo" />
     </span>
   );

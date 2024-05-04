@@ -33,7 +33,7 @@ const Header = (props: IHeaderProps) => {
           ></div>
 
           {/* Content on the right */}
-          <div className="relative h-96 w-1/4 md:w-3/4">
+          <div className="relative h-64 w-1/4 md:h-96 md:w-3/4">
             <div className="relative inset-0 z-10 w-96 items-center justify-center md:w-auto md:flex-row">
               <Image
                 className="left-18 absolute top-12 rotate-1 md:right-40 md:top-40 md:h-44 md:w-72"
