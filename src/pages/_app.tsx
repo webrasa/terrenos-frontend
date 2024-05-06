@@ -11,6 +11,7 @@ import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
+import { UnitProvider } from '@/store/unitContext';
 
 Amplify.configure({ ...AwsConfig });
 
@@ -38,7 +39,7 @@ const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
         },
       }}
     >
-      {getLayout(<Component {...pageProps} />)}
+      <UnitProvider>{getLayout(<Component {...pageProps} />)}</UnitProvider>
     </SWRConfig>
   );
 };
