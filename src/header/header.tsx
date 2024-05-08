@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import AutoComplete from './search';
+import AutoComplete from './autoComplete';
 
 const Header = () => {
   return (

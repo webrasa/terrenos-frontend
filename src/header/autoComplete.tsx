@@ -33,16 +33,15 @@ export default function AutoComplete() {
   const handleSelect = (location: SetStateAction<DropdownItem>) => {
     setSelectedLocation(location);
     setQuery('');
-    console.log('Selected:', location);
   };
 
   return (
     <div className="top-16 w-96 md:w-full">
       <Combobox value={selectedLocation} onChange={setSelectedLocation}>
         <div className="relative">
-          <div className="relative h-14 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+          <div className="relative h-16 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
-              className="w-full border-none bg-white py-2 pl-3 pr-10 text-sm leading-10 text-gray-900 focus:ring-0"
+              className="w-full border-none bg-white py-3 pl-3 pr-12 text-base leading-10 text-gray-900 focus:ring-0"
               displayValue={(location: DropdownItem) => location.name}
               onChange={(event) => setQuery(event.target.value)}
             />

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import type { MouseEventHandler } from 'react';
 
 type IButtonProps = {
   loading?: boolean;
@@ -15,6 +16,7 @@ type IButtonProps = {
   disabled?: boolean;
   greenBorder?: boolean;
   disableCursorPointer?: boolean;
+  onClickHandler?: MouseEventHandler<HTMLDivElement>;
 };
 
 /**
@@ -56,7 +58,7 @@ const Button = (props: IButtonProps) => {
   });
 
   return (
-    <div className={btnClass}>
+    <div className={btnClass} onClick={props.onClickHandler}>
       {props.loading && (
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -1,12 +1,16 @@
 // ** Layouts
+
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Section } from '@/layouts/Section';
-import { getShell } from '@/layouts/Shell';
+import Filter from '@/filter/filter';
+import AutoComplete from '@/header/autoComplete';
+import { Meta } from '@/layouts/Meta';
+import { Footer } from '@/templates/Footer';
+import { Navbar } from '@/templates/Navbar';
 import { AppConfig } from '@/utils/AppConfig';
+
 //* * Utils */
-import type { NextPageWithLayout } from '@/utils/NextLayout';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -16,16 +20,28 @@ export async function getStaticProps({ locale }: any) {
   };
 }
 
-const Index: NextPageWithLayout = () => {
-  const { t } = useTranslation('search');
-
-  return <Section title={t('general.title')}>{t('general.title')}</Section>;
+const Search = () => {
+  const { t } = useTranslation();
+  return (
+    <div className="text-gray-600 antialiased">
+      <Meta
+        title={t('general.title')}
+        description={t('general.description')}
+        image={AppConfig.image_url}
+      />
+      <Navbar />
+      <div className="m-10">
+        <div className="flex">
+          <AutoComplete />
+          <Filter />
+        </div>
+        <div className="flex">
+          <div className="w-1/2"></div>
+        </div>
+      </div>
+      <Footer />
+    </div>
+  );
 };
 
-Index.getLayout = getShell({
-  title: 'Search',
-  description: 'This is search description',
-  image: AppConfig.image_url,
-});
-
-export default Index;
+export default Search;
