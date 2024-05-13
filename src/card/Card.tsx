@@ -21,6 +21,8 @@ type IPropertyCardProps = {
   numberOfDays?: number;
   numberOfViews?: number;
   numberOfFavorites?: number;
+  fullWidth?: boolean;
+  status?: number;
   onChangeHandler?: ChangeEventHandler<HTMLSelectElement>;
 };
 
@@ -39,6 +41,8 @@ type IPropertyCardProps = {
  * @param {number} [props.numberOfDays=0] - Number of days since the property was listed.
  * @param {number} [props.numberOfViews=0] - Number of views the property has received.
  * @param {number} [props.numberOfFavorites=0] - Number of times the property has been favorited.
+ * @param {number} [props.fullWidth = false] - Should card be full width.
+ * @param {number} [props.status] - Status.
  */
 
 const PropertyCard = ({
@@ -53,11 +57,15 @@ const PropertyCard = ({
   numberOfDays = 0,
   numberOfViews = 0,
   numberOfFavorites = 0,
+  fullWidth = false,
+  status,
   onChangeHandler,
 }: IPropertyCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const { unit, setUnit } = useUnit();
+
+  const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
 
   const handlers = useSwipeable({
     onSwipedLeft: () =>
@@ -71,6 +79,11 @@ const PropertyCard = ({
   });
 
   const [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
+
+  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDropdown(e.target.value);
+    onChangeHandler && onChangeHandler(e);
+  };
 
   const toggleFavorite = () => {
     let idsString = getCookie('likedProperties') || '';
@@ -96,8 +109,15 @@ const PropertyCard = ({
     'overflow-hidden': true,
     'shadow-lg': true,
     'border-2': true,
-    'w-80': true,
+    'w-80': !fullWidth,
+    'w-full': fullWidth,
   });
+
+  const statusLabels = [
+    { id: 0, color: 'bg-red-800', text: 'Sold' },
+    { id: 1, color: 'bg-green-800', text: 'Active' },
+    { id: 2, color: 'bg-yellow-400', text: 'Pending' },
+  ];
 
   const updateFavoriteCookie = () => {
     const idsString = getCookie('likedProperties') || '';
@@ -115,6 +135,20 @@ const PropertyCard = ({
   return (
     <div className={cardClass}>
       <div className='relative' {...handlers}>
+        {statusLabels.map((label) => {
+          if (status === label.id) {
+            return (
+              <div
+                className='absolute w-30 top-3 left-4 px-2 bg-white rounded flex items-center gap-2'
+                key={label.id}
+              >
+                <div className={`rounded-full ${label.color} w-3 h-3`}></div>
+                {label.text}
+              </div>
+            );
+          }
+          return null;
+        })}
         {images.map((img, index) => (
           <img
             key={index}
@@ -205,7 +239,7 @@ const PropertyCard = ({
               <div className='mt-3 flex justify-end space-x-2'>
                 <div className='w-full rounded-lg border border-primary-600'>
                   <MenuDropdownItem
-                    selected='markAsSold'
+                    selected={selectedDropdown}
                     items={[
                       { value: 'markAsSold', name: 'Mark as sold' },
                       { value: 'setToPending', name: 'Set to pending' },
@@ -214,7 +248,7 @@ const PropertyCard = ({
                         name: 'Take off the market',
                       },
                     ]}
-                    onChangeHandler={onChangeHandler}
+                    onChangeHandler={handleDropdownChange}
                     rounded={true}
                     id='cardDropdown'
                   ></MenuDropdownItem>

@@ -25,7 +25,7 @@ const Index = () => {
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
-    <div className="text-gray-600 antialiased">
+    <div className='text-gray-600 antialiased'>
       <Meta
         title={t('general.title')}
         description={t('general.description')}
@@ -41,7 +41,7 @@ const Index = () => {
               id={index.toString()}
               price={'$55,000'}
               sizeMeters={1.6}
-              sizeAcres={2.6}
+              status={index % 3}
               location={'Alajuela provincia, Alajuela, Carrizal Costa'}
               secondLocation={'Rica, Alajuela provincia'}
               images={[
