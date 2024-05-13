@@ -32,7 +32,7 @@ export default function FilterAttributes() {
     <div className="mr-5 mt-7 w-40 flex-col text-left">
       <Menu as="div" className="inline-block w-40 text-left">
         <Menu.Button
-          className="inline-flex w-full justify-between rounded-md border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+          className="inline-flex w-full justify-between rounded border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
           onClick={() => setIsOpen(!isOpen)}
         >
           Search by Attribute

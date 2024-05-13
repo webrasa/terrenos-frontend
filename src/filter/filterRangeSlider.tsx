@@ -21,12 +21,15 @@ const FilterRangeSlider = () => {
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
-        <div className="mr-3 mt-7 text-sm font-semibold">
+        <div className="mr-3 mt-1 text-left">
           <Button
             variant="contained"
             {...bindTrigger(popupState)}
             sx={{
-              width: value[0] === 0 && value[1] === 100 ? '100px' : '180px',
+              justifyContent:
+                value[0] === 0 && value[1] === 100 ? 'left' : 'center',
+              fontSize: '14px',
+              width: value[0] === 0 && value[1] === 100 ? '120px' : '180px',
               textTransform: 'capitalize',
               color: value[0] === 0 && value[1] === 100 ? 'black' : 'white',
               backgroundColor:
