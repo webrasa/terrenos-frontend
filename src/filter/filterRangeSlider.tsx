@@ -1,6 +1,7 @@
 import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import Slider from '@mui/material/Slider';
+import TextField from '@mui/material/TextField';
 import PopupState, { bindPopover, bindTrigger } from 'material-ui-popup-state';
 import React, { useState } from 'react';
 
@@ -17,6 +18,21 @@ const FilterRangeSlider = () => {
       setDisplayedRange('Any');
     }
   };
+
+  const handleInputChange =
+    (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = parseInt(event.target.value, 10);
+      if (!Number.isNaN(newValue)) {
+        const newValues = [...value];
+        newValues[index] = newValue;
+        setValue(newValues);
+        if (newValues[0] !== 0 || newValues[1] !== 100) {
+          setDisplayedRange(`${newValues[0]} EUR - ${newValues[1]} EUR`);
+        } else {
+          setDisplayedRange('Any');
+        }
+      }
+    };
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
@@ -67,8 +83,20 @@ const FilterRangeSlider = () => {
                 sx={{ color: '#009f52' }}
               />
               <div className="mb-2 flex justify-between">
-                <div className="border-b">{`${value[0]} EUR`}</div>
-                <div className="border-b">{`${value[1]} EUR`}</div>
+                <TextField
+                  className="mr-2 border-b"
+                  value={value[0]}
+                  onChange={handleInputChange(0)}
+                  type="number"
+                  inputProps={{ min: 0 }}
+                />
+                <TextField
+                  className=""
+                  value={value[1]}
+                  onChange={handleInputChange(1)}
+                  type="number"
+                  inputProps={{ min: 0 }}
+                />
               </div>
             </div>
             <p className="mx-7 my-2 text-gray-500">
