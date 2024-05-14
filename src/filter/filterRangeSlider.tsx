@@ -21,7 +21,7 @@ const FilterRangeSlider = () => {
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState) => (
-        <div className="mr-3 mt-1 text-left">
+        <div className="mr-3 text-left">
           <Button
             variant="contained"
             {...bindTrigger(popupState)}

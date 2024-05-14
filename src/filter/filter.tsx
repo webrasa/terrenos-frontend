@@ -4,7 +4,7 @@ import FilterRangeSlider from './filterRangeSlider';
 
 const Filter = () => {
   return (
-    <div className="ml-5 flex w-1/2">
+    <div className="ml-5 flex w-1/2 justify-between">
       <div className="flex flex-col">
         <span className="text-base font-semibold text-black">Price range</span>
         <FilterRangeSlider />

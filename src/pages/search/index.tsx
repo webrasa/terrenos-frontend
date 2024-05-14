@@ -35,11 +35,15 @@ const Search = () => {
       <Navbar />
       <div className="m-10">
         <div className="flex">
-          <AutoComplete />
+          <div className="w-1/2">
+            <AutoComplete />
+          </div>
           <Filter />
         </div>
         <div className="flex">
-          <Map />
+          <div className="h-auto w-1/2">
+            <Map />
+          </div>
           <div className="relative ml-5 mt-5 w-1/2">
             <span className="text-3xl font-semibold text-black">Results</span>
             <div className="mt-2 grid grid-cols-2 gap-x-12 gap-y-4 ">

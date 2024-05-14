@@ -3,8 +3,8 @@ import React from 'react';
 
 const containerStyle = {
   borderRadius: '6px',
-  width: '650px',
-  height: '1000px',
+  width: '100%',
+  height: '100dvh',
 };
 const center = {
   lat: -3.745,
@@ -19,7 +19,7 @@ const options = {
 export default function Map() {
   return (
     <div className="mt-3">
-      <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}>
+      <LoadScript googleMapsApiKey="AIzaSyC2LgbiWpTkch7IuCs-x1-toJw2XrKQZVI">
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}

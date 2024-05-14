@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { Button } from '@/button/Button';
 
@@ -29,7 +29,7 @@ export default function FilterAttributes() {
   };
 
   return (
-    <div className="mr-5 mt-7 w-40 flex-col text-left">
+    <div className="mr-5 mt-6 w-40 flex-col text-left">
       <Menu as="div" className="inline-block w-40 text-left">
         <Menu.Button
           className="inline-flex w-full justify-between rounded border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
@@ -38,7 +38,7 @@ export default function FilterAttributes() {
           Search by Attribute
         </Menu.Button>
         <Transition
-          show={isOpen}
+          as={Fragment}
           enter="transition ease-out duration-100"
           enterFrom="transform opacity-0 scale-95"
           enterTo="transform opacity-100 scale-100"
