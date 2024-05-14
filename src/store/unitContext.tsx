@@ -1,12 +1,5 @@
-import { getCookie } from 'cookies-next';
-import React, {
-  createContext,
-  useContext,
-  useState,
-  ReactNode,
-  Dispatch,
-  SetStateAction,
-} from 'react';
+import type { Dispatch, ReactNode, SetStateAction } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 interface UnitContextType {
   unit: string;

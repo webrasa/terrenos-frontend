@@ -7,14 +7,14 @@ const conversionFactors: Record<Unit, number> = {
 };
 
 const unitNames: Record<Unit, string> = {
-  sqm: "Sq Meters",
-  acres: "Acres",
-  hectares: "Hectares",
+  sqm: 'Sq Meters',
+  acres: 'Acres',
+  hectares: 'Hectares',
 };
 
 export const convertAndFormatUnit = (value: number, unit: Unit): string => {
   const factor = conversionFactors[unit];
   const unitName = unitNames[unit];
-  const convertedValue = (value * factor);
+  const convertedValue = value * factor;
   return `${convertedValue} ${unitName}`;
 };
