@@ -1,40 +1,66 @@
 import { Combobox, Transition } from '@headlessui/react';
-import type { SetStateAction } from 'react';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import type { DropdownItem } from '@/types/DropdownItem';
+import type { ISearchHome } from '@/types/IHome';
 
 type ISearchProps = {
   indexTranslations: Function;
+  data: Array<ISearchHome>;
 };
-const locations: DropdownItem[] = [
-  { value: '1-1', name: 'Srbija' },
-  { value: '3-55', name: 'Beograd' },
-  { value: '2-544', name: 'Branicevski okrug' },
-  { value: '4-9889', name: 'Busije' },
-  { value: '4-2', name: 'Vozdovac' },
-  { value: '3-7', name: 'Pozarevac' },
-];
 
 export default function AutoComplete(props: ISearchProps) {
-  const [selectedLocation, setSelectedLocation] = useState<DropdownItem>({
+  const [selectedLocation, setSelectedLocation] = useState<ISearchHome>({
     value: '',
     name: '',
   });
   const [query, setQuery] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const router = useRouter();
 
   const filteredLocations =
     query === ''
-      ? locations
-      : locations.filter((location) =>
+      ? props.data
+      : props.data.filter((location) =>
           location.name
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
 
-  const handleSelect = (location: SetStateAction<DropdownItem>) => {
+  const handleSelect = (location: DropdownItem) => {
     setSelectedLocation(location);
+    setIsDisabled(true);
+
+    let countryId: string = '';
+    let regionId: string = '';
+    let cityId: string = '';
+    let districtId: string = '';
+
+    const [first, second] = location.value.split('-');
+    switch (first) {
+      case '1':
+        countryId = second || '';
+        break;
+      case '2':
+        regionId = second || '';
+        break;
+      case '3':
+        cityId = second || '';
+        break;
+      case '4':
+        districtId = second || '';
+        break;
+      default:
+        break;
+    }
+
+    router.push(
+      `/search?countryId=${countryId}&regionId=${regionId}&cityId=${cityId}&districtId=${districtId}&userLocation=`,
+    );
+
     setQuery('');
   };
 
@@ -186,6 +212,7 @@ export default function AutoComplete(props: ISearchProps) {
                         }`
                       }
                       value={location}
+                      disabled={isDisabled}
                       onClick={() => handleSelect(location)}
                     >
                       {({ active }) => (

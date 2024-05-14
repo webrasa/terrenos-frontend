@@ -1,0 +1,17 @@
+{
+  "navbar": {
+    "addProperty": "Add a property",
+    "viewListing": "View listings"
+  },
+  "cardSlider": {
+    "locationsNearYou": "Locations near you"
+  },
+  "promo": {
+    "title": "This could be yours",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+  },
+  "discover": {
+    "title": "Search by attributes or by country",
+    "landForSale": "Land for sale in"
+  }
+}

@@ -5,7 +5,11 @@ import { NavbarMenuCenter } from '@/navigation/NavbarMenuCenter';
 
 import { Logo } from './Logo';
 
-const Navbar = () => (
+type INavbarProps = {
+  translation: Function;
+};
+
+const Navbar = (props: INavbarProps) => (
   <div className="border-b border-gray-300">
     <LandingSection yPadding="py-4">
       <NavbarMenuCenter
@@ -13,13 +17,15 @@ const Navbar = () => (
         rightMenu={
           <>
             <li className="rounded-1.5xl bg-primary-600 p-2 text-center font-medium text-white md:px-10">
-              <Link href="/profile">Add a property</Link>
+              <Link href="/profile">
+                {props.translation('navbar.addProperty')}
+              </Link>
             </li>
           </>
         }
       >
         <li>
-          <Link href="/search">View listings</Link>
+          <Link href="/search">{props.translation('navbar.viewListing')}</Link>
         </li>
       </NavbarMenuCenter>
     </LandingSection>

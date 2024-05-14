@@ -1,11 +1,13 @@
 import Image from 'next/image';
 
 import { LandingSection } from '@/layouts/LandingSection';
+import type { ISearchHome } from '@/types/IHome';
 
 import AutoComplete from './search';
 
 type IHeaderProps = {
   indexTranslations: Function;
+  data: Array<ISearchHome>;
 };
 
 const Header = (props: IHeaderProps) => {
@@ -18,7 +20,10 @@ const Header = (props: IHeaderProps) => {
             <h1 className="relative bottom-4 text-3xl font-semibold text-black md:text-6xl">
               {props.indexTranslations('heroSection.title')}
             </h1>
-            <AutoComplete indexTranslations={props.indexTranslations} />
+            <AutoComplete
+              indexTranslations={props.indexTranslations}
+              data={props.data}
+            />
           </div>
 
           {/* Background image */}
