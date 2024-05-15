@@ -11,3 +11,7 @@ button:disabled {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+[type='checkbox']{
+  @apply text-primary-600;
+}

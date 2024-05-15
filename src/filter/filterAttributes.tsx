@@ -29,7 +29,7 @@ export default function FilterAttributes() {
   };
 
   return (
-    <div className="mr-5 mt-6 w-40 flex-col text-left">
+    <div className="mr-5 flex-col">
       <Menu as="div" className="inline-block w-40 text-left">
         <Menu.Button
           className="inline-flex w-full justify-between rounded border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
@@ -39,6 +39,7 @@ export default function FilterAttributes() {
         </Menu.Button>
         <Transition
           as={Fragment}
+          show={isOpen}
           enter="transition ease-out duration-100"
           enterFrom="transform opacity-0 scale-95"
           enterTo="transform opacity-100 scale-100"
@@ -67,7 +68,7 @@ export default function FilterAttributes() {
                     >
                       <input
                         type="checkbox"
-                        className={`mr-2 appearance-none checked:border-transparent checked:bg-green-600 checked:hover:bg-green-700 focus:ring-0 focus:ring-offset-0 checked:focus:ring-0 checked:focus:ring-offset-0`}
+                        className={`mr-2 appearance-none checked:border-transparent checked:bg-primary-600 checked:hover:bg-primary-600 focus:ring-0 focus:ring-offset-0 checked:focus:ring-0 checked:focus:ring-offset-0`}
                         checked={selectedItems.includes(item)}
                         onChange={() => handleCheckboxChange(item)}
                       />

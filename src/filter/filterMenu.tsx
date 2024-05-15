@@ -6,7 +6,7 @@ export default function FilterMenu() {
     <div className="w-10">
       <Menu as="div">
         <div>
-          <Menu.Button className="mt-5 inline-flex justify-center py-2">
+          <Menu.Button className="inline-flex justify-center py-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -46,8 +46,8 @@ export default function FilterMenu() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke="#009F52"
-                        className="ml-16 size-4"
+                        stroke="currentColor"
+                        className="ml-16 size-4 text-primary-600"
                       >
                         <path
                           strokeLinecap="round"
@@ -71,8 +71,8 @@ export default function FilterMenu() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke="#009F52"
-                        className="ml-2 size-4"
+                        stroke="currentColor"
+                        className="ml-2 size-4 text-primary-600"
                       >
                         <path
                           strokeLinecap="round"
@@ -96,8 +96,8 @@ export default function FilterMenu() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke="#009F52"
-                        className="ml-2 size-4"
+                        stroke="currentColor"
+                        className="ml-2 size-4 text-primary-600"
                       >
                         <path
                           strokeLinecap="round"
@@ -121,8 +121,8 @@ export default function FilterMenu() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke="#009F52"
-                        className="ml-2 size-4"
+                        stroke="currentColor"
+                        className="ml-2 size-4 text-primary-600"
                       >
                         <path
                           strokeLinecap="round"
@@ -146,8 +146,8 @@ export default function FilterMenu() {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
-                        stroke="#009F52"
-                        className="ml-16 size-4"
+                        stroke="currentColor"
+                        className="ml-16 size-4 text-primary-600"
                       >
                         <path
                           strokeLinecap="round"

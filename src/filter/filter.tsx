@@ -4,16 +4,12 @@ import FilterRangeSlider from './filterRangeSlider';
 
 const Filter = () => {
   return (
-    <div className="ml-5 flex w-1/2 justify-between">
+    <div className="ml-5 flex w-3/4 items-center justify-between">
       <div className="flex flex-col">
-        <span className="text-base font-semibold text-black">Price range</span>
-        <FilterRangeSlider />
+        <FilterRangeSlider minValue={0} maxValue={1000000} type="price" />
       </div>
       <div className="flex flex-col">
-        <span className="text-base font-semibold text-black">
-          Square meters
-        </span>
-        <FilterRangeSlider />
+        <FilterRangeSlider minValue={0} maxValue={1000000} type="surface" />
       </div>
       <FilterAttributes />
       <FilterMenu />

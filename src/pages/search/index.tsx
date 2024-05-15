@@ -33,20 +33,20 @@ const Search = () => {
         image={AppConfig.image_url}
       />
       <Navbar />
-      <div className="m-10">
+      <div className="mx-auto mt-3 max-w-screen-xl px-3 py-4">
         <div className="flex">
           <div className="w-1/2">
             <AutoComplete />
           </div>
           <Filter />
         </div>
-        <div className="flex">
+        <div className="mt-3 flex">
           <div className="h-auto w-1/2">
             <Map />
           </div>
-          <div className="relative ml-5 mt-5 w-1/2">
+          <div className="relative ml-5 w-3/4">
             <span className="text-3xl font-semibold text-black">Results</span>
-            <div className="mt-2 grid grid-cols-2 gap-x-12 gap-y-4 ">
+            <div className="mt-2 grid grid-cols-2 gap-4 ">
               {array.map((item, index) => {
                 return (
                   <PropertyCard
