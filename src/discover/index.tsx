@@ -8,14 +8,14 @@ type IDiscoverProps = {
   attributes: Array<Attributes>;
   countries: Array<Countries>;
   translationCommon: Function;
-  translationHome: Function;
+  translation: Function;
 };
 
 const Discover = (props: IDiscoverProps) => {
   return (
     <LandingSection yPadding="py-4">
       <h2 className="pb-10 pt-6 text-center font-sans text-4xl font-semibold text-black">
-        {props.translationHome('discover.title')}
+        {props.translation('searchSection.title')}
       </h2>
       <div className="flex flex-wrap justify-evenly gap-4">
         {props.attributes &&
@@ -41,7 +41,7 @@ const Discover = (props: IDiscoverProps) => {
                 key={index}
                 href={`/search?countryId=${item.id}&regionId=&cityId=&districtId=&userLocation=`}
               >
-                {`${props.translationHome('discover.landForSale')} ${item.name}`}
+                {`${props.translation('sliderSection.title')} ${item.name}`}
               </Link>
             );
           })}

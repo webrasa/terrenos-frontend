@@ -8,6 +8,7 @@ import AutoComplete from './search';
 type IHeaderProps = {
   indexTranslations: Function;
   data: Array<ISearchHome>;
+  url: string;
 };
 
 const Header = (props: IHeaderProps) => {
@@ -23,6 +24,7 @@ const Header = (props: IHeaderProps) => {
             <AutoComplete
               indexTranslations={props.indexTranslations}
               data={props.data}
+              url={props.url}
             />
           </div>
 

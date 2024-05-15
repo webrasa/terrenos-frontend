@@ -81,7 +81,7 @@ export default function CardSlider(props: ISliderProps) {
     <LandingSection yPadding="py-4">
       <div className="relative">
         <div className="mb-4 text-2xl font-bold text-black">
-          <h1>{props.translation('cardSlider.locationsNearYou')}</h1>
+          <h1>{props.translation('sliderSection.title')}</h1>
         </div>
         <ScrollMenu
           LeftArrow={LeftArrow}

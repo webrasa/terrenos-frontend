@@ -29,7 +29,6 @@ export async function getStaticProps({ locale }: any) {
 const Index = () => {
   const { t } = useTranslation('index');
   const { t: translationCommon } = useTranslation('common');
-  const { t: translationHome } = useTranslation('home');
 
   const { userLocation } = UseLocation();
 
@@ -54,9 +53,13 @@ const Index = () => {
         description={t('general.description')}
         image={AppConfig.image_url}
       />
-      <Navbar translation={translationHome} />
-      <Header indexTranslations={t} data={data?.locations || []} />
-      <CardSlider translation={translationHome}>
+      <Navbar translation={translationCommon} />
+      <Header
+        indexTranslations={t}
+        data={data?.locations || []}
+        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${userLocation.latitude},${userLocation.longitude}`}
+      />
+      <CardSlider translation={t}>
         {data && data.properties
           ? data.properties.map((item, index) => {
               return (
@@ -80,13 +83,13 @@ const Index = () => {
       </CardSlider>
       <Promo
         url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${userLocation.latitude},${userLocation.longitude}`}
-        translation={translationHome}
+        translation={t}
       />
       <Discover
         attributes={data?.attributes || []}
         countries={data?.countries || []}
         translationCommon={translationCommon}
-        translationHome={translationHome}
+        translation={t}
       ></Discover>
       <Footer />
     </div>

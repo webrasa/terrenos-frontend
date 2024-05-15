@@ -8,6 +8,7 @@ import type { ISearchHome } from '@/types/IHome';
 type ISearchProps = {
   indexTranslations: Function;
   data: Array<ISearchHome>;
+  url: string;
 };
 
 export default function AutoComplete(props: ISearchProps) {
@@ -36,34 +37,39 @@ export default function AutoComplete(props: ISearchProps) {
       setIsDisabled(true);
     }, 200);
 
-    let countryId: string = '';
-    let regionId: string = '';
-    let cityId: string = '';
-    let districtId: string = '';
+    let url = '';
 
-    const [first, second] = location.value.split('-');
-    switch (first) {
-      case '1':
-        countryId = second || '';
-        break;
-      case '2':
-        regionId = second || '';
-        break;
-      case '3':
-        cityId = second || '';
-        break;
-      case '4':
-        districtId = second || '';
-        break;
-      default:
-        break;
+    if (location.value === 'currentLocation') {
+      url = props.url;
+    } else {
+      let countryId: string = '';
+      let regionId: string = '';
+      let cityId: string = '';
+      let districtId: string = '';
+
+      const [first, second] = location.value.split('-');
+      switch (first) {
+        case '1':
+          countryId = second || '';
+          break;
+        case '2':
+          regionId = second || '';
+          break;
+        case '3':
+          cityId = second || '';
+          break;
+        case '4':
+          districtId = second || '';
+          break;
+        default:
+          break;
+      }
+
+      url = `/search?countryId=${countryId}&regionId=${regionId}&cityId=${cityId}&districtId=${districtId}&userLocation=`;
     }
 
-    router.push(
-      `/search?countryId=${countryId}&regionId=${regionId}&cityId=${cityId}&districtId=${districtId}&userLocation=`,
-    );
-
     setQuery('');
+    router.push(url);
   };
 
   return (
@@ -221,7 +227,6 @@ export default function AutoComplete(props: ISearchProps) {
                         }`
                       }
                       value={location}
-                      disabled={isDisabled}
                     >
                       {({ active }) => (
                         <>

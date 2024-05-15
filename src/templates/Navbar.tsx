@@ -18,14 +18,16 @@ const Navbar = (props: INavbarProps) => (
           <>
             <li className="rounded-1.5xl bg-primary-600 p-2 text-center font-medium text-white md:px-10">
               <Link href="/profile">
-                {props.translation('navbar.addProperty')}
+                {props.translation('navbarSection.ctaAddPropertyButtonTitle')}
               </Link>
             </li>
           </>
         }
       >
         <li>
-          <Link href="/search">{props.translation('navbar.viewListing')}</Link>
+          <Link href="/search">
+            {props.translation('navbarSection.viewListingsTitle')}
+          </Link>
         </li>
       </NavbarMenuCenter>
     </LandingSection>

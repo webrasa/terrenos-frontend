@@ -15,14 +15,14 @@ const Promo = (props: IPromoProps) => {
       <div className="flex h-auto w-full flex-col-reverse md:flex-row md:gap-x-24">
         <div className="text-center md:justify-center md:text-left">
           <h2 className="pb-4 pt-6 font-sans text-4xl font-semibold text-black md:pt-20">
-            {props.translation('promo.title')}
+            {props.translation('tripSection.title')}
           </h2>
           <p className="px-11 pb-4 font-sans text-black md:px-1 md:pb-9 md:text-sm">
-            {props.translation('promo.text')}
+            {props.translation('tripSection.description')}
           </p>
           <Link href={props.url}>
             <Button thinFont puffy>
-              For sale near me
+              {props.translation('tripSection.ctaTitle')}
             </Button>
           </Link>
         </div>
