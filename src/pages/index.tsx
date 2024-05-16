@@ -68,7 +68,6 @@ const Index = () => {
                   id={item.id.toString()}
                   price={item.price.toString()}
                   sizeMeters={1.6}
-                  sizeAcres={2.6}
                   location={getPropertyLocation(item)}
                   secondLocation={item.address}
                   images={[
