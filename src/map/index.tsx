@@ -4,7 +4,7 @@ import React from 'react';
 const containerStyle = {
   borderRadius: '6px',
   width: '100%',
-  height: '100dvh',
+  height: '80dvh',
 };
 const center = {
   lat: -3.745,
