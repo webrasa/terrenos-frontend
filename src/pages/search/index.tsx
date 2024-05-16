@@ -24,7 +24,7 @@ export async function getStaticProps({ locale }: any) {
 
 const Search = () => {
   const { t } = useTranslation();
-  const array = [1, 2, 3, 4, 5, 6];
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <div className="text-gray-600 antialiased">
       <Meta
@@ -46,7 +46,7 @@ const Search = () => {
           </div>
           <div className="relative ml-5 w-3/4">
             <span className="text-3xl font-semibold text-black">Results</span>
-            <div className="mt-2 grid grid-cols-2 gap-4 ">
+            <div className="custom-scroll mt-2 grid max-h-screen grid-cols-2 gap-4">
               {array.map((item, index) => {
                 return (
                   <PropertyCard
