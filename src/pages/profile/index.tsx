@@ -3,9 +3,13 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Navbar } from '@/templates/Navbar';
 import { Footer } from '@/templates/Footer';
-import { PropertyCard } from '@/card/Card';
 import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
+import { LandingSection } from '@/layouts/LandingSection';
+import CurrentListing from './CurrentListing';
+import Drafts from './Drafts';
+import WatchList from './WatchList';
+import SoldOffMarket from './SoldOffMarket';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -37,153 +41,48 @@ const Index = () => {
   }, []);
 
   return (
-    <div className='antialiased'>
+    <div className="antialiased">
       <Navbar />
-      <div className='container mx-auto md:px-40 px-4'>
-        <div className='flex items-center space-x-4 py-4'>
-          <img
-            src={userProfileImage}
-            alt='Profile'
-            className='h-24 w-24 rounded-full object-cover'
-          />
-          <h1 className='text-3xl font-medium text-black'>Hello, {userName}</h1>
+      <LandingSection yPadding="py-4">
+        <div className="container mx-auto">
+          <div className="flex items-center space-x-4">
+            <img
+              src={userProfileImage}
+              alt="Profile"
+              className="h-24 w-24 rounded-full object-cover"
+            />
+            <h1 className="text-3xl font-medium text-black">
+              Hello, {userName}
+            </h1>
+          </div>
+          <TabGroup>
+            <TabList className="border-b-2 h-15 -ml-8 flex flex-nowrap	overflow-x-auto overflow-y-hidden md:block whitespace-nowrap">
+              {tabs.map((tab) => (
+                <Tab
+                  key={tab.key}
+                  className="text-black data-[selected]:font-bold outline-none data-[selected]:border-b-8 border-green-600 h-12 py-2 mx-10"
+                >
+                  {tab.name}
+                </Tab>
+              ))}
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <CurrentListing array={array} />
+              </TabPanel>
+              <TabPanel>
+                <Drafts array={array} />
+              </TabPanel>
+              <TabPanel>
+                <WatchList array={array} likedIds={likedIds} />
+              </TabPanel>
+              <TabPanel>
+                <SoldOffMarket array={array} />
+              </TabPanel>
+            </TabPanels>
+          </TabGroup>
         </div>
-        <TabGroup>
-          <TabList className='border-b-2 h-15 -ml-12 flex flex-nowrap	overflow-x-auto overflow-y-hidden md:block whitespace-nowrap'>
-            {tabs.map((tab) => (
-              <Tab
-                key={tab.key}
-                className='text-black data-[selected]:font-bold outline-none data-[selected]:border-b-8 border-green-600 h-12 py-2 mx-10'
-              >
-                {tab.name}
-              </Tab>
-            ))}
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <div className='flex flex-wrap mx-2'>
-                {array.map((item, index) => {
-                  return (
-                    <div className={`w-full sm:w-full md:w-1/3 px-1 pt-6`}>
-                      <PropertyCard
-                        key={index}
-                        id={index.toString()}
-                        price={'$55,000'}
-                        sizeMeters={1.6}
-                        fullWidth={true}
-                        location={
-                          'Alajuela provincia, Alajuela, Carrizal Costa'
-                        }
-                        secondLocation={'Rica, Alajuela provincia'}
-                        images={[
-                          'https://picsum.photos/200/300',
-                          'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                          'https://picsum.photos/200/300',
-                        ]}
-                        showDropdown={true}
-                        showEditButton={true}
-                        numberOfDays={10}
-                        numberOfViews={12}
-                        numberOfFavorites={2}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className='flex flex-wrap mx-2'>
-                {array.map((item, index) => {
-                  return (
-                    <div className={`w-full sm:w-full md:w-1/3 px-1 pt-6`}>
-                      <PropertyCard
-                        key={index}
-                        id={index.toString()}
-                        price={'$55,000'}
-                        sizeMeters={1.6}
-                        fullWidth={true}
-                        location={
-                          'Alajuela provincia, Alajuela, Carrizal Costa'
-                        }
-                        secondLocation={'Rica, Alajuela provincia'}
-                        images={[
-                          'https://picsum.photos/200/300',
-                          'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                          'https://picsum.photos/200/300',
-                        ]}
-                        showDropdown={true}
-                        showEditButton={true}
-                        numberOfDays={10}
-                        numberOfViews={12}
-                        numberOfFavorites={2}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className='flex flex-wrap mx-2'>
-                {array.map((item, index) => {
-                  if (likedIds.includes(index.toString()))
-                    return (
-                      <div className={`w-full sm:w-full md:w-1/3 px-1 pt-6`}>
-                        <PropertyCard
-                          key={index}
-                          id={index.toString()}
-                          price={'$55,000'}
-                          sizeMeters={1.6}
-                          fullWidth={true}
-                          location={
-                            'Alajuela provincia, Alajuela, Carrizal Costa'
-                          }
-                          secondLocation={'Rica, Alajuela provincia'}
-                          images={[
-                            'https://picsum.photos/200/300',
-                            'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                            'https://picsum.photos/200/300',
-                          ]}
-                          status={index % 3}
-                        />
-                      </div>
-                    );
-                })}
-              </div>
-            </TabPanel>
-            <TabPanel>
-              <div className='flex flex-wrap mx-2'>
-                {array.map((item, index) => {
-                  return (
-                    <div className={`w-full sm:w-full md:w-1/3 px-1 pt-6`}>
-                      <PropertyCard
-                        key={index}
-                        id={index.toString()}
-                        price={'$55,000'}
-                        sizeMeters={1.6}
-                        fullWidth={true}
-                        location={
-                          'Alajuela provincia, Alajuela, Carrizal Costa'
-                        }
-                        secondLocation={'Rica, Alajuela provincia'}
-                        images={[
-                          'https://picsum.photos/200/300',
-                          'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                          'https://picsum.photos/200/300',
-                        ]}
-                        showDropdown={true}
-                        showEditButton={true}
-                        numberOfDays={10}
-                        numberOfViews={12}
-                        numberOfFavorites={2}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </TabPanel>
-          </TabPanels>
-        </TabGroup>
-      </div>
+      </LandingSection>
       <Footer />
     </div>
   );
