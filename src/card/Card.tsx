@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { getCookie, setCookie } from 'cookies-next';
-import type { ChangeEventHandler } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
@@ -14,7 +13,7 @@ type IPropertyCardProps = {
   id: string;
   images: string[];
   price: string;
-  sizeMeters: number;
+  surfaceArea: number;
   location: string;
   secondLocation: string;
   showDropdown?: boolean;
@@ -24,7 +23,6 @@ type IPropertyCardProps = {
   numberOfFavorites?: number;
   fullWidth?: boolean;
   status?: number;
-  onChangeHandler?: ChangeEventHandler<HTMLSelectElement>;
 };
 
 /**
@@ -34,7 +32,7 @@ type IPropertyCardProps = {
  * @param {string[]} props.id - Product id
  * @param {string[]} props.images - Array of image URLs for the property.
  * @param {string} props.price - Price of the property.
- * @param {number} props.sizeMeters - Size of the property in square meters.
+ * @param {number} props.surfaceArea -  Surface area of the property.
  * @param {string} props.location - Primary location of the property.
  * @param {string} props.secondLocation - Secondary location of the property.
  * @param {boolean} [props.showDropdown=false] - Determines if the dropdown should be displayed.
@@ -50,7 +48,7 @@ const PropertyCard = ({
   id,
   images,
   price,
-  sizeMeters,
+  surfaceArea,
   location,
   secondLocation,
   showDropdown = false,
@@ -60,7 +58,6 @@ const PropertyCard = ({
   numberOfFavorites = 0,
   fullWidth = false,
   status,
-  onChangeHandler,
 }: IPropertyCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
@@ -73,7 +70,7 @@ const PropertyCard = ({
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length,
+        (current) => (current - 1 + images.length) % images.length
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -202,7 +199,7 @@ const PropertyCard = ({
       <div className="p-2.5">
         <div className="align-center flex justify-between">
           <h3 className="text-lg font-bold text-black">{price}</h3>
-          <p className="text-sm text-black">{`${convertAndFormatUnit(sizeMeters, unit as Unit)}`}</p>
+          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
         </div>
         <p className="mt-2 text-sm text-black">{location}</p>
         <p className="mt-2 text-sm text-black">
