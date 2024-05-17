@@ -8,13 +8,13 @@ import type {
 } from './IComponents';
 
 export type IHome = {
-  attributes: Array<Attributes>;
-  cities: Array<Cities>;
-  countries: Array<Countries>;
-  districts: Array<Districts>;
-  properties: Array<Properties>;
-  regions: Array<Regions>;
-  locations: Array<ISearchHome>;
+  attributes?: Array<Attributes>;
+  cities?: Array<Cities>;
+  countries?: Array<Countries>;
+  districts?: Array<Districts>;
+  properties?: Array<Properties>;
+  regions?: Array<Regions>;
+  locations?: Array<ISearchHome>;
 };
 
 export type ISearchHome = {

@@ -1,17 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 
+import { API } from 'aws-amplify';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import useSWR from 'swr';
+import { useEffect, useState } from 'react';
 
 import { PropertyCard } from '@/card/Card';
 import CardSlider from '@/card-slider/CardSlider';
 import Discover from '@/discover';
 import { Header } from '@/header/header';
-import { UseLocation } from '@/hooks/UseLocation';
+import { useAsync } from '@/hooks/UseAsync';
 import { Meta } from '@/layouts/Meta';
 import Promo from '@/promo';
+import { useUserLocation } from '@/store/locationContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import type { Properties } from '@/types/IComponents';
@@ -27,14 +29,30 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Index = () => {
+  // States
+  const [data, setData] = useState<IHome>({});
+
+  // Translations
   const { t } = useTranslation('index');
   const { t: translationCommon } = useTranslation('common');
 
-  const { userLocation } = UseLocation();
+  // Context
+  const { ipLocation } = useUserLocation();
 
-  const { data, error, isLoading, mutate } = useSWR<IHome>(
-    `/home/${userLocation?.latitude}/${userLocation?.longitude}`,
-  );
+  // Functions
+  const getData = useAsync(async (latitude: string, longitude: string) => {
+    try {
+      const homeData = await API.get(
+        'backend',
+        `/home/${latitude}/${longitude}`,
+        {},
+      );
+      setData(homeData);
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
 
   const getPropertyLocation = (item: Properties) => {
     let address = '';
@@ -45,6 +63,18 @@ const Index = () => {
 
     return address;
   };
+
+  // Hooks
+  useEffect(() => {
+    if (
+      ipLocation.latitude &&
+      ipLocation.latitude !== 0 &&
+      ipLocation.longitude &&
+      ipLocation.longitude !== 0
+    ) {
+      getData.execute(ipLocation.latitude, ipLocation.longitude);
+    }
+  }, [ipLocation]);
 
   return (
     <div className="text-gray-600 antialiased">
@@ -57,10 +87,10 @@ const Index = () => {
       <Header
         indexTranslations={t}
         data={data?.locations || []}
-        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${userLocation.latitude},${userLocation.longitude}`}
+        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${ipLocation.latitude},${ipLocation.longitude}`}
       />
       <CardSlider translation={t}>
-        {data && data.properties
+        {data && data.properties && data.properties
           ? data.properties.map((item, index) => {
               return (
                 <PropertyCard
@@ -81,7 +111,7 @@ const Index = () => {
           : []}
       </CardSlider>
       <Promo
-        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${userLocation.latitude},${userLocation.longitude}`}
+        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${ipLocation.latitude},${ipLocation.longitude}`}
         translation={t}
       />
       <Discover

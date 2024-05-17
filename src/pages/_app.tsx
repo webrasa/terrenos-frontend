@@ -7,13 +7,17 @@ import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
+import { UserLocationProvider } from '@/store/locationContext';
+import { poolProviders } from '@/store/poolContext';
+import { UnitProvider } from '@/store/unitContext';
 import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
-import { UnitProvider } from '@/store/unitContext';
 
 Amplify.configure({ ...AwsConfig });
+
+const PoolProviders = poolProviders(UnitProvider, UserLocationProvider);
 
 // Next JS App props with the shared layout support.
 type AppPropsWithLayout = AppProps & {
@@ -39,7 +43,7 @@ const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
         },
       }}
     >
-      <UnitProvider>{getLayout(<Component {...pageProps} />)}</UnitProvider>
+      <PoolProviders>{getLayout(<Component {...pageProps} />)}</PoolProviders>
     </SWRConfig>
   );
 };
