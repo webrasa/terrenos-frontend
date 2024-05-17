@@ -1,3 +1,4 @@
+import { getCookie, setCookie } from 'cookies-next';
 import React, {
   createContext,
   useContext,
@@ -31,6 +32,10 @@ export function UserLocationProvider(props: any) {
   useEffect(() => {
     async function fetchAPI() {
       const res = await getUserLocationFromIp();
+      if (!getCookie('currency')) setCookie('currency', res.currency);
+      if (!getCookie('language'))
+        setCookie('language', res.languages.split(',')[0].trim());
+
       setIpLocation({
         latitude: res.latitude,
         longitude: res.longitude,
