@@ -41,7 +41,10 @@ const Index = () => {
 
   // Functions
   const getData = useAsync(async (latitude: string, longitude: string) => {
+    console.log('ipLocation ', ipLocation);
+
     try {
+      if (Object.keys(data).length > 0 && ipLocation.source === 'IP') return;
       const homeData = await API.get(
         'backend',
         `/home/${latitude}/${longitude}`,
