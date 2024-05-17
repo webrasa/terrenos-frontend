@@ -7,6 +7,7 @@ type ScrollVisibilityApiType = React.ContextType<typeof VisibilityContext>;
 
 type ISliderProps = {
   children: JSX.Element[];
+  translation: Function;
 };
 
 export default function CardSlider(props: ISliderProps) {
@@ -80,7 +81,7 @@ export default function CardSlider(props: ISliderProps) {
     <LandingSection yPadding="py-4">
       <div className="relative">
         <div className="mb-4 text-2xl font-bold text-black">
-          <h1>Locations near you</h1>
+          <h1>{props.translation('sliderSection.title')}</h1>
         </div>
         <ScrollMenu
           LeftArrow={LeftArrow}

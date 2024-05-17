@@ -1,46 +1,87 @@
 import { Combobox, Transition } from '@headlessui/react';
-import type { SetStateAction } from 'react';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import type { DropdownItem } from '@/types/DropdownItem';
+import type { ISearchHome } from '@/types/IHome';
 
 type ISearchProps = {
   indexTranslations: Function;
+  data: Array<ISearchHome>;
+  url: string;
 };
-const locations: DropdownItem[] = [
-  { value: '1-1', name: 'Srbija' },
-  { value: '3-55', name: 'Beograd' },
-  { value: '2-544', name: 'Branicevski okrug' },
-  { value: '4-9889', name: 'Busije' },
-  { value: '4-2', name: 'Vozdovac' },
-  { value: '3-7', name: 'Pozarevac' },
-];
 
 export default function AutoComplete(props: ISearchProps) {
-  const [selectedLocation, setSelectedLocation] = useState<DropdownItem>({
+  const [selectedLocation, setSelectedLocation] = useState<ISearchHome>({
     value: '',
     name: '',
   });
   const [query, setQuery] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const router = useRouter();
 
   const filteredLocations =
     query === ''
-      ? locations
-      : locations.filter((location) =>
+      ? props.data
+      : props.data.filter((location) =>
           location.name
             .toLowerCase()
             .replace(/\s+/g, '')
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
 
-  const handleSelect = (location: SetStateAction<DropdownItem>) => {
+  const handleSelect = (location: DropdownItem) => {
     setSelectedLocation(location);
+    setTimeout(() => {
+      setIsDisabled(true);
+    }, 200);
+
+    let url = '';
+
+    if (location.value === 'currentLocation') {
+      url = props.url;
+    } else {
+      let countryId: string = '';
+      let regionId: string = '';
+      let cityId: string = '';
+      let districtId: string = '';
+
+      const [first, second] = location.value.split('-');
+      switch (first) {
+        case '1':
+          countryId = second || '';
+          break;
+        case '2':
+          regionId = second || '';
+          break;
+        case '3':
+          cityId = second || '';
+          break;
+        case '4':
+          districtId = second || '';
+          break;
+        default:
+          break;
+      }
+
+      url = `/search?countryId=${countryId}&regionId=${regionId}&cityId=${cityId}&districtId=${districtId}&userLocation=`;
+    }
+
     setQuery('');
+    router.push(url);
   };
 
   return (
     <div className="top-16 md:w-full">
-      <Combobox value={selectedLocation} onChange={setSelectedLocation}>
+      <Combobox
+        value={selectedLocation}
+        onChange={(location) => {
+          handleSelect(location);
+          setSelectedLocation(location);
+        }}
+        disabled={isDisabled}
+      >
         <div className="relative">
           <div className="relative h-14 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
@@ -186,7 +227,6 @@ export default function AutoComplete(props: ISearchProps) {
                         }`
                       }
                       value={location}
-                      onClick={() => handleSelect(location)}
                     >
                       {({ active }) => (
                         <>

@@ -4,22 +4,25 @@ import Link from 'next/link';
 import { Button } from '@/button/Button';
 import { LandingSection } from '@/layouts/LandingSection';
 
-const Promo = () => {
+type IPromoProps = {
+  url: string;
+  translation: Function;
+};
+
+const Promo = (props: IPromoProps) => {
   return (
     <LandingSection yPadding="py-4">
       <div className="flex h-auto w-full flex-col-reverse md:flex-row md:gap-x-24">
         <div className="text-center md:justify-center md:text-left">
           <h2 className="pb-4 pt-6 font-sans text-4xl font-semibold text-black md:pt-20">
-            This could be yours
+            {props.translation('tripSection.title')}
           </h2>
           <p className="px-11 pb-4 font-sans text-black md:px-1 md:pb-9 md:text-sm">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation
+            {props.translation('tripSection.description')}
           </p>
-          <Link href="/profile">
+          <Link href={props.url}>
             <Button thinFont puffy>
-              For sale near me
+              {props.translation('tripSection.ctaTitle')}
             </Button>
           </Link>
         </div>

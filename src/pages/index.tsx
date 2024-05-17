@@ -1,28 +1,81 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import 'react-horizontal-scrolling-menu/dist/styles.css';
 
+import { API } from 'aws-amplify';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useEffect, useState } from 'react';
 
 import { PropertyCard } from '@/card/Card';
 import CardSlider from '@/card-slider/CardSlider';
 import Discover from '@/discover';
 import { Header } from '@/header/header';
+import { useAsync } from '@/hooks/UseAsync';
 import { Meta } from '@/layouts/Meta';
 import Promo from '@/promo';
+import { useUserLocation } from '@/store/locationContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
+import type { Properties } from '@/types/IComponents';
+import type { IHome } from '@/types/IHome';
 import { AppConfig } from '@/utils/AppConfig';
 
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['index'])),
+      ...(await serverSideTranslations(locale, ['index', 'common', 'home'])),
     },
   };
 }
+
 const Index = () => {
+  // States
+  const [data, setData] = useState<IHome>({});
+
+  // Translations
   const { t } = useTranslation('index');
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const { t: translationCommon } = useTranslation('common');
+
+  // Context
+  const { ipLocation } = useUserLocation();
+
+  // Functions
+  const getData = useAsync(async (latitude: string, longitude: string) => {
+    try {
+      if (Object.keys(data).length > 0 && ipLocation.source === 'IP') return;
+      const homeData = await API.get(
+        'backend',
+        `/home/${latitude}/${longitude}`,
+        {},
+      );
+      setData(homeData);
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
+
+  const getPropertyLocation = (item: Properties) => {
+    let address = '';
+    if (item.country) address = item.country.name;
+    if (item.region) address = `${address}, ${item.region.name}`;
+    if (item.city) address = `${address}, ${item.city.name}`;
+    if (item.district) address = `${address}, ${item.district.name}`;
+
+    return address;
+  };
+
+  // Hooks
+  useEffect(() => {
+    if (
+      ipLocation.latitude &&
+      ipLocation.latitude !== 0 &&
+      ipLocation.longitude &&
+      ipLocation.longitude !== 0
+    ) {
+      getData.execute(ipLocation.latitude, ipLocation.longitude);
+    }
+  }, [ipLocation]);
 
   return (
     <div className="text-gray-600 antialiased">
@@ -31,30 +84,44 @@ const Index = () => {
         description={t('general.description')}
         image={AppConfig.image_url}
       />
-      <Navbar />
-      <Header indexTranslations={t} />
-      <CardSlider>
-        {array.map((item, index) => {
-          return (
-            <PropertyCard
-              key={index}
-              id={index.toString()}
-              price={'$55,000'}
-              surfaceArea={1.6}
-              status={index % 3}
-              location={'Alajuela provincia, Alajuela, Carrizal Costa'}
-              secondLocation={'Rica, Alajuela provincia'}
-              images={[
-                'https://picsum.photos/200/300',
-                'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                'https://picsum.photos/200/300',
-              ]}
-            />
-          );
-        })}
+      <Navbar translation={translationCommon} />
+      <Header
+        indexTranslations={t}
+        data={data?.locations || []}
+        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${ipLocation.latitude},${ipLocation.longitude}`}
+      />
+      <CardSlider translation={t}>
+        {data && data.properties && data.properties
+          ? data.properties.map((item, index) => {
+              return (
+                <PropertyCard
+                  key={index}
+                  id={item.id.toString()}
+                  price={item.price.toString()}
+                  status={index % 3}
+                  surfaceArea={1.6}
+                  location={getPropertyLocation(item)}
+                  secondLocation={item.address}
+                  images={[
+                    'https://picsum.photos/200/300',
+                    'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
+                    'https://picsum.photos/200/300',
+                  ]}
+                />
+              );
+            })
+          : []}
       </CardSlider>
-      <Promo></Promo>
-      <Discover></Discover>
+      <Promo
+        url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${ipLocation.latitude},${ipLocation.longitude}`}
+        translation={t}
+      />
+      <Discover
+        attributes={data?.attributes || []}
+        countries={data?.countries || []}
+        translationCommon={translationCommon}
+        translation={t}
+      ></Discover>
       <Footer />
     </div>
   );
