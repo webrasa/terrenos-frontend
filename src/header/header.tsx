@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import AutoComplete from './autoComplete';
 import { LandingSection } from '@/layouts/LandingSection';
 import type { ISearchHome } from '@/types/IHome';
 
+import AutoComplete from './autoComplete';
 
 type IHeaderProps = {
   indexTranslations: Function;
