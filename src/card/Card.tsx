@@ -1,18 +1,19 @@
 import classNames from 'classnames';
 import { getCookie, setCookie } from 'cookies-next';
-import type { ChangeEventHandler } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
 import { Button } from '@/button/Button';
 import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
+import { useUnit } from '@/store/unitContext';
+import type { Unit } from '@/utils/UnitConverter';
+import { convertAndFormatUnit } from '@/utils/UnitConverter';
 
 type IPropertyCardProps = {
   id: string;
   images: string[];
   price: string;
-  sizeMeters: number;
-  sizeAcres: number;
+  surfaceArea: number;
   location: string;
   secondLocation: string;
   showDropdown?: boolean;
@@ -20,7 +21,8 @@ type IPropertyCardProps = {
   numberOfDays?: number;
   numberOfViews?: number;
   numberOfFavorites?: number;
-  onChangeHandler?: ChangeEventHandler<HTMLSelectElement>;
+  fullWidth?: boolean;
+  status?: number;
 };
 
 /**
@@ -30,8 +32,7 @@ type IPropertyCardProps = {
  * @param {string[]} props.id - Product id
  * @param {string[]} props.images - Array of image URLs for the property.
  * @param {string} props.price - Price of the property.
- * @param {number} props.sizeMeters - Size of the property in square meters.
- * @param {number} props.sizeAcres - Size of the property in acres.
+ * @param {number} props.surfaceArea -  Surface area of the property.
  * @param {string} props.location - Primary location of the property.
  * @param {string} props.secondLocation - Secondary location of the property.
  * @param {boolean} [props.showDropdown=false] - Determines if the dropdown should be displayed.
@@ -39,14 +40,15 @@ type IPropertyCardProps = {
  * @param {number} [props.numberOfDays=0] - Number of days since the property was listed.
  * @param {number} [props.numberOfViews=0] - Number of views the property has received.
  * @param {number} [props.numberOfFavorites=0] - Number of times the property has been favorited.
+ * @param {number} [props.fullWidth = false] - Should card be full width.
+ * @param {number} [props.status] - Status.
  */
 
 const PropertyCard = ({
   id,
   images,
   price,
-  sizeMeters,
-  sizeAcres,
+  surfaceArea,
   location,
   secondLocation,
   showDropdown = false,
@@ -54,23 +56,31 @@ const PropertyCard = ({
   numberOfDays = 0,
   numberOfViews = 0,
   numberOfFavorites = 0,
-  onChangeHandler,
+  fullWidth = false,
+  status,
 }: IPropertyCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
+  const { unit, setUnit } = useUnit();
+
+  const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
 
   const handlers = useSwipeable({
     onSwipedLeft: () =>
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length,
+        (current) => (current - 1 + images.length) % images.length
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
   });
 
   const [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
+
+  const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedDropdown(e.target.value);
+  };
 
   const toggleFavorite = () => {
     let idsString = getCookie('likedProperties') || '';
@@ -96,8 +106,15 @@ const PropertyCard = ({
     'overflow-hidden': true,
     'shadow-lg': true,
     'border-2': true,
-    'w-80': true,
+    'w-80': !fullWidth,
+    'w-full': fullWidth,
   });
+
+  const statusLabels = [
+    { id: 0, color: 'bg-red-800', text: 'Sold' },
+    { id: 1, color: 'bg-green-800', text: 'Active' },
+    { id: 2, color: 'bg-yellow-400', text: 'Pending' },
+  ];
 
   const updateFavoriteCookie = () => {
     const idsString = getCookie('likedProperties') || '';
@@ -109,11 +126,26 @@ const PropertyCard = ({
 
   useEffect(() => {
     updateFavoriteCookie();
+    setUnit(getCookie('unit') || 'sqm');
   }, []);
 
   return (
     <div className={cardClass}>
       <div className="relative" {...handlers}>
+        {statusLabels.map((label) => {
+          if (status === label.id) {
+            return (
+              <div
+                className="w-30 absolute left-4 top-3 flex items-center gap-2 rounded bg-white px-2"
+                key={label.id}
+              >
+                <div className={`rounded-full ${label.color} size-3`}></div>
+                {label.text}
+              </div>
+            );
+          }
+          return null;
+        })}
         {images.map((img, index) => (
           <img
             key={index}
@@ -167,7 +199,7 @@ const PropertyCard = ({
       <div className="p-2.5">
         <div className="align-center flex justify-between">
           <h3 className="text-lg font-bold text-black">{price}</h3>
-          <p className="text-sm text-black">{`${sizeMeters} Sq Meters | ${sizeAcres} Acres`}</p>
+          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
         </div>
         <p className="mt-2 text-sm text-black">{location}</p>
         <p className="mt-2 text-sm text-black">
@@ -204,7 +236,7 @@ const PropertyCard = ({
               <div className="mt-3 flex justify-end space-x-2">
                 <div className="w-full rounded-lg border border-primary-600">
                   <MenuDropdownItem
-                    selected="markAsSold"
+                    selected={selectedDropdown}
                     items={[
                       { value: 'markAsSold', name: 'Mark as sold' },
                       { value: 'setToPending', name: 'Set to pending' },
@@ -213,7 +245,7 @@ const PropertyCard = ({
                         name: 'Take off the market',
                       },
                     ]}
-                    onChangeHandler={onChangeHandler}
+                    onChangeHandler={handleDropdownChange}
                     rounded={true}
                     id="cardDropdown"
                   ></MenuDropdownItem>

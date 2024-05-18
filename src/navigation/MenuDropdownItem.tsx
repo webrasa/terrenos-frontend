@@ -14,14 +14,16 @@ type IMenuDropdownItemProps = {
 
 const MenuDropdownItem = (props: IMenuDropdownItemProps) => {
   return (
-    <div className={`flex items-center ${props?.icon ? 'pl-2' : null} ${props?.rounded? 'rounded-lg': ''} `}>
+    <div
+      className={`flex  items-center ${props?.icon ? 'pl-2' : null} ${props?.rounded ? 'rounded-lg' : ''} `}
+    >
       {props.icon ? (
         <div className="flex items-center">{props.icon}</div>
       ) : null}
       <select
         id={props.id}
         onChange={props.onChangeHandler}
-        className={`w-full border-none pl-2 text-black focus:ring-0  ${props?.rounded? 'rounded-lg': ''}`}
+        className={`w-full border-none pl-2 text-black focus:ring-0  ${props?.rounded ? 'rounded-lg' : ''}`}
         value={props.selected}
       >
         {props.items.map((item) => (
