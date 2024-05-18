@@ -17,9 +17,9 @@ type IFilterRangeSliderProps = {
  * Pill component with design style.
  * @component
  * @params props - Component props.
- * @param props.base - Indicates if the pill is a base pill.
- * @param props.greenBorder - Indicates if the pill has green border.
- * @param props.blackBorder - Indicates if the pill has black border.
+ * @param props.minValue - Indicates the minValue of the rangeSlider.
+ * @param props.maxValue - Indicates the maxValue of the rangeSlider.
+ * @param props.type - Indicates the type of the rangeSlider.
  */
 const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   const [value, setValue] = useState<number[]>([

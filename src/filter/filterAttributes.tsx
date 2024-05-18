@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { Button } from '@/button/Button';
 
@@ -19,6 +19,7 @@ const arrayElements = [
 export default function FilterAttributes() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleCheckboxChange = (item: string) => {
     setSelectedItems((prevSelectedItems) =>
@@ -28,8 +29,24 @@ export default function FilterAttributes() {
     );
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="mr-5 flex-col">
+    <div className="mr-5 flex-col" ref={containerRef}>
       <Menu as="div" className="inline-block w-40 text-left">
         <Menu.Button
           className="inline-flex w-full justify-between rounded border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
