@@ -6,6 +6,7 @@ import { useSwipeable } from 'react-swipeable';
 import { Button } from '@/button/Button';
 import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
 import { useUnit } from '@/store/unitContext';
+import { useWatchList } from '@/store/watchListContext';
 import type { Unit } from '@/utils/UnitConverter';
 import { convertAndFormatUnit } from '@/utils/UnitConverter';
 
@@ -62,6 +63,7 @@ const PropertyCard = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const { unit, setUnit } = useUnit();
+  const { setWatchList } = useWatchList();
 
   const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
 
@@ -70,7 +72,7 @@ const PropertyCard = ({
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length
+        (current) => (current - 1 + images.length) % images.length,
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -99,6 +101,7 @@ const PropertyCard = ({
     setFavoditeCookie(ids);
 
     setIsFavorited(!isFavorited);
+    setWatchList(ids);
   };
 
   const cardClass = classNames({

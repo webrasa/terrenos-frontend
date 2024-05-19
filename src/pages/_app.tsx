@@ -10,6 +10,7 @@ import { SWRConfig } from 'swr';
 import { UserLocationProvider } from '@/store/locationContext';
 import { poolProviders } from '@/store/poolContext';
 import { UnitProvider } from '@/store/unitContext';
+import { WatchListProvider } from '@/store/watchListContext';
 import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
@@ -17,7 +18,11 @@ import type { NextPageWithLayout } from '../utils/NextLayout';
 
 Amplify.configure({ ...AwsConfig });
 
-const PoolProviders = poolProviders(UnitProvider, UserLocationProvider);
+const PoolProviders = poolProviders(
+  UnitProvider,
+  UserLocationProvider,
+  WatchListProvider,
+);
 
 // Next JS App props with the shared layout support.
 type AppPropsWithLayout = AppProps & {

@@ -1,15 +1,18 @@
-import { useTranslation } from 'next-i18next';
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Navbar } from '@/templates/Navbar';
-import { Footer } from '@/templates/Footer';
-import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useEffect } from 'react';
+
 import { LandingSection } from '@/layouts/LandingSection';
+import { useWatchList } from '@/store/watchListContext';
+import { Footer } from '@/templates/Footer';
+import { Navbar } from '@/templates/Navbar';
+
 import CurrentListing from './CurrentListing';
 import Drafts from './Drafts';
-import WatchList from './WatchList';
 import SoldOffMarket from './SoldOffMarket';
+import WatchList from './WatchList';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -22,7 +25,7 @@ export async function getStaticProps({ locale }: any) {
 const Index = () => {
   const { t } = useTranslation('index');
   const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const [likedIds, setLikedIds] = useState<string[]>([]);
+  const { setWatchList } = useWatchList();
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
   const tabs = [
@@ -37,30 +40,30 @@ const Index = () => {
   useEffect(() => {
     const idsString = getCookie('likedProperties') || '';
     const ids = idsString ? idsString.split('-') : [];
-    setLikedIds(ids);
+    setWatchList(ids);
   }, []);
 
   return (
     <div className="antialiased">
-      <Navbar />
+      <Navbar translation={t} />
       <LandingSection yPadding="py-4">
         <div className="container mx-auto">
           <div className="flex items-center space-x-4">
             <img
               src={userProfileImage}
               alt="Profile"
-              className="h-24 w-24 rounded-full object-cover"
+              className="size-24 rounded-full object-cover"
             />
             <h1 className="text-3xl font-medium text-black">
               Hello, {userName}
             </h1>
           </div>
           <TabGroup>
-            <TabList className="border-b-2 h-15 -ml-8 flex flex-nowrap	overflow-x-auto overflow-y-hidden md:block whitespace-nowrap">
+            <TabList className="h-15 -ml-8 flex flex-nowrap overflow-x-auto	overflow-y-hidden whitespace-nowrap border-b-2 md:block">
               {tabs.map((tab) => (
                 <Tab
                   key={tab.key}
-                  className="text-black data-[selected]:font-bold outline-none data-[selected]:border-b-8 border-green-600 h-12 py-2 mx-10"
+                  className="mx-10 h-12 border-green-600 py-2 text-black outline-none data-[selected]:border-b-8 data-[selected]:font-bold"
                 >
                   {tab.name}
                 </Tab>
@@ -74,7 +77,7 @@ const Index = () => {
                 <Drafts array={array} />
               </TabPanel>
               <TabPanel>
-                <WatchList array={array} likedIds={likedIds} />
+                <WatchList array={array} />
               </TabPanel>
               <TabPanel>
                 <SoldOffMarket array={array} />
