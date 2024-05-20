@@ -1,9 +1,11 @@
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
+import { API } from 'aws-amplify';
 import { getCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect } from 'react';
 
+import { useAsync } from '@/hooks/UseAsync';
 import { LandingSection } from '@/layouts/LandingSection';
 import { useWatchList } from '@/store/watchListContext';
 import { Footer } from '@/templates/Footer';
@@ -24,10 +26,10 @@ export async function getStaticProps({ locale }: any) {
 
 const Index = () => {
   const { t } = useTranslation('index');
-  const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const { setWatchList } = useWatchList();
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
+  const userId = 1; // TODO: Change this to the user id when userAuth
   const tabs = [
     { name: 'Current Listing', key: 'currentListing' },
     { name: 'Drafts', key: 'drafts' },
@@ -36,6 +38,39 @@ const Index = () => {
     { name: 'Inbox', key: 'inbox' },
     { name: 'Account', key: 'account' },
   ];
+
+  const getData = useAsync(async (setProperties, filterByTab) => {
+    try {
+      const propertiesData = await API.get(
+        'backend',
+        `/properties/${userId}`,
+        {},
+      );
+      setProperties(propertiesData.properties.filter(filterByTab));
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
+
+  const updateData = useAsync(async (id, status, properties, setProperties) => {
+    try {
+      const { property } = properties.filter((el: any) => el.id === id)[0];
+      property.attributes = property.propertyAttributes.map((el: any) => el.id);
+
+      const myInit = {
+        body: {
+          ...property,
+          status,
+        },
+      };
+      await API.put('backend', `/updateProperty/${id}`, myInit);
+      setProperties(properties.filter((el: any) => el.property.id !== id));
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
 
   useEffect(() => {
     const idsString = getCookie('likedProperties') || '';
@@ -71,16 +106,16 @@ const Index = () => {
             </TabList>
             <TabPanels>
               <TabPanel>
-                <CurrentListing array={array} />
+                <CurrentListing getData={getData} updateData={updateData} />
               </TabPanel>
               <TabPanel>
-                <Drafts array={array} />
+                <Drafts getData={getData} updateData={updateData} />
               </TabPanel>
               <TabPanel>
-                <WatchList array={array} />
+                <WatchList getData={getData} />
               </TabPanel>
               <TabPanel>
-                <SoldOffMarket array={array} />
+                <SoldOffMarket getData={getData} updateData={updateData} />
               </TabPanel>
             </TabPanels>
           </TabGroup>

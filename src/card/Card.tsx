@@ -7,6 +7,7 @@ import { Button } from '@/button/Button';
 import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
 import { useUnit } from '@/store/unitContext';
 import { useWatchList } from '@/store/watchListContext';
+import type { DropdownItem } from '@/types/DropdownItem';
 import type { Unit } from '@/utils/UnitConverter';
 import { convertAndFormatUnit } from '@/utils/UnitConverter';
 
@@ -24,6 +25,9 @@ type IPropertyCardProps = {
   numberOfFavorites?: number;
   fullWidth?: boolean;
   status?: number;
+  dropDownItems: DropdownItem[];
+  selectedDropdown: string;
+  changeStatus: (id: string, status: string) => void;
 };
 
 /**
@@ -59,13 +63,14 @@ const PropertyCard = ({
   numberOfFavorites = 0,
   fullWidth = false,
   status,
+  dropDownItems,
+  selectedDropdown,
+  changeStatus,
 }: IPropertyCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const { unit, setUnit } = useUnit();
   const { setWatchList } = useWatchList();
-
-  const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
 
   const handlers = useSwipeable({
     onSwipedLeft: () =>
@@ -81,7 +86,7 @@ const PropertyCard = ({
   const [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedDropdown(e.target.value);
+    changeStatus(id, e.target.value);
   };
 
   const toggleFavorite = () => {
@@ -116,7 +121,9 @@ const PropertyCard = ({
   const statusLabels = [
     { id: 0, color: 'bg-red-800', text: 'Sold' },
     { id: 1, color: 'bg-green-800', text: 'Active' },
-    { id: 2, color: 'bg-yellow-400', text: 'Pending' },
+    { id: 2, color: 'bg-orange-800', text: 'Draft' },
+    { id: 3, color: 'bg-yellow-400', text: 'Pending' },
+    { id: 4, color: 'bg-red-400', text: 'OffTheMarket' },
   ];
 
   const updateFavoriteCookie = () => {
@@ -134,16 +141,16 @@ const PropertyCard = ({
 
   return (
     <div className={cardClass}>
-      <div className="relative" {...handlers}>
+      <div className="relative" key={id} {...handlers}>
         {statusLabels.map((label) => {
-          if (status === label.id) {
+          if (status === label.text) {
             return (
               <div
                 className="w-30 absolute left-4 top-3 flex items-center gap-2 rounded bg-white px-2"
                 key={label.id}
               >
                 <div className={`rounded-full ${label.color} size-3`}></div>
-                {label.text}
+                {status}
               </div>
             );
           }
@@ -240,14 +247,7 @@ const PropertyCard = ({
                 <div className="w-full rounded-lg border border-primary-600">
                   <MenuDropdownItem
                     selected={selectedDropdown}
-                    items={[
-                      { value: 'markAsSold', name: 'Mark as sold' },
-                      { value: 'setToPending', name: 'Set to pending' },
-                      {
-                        value: 'takeOffTheMarket',
-                        name: 'Take off the market',
-                      },
-                    ]}
+                    items={dropDownItems}
                     onChangeHandler={handleDropdownChange}
                     rounded={true}
                     id="cardDropdown"
