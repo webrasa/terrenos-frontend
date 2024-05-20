@@ -1,9 +1,16 @@
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@headlessui/react';
+import {
+  Tab,
+  TabGroup,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Transition,
+} from '@headlessui/react';
 import { API } from 'aws-amplify';
 import { getCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { useEffect } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useAsync } from '@/hooks/UseAsync';
 import { LandingSection } from '@/layouts/LandingSection';
@@ -30,14 +37,6 @@ const Index = () => {
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
   const userId = 1; // TODO: Change this to the user id when userAuth
-  const tabs = [
-    { name: 'Current Listing', key: 'currentListing' },
-    { name: 'Drafts', key: 'drafts' },
-    { name: 'My Watch List', key: 'myWatchList' },
-    { name: 'Sold / Off the market', key: 'soldOffTheMarket' },
-    { name: 'Inbox', key: 'inbox' },
-    { name: 'Account', key: 'account' },
-  ];
 
   const getData = useAsync(async (setProperties, filterByTab) => {
     try {
@@ -78,12 +77,62 @@ const Index = () => {
     setWatchList(ids);
   }, []);
 
+  const tabListRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (tabListRef.current) {
+      tabListRef.current.scrollBy({ left: -200, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (tabListRef.current) {
+      tabListRef.current.scrollBy({ left: 200, behavior: 'smooth' });
+    }
+  };
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [direction, setDirection] = useState('right');
+
+  const handleTabChange = (index: number) => {
+    if (index > selectedIndex) {
+      setDirection('right');
+    } else {
+      setDirection('left');
+    }
+    setSelectedIndex(index);
+  };
+
+  const tabs = [
+    {
+      name: 'Current Listing',
+      key: 'currentListing',
+      component: <CurrentListing getData={getData} updateData={updateData} />,
+    },
+    {
+      name: 'Drafts',
+      key: 'drafts',
+      component: <Drafts getData={getData} updateData={updateData} />,
+    },
+    {
+      name: 'My Watch List',
+      key: 'myWatchList',
+      component: <WatchList getData={getData} />,
+    },
+    {
+      name: 'Sold / Off the market',
+      key: 'soldOffTheMarket',
+      component: <SoldOffMarket getData={getData} updateData={updateData} />,
+    },
+    // { name: 'Inbox', key: 'inbox', component: <Inbox array={array} /> },
+    // { name: 'Account', key: 'account', component: <Account array={array} /> },
+  ];
   return (
     <div className="antialiased">
       <Navbar translation={t} />
       <LandingSection yPadding="py-4">
         <div className="container mx-auto">
-          <div className="flex items-center space-x-4">
+          <div className="relative flex items-center space-x-4">
             <img
               src={userProfileImage}
               alt="Profile"
@@ -92,31 +141,88 @@ const Index = () => {
             <h1 className="text-3xl font-medium text-black">
               Hello, {userName}
             </h1>
+            <div
+              onClick={scrollLeft}
+              className="absolute right-12 top-14 cursor-pointer rounded border border-gray-400 p-1 lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#000"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.72 12.53a.75.75 0 0 1 0-1.06l7.5-7.5a.75.75 0 1 1 1.06 1.06L9.31 12l6.97 6.97a.75.75 0 1 1-1.06 1.06l-7.5-7.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+
+            <div
+              onClick={scrollRight}
+              className="absolute right-2 top-14 cursor-pointer rounded border border-gray-400 p-1 lg:hidden"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="#000"
+                className="size-6"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M16.28 11.47a.75.75 0 0 1 0 1.06l-7.5 7.5a.75.75 0 0 1-1.06-1.06L14.69 12 7.72 5.03a.75.75 0 0 1 1.06-1.06l7.5 7.5Z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
           </div>
-          <TabGroup>
-            <TabList className="h-15 -ml-8 flex flex-nowrap overflow-x-auto	overflow-y-hidden whitespace-nowrap border-b-2 md:block">
+          <TabGroup selectedIndex={selectedIndex} onChange={handleTabChange}>
+            <TabList
+              ref={tabListRef}
+              className="h-15 hide-scrollbar -ml-8 flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap border-b-2 md:block"
+            >
               {tabs.map((tab) => (
                 <Tab
                   key={tab.key}
-                  className="mx-10 h-12 border-green-600 py-2 text-black outline-none data-[selected]:border-b-8 data-[selected]:font-bold"
+                  className={({ selected }) =>
+                    `text-black outline-none h-12 py-2 mx-10 relative ${
+                      selected ? 'font-bold border-green-600' : ''
+                    }`
+                  }
                 >
-                  {tab.name}
+                  {({ selected }) => (
+                    <>
+                      {tab.name}
+                      <Transition
+                        show={selected}
+                        as={Fragment}
+                        enter="transition ease-out duration-300"
+                        enterFrom={
+                          direction === 'right'
+                            ? 'transform -translate-x-full opacity-0'
+                            : 'transform translate-x-full opacity-0'
+                        }
+                        enterTo="transform translate-x-0 opacity-200"
+                        leave="transition ease-in duration-200"
+                        leaveFrom="transform translate-x-0 opacity-200"
+                        leaveTo={
+                          direction === 'right'
+                            ? 'transform translate-x-full opacity-0'
+                            : 'transform -translate-x-full opacity-0'
+                        }
+                      >
+                        <div className="absolute inset-x-0 bottom-0 h-1 bg-green-600" />
+                      </Transition>
+                    </>
+                  )}
                 </Tab>
               ))}
             </TabList>
             <TabPanels>
-              <TabPanel>
-                <CurrentListing getData={getData} updateData={updateData} />
-              </TabPanel>
-              <TabPanel>
-                <Drafts getData={getData} updateData={updateData} />
-              </TabPanel>
-              <TabPanel>
-                <WatchList getData={getData} />
-              </TabPanel>
-              <TabPanel>
-                <SoldOffMarket getData={getData} updateData={updateData} />
-              </TabPanel>
+              {tabs.map((tab) => (
+                <TabPanel key={tab.key}>{tab.component}</TabPanel>
+              ))}
             </TabPanels>
           </TabGroup>
         </div>
@@ -125,11 +231,5 @@ const Index = () => {
     </div>
   );
 };
-
-// Index.getLayout = getShell({
-//   title: 'Profile',
-//   description: 'This is profile description',
-//   image: 'imageURL',
-// });
 
 export default Index;
