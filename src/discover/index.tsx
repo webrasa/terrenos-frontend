@@ -30,7 +30,6 @@ const Discover = (props: IDiscoverProps) => {
                   base
                   greenBorder
                   name={item.name}
-                  onClickHandler={() => console.log('asd')}
                 ></Pill>
               </Link>
             );
