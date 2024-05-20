@@ -87,7 +87,7 @@ export default function AutoComplete(props: ISearchProps) {
             <Combobox.Input
               autoComplete="off"
               className="w-full border-none bg-white py-2 pl-3 pr-10 text-sm leading-10 text-gray-900 focus:ring-0"
-              displayValue={(location: DropdownItem) => location.name}
+              displayValue={(location: DropdownItem) => location?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 m-1 flex items-center">
@@ -114,12 +114,12 @@ export default function AutoComplete(props: ISearchProps) {
             afterLeave={() => setQuery('')}
           >
             <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {filteredLocations.length === 0 && query !== '' ? (
+              {filteredLocations?.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   {props.indexTranslations('heroSection.nothingFound')}
                 </div>
               ) : (
-                filteredLocations.slice(0, 3).map((location) => {
+                filteredLocations?.slice(0, 3).map((location) => {
                   // Extract first digit from value
                   const firstDigit = location.value.charAt(0);
 

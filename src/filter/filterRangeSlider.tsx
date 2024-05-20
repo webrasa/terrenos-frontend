@@ -2,8 +2,11 @@ import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
+import { getCookie } from 'cookies-next';
 import PopupState, { bindPopover, bindTrigger } from 'material-ui-popup-state';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useUnit } from '@/store/unitContext';
 
 type RangeSlider = 'surface' | 'price';
 
@@ -11,6 +14,7 @@ type IFilterRangeSliderProps = {
   minValue: number;
   maxValue: number;
   type: RangeSlider;
+  surfaceArea: number;
 };
 
 /**
@@ -20,8 +24,10 @@ type IFilterRangeSliderProps = {
  * @param props.minValue - Indicates the minValue of the rangeSlider.
  * @param props.maxValue - Indicates the maxValue of the rangeSlider.
  * @param props.type - Indicates the type of the rangeSlider.
+ * @param props.surfaceArea -  Surface area of the property.
  */
 const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
+  // States
   const [value, setValue] = useState<number[]>([
     props.minValue,
     props.maxValue,
@@ -29,6 +35,7 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   const [displayedRange, setDisplayedRange] = useState<string>(
     `Any ${props.type}`,
   );
+  const { unit, setUnit } = useUnit();
 
   const handleSliderChange = (_: Event, newValue: number | number[]) => {
     const newRange = Array.isArray(newValue) ? newValue : [newValue, newValue];
@@ -57,6 +64,11 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
         }
       }
     };
+
+  // Hooks
+  useEffect(() => {
+    setUnit(getCookie('unit') || 'currency');
+  }, []);
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">
@@ -120,13 +132,16 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
                 />
                 <div className="mb-2 flex justify-between">
                   <TextField
-                    className="mr-2 border-b"
+                    variant="standard"
+                    className="mr-2 border-b focus:outline-none"
                     value={value[0]}
                     onChange={handleInputChange(0)}
                     type="number"
                     inputProps={{ min: props.minValue, max: props.maxValue }}
                   />
+
                   <TextField
+                    variant="standard"
                     className=""
                     value={value[1]}
                     onChange={handleInputChange(1)}

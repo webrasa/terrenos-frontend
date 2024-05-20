@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { LandingSection } from '@/layouts/LandingSection';
 import type { ISearchHome } from '@/types/IHome';
 
-import AutoComplete from './autoComplete';
+import AutoComplete from './search';
 
 type IHeaderProps = {
   indexTranslations: Function;
