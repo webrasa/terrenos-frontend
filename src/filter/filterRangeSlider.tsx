@@ -14,7 +14,6 @@ type IFilterRangeSliderProps = {
   minValue: number;
   maxValue: number;
   type: RangeSlider;
-  surfaceArea: number;
 };
 
 /**
@@ -24,7 +23,6 @@ type IFilterRangeSliderProps = {
  * @param props.minValue - Indicates the minValue of the rangeSlider.
  * @param props.maxValue - Indicates the maxValue of the rangeSlider.
  * @param props.type - Indicates the type of the rangeSlider.
- * @param props.surfaceArea -  Surface area of the property.
  */
 const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   // States

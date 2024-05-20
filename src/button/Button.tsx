@@ -18,7 +18,6 @@ type IButtonProps = {
   thinFont?: boolean;
   onClickHandler?: MouseEventHandler<HTMLDivElement>;
   disableCursorPointer?: boolean;
-  onClickHandler?: MouseEventHandler<HTMLDivElement>;
 };
 
 /**

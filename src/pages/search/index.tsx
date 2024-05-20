@@ -41,7 +41,7 @@ const Search = () => {
       if (Object.keys(data).length > 0 && ipLocation.source === 'IP') return;
       const homeData = await API.get(
         'backend',
-        `/search/${latitude}/${longitude}`,
+        `/home/${latitude}/${longitude}`,
         {},
       );
       setData(homeData);
