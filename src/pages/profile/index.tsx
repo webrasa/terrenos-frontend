@@ -42,7 +42,7 @@ const Index = () => {
 
   return (
     <div className="antialiased">
-      <Navbar />
+      <Navbar translation={t} />
       <LandingSection yPadding="py-4">
         <div className="container mx-auto">
           <div className="flex items-center space-x-4">

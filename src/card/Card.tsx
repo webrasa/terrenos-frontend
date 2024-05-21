@@ -8,11 +8,13 @@ import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
 import { useUnit } from '@/store/unitContext';
 import type { Unit } from '@/utils/UnitConverter';
 import { convertAndFormatUnit } from '@/utils/UnitConverter';
+import { useCurrency } from '@/store/currencyContext';
+import { Currency, convertAndFormatCurrency } from '@/utils/CurrencyConverter';
 
 type IPropertyCardProps = {
   id: string;
   images: string[];
-  price: string;
+  price: number;
   surfaceArea: number;
   location: string;
   secondLocation: string;
@@ -62,6 +64,7 @@ const PropertyCard = ({
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const { unit, setUnit } = useUnit();
+  const { currency, setCurrency } = useCurrency();
 
   const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
 
@@ -127,6 +130,7 @@ const PropertyCard = ({
   useEffect(() => {
     updateFavoriteCookie();
     setUnit(getCookie('unit') || 'sqm');
+    setCurrency(getCookie('currency') || 'usd');
   }, []);
 
   return (
@@ -198,7 +202,9 @@ const PropertyCard = ({
       </div>
       <div className="p-2.5">
         <div className="align-center flex justify-between">
-          <h3 className="text-lg font-bold text-black">{price}</h3>
+          <h3 className="text-lg font-bold text-black">
+            {convertAndFormatCurrency(price, 'usd', currency as Currency)}
+          </h3>
           <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
         </div>
         <p className="mt-2 text-sm text-black">{location}</p>

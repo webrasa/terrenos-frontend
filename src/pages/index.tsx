@@ -46,7 +46,7 @@ const Index = () => {
       const homeData = await API.get(
         'backend',
         `/home/${latitude}/${longitude}`,
-        {},
+        {}
       );
       setData(homeData);
     } catch (err: any) {
@@ -97,7 +97,7 @@ const Index = () => {
                 <PropertyCard
                   key={index}
                   id={item.id.toString()}
-                  price={item.price.toString()}
+                  price={item.price}
                   status={index % 3}
                   surfaceArea={1.6}
                   location={getPropertyLocation(item)}

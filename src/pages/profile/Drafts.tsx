@@ -10,7 +10,7 @@ const Drafts: React.FC<Props> = ({ array }) => (
       <div key={index} className="w-full sm:w-full md:w-1/3 px-1 pt-6">
         <PropertyCard
           id={index.toString()}
-          price={'$55,000'}
+          price={55000}
           surfaceArea={1.6}
           fullWidth={true}
           location={'Alajuela provincia, Alajuela, Carrizal Costa'}

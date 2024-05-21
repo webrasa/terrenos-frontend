@@ -14,10 +14,15 @@ import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
+import { CurrencyProvider } from '@/store/currencyContext';
 
 Amplify.configure({ ...AwsConfig });
 
-const PoolProviders = poolProviders(UnitProvider, UserLocationProvider);
+const PoolProviders = poolProviders(
+  UnitProvider,
+  CurrencyProvider,
+  UserLocationProvider
+);
 
 // Next JS App props with the shared layout support.
 type AppPropsWithLayout = AppProps & {
