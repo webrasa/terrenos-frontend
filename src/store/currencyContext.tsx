@@ -12,7 +12,7 @@ const defaultCurrencyContextValue: CurrencyContextType = {
 };
 
 const CurrencyContext = createContext<CurrencyContextType>(
-  defaultCurrencyContextValue
+  defaultCurrencyContextValue,
 );
 
 export function useCurrency() {

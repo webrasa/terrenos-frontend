@@ -5,11 +5,12 @@ import { useSwipeable } from 'react-swipeable';
 
 import { Button } from '@/button/Button';
 import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
+import { useCurrency } from '@/store/currencyContext';
 import { useUnit } from '@/store/unitContext';
+import type { Currency } from '@/utils/CurrencyConverter';
+import { convertAndFormatCurrency } from '@/utils/CurrencyConverter';
 import type { Unit } from '@/utils/UnitConverter';
 import { convertAndFormatUnit } from '@/utils/UnitConverter';
-import { useCurrency } from '@/store/currencyContext';
-import { Currency, convertAndFormatCurrency } from '@/utils/CurrencyConverter';
 
 type IPropertyCardProps = {
   id: string;
@@ -73,7 +74,7 @@ const PropertyCard = ({
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length
+        (current) => (current - 1 + images.length) % images.length,
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -203,7 +204,11 @@ const PropertyCard = ({
       <div className="p-2.5">
         <div className="align-center flex justify-between">
           <h3 className="text-lg font-bold text-black">
-            {convertAndFormatCurrency(price, 'usd', currency as Currency)}
+            {convertAndFormatCurrency(
+              price,
+              'usd',
+              currency as Currency['shortName'],
+            )}
           </h3>
           <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
         </div>

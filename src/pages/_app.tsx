@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
+import { CurrencyProvider } from '@/store/currencyContext';
 import { UserLocationProvider } from '@/store/locationContext';
 import { poolProviders } from '@/store/poolContext';
 import { UnitProvider } from '@/store/unitContext';
@@ -14,14 +15,13 @@ import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
-import { CurrencyProvider } from '@/store/currencyContext';
 
 Amplify.configure({ ...AwsConfig });
 
 const PoolProviders = poolProviders(
   UnitProvider,
   CurrencyProvider,
-  UserLocationProvider
+  UserLocationProvider,
 );
 
 // Next JS App props with the shared layout support.
