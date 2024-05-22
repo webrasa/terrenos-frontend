@@ -1,31 +1,23 @@
-import React, { useEffect, useState } from 'react';
-
 import { PropertyCard } from '@/card/Card';
 import { useWatchList } from '@/store/watchListContext';
+import type { PropertyData } from '@/types/IComponents';
 
 interface Props {
-  array: number[];
+  properties: Array<PropertyData> | undefined;
 }
 
-const WatchList: React.FC<Props> = ({ getData }) => {
+const WatchList: React.FC<Props> = ({ properties }) => {
   const { watchList } = useWatchList();
-  const [properties, setProperties] = useState<object>();
-
-  useEffect(() => {
-    getData.execute(setProperties, (el: object) =>
-      watchList.includes(el.property.id.toString()),
-    );
-  }, []);
 
   return (
     <div className="flex flex-wrap">
-      {properties?.map((item, index) => {
+      {properties?.map((item: PropertyData, index: number) => {
         if (watchList.includes(item.id.toString())) {
           return (
             <div key={index} className="w-full px-1 pt-6 sm:w-full md:w-1/3">
               <PropertyCard
                 id={item.id.toString()}
-                price={item.property.price}
+                price={item.property.price.toString()}
                 surfaceArea={item.property.surface}
                 fullWidth={true}
                 location={item.property.address}

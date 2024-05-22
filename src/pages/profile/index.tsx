@@ -17,45 +17,55 @@ import { LandingSection } from '@/layouts/LandingSection';
 import { useWatchList } from '@/store/watchListContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
+import type { Properties, PropertyData } from '@/types/IComponents';
 
+import Account from './Account';
 import CurrentListing from './CurrentListing';
 import Drafts from './Drafts';
+import Inbox from './Inbox';
 import SoldOffMarket from './SoldOffMarket';
 import WatchList from './WatchList';
 
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['search'])),
+      ...(await serverSideTranslations(locale, ['common'])),
     },
   };
 }
 
 const Index = () => {
-  const { t } = useTranslation('index');
+  const { t } = useTranslation('common');
   const { setWatchList } = useWatchList();
+  const [properties, setProperties] = useState<Array<PropertyData>>();
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
   const userId = 1; // TODO: Change this to the user id when userAuth
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // FIX:  This is a temporary dev data
 
-  const getData = useAsync(async (setProperties, filterByTab) => {
+  const getData = useAsync(async () => {
     try {
       const propertiesData = await API.get(
         'backend',
         `/properties/${userId}`,
         {},
       );
-      setProperties(propertiesData.properties.filter(filterByTab));
+      setProperties(propertiesData.properties);
     } catch (err: any) {
       // handle error
       console.log(err.message);
     }
   });
 
-  const updateData = useAsync(async (id, status, properties, setProperties) => {
+  const updateData = useAsync(async (id, status) => {
     try {
-      const { property } = properties.filter((el: any) => el.id === id)[0];
-      property.attributes = property.propertyAttributes.map((el: any) => el.id);
+      const property: Properties =
+        properties?.filter((el: PropertyData) => el.id === Number(id))[0]
+          ?.property || ({} as Properties);
+
+      property.attributes = property?.propertyAttributes?.map(
+        (el: any) => el.id,
+      );
 
       const myInit = {
         body: {
@@ -64,7 +74,7 @@ const Index = () => {
         },
       };
       await API.put('backend', `/updateProperty/${id}`, myInit);
-      setProperties(properties.filter((el: any) => el.property.id !== id));
+      getData.execute();
     } catch (err: any) {
       // handle error
       console.log(err.message);
@@ -75,6 +85,7 @@ const Index = () => {
     const idsString = getCookie('likedProperties') || '';
     const ids = idsString ? idsString.split('-') : [];
     setWatchList(ids);
+    getData.execute();
   }, []);
 
   const tabListRef = useRef<HTMLDivElement>(null);
@@ -107,26 +118,52 @@ const Index = () => {
     {
       name: 'Current Listing',
       key: 'currentListing',
-      component: <CurrentListing getData={getData} updateData={updateData} />,
+      component: (
+        <CurrentListing
+          properties={properties?.filter(
+            (el) =>
+              el.property.status === 'Active' ||
+              el.property.status === 'Pending',
+          )}
+          updateData={updateData}
+        />
+      ),
     },
     {
       name: 'Drafts',
       key: 'drafts',
-      component: <Drafts getData={getData} updateData={updateData} />,
+      component: (
+        <Drafts
+          properties={properties?.filter(
+            (el) => el.property.status === 'Draft',
+          )}
+          updateData={updateData}
+        />
+      ),
     },
     {
       name: 'My Watch List',
       key: 'myWatchList',
-      component: <WatchList getData={getData} />,
+      component: <WatchList properties={properties} />,
     },
     {
       name: 'Sold / Off the market',
       key: 'soldOffTheMarket',
-      component: <SoldOffMarket getData={getData} updateData={updateData} />,
+      component: (
+        <SoldOffMarket
+          properties={properties?.filter(
+            (el) =>
+              el.property.status === 'Sold' ||
+              el.property.status === 'OffTheMarket',
+          )}
+          updateData={updateData}
+        />
+      ),
     },
-    // { name: 'Inbox', key: 'inbox', component: <Inbox array={array} /> },
-    // { name: 'Account', key: 'account', component: <Account array={array} /> },
+    { name: 'Inbox', key: 'inbox', component: <Inbox array={array} /> },
+    { name: 'Account', key: 'account', component: <Account array={array} /> },
   ];
+
   return (
     <div className="antialiased">
       <Navbar translation={t} />

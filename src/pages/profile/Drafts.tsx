@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { PropertyCard } from '@/card/Card';
 import type { DropdownItem } from '@/types/DropdownItem';
+import type { PropertyData } from '@/types/IComponents';
 
-interface Props {
-  getData: () => array;
-  updateData: (
-    id: string,
-    status: string,
-    properties: array,
-    setProperties: () => void,
-  ) => array;
-}
+type UpdateData = {
+  execute: (...args: any[]) => Promise<false | void>;
+  pending: boolean;
+  value: void | null;
+};
 
-const Drafts: React.FC<Props> = ({ getData, updateData }) => {
-  const [properties, setProperties] = useState<any>();
+type Props = {
+  properties: Array<PropertyData> | undefined;
+  updateData: UpdateData;
+};
+
+const Drafts: React.FC<Props> = ({ properties, updateData }) => {
   const [selectedDropdown, setSelectedDropdown] = useState('');
 
   const dropDownItems: DropdownItem[] = [
@@ -24,24 +25,19 @@ const Drafts: React.FC<Props> = ({ getData, updateData }) => {
     { value: 'OffTheMarket', name: 'Set as off the market' },
     { value: 'Pending', name: 'Set as pending' },
   ];
-  useEffect(() => {
-    getData.execute(
-      setProperties,
-      (el: object) => el.property.status === 'Draft',
-    );
-  }, []);
   const changeStatus = (id: string, status: string) => {
     setSelectedDropdown(status);
-    updateData.execute(id, status, properties, setProperties);
+    updateData.execute(id, status);
   };
+
   return (
     properties && (
       <div className="flex flex-wrap">
-        {properties.map((item: object, index: number) => (
+        {properties.map((item: PropertyData, index: number) => (
           <div key={index} className="w-full px-1 pt-6 sm:w-full md:w-1/3">
             <PropertyCard
-              id={item.propertyId}
-              price={item.property.price}
+              id={item.propertyId.toString()}
+              price={item.property.price.toString()}
               surfaceArea={item.property.surface}
               fullWidth={true}
               location={item.property.address}

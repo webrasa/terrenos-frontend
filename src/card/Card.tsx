@@ -24,10 +24,10 @@ type IPropertyCardProps = {
   numberOfViews?: number;
   numberOfFavorites?: number;
   fullWidth?: boolean;
-  status?: number;
-  dropDownItems: DropdownItem[];
-  selectedDropdown: string;
-  changeStatus: (id: string, status: string) => void;
+  status?: string | number;
+  dropDownItems?: DropdownItem[];
+  selectedDropdown?: string;
+  changeStatus?: (id: string, status: string) => void;
 };
 
 /**
@@ -86,7 +86,9 @@ const PropertyCard = ({
   const [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    changeStatus(id, e.target.value);
+    if (changeStatus) {
+      changeStatus(id, e.target.value);
+    }
   };
 
   const toggleFavorite = () => {
