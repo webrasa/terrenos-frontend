@@ -74,7 +74,7 @@ const PropertyCard = ({
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length,
+        (current) => (current - 1 + images.length) % images.length
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -207,10 +207,10 @@ const PropertyCard = ({
             {convertAndFormatCurrency(
               price,
               'usd',
-              currency as Currency['shortName'],
+              currency as Currency['shortName']
             )}
           </h3>
-          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
+          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, 'Sq Meters', unit as Unit['shortName'])}`}</p>
         </div>
         <p className="mt-2 text-sm text-black">{location}</p>
         <p className="mt-2 text-sm text-black">
