@@ -5,16 +5,19 @@ import { useSwipeable } from 'react-swipeable';
 
 import { Button } from '@/button/Button';
 import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
+import { useCurrency } from '@/store/currencyContext';
 import { useUnit } from '@/store/unitContext';
 import { useWatchList } from '@/store/watchListContext';
 import type { DropdownItem } from '@/types/DropdownItem';
+import type { Currency } from '@/utils/CurrencyConverter';
+import { convertAndFormatCurrency } from '@/utils/CurrencyConverter';
 import type { Unit } from '@/utils/UnitConverter';
 import { convertAndFormatUnit } from '@/utils/UnitConverter';
 
 type IPropertyCardProps = {
   id: string;
   images: string[];
-  price: string;
+  price: number;
   surfaceArea: number;
   location: string;
   secondLocation: string;
@@ -71,6 +74,7 @@ const PropertyCard = ({
   const [isFavorited, setIsFavorited] = useState(false);
   const { unit, setUnit } = useUnit();
   const { setWatchList } = useWatchList();
+  const { currency, setCurrency } = useCurrency();
 
   const handlers = useSwipeable({
     onSwipedLeft: () =>
@@ -139,6 +143,7 @@ const PropertyCard = ({
   useEffect(() => {
     updateFavoriteCookie();
     setUnit(getCookie('unit') || 'sqm');
+    setCurrency(getCookie('currency') || 'usd');
   }, []);
 
   return (
@@ -210,8 +215,14 @@ const PropertyCard = ({
       </div>
       <div className="p-2.5">
         <div className="align-center flex justify-between">
-          <h3 className="text-lg font-bold text-black">{price}</h3>
-          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
+          <h3 className="text-lg font-bold text-black">
+            {convertAndFormatCurrency(
+              price,
+              'usd',
+              currency as Currency['shortName'],
+            )}
+          </h3>
+          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, 'Sq Meters', unit as Unit['shortName'])}`}</p>
         </div>
         <p className="mt-2 text-sm text-black">{location}</p>
         <p className="mt-2 text-sm text-black">

@@ -37,7 +37,7 @@ const Drafts: React.FC<Props> = ({ properties, updateData }) => {
           <div key={index} className="w-full px-1 pt-6 sm:w-full md:w-1/3">
             <PropertyCard
               id={item.propertyId.toString()}
-              price={item.property.price.toString()}
+              price={item.property.price}
               surfaceArea={item.property.surface}
               fullWidth={true}
               location={item.property.address}

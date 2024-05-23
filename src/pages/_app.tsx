@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
+import { CurrencyProvider } from '@/store/currencyContext';
 import { UserLocationProvider } from '@/store/locationContext';
 import { poolProviders } from '@/store/poolContext';
 import { UnitProvider } from '@/store/unitContext';
@@ -20,8 +21,9 @@ Amplify.configure({ ...AwsConfig });
 
 const PoolProviders = poolProviders(
   UnitProvider,
-  UserLocationProvider,
   WatchListProvider,
+  CurrencyProvider,
+  UserLocationProvider,
 );
 
 // Next JS App props with the shared layout support.
