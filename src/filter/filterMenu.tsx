@@ -5,22 +5,29 @@ import {
   MenuItems,
   Transition,
 } from '@headlessui/react';
-import type { MouseEventHandler } from 'react';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 
 type IFilterMenuProps = {
-  translation: Function;
-  onClickHandler?: MouseEventHandler<HTMLDivElement>;
+  // translation: Function;
+  sort: Function;
+  translations: Function;
 };
 const filerMenuOptions = [
-  'newest',
-  'priceHighToLow',
-  'priceLowToHigh',
-  'updatedRecently',
-  'trending',
+  'newsetLabel',
+  'priceHighToLowLabel',
+  'priceLowToHighLabel',
+  'updatedRecentlyLabel',
+  'trendingLabel',
 ];
-const active = 'updatedRecently';
-export default function FilterMenu() {
+export default function FilterMenu(props: IFilterMenuProps) {
+  const [active, setActive] = useState('');
+  const handleSort = (selected: string) => {
+    // eslint-disable-next-line no-param-reassign
+    if (selected === active) selected = '';
+
+    setActive(selected);
+    props.sort(selected);
+  };
   return (
     <div className="w-10">
       <Menu as="div">
@@ -57,8 +64,9 @@ export default function FilterMenu() {
                 <MenuItem key={menuOption}>
                   <button
                     className={`group mb-1 flex w-full items-center rounded-md p-2 text-sm text-gray-900 hover:bg-primary-600 hover:text-white ${active === menuOption ? 'bg-primary-600 text-white' : ''} `}
+                    onClick={() => handleSort(menuOption)}
                   >
-                    {menuOption}
+                    {props.translations(`sortSection.${menuOption}`)}
                   </button>
                 </MenuItem>
               ))}

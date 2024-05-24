@@ -9,6 +9,7 @@ type ISearchProps = {
   indexTranslations: Function;
   data: Array<ISearchHome>;
   url: string;
+  skipDisableOnChange?: boolean;
 };
 
 export default function AutoComplete(props: ISearchProps) {
@@ -32,10 +33,13 @@ export default function AutoComplete(props: ISearchProps) {
         );
 
   const handleSelect = (location: DropdownItem) => {
+    if (!location) return;
+
     setSelectedLocation(location);
-    setTimeout(() => {
-      setIsDisabled(true);
-    }, 200);
+    if (!props.skipDisableOnChange)
+      setTimeout(() => {
+        setIsDisabled(true);
+      }, 200);
 
     let url = '';
 

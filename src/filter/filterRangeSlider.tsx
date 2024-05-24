@@ -2,11 +2,14 @@ import Button from '@mui/material/Button';
 import Popover from '@mui/material/Popover';
 import Slider from '@mui/material/Slider';
 import TextField from '@mui/material/TextField';
+import type { CookieValueTypes } from 'cookies-next';
 import { getCookie } from 'cookies-next';
 import PopupState, { bindPopover, bindTrigger } from 'material-ui-popup-state';
 import React, { useEffect, useState } from 'react';
 
+import useDebounce from '@/hooks/UseDebounce';
 import { useUnit } from '@/store/unitContext';
+import type { ISearchFilters } from '@/types/Search';
 
 type RangeSlider = 'surface' | 'price';
 
@@ -14,6 +17,9 @@ type IFilterRangeSliderProps = {
   minValue: number;
   maxValue: number;
   type: RangeSlider;
+  translation: Function;
+  setFilters: Function;
+  filters: ISearchFilters;
 };
 
 /**
@@ -23,6 +29,10 @@ type IFilterRangeSliderProps = {
  * @param props.minValue - Indicates the minValue of the rangeSlider.
  * @param props.maxValue - Indicates the maxValue of the rangeSlider.
  * @param props.type - Indicates the type of the rangeSlider.
+ * @param props.getData - Function to get search data.
+ * @param props.translation - Function for translating text.
+ * @param props.setFilters - Function to set filters.
+ * @param props.filters - Object containing all filters.
  */
 const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   // States
@@ -30,20 +40,62 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
     props.minValue,
     props.maxValue,
   ]);
-  const [displayedRange, setDisplayedRange] = useState<string>(
-    `Any ${props.type}`,
-  );
-  const { unit, setUnit } = useUnit();
+  const [extension, setExtension] = useState<String | CookieValueTypes>('');
+
+  const getButtonText = () => {
+    return props.type === 'price'
+      ? props.translation('filtersSection.priceRangeLabel')
+      : props.translation('filtersSection.squareMetersLabel');
+  };
+  const [displayedRange, setDisplayedRange] = useState<string>(getButtonText());
+  const { unit } = useUnit();
+
+  const debouncedSearch = useDebounce(displayedRange, 500);
+
+  const cleanRange = () => {
+    if (props.type === 'price') {
+      props.setFilters({ ...props.filters, priceFrom: '', priceTo: '' });
+    } else {
+      props.setFilters({
+        ...props.filters,
+        surfaceFrom: '',
+        surfaceTo: '',
+      });
+    }
+  };
 
   const handleSliderChange = (_: Event, newValue: number | number[]) => {
     const newRange = Array.isArray(newValue) ? newValue : [newValue, newValue];
     setValue(newRange);
     if (newRange[0] !== props.minValue || newRange[1] !== props.maxValue) {
-      setDisplayedRange(`${newRange[0]} EUR - ${newRange[1]} EUR`);
+      setDisplayedRange(
+        `${newRange[0]} ${extension} - ${newRange[1]} ${extension}`,
+      );
     } else {
-      setDisplayedRange(`Any ${props.type}`);
+      setDisplayedRange(getButtonText());
     }
   };
+
+  useEffect(() => {
+    if (debouncedSearch && debouncedSearch.length > 0) {
+      const dsSplit = debouncedSearch.split('-');
+      if (dsSplit[0] && dsSplit[1]) {
+        const from = dsSplit[0].replace(/\D/g, '').trim();
+        const to = dsSplit[1].replace(/\D/g, '').trim();
+        if (props.type === 'price') {
+          props.setFilters({ ...props.filters, priceFrom: from, priceTo: to });
+        } else {
+          props.setFilters({
+            ...props.filters,
+            surfaceFrom: from,
+            surfaceTo: to,
+          });
+        }
+      } else {
+        cleanRange();
+      }
+    }
+  }, [debouncedSearch]);
 
   const handleInputChange =
     (index: number) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,16 +108,18 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
           newValues[0] !== props.minValue ||
           newValues[1] !== props.maxValue
         ) {
-          setDisplayedRange(`${newValues[0]} EUR - ${newValues[1]} EUR`);
+          setDisplayedRange(
+            `${newValues[0]} ${extension} - ${newValues[1]} ${extension}`,
+          );
         } else {
-          setDisplayedRange(`Any ${props.type}`);
+          setDisplayedRange(getButtonText());
         }
       }
     };
 
   // Hooks
   useEffect(() => {
-    setUnit(getCookie('unit') || 'currency');
+    setExtension(props.type === 'price' ? getCookie('currency') : unit);
   }, []);
 
   return (
@@ -132,18 +186,18 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
                   <TextField
                     variant="standard"
                     className="mr-2 border-b focus:outline-none"
-                    value={value[0]}
+                    value={`${value[0]} ${extension}`}
                     onChange={handleInputChange(0)}
-                    type="number"
+                    type="string"
                     inputProps={{ min: props.minValue, max: props.maxValue }}
                   />
 
                   <TextField
                     variant="standard"
                     className=""
-                    value={value[1]}
+                    value={`${value[1]} ${extension}`}
                     onChange={handleInputChange(1)}
-                    type="number"
+                    type="string"
                     inputProps={{ min: props.minValue, max: props.maxValue }}
                   />
                 </div>

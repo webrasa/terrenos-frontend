@@ -1,4 +1,5 @@
 import { API } from 'aws-amplify';
+import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
@@ -14,42 +15,88 @@ import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import type { Properties } from '@/types/IComponents';
 import type { IHome } from '@/types/IHome';
+import type { ISearchFilters } from '@/types/Search';
 import { AppConfig } from '@/utils/AppConfig';
 
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['search', 'common', 'home'])),
+      ...(await serverSideTranslations(locale, ['search', 'common', 'index'])),
     },
   };
 }
 
 const Search = () => {
+  const router = useRouter();
+
   // States
   const [data, setData] = useState<IHome>({});
+  // const [attributesData, setAttributesData] = useState<Array<Attributes>>([]);
+  const [homeData, setHomeData] = useState<IHome>({});
+  const [filters, setFilters] = useState<ISearchFilters>({
+    priceFrom: '',
+    priceTo: '',
+    surfaceFrom: '',
+    surfaceTo: '',
+    attributes: '',
+    sortBy: '',
+    countryId: '',
+    regionId: '',
+    cityId: '',
+    districtId: '',
+    userLocation: '',
+  });
 
   // Translations
-  const { t } = useTranslation('search');
+  const { t: translationSearch } = useTranslation('search');
   const { t: translationCommon } = useTranslation('common');
+  const { t: translationIndex } = useTranslation('index');
 
   // Context
   const { ipLocation } = useUserLocation();
 
   // Functions
-  const getData = useAsync(async (latitude: string, longitude: string) => {
+  const getData = useAsync(async () => {
     try {
-      if (Object.keys(data).length > 0 && ipLocation.source === 'IP') return;
-      const homeData = await API.get(
+      const { countryId, regionId, cityId, districtId, userLocation } =
+        router.query;
+
+      const searchData = await API.get(
         'backend',
-        `/home/${latitude}/${longitude}`,
+        `/search?countryId=${filters.countryId || countryId}&regionId=${filters.regionId || regionId}&cityId=${filters.cityId || cityId}&districtId=${filters.districtId || districtId}&userLocation=${userLocation}&attributes=${filters.attributes}&priceFrom=${filters.priceFrom}&priceTo=${filters.priceTo}&surfaceFrom=${filters.surfaceFrom}&surfaceTo=${filters.surfaceTo}`,
         {},
       );
-      setData(homeData);
+      setData(searchData);
     } catch (err: any) {
       // handle error
       console.log(err.message);
     }
   });
+
+  const getHomeData = useAsync(async (latitude: string, longitude: string) => {
+    try {
+      if (Object.keys(data).length > 0 && ipLocation.source === 'IP') return;
+      const hData = await API.get(
+        'backend',
+        `/home/${latitude}/${longitude}`,
+        {},
+      );
+      setHomeData(hData);
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
+
+  // const getAttributes = useAsync(async () => {
+  //   try {
+  //     const attData = await API.get('backend', `/attributesByCategories`, {});
+  //     setAttributesData(attData.attributesByCategories);
+  //   } catch (err: any) {
+  //     // handle error
+  //     console.log(err.message);
+  //   }
+  // });
 
   const getPropertyLocation = (item: Properties) => {
     let address = '';
@@ -61,7 +108,70 @@ const Search = () => {
     return address;
   };
 
+  const sort = (selected: string) => {
+    let sortedArrayOfProperties: Array<Properties> = [];
+
+    switch (selected) {
+      case 'newsetLabel':
+        sortedArrayOfProperties =
+          data.properties?.sort((a, b) => {
+            const keyA = new Date(a.createdAt);
+            const keyB = new Date(b.createdAt);
+            if (keyA < keyB) return 1;
+            if (keyA > keyB) return -1;
+            return 0;
+          }) || [];
+        break;
+      case 'priceHighToLowLabel':
+        sortedArrayOfProperties =
+          data.properties?.sort((a, b) => {
+            if (a.price > b.price) return -1;
+            if (a.price < b.price) return 1;
+            return 0;
+          }) || [];
+        break;
+      case 'priceLowToHighLabel':
+        sortedArrayOfProperties =
+          data.properties?.sort((a, b) => {
+            if (a.price < b.price) return -1;
+            if (a.price > b.price) return 1;
+            return 0;
+          }) || [];
+        break;
+      case 'updatedRecentlyLabel':
+        sortedArrayOfProperties =
+          data.properties?.sort((a, b) => {
+            const keyA = new Date(a.updatedAt);
+            const keyB = new Date(b.updatedAt);
+            if (keyA < keyB) return 1;
+            if (keyA > keyB) return -1;
+            return 0;
+          }) || [];
+        break;
+      case 'trendingLabel':
+        getData.execute();
+        break;
+      default:
+        getData.execute();
+        break;
+    }
+
+    if (sortedArrayOfProperties.length > 0)
+      setData({ properties: sortedArrayOfProperties });
+  };
+
   // Hooks
+  useEffect(() => {
+    const isEmpty = Object.values(router.query).every(
+      (value) => value === null || value === '',
+    );
+    if (!isEmpty) getData.execute();
+  }, [router.query]);
+
+  useEffect(() => {
+    getData.execute();
+  }, [filters]);
+
   useEffect(() => {
     if (
       ipLocation.latitude &&
@@ -69,15 +179,15 @@ const Search = () => {
       ipLocation.longitude &&
       ipLocation.longitude !== 0
     ) {
-      getData.execute(ipLocation.latitude, ipLocation.longitude);
+      getHomeData.execute(ipLocation.latitude, ipLocation.longitude);
     }
   }, [ipLocation]);
 
   return (
     <div className="text-gray-600 antialiased">
       <Meta
-        title={t('general.title')}
-        description={t('general.description')}
+        title={translationSearch('general.title')}
+        description={translationSearch('general.description')}
         image={AppConfig.image_url}
       />
       <Navbar translation={translationCommon} />
@@ -85,12 +195,21 @@ const Search = () => {
         <div className="flex">
           <div className="w-1/2">
             <AutoComplete
-              indexTranslations={t}
-              data={data?.locations || []}
+              indexTranslations={translationIndex}
+              data={homeData?.locations || []}
               url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${ipLocation.latitude},${ipLocation.longitude}`}
+              skipDisableOnChange={true}
             />
           </div>
-          <Filter />
+          <Filter
+            getData={getData}
+            attributesData={homeData.attributes || []}
+            sort={sort}
+            translations={translationSearch}
+            translationCommon={translationCommon}
+            setFilters={setFilters}
+            filters={filters}
+          />
         </div>
         <div className="mt-3 flex">
           <div className="h-auto w-1/2">
