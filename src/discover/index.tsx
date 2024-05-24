@@ -21,14 +21,17 @@ const Discover = (props: IDiscoverProps) => {
         {props.attributes &&
           props.attributes.map((item, index) => {
             return (
-              <Pill
+              <Link
+                href={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=&attributes=${item.id}`}
                 key={index}
-                translation={props.translationCommon}
-                base
-                greenBorder
-                name={item.name}
-                id={item.id}
-              ></Pill>
+              >
+                <Pill
+                  translation={props.translationCommon}
+                  base
+                  greenBorder
+                  name={item.name}
+                ></Pill>
+              </Link>
             );
           })}
       </div>
