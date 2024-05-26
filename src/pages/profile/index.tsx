@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next';
 import {
   Tab,
   TabGroup,
@@ -7,58 +6,86 @@ import {
   TabPanels,
   Transition,
 } from '@headlessui/react';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { Navbar } from '@/templates/Navbar';
-import { Footer } from '@/templates/Footer';
-import { Fragment, useEffect, useRef, useState } from 'react';
+import { API } from 'aws-amplify';
 import { getCookie } from 'cookies-next';
+import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { Fragment, useEffect, useRef, useState } from 'react';
+
+import { useAsync } from '@/hooks/UseAsync';
 import { LandingSection } from '@/layouts/LandingSection';
+import { useWatchList } from '@/store/watchListContext';
+import { Footer } from '@/templates/Footer';
+import { Navbar } from '@/templates/Navbar';
+import type { Properties, PropertyData } from '@/types/IComponents';
+
+import Account from './Account';
 import CurrentListing from './CurrentListing';
 import Drafts from './Drafts';
-import WatchList from './WatchList';
-import SoldOffMarket from './SoldOffMarket';
 import Inbox from './Inbox';
-import Account from './Account';
+import SoldOffMarket from './SoldOffMarket';
+import WatchList from './WatchList';
 
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['search'])),
+      ...(await serverSideTranslations(locale, ['common'])),
     },
   };
 }
 
 const Index = () => {
-  const { t } = useTranslation('index');
-  const array = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  const [likedIds, setLikedIds] = useState<string[]>([]);
+  const { t } = useTranslation('common');
+  const { setWatchList } = useWatchList();
+  const [properties, setProperties] = useState<Array<PropertyData>>();
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
-  const tabs = [
-    {
-      name: 'Current Listing',
-      key: 'currentListing',
-      component: <CurrentListing array={array} />,
-    },
-    { name: 'Drafts', key: 'drafts', component: <Drafts array={array} /> },
-    {
-      name: 'My Watch List',
-      key: 'myWatchList',
-      component: <WatchList array={array} likedIds={likedIds} />,
-    },
-    {
-      name: 'Sold / Off the market',
-      key: 'soldOffTheMarket',
-      component: <SoldOffMarket array={array} />,
-    },
-    { name: 'Inbox', key: 'inbox', component: <Inbox array={array} /> },
-    { name: 'Account', key: 'account', component: <Account array={array} /> },
-  ];
+  const userId = 1; // TODO: Change this to the user id when userAuth
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // FIX:  This is a temporary dev data
+
+  const getData = useAsync(async () => {
+    try {
+      const propertiesData = await API.get(
+        'backend',
+        `/properties/${userId}`,
+        {},
+      );
+      setProperties(propertiesData.properties);
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
+
+  const updateData = useAsync(async (id, status) => {
+    try {
+      const property: Properties =
+        properties?.filter((el: PropertyData) => el.id === Number(id))[0]
+          ?.property || ({} as Properties);
+
+      property.attributes = property?.propertyAttributes?.map(
+        (el: any) => el.id,
+      );
+
+      const myInit = {
+        body: {
+          ...property,
+          status,
+        },
+      };
+      await API.put('backend', `/updateProperty/${id}`, myInit);
+      getData.execute();
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
 
   useEffect(() => {
     const idsString = getCookie('likedProperties') || '';
     const ids = idsString ? idsString.split('-') : [];
-    setLikedIds(ids);
+    setWatchList(ids);
+    getData.execute();
   }, []);
 
   const tabListRef = useRef<HTMLDivElement>(null);
@@ -87,16 +114,66 @@ const Index = () => {
     setSelectedIndex(index);
   };
 
+  const tabs = [
+    {
+      name: 'Current Listing',
+      key: 'currentListing',
+      component: (
+        <CurrentListing
+          properties={properties?.filter(
+            (el) =>
+              el.property.status === 'Active' ||
+              el.property.status === 'Pending',
+          )}
+          updateData={updateData}
+        />
+      ),
+    },
+    {
+      name: 'Drafts',
+      key: 'drafts',
+      component: (
+        <Drafts
+          properties={properties?.filter(
+            (el) => el.property.status === 'Draft',
+          )}
+          updateData={updateData}
+        />
+      ),
+    },
+    {
+      name: 'My Watch List',
+      key: 'myWatchList',
+      component: <WatchList properties={properties} />,
+    },
+    {
+      name: 'Sold / Off the market',
+      key: 'soldOffTheMarket',
+      component: (
+        <SoldOffMarket
+          properties={properties?.filter(
+            (el) =>
+              el.property.status === 'Sold' ||
+              el.property.status === 'OffTheMarket',
+          )}
+          updateData={updateData}
+        />
+      ),
+    },
+    { name: 'Inbox', key: 'inbox', component: <Inbox array={array} /> },
+    { name: 'Account', key: 'account', component: <Account array={array} /> },
+  ];
+
   return (
     <div className="antialiased">
-      <Navbar />
+      <Navbar translation={t} />
       <LandingSection yPadding="py-4">
         <div className="container mx-auto">
-          <div className="flex items-center space-x-4 relative">
+          <div className="relative flex items-center space-x-4">
             <img
               src={userProfileImage}
               alt="Profile"
-              className="h-24 w-24 rounded-full object-cover"
+              className="size-24 rounded-full object-cover"
             />
             <h1 className="text-3xl font-medium text-black">
               Hello, {userName}
@@ -140,7 +217,7 @@ const Index = () => {
           <TabGroup selectedIndex={selectedIndex} onChange={handleTabChange}>
             <TabList
               ref={tabListRef}
-              className="border-b-2 h-15 -ml-8 flex flex-nowrap overflow-x-auto overflow-y-hidden md:block whitespace-nowrap hide-scrollbar"
+              className="h-15 hide-scrollbar -ml-8 flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap border-b-2 md:block"
             >
               {tabs.map((tab) => (
                 <Tab
@@ -172,7 +249,7 @@ const Index = () => {
                             : 'transform -translate-x-full opacity-0'
                         }
                       >
-                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-green-600" />
+                        <div className="absolute inset-x-0 bottom-0 h-1 bg-green-600" />
                       </Transition>
                     </>
                   )}
@@ -191,11 +268,5 @@ const Index = () => {
     </div>
   );
 };
-
-// Index.getLayout = getShell({
-//   title: 'Profile',
-//   description: 'This is profile description',
-//   image: 'imageURL',
-// });
 
 export default Index;
