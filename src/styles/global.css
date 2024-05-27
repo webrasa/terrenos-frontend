@@ -16,3 +16,26 @@ button:disabled {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.image-gallery-thumbnail{
+  transition: none;
+}
+
+.image-gallery-icon:hover{
+  color: #009f52!important;
+}
+.image-gallery-slide-wrapper{
+  border-radius: 4px;
+}
+
+.image-gallery-thumbnail:hover{
+  border-color: #009f52!important;
+  border-radius: 7px;
+}
+.image-gallery-thumbnail.active, .image-gallery-thumbnail:focus{
+  border-color: #009f52 !important;
+  border-radius: 7px;
+}
+.image-gallery-thumbnail .image-gallery-thumbnail-image{
+  border-radius: 4px;
+}
