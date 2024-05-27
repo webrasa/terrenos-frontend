@@ -3,10 +3,10 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import { Section } from '@/layouts/Section';
-import { getShell } from '@/layouts/Shell';
+import MyGallery from '@/gallery';
+import { Meta } from '@/layouts/Meta';
+import { AppConfig } from '@/utils/AppConfig';
 //* * Utils */
-import type { NextPageWithLayout } from '@/utils/NextLayout';
 
 export async function getStaticProps({ locale }: any) {
   return {
@@ -16,15 +16,18 @@ export async function getStaticProps({ locale }: any) {
   };
 }
 
-const Index: NextPageWithLayout = () => {
-  const { t } = useTranslation('property');
-  return <Section title={t('general.title')}>{t('general.title')}</Section>;
+const Property = () => {
+  const { t } = useTranslation('index');
+  return (
+    <div className="text-gray-600 antialiased">
+      <Meta
+        title={t('general.title')}
+        description={t('general.description')}
+        image={AppConfig.image_url}
+      />
+      <MyGallery />
+    </div>
+  );
 };
 
-Index.getLayout = getShell({
-  title: 'Property',
-  description: 'This is property description',
-  image: 'imageURL',
-});
-
-export default Index;
+export default Property;

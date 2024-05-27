@@ -16,7 +16,7 @@ button:disabled {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
-
+/* Gallery CSS */
 .image-gallery-thumbnail{
   transition: none;
 }
@@ -24,7 +24,8 @@ button:disabled {
 .image-gallery-icon:hover{
   color: #009f52!important;
 }
-.image-gallery-slide-wrapper{
+
+.image-gallery-content.image-gallery-thumbnails-left .image-gallery-slide .image-gallery-image, .image-gallery-content.image-gallery-thumbnails-right .image-gallery-slide .image-gallery-image{
   border-radius: 4px;
 }
 
