@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { PropertyCard } from '@/card/Card';
 import CardSlider from '@/card-slider/CardSlider';
 import Discover from '@/discover';
-import MyGallery from '@/gallery';
 import { Header } from '@/header/header';
 import { useAsync } from '@/hooks/UseAsync';
 import { Meta } from '@/layouts/Meta';
@@ -123,7 +122,6 @@ const Index = () => {
         translationCommon={translationCommon}
         translation={t}
       ></Discover>
-      <MyGallery />
       <Footer />
     </div>
   );

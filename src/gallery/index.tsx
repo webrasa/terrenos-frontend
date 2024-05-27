@@ -44,14 +44,16 @@ const renderRightNav = (onClick: () => void, disabled: boolean) => (
 
 function MyGallery() {
   return (
-    <div className="m-5 w-1/2">
-      <ImageGallery
-        items={images}
-        showPlayButton={false}
-        thumbnailPosition="right"
-        renderLeftNav={renderLeftNav}
-        renderRightNav={renderRightNav}
-      />
+    <div className="auto mx-auto mt-3 max-w-screen-xl px-3 py-4">
+      <div className="flex w-1/2">
+        <ImageGallery
+          items={images}
+          showPlayButton={false}
+          thumbnailPosition="right"
+          renderLeftNav={renderLeftNav}
+          renderRightNav={renderRightNav}
+        />
+      </div>
     </div>
   );
 }
