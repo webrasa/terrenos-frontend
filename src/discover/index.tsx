@@ -26,10 +26,9 @@ const Discover = (props: IDiscoverProps) => {
                 key={index}
               >
                 <Pill
-                  translation={props.translationCommon}
                   base
                   greenBorder
-                  name={item.name}
+                  name={props.translationCommon(`attributes.${item.name}`)}
                 ></Pill>
               </Link>
             );

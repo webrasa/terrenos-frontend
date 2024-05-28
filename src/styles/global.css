@@ -17,9 +17,6 @@ button:disabled {
   display: none;
 }
 /* Gallery CSS */
-.image-gallery-thumbnail{
-  transition: none;
-}
 
 .image-gallery-icon:hover{
   color: #009f52!important;

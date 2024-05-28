@@ -44,8 +44,8 @@ const renderRightNav = (onClick: () => void, disabled: boolean) => (
 
 function MyGallery() {
   return (
-    <div className="mx-auto max-w-screen-xl px-2 py-4 sm:px-5 lg:px-6">
-      <div className="flex w-1/2">
+    <div className="mx-auto py-4">
+      <div className="flex">
         <ImageGallery
           items={images}
           showPlayButton={false}

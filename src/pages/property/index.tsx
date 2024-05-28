@@ -1,17 +1,16 @@
 // ** Layouts
 
-import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Button } from '@/button/Button';
 import MyGallery from '@/gallery/myGallery';
+import { LandingSection } from '@/layouts/LandingSection';
 import { Meta } from '@/layouts/Meta';
 import { Pill } from '@/pill/Pill';
 import TableProperty from '@/tableProperty';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
-import type { Attributes } from '@/types/IComponents';
 import { AppConfig } from '@/utils/AppConfig';
 //* * Utils */
 
@@ -23,14 +22,10 @@ export async function getStaticProps({ locale }: any) {
   };
 }
 
-type IPropertyProps = {
-  attributes: Array<Attributes>;
-  translationCommon: Function;
-};
-
-const Property = (props: IPropertyProps) => {
+const Property = () => {
   const { t } = useTranslation('index');
   const { t: translationCommon } = useTranslation('common');
+  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className="text-gray-600 antialiased">
       <Meta
@@ -39,9 +34,9 @@ const Property = (props: IPropertyProps) => {
         image={AppConfig.image_url}
       />
       <Navbar translation={translationCommon} />
-      <MyGallery />
-      <div className="mx-auto max-w-screen-xl px-2 py-4 sm:px-5 lg:px-6">
-        <div className="w-1/2">
+      <LandingSection yPadding="py-2">
+        <MyGallery />
+        <div className="mx-auto py-4">
           <h1 className="mb-5 text-2xl font-semibold text-black">
             Description
           </h1>
@@ -69,27 +64,14 @@ const Property = (props: IPropertyProps) => {
             Property specs and Attributes
           </h1>
           <TableProperty />
-          <div className="flex flex-wrap justify-evenly gap-4">
-            {props.attributes &&
-              props.attributes.map((item, index) => {
-                return (
-                  <Link
-                    href={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=&attributes=${item.id}`}
-                    key={index}
-                  >
-                    <Pill
-                      translation={props.translationCommon}
-                      base
-                      greenBorder
-                      name={item.name}
-                    ></Pill>
-                  </Link>
-                );
-              })}
+          <div className="my-5 flex flex-wrap justify-between gap-4">
+            {array.map((a) => (
+              <Pill key={a} base greenBorder name="PERA"></Pill>
+            ))}
           </div>
           <Button full>Contact Seller</Button>
         </div>
-      </div>
+      </LandingSection>
       <Footer />
     </div>
   );
