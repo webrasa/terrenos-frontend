@@ -1,13 +1,16 @@
 // ** Layouts
 
-import { Button } from '@headlessui/react';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
-import MyGallery from '@/gallery';
+import { Button } from '@/button/Button';
+import MyGallery from '@/gallery/myGallery';
 import { Meta } from '@/layouts/Meta';
 import { Pill } from '@/pill/Pill';
+import TableProperty from '@/tableProperty';
+import { Footer } from '@/templates/Footer';
+import { Navbar } from '@/templates/Navbar';
 import type { Attributes } from '@/types/IComponents';
 import { AppConfig } from '@/utils/AppConfig';
 //* * Utils */
@@ -15,7 +18,7 @@ import { AppConfig } from '@/utils/AppConfig';
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['property'])),
+      ...(await serverSideTranslations(locale, ['property', 'common'])),
     },
   };
 }
@@ -27,6 +30,7 @@ type IPropertyProps = {
 
 const Property = (props: IPropertyProps) => {
   const { t } = useTranslation('index');
+  const { t: translationCommon } = useTranslation('common');
   return (
     <div className="text-gray-600 antialiased">
       <Meta
@@ -34,25 +38,26 @@ const Property = (props: IPropertyProps) => {
         description={t('general.description')}
         image={AppConfig.image_url}
       />
+      <Navbar translation={translationCommon} />
       <MyGallery />
-      <div className="mx-auto mt-3 max-w-screen-xl px-3 py-4">
+      <div className="mx-auto max-w-screen-xl px-2 py-4 sm:px-5 lg:px-6">
         <div className="w-1/2">
           <h1 className="mb-5 text-2xl font-semibold text-black">
             Description
           </h1>
           <p className="mb-5 text-black">
             Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
+            industry. Lorem Ipsum has been the industry standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only
+            five centuries, but also the leap into electronic typesetting,
             remaining essentially unchanged. It was popularised in the 1960s
             with the release of Letraset sheets containing Lorem Ipsum passages,
             and more recently with desktop publishing software like Aldus
             PageMaker including versions of Lorem IpsumLorem Ipsum is simply
             dummy text of the printing and typesetting industry. Lorem Ipsum has
-            been the industry's standard dummy text ever since the 1500s, when
-            an unknown printer took a galley of type and scrambled it to make a
+            been the industry standard dummy text ever since the 1500s, when an
+            unknown printer took a galley of type and scrambled it to make a
             type specimen book. It has survived not only five centuries, but
             also the leap into electronic typesetting, remaining essentially
             unchanged. It was popularised in the 1960s with the release of
@@ -60,6 +65,10 @@ const Property = (props: IPropertyProps) => {
             with desktop publishing software like Aldus PageMaker including
             versions of Lorem Ipsum
           </p>
+          <h1 className="mb-5 text-2xl font-semibold text-black">
+            Property specs and Attributes
+          </h1>
+          <TableProperty />
           <div className="flex flex-wrap justify-evenly gap-4">
             {props.attributes &&
               props.attributes.map((item, index) => {
@@ -78,11 +87,10 @@ const Property = (props: IPropertyProps) => {
                 );
               })}
           </div>
-          <Button className="w-full rounded-1.5xl bg-primary-600 px-4 py-2 text-lg text-white">
-            Contact Seller
-          </Button>
+          <Button full>Contact Seller</Button>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
