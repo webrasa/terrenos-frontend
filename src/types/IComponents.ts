@@ -45,10 +45,19 @@ export type Properties = {
   type: string;
   updatedAt: string;
   views: number;
+  propertyAttributes?: number[] | undefined;
+  attributes?: number[] | undefined;
 };
 
 export type Regions = {
   id: number;
   key: string;
   name: string;
+};
+
+export type PropertyData = {
+  id: number;
+  userId: number;
+  propertyId: number;
+  property: Properties;
 };
