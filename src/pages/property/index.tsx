@@ -62,11 +62,11 @@ const Property = () => {
             with desktop publishing software like Aldus PageMaker including
             versions of Lorem Ipsum
           </p>
-          <h1 className="mb-5 text-2xl font-semibold text-black">
+          <h1 className="my-5 text-2xl font-semibold text-black">
             Property specs and Attributes
           </h1>
           <TableProperty />
-          <div className="my-5 flex flex-wrap justify-between gap-4">
+          <div className="mb-10 mt-5 flex flex-wrap justify-between gap-4">
             {array.map((a) => (
               <Pill key={a} base greenBorder name="PERA"></Pill>
             ))}

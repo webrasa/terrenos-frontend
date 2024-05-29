@@ -15,7 +15,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -35,7 +35,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -55,7 +55,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -75,7 +75,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -95,7 +95,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -115,7 +115,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -140,7 +140,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -165,7 +165,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
@@ -185,7 +185,7 @@ export default function VerticalTable(props: ITablePropertyProps) {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="black"
-            className="mr-3 size-4"
+            className="ml-2 mr-3 size-4"
           >
             <path
               strokeLinecap="round"
