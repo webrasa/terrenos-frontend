@@ -8,6 +8,7 @@ import MyGallery from '@/gallery/myGallery';
 import { LandingSection } from '@/layouts/LandingSection';
 import { Meta } from '@/layouts/Meta';
 import { Pill } from '@/pill/Pill';
+import SectionProperty from '@/sectionProperty';
 import TableProperty from '@/tableProperty';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
@@ -36,6 +37,7 @@ const Property = () => {
       <Navbar translation={translationCommon} />
       <LandingSection yPadding="py-2">
         <MyGallery />
+        <SectionProperty />
         <div className="mx-auto py-4">
           <h1 className="mb-5 text-2xl font-semibold text-black">
             Description

@@ -52,6 +52,7 @@ function MyGallery() {
           thumbnailPosition="right"
           renderLeftNav={renderLeftNav}
           renderRightNav={renderRightNav}
+          showIndex={true}
         />
       </div>
     </div>
