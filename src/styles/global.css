@@ -16,7 +16,15 @@ button:disabled {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+
 /* Gallery CSS */
+
+/* Gallery CSS Main Image */
+.image-gallery-slide-wrapper {
+  overflow: hidden; /* Ensure content doesn't overflow */
+  border-radius: 4px; /* Maintain border radius on the wrapper */
+}
 
 .image-gallery-icon:hover{
   color: #009f52!important;
@@ -27,13 +35,17 @@ button:disabled {
  color:gray!important;
  border-radius: 4px;
  margin: 10px;
-
 }
 
 .image-gallery-content.image-gallery-thumbnails-left .image-gallery-slide .image-gallery-image, .image-gallery-content.image-gallery-thumbnails-right .image-gallery-slide .image-gallery-image{
   border-radius: 4px;
 }
 
+/* Gallery CSS Thumbnail Images*/
+.image-gallery-thumbnail {
+  border-radius: 7px; /* Initial border-radius */
+  overflow: hidden; /* Ensure content doesn't overflow */
+}
 .image-gallery-thumbnail:hover{
   border-color: #009f52!important;
   border-radius: 7px;
