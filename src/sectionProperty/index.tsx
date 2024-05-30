@@ -1,14 +1,19 @@
-const SectionProperty = () => {
+type ISectionPropertyProps = {
+  title: string;
+  subtitle: string;
+};
+
+const SectionProperty = (props: ISectionPropertyProps) => {
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
+  const latitude = 37.3393;
+  const longitude = -121.894;
   return (
     <div className="mx-auto py-4 text-black">
-      <h1 className="mb-4 text-3xl font-bold"> $35,000 </h1>
-      <p className="mb-4 text-2xl font-medium">
-        Lacmiel, 2 cuadras arriba, 1/2 cuadra al sur
-      </p>
-      <p className="mb-6 text-xl font-normal">
-        San Jose, Columbia -121.894 37.3393
+      <h1 className="mb-4 text-2xl font-bold"> $35,000 </h1>
+      <p className="mb-4 text-xl font-medium">{props.title}</p>
+      <p className="mb-6 text-lg font-normal">
+        {props.subtitle} {longitude} {latitude}
       </p>
       <div className="mb-10 flex items-center">
         <img
@@ -18,11 +23,11 @@ const SectionProperty = () => {
         />
         <h1 className="text-lg font-medium">{userName}</h1>
       </div>
-      <div className="flex border-y border-gray-500 text-lg">
-        <p className="py-4 pr-10">
+      <div className="flex border-y border-gray-500 text-sm md:text-lg">
+        <p className="py-4 pr-6 md:pr-10">
           <b>10 days</b> on Terrenoss
         </p>
-        <p className="py-4 pr-10">
+        <p className="py-4 pr-6 md:pr-10">
           <b>12</b> Views
         </p>
         <p className="py-4">

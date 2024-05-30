@@ -18,14 +18,20 @@ import { AppConfig } from '@/utils/AppConfig';
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['property', 'common'])),
+      ...(await serverSideTranslations(locale, [
+        'property',
+        'common',
+        'index',
+      ])),
     },
   };
 }
 
 const Property = () => {
+  // Translations
   const { t } = useTranslation('index');
   const { t: translationCommon } = useTranslation('common');
+  const { t: translationProperty } = useTranslation('property');
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   return (
     <div className="text-gray-600 antialiased">
@@ -37,7 +43,10 @@ const Property = () => {
       <Navbar translation={translationCommon} />
       <LandingSection yPadding="py-2">
         <MyGallery />
-        <SectionProperty />
+        <SectionProperty
+          title={translationProperty('sectionProperty.place')}
+          subtitle={translationProperty('sectionProperty.town')}
+        />
         <div className="mx-auto py-4">
           <h1 className="mb-5 text-2xl font-semibold text-black">
             Description
