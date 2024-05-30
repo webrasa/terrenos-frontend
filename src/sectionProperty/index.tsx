@@ -1,6 +1,9 @@
 type ISectionPropertyProps = {
   title: string;
   subtitle: string;
+  days: string;
+  views: string;
+  favorites: string;
 };
 
 const SectionProperty = (props: ISectionPropertyProps) => {
@@ -8,6 +11,10 @@ const SectionProperty = (props: ISectionPropertyProps) => {
   const userProfileImage = 'https://picsum.photos/200/200';
   const latitude = 37.3393;
   const longitude = -121.894;
+  const daysTerrenoss = 10;
+  const viewsTerrenoss = 12;
+  const favoritesTerrenoss = 12;
+
   return (
     <div className="mx-auto py-4 text-black">
       <h1 className="mb-4 text-2xl font-bold"> $35,000 </h1>
@@ -25,10 +32,11 @@ const SectionProperty = (props: ISectionPropertyProps) => {
       </div>
       <div className="flex border-y border-gray-500 text-sm md:text-lg">
         <p className="py-4 pr-6 md:pr-10">
-          <b>10 days</b> on Terrenoss
+          <b className="pr-1">{daysTerrenoss}</b>
+          {props.days}
         </p>
         <p className="py-4 pr-6 md:pr-10">
-          <b>12</b> Views
+          <b className="pr-1">{viewsTerrenoss}</b> {props.views}
         </p>
         <p className="py-4">
           <svg
@@ -47,7 +55,7 @@ const SectionProperty = (props: ISectionPropertyProps) => {
           </svg>
         </p>
         <p className="py-4">
-          <b>12</b> favorites
+          <b className="pr-1">{favoritesTerrenoss}</b> {props.favorites}
         </p>
       </div>
     </div>
