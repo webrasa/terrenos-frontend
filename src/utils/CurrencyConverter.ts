@@ -6,7 +6,7 @@ export type Currency = {
   symbolBefore: Boolean;
 };
 
-const currencies: Array<Currency> = [
+export const currencies: Array<Currency> = [
   {
     name: 'Dollar',
     shortName: 'usd',
@@ -53,3 +53,7 @@ export const convertAndFormatCurrency = (
   })?.symbolBefore;
   return `${symbolBefore ? currencySymbol : ''}${roundedValue}${!symbolBefore ? currencySymbol : ''}`;
 };
+
+export const getCurrency = (currency: Currency['shortName']): Currency => {
+  return currencies.find((obj) => obj.shortName === currency) ?? currencies[0] as Currency;
+}
