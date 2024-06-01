@@ -20,7 +20,7 @@ type ILandingSectionProps = {
  */
 const LandingSection = (props: ILandingSectionProps) => (
   <div
-    className={`mx-auto max-w-screen-xl px-2 sm:px-5 lg:px-6 ${
+    className={`mx-auto max-w-screen-xl px-2 sm:px-5 lg:px-6 xl:max-w-screen-lg ${
       props.yPadding ? props.yPadding : 'py-16'
     }`}
   >
