@@ -1,42 +1,39 @@
 type ISectionPropertyProps = {
   title: string;
   subtitle: string;
-  days: string;
-  views: string;
-  favorites: string;
+  days: number;
+  views: number;
+  favorites: number;
+  username: string;
+  userProfileImage: string;
+  latitude: number;
+  longitude: number;
+  price: string;
+  propertyTranslations: Function;
 };
 
-const SectionProperty = (props: ISectionPropertyProps) => {
-  const userName = 'Mary';
-  const userProfileImage = 'https://picsum.photos/200/200';
-  const latitude = 37.3393;
-  const longitude = -121.894;
-  const daysTerrenoss = 10;
-  const viewsTerrenoss = 12;
-  const favoritesTerrenoss = 12;
-
+const PropertyInfo = (props: ISectionPropertyProps) => {
   return (
     <div className="mx-auto py-4 text-black">
-      <h1 className="mb-4 text-2xl font-bold"> $35,000 </h1>
+      <h1 className="mb-4 text-2xl font-bold"> {props.price} </h1>
       <p className="mb-4 text-xl font-medium">{props.title}</p>
-      <p className="mb-6 text-lg font-normal">
-        {props.subtitle} {longitude} {latitude}
-      </p>
+      <p className="mb-6 text-lg font-normal">{props.subtitle}</p>
       <div className="mb-10 flex items-center">
         <img
-          src={userProfileImage}
+          src={props.userProfileImage}
           alt="Profile"
           className="mr-4 size-8 rounded-full object-cover"
         />
-        <h1 className="text-lg font-medium">{userName}</h1>
+        <h1 className="text-lg font-medium">{props.username}</h1>
       </div>
       <div className="flex border-y border-gray-500 text-sm md:text-lg">
         <p className="py-4 pr-6 md:pr-10">
-          <b className="pr-1">{daysTerrenoss}</b>
-          {props.days}
+          <b className="pr-1">{props.days}</b>
+          {props.propertyTranslations('propertyInfoSection.days')}
         </p>
         <p className="py-4 pr-6 md:pr-10">
-          <b className="pr-1">{viewsTerrenoss}</b> {props.views}
+          <b className="pr-1">{props.views}</b>{' '}
+          {props.propertyTranslations('propertyInfoSection.views')}
         </p>
         <p className="py-4">
           <svg
@@ -55,11 +52,12 @@ const SectionProperty = (props: ISectionPropertyProps) => {
           </svg>
         </p>
         <p className="py-4">
-          <b className="pr-1">{favoritesTerrenoss}</b> {props.favorites}
+          <b className="pr-1">{props.favorites}</b>{' '}
+          {props.propertyTranslations('propertyInfoSection.favorites')}
         </p>
       </div>
     </div>
   );
 };
 
-export default SectionProperty;
+export default PropertyInfo;
