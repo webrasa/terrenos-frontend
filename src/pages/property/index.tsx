@@ -28,7 +28,6 @@ export async function getStaticProps({ locale }: any) {
 
 const Property = () => {
   // Translations
-  const { t } = useTranslation('index');
   const { t: translationCommon } = useTranslation('common');
   const { t: translationProperty } = useTranslation('property');
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];

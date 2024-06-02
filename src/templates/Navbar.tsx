@@ -16,8 +16,11 @@ const Navbar = (props: INavbarProps) => (
         logo={<Logo xl />}
         rightMenu={
           <>
-            <li className="rounded-1.5xl bg-primary-600 p-2 text-center font-medium text-white md:px-10">
-              <Link href="/profile">
+            <li className="">
+              <Link
+                href="/add-property"
+                className="rounded-1.5xl bg-primary-600 p-2 text-center font-medium text-white hover:bg-primary-400 md:px-10"
+              >
                 {props.translation('navbarSection.ctaAddPropertyButtonTitle')}
               </Link>
             </li>

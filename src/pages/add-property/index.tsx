@@ -1,5 +1,6 @@
 import { getCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 
 import { CheckboxWrap } from '@/checkbox-wrap';
@@ -15,8 +16,20 @@ import { Navbar } from '@/templates/Navbar';
 import { currencies, getCurrency } from '@/utils/CurrencyConverter';
 import { getUnit, units } from '@/utils/UnitConverter';
 
+export async function getStaticProps({ locale }: any) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        'add-property',
+        'common',
+        'index',
+      ])),
+    },
+  };
+}
+
 const Index = () => {
-  const { t } = useTranslation('index');
+  const { t } = useTranslation('common');
   const { unit, setUnit } = useUnit();
   const { currency, setCurrency } = useCurrency();
 
