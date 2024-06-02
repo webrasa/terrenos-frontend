@@ -25,10 +25,17 @@ const CheckboxCard = ({ id, title, items }: CheckboxCardProps) => {
   return (
     <div className="w-full md:w-1/2">
       <h3 className="font-medium">{title}</h3>
-      <div className="grid grid-cols-2 gap-x-2 gap-y-4 mt-4">
+      <div className="mt-4 grid grid-cols-2 gap-x-2 gap-y-4">
         {items.map((item) => (
-          <FormElementBox htmlFor={item.id.toString()} text={item.name}>
-            <input id={item.id.toString()} type="checkbox" />
+          <FormElementBox
+            key={item.id}
+            htmlFor={`propertyAttributeCheckBox${item.id.toString()}`}
+            text={item.name}
+          >
+            <input
+              id={`propertyAttributeCheckBox${item.id.toString()}`}
+              type="checkbox"
+            />
           </FormElementBox>
         ))}
       </div>

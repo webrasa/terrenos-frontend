@@ -1,5 +1,7 @@
-import { CheckboxCard, ItemType } from '@/checkbox-card';
 import { useState } from 'react';
+
+import type { ItemType } from '@/checkbox-card';
+import { CheckboxCard } from '@/checkbox-card';
 
 type CheckboxType = {
   id: number;
@@ -27,7 +29,7 @@ const CheckboxWrap = ({ itemsArray }: CheckboxWrapProps) => {
 
   return (
     <div>
-      <div className="flex flex-wrap flex-col md:flex-row justify-between gap-y-4">
+      <div className="flex flex-col flex-wrap justify-between gap-y-4 md:flex-row">
         {itemsArray.slice(0, showAll ? itemsArray.length : 2).map((item) => (
           <CheckboxCard
             key={item.id}
@@ -37,7 +39,7 @@ const CheckboxWrap = ({ itemsArray }: CheckboxWrapProps) => {
           />
         ))}
       </div>
-      <div className="text-right w-full">
+      <div className="w-full text-right">
         <p onClick={toggleShowAll} className="cursor-pointer text-blue-500">
           {showAll ? 'Show less' : 'Show more'}
         </p>

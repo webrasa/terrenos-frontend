@@ -1,3 +1,7 @@
+import { getCookie } from 'cookies-next';
+import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
+
 import { CheckboxWrap } from '@/checkbox-wrap';
 import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
@@ -10,9 +14,6 @@ import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import { currencies, getCurrency } from '@/utils/CurrencyConverter';
 import { getUnit, units } from '@/utils/UnitConverter';
-import { getCookie } from 'cookies-next';
-import { useTranslation } from 'next-i18next';
-import { useEffect, useState } from 'react';
 
 const Index = () => {
   const { t } = useTranslation('index');
@@ -43,8 +44,8 @@ const Index = () => {
           <h1 className="text-xl font-medium">Add a property</h1>
           <p>Fill out the fields below to add a property. </p>
           <div>
-            <h2 className="font-medium mt-8 mb-4">Location</h2>
-            <div className="flex gap-4 mb-4">
+            <h2 className="mb-4 mt-8 font-medium">Location</h2>
+            <div className="mb-4 flex gap-4">
               <div className="w-1/2">
                 <Label htmlFor="country">Country</Label>
                 <FormElement>
@@ -74,12 +75,12 @@ const Index = () => {
                 <input id="address" type="text" />
               </FormElement>
             </div>
-            <h2 className="font-medium mt-8 mb-4">Map</h2>
-            <div className="flex w-full md:flex-row flex-col border  cursor-pointer border-gray-600">
-              <div className="w-full md:w-1/2 text-center text-gray-500 py-4">
+            <h2 className="mb-4 mt-8 font-medium">Map</h2>
+            <div className="flex w-full cursor-pointer flex-col border  border-gray-600 md:flex-row">
+              <div className="w-full py-4 text-center text-gray-500 md:w-1/2">
                 Click for approximate location
               </div>
-              <div className="w-full md:w-1/2 text-center bg-green-600 text-white py-4">
+              <div className="w-full bg-green-600 py-4 text-center text-white md:w-1/2">
                 Draw for more precise location
               </div>
             </div>
@@ -88,27 +89,17 @@ const Index = () => {
               <div className="w-1/2">
                 <Label htmlFor="latitude">Latitude</Label>
                 <FormElement>
-                  <Select
-                    value={0}
-                    currentLabel="Latitude"
-                    handleChange={() => console.log('handleChange')}
-                    optionList={[]}
-                  />
+                  <input id="latitude" type="text" />
                 </FormElement>
               </div>
               <div className="w-1/2">
                 <Label htmlFor="longitude">Longitude</Label>
                 <FormElement>
-                  <Select
-                    value={0}
-                    currentLabel="Longitude"
-                    handleChange={() => console.log('handleChange')}
-                    optionList={[]}
-                  />
+                  <input id="longitude" type="text" />
                 </FormElement>
               </div>
             </div>
-            <h2 className="font-medium mt-8 mb-4">
+            <h2 className="mb-4 mt-8 font-medium">
               Property Information and Media
             </h2>
             <div className="mb-4">
@@ -142,7 +133,7 @@ const Index = () => {
             <div>
               <ImageUploader />
             </div>
-            <h2 className="font-medium mt-8">Attributes (Optional)</h2>
+            <h2 className="mt-8 font-medium">Attributes (Optional)</h2>
             <p className="mb-4 text-sm">Select all that apply</p>
             <CheckboxWrap
               itemsArray={[
@@ -151,44 +142,44 @@ const Index = () => {
                   title: 'Geography',
                   items: [
                     { id: 1, name: 'Beachfront', value: 'beachfront' },
-                    { id: 1, name: 'Island', value: 'island' },
-                    { id: 1, name: 'Corner lot', value: 'corner-lot' },
+                    { id: 2, name: 'Island', value: 'island' },
+                    { id: 3, name: 'Corner lot', value: 'corner-lot' },
                   ],
                 },
                 {
                   id: 2,
                   title: 'Land use',
                   items: [
-                    { id: 1, name: 'Cattle ranch', value: 'cattle-ranch' },
-                    { id: 1, name: 'Investment', value: 'investment' },
-                    { id: 1, name: 'Chicken farm', value: 'chicken-farm' },
+                    { id: 4, name: 'Cattle ranch', value: 'cattle-ranch' },
+                    { id: 5, name: 'Investment', value: 'investment' },
+                    { id: 6, name: 'Chicken farm', value: 'chicken-farm' },
                   ],
                 },
                 {
                   id: 3,
                   title: 'Structures',
                   items: [
-                    { id: 1, name: 'Cattle ranch', value: 'cattle-ranch' },
-                    { id: 1, name: 'Investment', value: 'investment' },
-                    { id: 1, name: 'Chicken farm', value: 'chicken-farm' },
+                    { id: 7, name: 'Cattle ranch', value: 'cattle-ranch' },
+                    { id: 8, name: 'Investment', value: 'investment' },
+                    { id: 9, name: 'Chicken farm', value: 'chicken-farm' },
                   ],
                 },
                 {
                   id: 4,
                   title: 'Improvements',
                   items: [
-                    { id: 1, name: 'Cattle ranch', value: 'cattle-ranch' },
-                    { id: 1, name: 'Investment', value: 'investment' },
-                    { id: 1, name: 'Chicken farm', value: 'chicken-farm' },
+                    { id: 10, name: 'Cattle ranch', value: 'cattle-ranch' },
+                    { id: 11, name: 'Investment', value: 'investment' },
+                    { id: 12, name: 'Chicken farm', value: 'chicken-farm' },
                   ],
                 },
               ]}
             />
-            <div className="flex justify-end gap-x-4 mt-4">
-              <div className="border border-gray-600 rounded-md px-8 py-3 cursor-pointer">
+            <div className="mt-4 flex justify-end gap-x-4">
+              <div className="cursor-pointer rounded-md border border-gray-600 px-8 py-3">
                 Save as draft
               </div>
-              <div className="border border-gray-600 rounded-md px-8 py-3 cursor-pointer bg-green-600 text-white">
+              <div className="cursor-pointer rounded-md border border-gray-600 bg-green-600 px-8 py-3 text-white">
                 Publish listing
               </div>
             </div>
