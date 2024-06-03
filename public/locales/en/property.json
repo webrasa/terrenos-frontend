@@ -1,0 +1,23 @@
+{
+  "propertyInfoSection": {
+    "days": "days on Terrenoss",
+    "views": "Views",
+    "favorites": "favorites"
+  },
+  "descriptionSection": {
+    "title": "Description",
+    "text": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since the 1500s, when an unknown printer took a galley of type and scrambled it to make make a type sample book. It has survived not only five centuries, but also the leap to electronic typesetting, which remained essentially unchanged. It was popularized in the 1960s with the release of Letraset sheets containing Lorem passages. Ipsum and more recently with desktop publishing software such as Aldus PageMaker, which included versions of Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text. the 16th century, when an unknown printer took a gallery of type and mixed it to make a type specimen book. It has survived not only five centuries, but also the leap to electronic typesetting, which remained essentially unchanged. It was popularized in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+  },
+  "propertyAttributesSection": {
+    "title": "Property specs and Attributes",
+    "country": "Country",
+    "id": "Terrenoss ID",
+    "taxes": "Taxes",
+    "city": "City",
+    "address": "Address",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "surface": "Surface"
+  },
+  "contactSellerButton": "Contact Seller"
+}

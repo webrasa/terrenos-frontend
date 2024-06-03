@@ -51,10 +51,6 @@ const NavbarMenuCenter = (props: INavbarMenuCenterProps) => {
             @apply w-full;
           }
 
-          .navbar :global(a:hover) {
-            @apply text-primary-600;
-          }
-
           @screen md {
             .navbar {
               @apply flex-row items-center p-0 bg-transparent;

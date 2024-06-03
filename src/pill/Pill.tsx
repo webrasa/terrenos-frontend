@@ -7,7 +7,6 @@ type IPillProps = {
   blackBorder?: boolean;
   name: string;
   disableCursorPointer?: boolean;
-  translation: Function;
   onClickHandler?: MouseEventHandler<HTMLDivElement>;
 };
 
@@ -20,7 +19,6 @@ type IPillProps = {
  * @param props.blackBorder - Indicates if the pill has black border.
  * @param props.name - Indicates name of the pill
  * @param props.disableCursorPointer - Indicates if cursor is disabled
- * @param props.translation - Indicates translation for the component
  * @param props.onClickHandler - Indicates function for onclick event
  */
 
@@ -50,7 +48,7 @@ const Pill = (props: IPillProps) => {
           />
         </svg>
       )}
-      {props.translation(`attributes.${props.name}`)}
+      {props.name}
       <style jsx>
         {`
           .pill-base {

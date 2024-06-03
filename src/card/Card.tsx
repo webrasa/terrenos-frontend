@@ -6,14 +6,19 @@ import { useSwipeable } from 'react-swipeable';
 
 import { Button } from '@/button/Button';
 import { MenuDropdownItem } from '@/navigation/MenuDropdownItem';
+import { useCurrency } from '@/store/currencyContext';
 import { useUnit } from '@/store/unitContext';
+import { useWatchList } from '@/store/watchListContext';
+import type { DropdownItem } from '@/types/DropdownItem';
+import type { Currency } from '@/utils/CurrencyConverter';
+import { convertAndFormatCurrency } from '@/utils/CurrencyConverter';
 import type { Unit } from '@/utils/UnitConverter';
 import { convertAndFormatUnit } from '@/utils/UnitConverter';
 
 type IPropertyCardProps = {
   id: string;
   images: string[];
-  price: string;
+  price: number;
   surfaceArea: number;
   location: string;
   secondLocation: string;
@@ -23,7 +28,10 @@ type IPropertyCardProps = {
   numberOfViews?: number;
   numberOfFavorites?: number;
   fullWidth?: boolean;
-  status?: number;
+  status?: string | number;
+  dropDownItems?: DropdownItem[];
+  selectedDropdown?: string;
+  changeStatus?: (id: string, status: string) => void;
 };
 
 /**
@@ -59,12 +67,15 @@ const PropertyCard = ({
   numberOfFavorites = 0,
   fullWidth = false,
   status,
+  dropDownItems,
+  selectedDropdown,
+  changeStatus,
 }: IPropertyCardProps) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isFavorited, setIsFavorited] = useState(false);
   const { unit, setUnit } = useUnit();
-
-  const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
+  const { setWatchList } = useWatchList();
+  const { currency, setCurrency } = useCurrency();
 
   // Router
   const router = useRouter();
@@ -83,7 +94,9 @@ const PropertyCard = ({
   const [favoriteCookie, setFavoditeCookie] = useState<string[]>([]);
 
   const handleDropdownChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedDropdown(e.target.value);
+    if (changeStatus) {
+      changeStatus(id, e.target.value);
+    }
   };
 
   const toggleFavorite = () => {
@@ -103,6 +116,7 @@ const PropertyCard = ({
     setFavoditeCookie(ids);
 
     setIsFavorited(!isFavorited);
+    setWatchList(ids);
   };
 
   const onLocationClickHandler = () => {
@@ -121,7 +135,9 @@ const PropertyCard = ({
   const statusLabels = [
     { id: 0, color: 'bg-red-800', text: 'Sold' },
     { id: 1, color: 'bg-green-800', text: 'Active' },
-    { id: 2, color: 'bg-yellow-400', text: 'Pending' },
+    { id: 2, color: 'bg-orange-800', text: 'Draft' },
+    { id: 3, color: 'bg-yellow-400', text: 'Pending' },
+    { id: 4, color: 'bg-red-400', text: 'OffTheMarket' },
   ];
 
   const updateFavoriteCookie = () => {
@@ -135,20 +151,21 @@ const PropertyCard = ({
   useEffect(() => {
     updateFavoriteCookie();
     setUnit(getCookie('unit') || 'sqm');
+    setCurrency(getCookie('currency') || 'usd');
   }, []);
 
   return (
     <div className={cardClass}>
-      <div className="relative" {...handlers}>
+      <div className="relative" key={id} {...handlers}>
         {statusLabels.map((label) => {
-          if (status === label.id) {
+          if (status === label.text) {
             return (
               <div
                 className="w-30 absolute left-4 top-3 flex items-center gap-2 rounded bg-white px-2"
                 key={label.id}
               >
                 <div className={`rounded-full ${label.color} size-3`}></div>
-                {label.text}
+                {status}
               </div>
             );
           }
@@ -206,8 +223,14 @@ const PropertyCard = ({
       </div>
       <div className="p-2.5">
         <div className="align-center flex justify-between">
-          <h3 className="text-lg font-bold text-black">{price}</h3>
-          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
+          <h3 className="text-lg font-bold text-black">
+            {convertAndFormatCurrency(
+              price,
+              'usd',
+              currency as Currency['shortName'],
+            )}
+          </h3>
+          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, 'Sq Meters', unit as Unit['shortName'])}`}</p>
         </div>
         <p
           className="mt-2 cursor-pointer text-sm text-black"
@@ -253,14 +276,7 @@ const PropertyCard = ({
                 <div className="w-full rounded-lg border border-primary-600">
                   <MenuDropdownItem
                     selected={selectedDropdown}
-                    items={[
-                      { value: 'markAsSold', name: 'Mark as sold' },
-                      { value: 'setToPending', name: 'Set to pending' },
-                      {
-                        value: 'takeOffTheMarket',
-                        name: 'Take off the market',
-                      },
-                    ]}
+                    items={dropDownItems}
                     onChangeHandler={handleDropdownChange}
                     rounded={true}
                     id="cardDropdown"
