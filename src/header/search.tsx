@@ -1,18 +1,22 @@
 import { Combobox, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import type { DropdownItem } from '@/types/DropdownItem';
 import type { ISearchHome } from '@/types/IHome';
+import type { ISearchFilters } from '@/types/Search';
 
 type ISearchProps = {
   indexTranslations: Function;
   data: Array<ISearchHome>;
   url: string;
+  setFilters?: Function;
+  filters?: ISearchFilters;
+  userLocation?: string;
 };
 
 export default function AutoComplete(props: ISearchProps) {
-  const [selectedLocation, setSelectedLocation] = useState<ISearchHome>({
+  const [selectedLocation, setSelectedLocation] = useState<ISearchHome | null>({
     value: '',
     name: '',
   });
@@ -31,15 +35,23 @@ export default function AutoComplete(props: ISearchProps) {
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
 
-  const handleSelect = (location: DropdownItem) => {
+  const handleSelect = (location: DropdownItem | null) => {
+    if (!location) return;
+
     setSelectedLocation(location);
-    setTimeout(() => {
-      setIsDisabled(true);
-    }, 200);
+    if (!props.filters)
+      setTimeout(() => {
+        setIsDisabled(true);
+      }, 200);
 
     let url = '';
 
     if (location.value === 'currentLocation') {
+      if (props.setFilters)
+        props.setFilters({
+          ...props.filters,
+          userLocation: props.userLocation,
+        });
       url = props.url;
     } else {
       let countryId: string = '';
@@ -51,15 +63,36 @@ export default function AutoComplete(props: ISearchProps) {
       switch (first) {
         case '1':
           countryId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              countryId: second || '',
+            });
+          url = props.url;
           break;
         case '2':
           regionId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              regionId: second || '',
+            });
           break;
         case '3':
           cityId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              cityId: second || '',
+            });
           break;
         case '4':
           districtId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              districtId: second || '',
+            });
           break;
         default:
           break;
@@ -72,6 +105,48 @@ export default function AutoComplete(props: ISearchProps) {
     router.push(url);
   };
 
+  // Hooks
+  useEffect(() => {
+    if (
+      (props.filters?.countryId ||
+        props.filters?.regionId ||
+        props.filters?.cityId ||
+        props.filters?.districtId) &&
+      filteredLocations &&
+      filteredLocations.length > 0
+    ) {
+      let loc;
+
+      if (props.filters?.countryId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `1-${props.filters?.countryId}`,
+        );
+
+      if (props.filters?.regionId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `2-${props.filters?.regionId}`,
+        );
+
+      if (props.filters?.cityId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `3-${props.filters?.cityId}`,
+        );
+
+      if (props.filters?.districtId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `4-${props.filters?.districtId}`,
+        );
+
+      if (loc && selectedLocation?.value !== loc?.value)
+        setSelectedLocation(
+          loc || {
+            value: '',
+            name: '',
+          },
+        );
+    }
+  }, [props.filters, filteredLocations]);
+
   return (
     <div className="top-16 md:w-full">
       <Combobox
@@ -83,11 +158,11 @@ export default function AutoComplete(props: ISearchProps) {
         disabled={isDisabled}
       >
         <div className="relative">
-          <div className="relative h-14 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
+          <div className="relative h-16 w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               autoComplete="off"
               className="w-full border-none bg-white py-2 pl-3 pr-10 text-sm leading-10 text-gray-900 focus:ring-0"
-              displayValue={(location: DropdownItem) => location.name}
+              displayValue={(location: DropdownItem) => location?.name}
               onChange={(event) => setQuery(event.target.value)}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 m-1 flex items-center">
@@ -113,13 +188,13 @@ export default function AutoComplete(props: ISearchProps) {
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
-              {filteredLocations.length === 0 && query !== '' ? (
+            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+              {filteredLocations?.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none px-4 py-2 text-gray-700">
                   {props.indexTranslations('heroSection.nothingFound')}
                 </div>
               ) : (
-                filteredLocations.slice(0, 3).map((location) => {
+                filteredLocations?.slice(0, 3).map((location) => {
                   // Extract first digit from value
                   const firstDigit = location.value.charAt(0);
 

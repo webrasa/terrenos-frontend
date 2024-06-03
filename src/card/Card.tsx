@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { getCookie, setCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
@@ -76,6 +77,9 @@ const PropertyCard = ({
   const { setWatchList } = useWatchList();
   const { currency, setCurrency } = useCurrency();
 
+  // Router
+  const router = useRouter();
+
   const handlers = useSwipeable({
     onSwipedLeft: () =>
       setActiveIndex((current) => (current + 1) % images.length),
@@ -113,6 +117,10 @@ const PropertyCard = ({
 
     setIsFavorited(!isFavorited);
     setWatchList(ids);
+  };
+
+  const onLocationClickHandler = () => {
+    router.push(`/property/${id}`);
   };
 
   const cardClass = classNames({
@@ -224,8 +232,16 @@ const PropertyCard = ({
           </h3>
           <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, 'Sq Meters', unit as Unit['shortName'])}`}</p>
         </div>
-        <p className="mt-2 text-sm text-black">{location}</p>
-        <p className="mt-2 text-sm text-black">
+        <p
+          className="mt-2 cursor-pointer text-sm text-black"
+          onClick={onLocationClickHandler}
+        >
+          {location}
+        </p>
+        <p
+          className="mt-2 cursor-pointer text-sm text-black"
+          onClick={onLocationClickHandler}
+        >
           <b>{secondLocation}</b>
         </p>
         <>
