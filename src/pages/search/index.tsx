@@ -1,5 +1,5 @@
 import { API } from 'aws-amplify';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
@@ -10,10 +10,11 @@ import AutoComplete from '@/header/search';
 import { useAsync } from '@/hooks/UseAsync';
 import { Meta } from '@/layouts/Meta';
 import Map from '@/map';
+import { Pill } from '@/pill/Pill';
 import { useUserLocation } from '@/store/locationContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
-import type { Properties } from '@/types/IComponents';
+import type { Attributes, Properties } from '@/types/IComponents';
 import type { IHome } from '@/types/IHome';
 import type { ISearchFilters } from '@/types/Search';
 import { AppConfig } from '@/utils/AppConfig';
@@ -27,25 +28,27 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Search = () => {
-  const router = useRouter();
+  const { query, isReady } = useRouter();
 
   // States
   const [data, setData] = useState<IHome>({});
-  // const [attributesData, setAttributesData] = useState<Array<Attributes>>([]);
   const [homeData, setHomeData] = useState<IHome>({});
+  const [attributeData, setAttributeData] = useState<Array<Attributes>>([]);
   const [filters, setFilters] = useState<ISearchFilters>({
-    priceFrom: '',
-    priceTo: '',
-    surfaceFrom: '',
-    surfaceTo: '',
-    attributes: '',
-    sortBy: '',
     countryId: '',
     regionId: '',
     cityId: '',
     districtId: '',
     userLocation: '',
+    attributes: '',
+    priceFrom: '',
+    priceTo: '',
+    surfaceFrom: '',
+    surfaceTo: '',
+    sortBy: '',
   });
+  const [priceMaxValue, setPriceMaxValue] = useState<number>(1000000);
+  const [surfaceMaxValue, setSurfaceMaxValue] = useState<number>(1000000);
 
   // Translations
   const { t: translationSearch } = useTranslation('search');
@@ -58,12 +61,9 @@ const Search = () => {
   // Functions
   const getData = useAsync(async () => {
     try {
-      const { countryId, regionId, cityId, districtId, userLocation } =
-        router.query;
-
       const searchData = await API.get(
         'backend',
-        `/search?countryId=${filters.countryId || countryId}&regionId=${filters.regionId || regionId}&cityId=${filters.cityId || cityId}&districtId=${filters.districtId || districtId}&userLocation=${userLocation}&attributes=${filters.attributes}&priceFrom=${filters.priceFrom}&priceTo=${filters.priceTo}&surfaceFrom=${filters.surfaceFrom}&surfaceTo=${filters.surfaceTo}`,
+        `/search?countryId=${filters.countryId}&regionId=${filters.regionId}&cityId=${filters.cityId}&districtId=${filters.districtId}&userLocation=${filters.userLocation}&attributes=${filters.attributes}&priceFrom=${filters.priceFrom}&priceTo=${filters.priceTo}&surfaceFrom=${filters.surfaceFrom}&surfaceTo=${filters.surfaceTo}`,
         {},
       );
       setData(searchData);
@@ -88,15 +88,15 @@ const Search = () => {
     }
   });
 
-  // const getAttributes = useAsync(async () => {
-  //   try {
-  //     const attData = await API.get('backend', `/attributesByCategories`, {});
-  //     setAttributesData(attData.attributesByCategories);
-  //   } catch (err: any) {
-  //     // handle error
-  //     console.log(err.message);
-  //   }
-  // });
+  const getAttributeData = useAsync(async () => {
+    try {
+      const aData = await API.get('backend', `/attributesByCategories`, {});
+      setAttributeData(aData.attributesByCategories);
+    } catch (err: any) {
+      // handle error
+      console.log(err.message);
+    }
+  });
 
   const getPropertyLocation = (item: Properties) => {
     let address = '';
@@ -160,17 +160,67 @@ const Search = () => {
       setData({ properties: sortedArrayOfProperties });
   };
 
+  const pillOnClickHandler = (id: string) => {
+    const filterAttributesArray =
+      filters.attributes && typeof filters.attributes === 'string'
+        ? filters.attributes?.split(',')
+        : [];
+    const newFilterAttributesArray = filterAttributesArray.filter(
+      (el: string) => el !== id,
+    );
+    setFilters({
+      ...filters,
+      attributes: newFilterAttributesArray.toString(),
+    });
+  };
+
   // Hooks
   useEffect(() => {
-    const isEmpty = Object.values(router.query).every(
+    if (!isReady) return;
+    const isEmpty = Object.values(query).every(
       (value) => value === null || value === '',
     );
-    if (!isEmpty) getData.execute();
-  }, [router.query]);
+    if (!isEmpty) {
+      // eslint-disable-next-line unused-imports/no-unused-vars
+      const { sortBy, ...rest } = filters;
+      if (JSON.stringify(rest) !== JSON.stringify(query))
+        setFilters({ ...filters, ...query });
+    } else if (
+      'countryId' in query &&
+      'regionId' in query &&
+      'cityId' in query &&
+      'districtId' in query &&
+      'userLocation' in query
+    ) {
+      getData.execute();
+    }
+  }, [query]);
 
   useEffect(() => {
+    if (!isReady) return;
+
+    // eslint-disable-next-line unused-imports/no-unused-vars
+    const { sortBy, ...rest } = filters;
+
+    if (
+      !Object.values(query).every((value) => value === null || value === '') ||
+      !Object.values(filters).every((value) => value === null || value === '')
+    ) {
+      router.push(
+        {
+          pathname: '/search',
+          query: rest,
+        },
+        undefined,
+        { shallow: true },
+      );
+    }
     getData.execute();
   }, [filters]);
+
+  useEffect(() => {
+    getAttributeData.execute();
+  }, []);
 
   useEffect(() => {
     if (
@@ -182,6 +232,16 @@ const Search = () => {
       getHomeData.execute(ipLocation.latitude, ipLocation.longitude);
     }
   }, [ipLocation]);
+
+  // THIS NEEDS TO BE TALKED THRU
+  // useEffect(() => {
+  //   if (data.properties && data.properties.length > 0) {
+  //     const price = Math.max(...data.properties.map((o) => o.price));
+  //     setPriceMaxValue(price);
+  //     const surface = Math.max(...data.properties.map((o) => o.surface));
+  //     setSurfaceMaxValue(surface);
+  //   }
+  // }, [data.properties]);
 
   return (
     <div className="text-gray-600 antialiased">
@@ -198,24 +258,49 @@ const Search = () => {
               indexTranslations={translationIndex}
               data={homeData?.locations || []}
               url={`/search?countryId=&regionId=&cityId=&districtId=&userLocation=${ipLocation.latitude},${ipLocation.longitude}`}
-              skipDisableOnChange={true}
+              filters={filters}
+              setFilters={setFilters}
+              userLocation={`${ipLocation.latitude},${ipLocation.longitude}`}
             />
           </div>
           <Filter
-            getData={getData}
-            attributesData={homeData.attributes || []}
+            attributesData={attributeData || []}
             sort={sort}
             translations={translationSearch}
             translationCommon={translationCommon}
             setFilters={setFilters}
             filters={filters}
+            maxPrice={priceMaxValue}
+            maxSurface={surfaceMaxValue}
           />
         </div>
         <div className="mt-3 flex">
           <div className="h-auto w-1/2">
-            <Map />
+            <Map
+              properties={data.properties || []}
+              getPropertyLocation={getPropertyLocation}
+            />
           </div>
           <div className="relative ml-5 w-3/4">
+            <div className="mt-2 flex max-h-screen flex-wrap gap-4">
+              {filters.attributes && typeof filters.attributes === 'string'
+                ? filters.attributes?.split(',').map((id, key) => {
+                    const att = attributeData.find(
+                      (attribute) => attribute.id === Number(id),
+                    );
+                    return (
+                      <Pill
+                        key={key}
+                        translation={translationCommon}
+                        base
+                        greenBorder
+                        name={att?.name || ''}
+                        onClickHandler={() => pillOnClickHandler(id)}
+                      ></Pill>
+                    );
+                  })
+                : ''}
+            </div>
             <span className="text-3xl font-semibold text-black">Results</span>
             <div className="custom-scroll mt-2 grid max-h-screen grid-cols-2 gap-4">
               {data && data.properties && data.properties

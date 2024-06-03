@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { getCookie, setCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useSwipeable } from 'react-swipeable';
 
@@ -65,12 +66,15 @@ const PropertyCard = ({
 
   const [selectedDropdown, setSelectedDropdown] = useState('markAsSold');
 
+  // Router
+  const router = useRouter();
+
   const handlers = useSwipeable({
     onSwipedLeft: () =>
       setActiveIndex((current) => (current + 1) % images.length),
     onSwipedRight: () =>
       setActiveIndex(
-        (current) => (current - 1 + images.length) % images.length
+        (current) => (current - 1 + images.length) % images.length,
       ),
     preventScrollOnSwipe: true,
     trackMouse: true,
@@ -99,6 +103,10 @@ const PropertyCard = ({
     setFavoditeCookie(ids);
 
     setIsFavorited(!isFavorited);
+  };
+
+  const onLocationClickHandler = () => {
+    router.push(`/property/${id}`);
   };
 
   const cardClass = classNames({
@@ -201,8 +209,16 @@ const PropertyCard = ({
           <h3 className="text-lg font-bold text-black">{price}</h3>
           <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, unit as Unit)}`}</p>
         </div>
-        <p className="mt-2 text-sm text-black">{location}</p>
-        <p className="mt-2 text-sm text-black">
+        <p
+          className="mt-2 cursor-pointer text-sm text-black"
+          onClick={onLocationClickHandler}
+        >
+          {location}
+        </p>
+        <p
+          className="mt-2 cursor-pointer text-sm text-black"
+          onClick={onLocationClickHandler}
+        >
           <b>{secondLocation}</b>
         </p>
         <>

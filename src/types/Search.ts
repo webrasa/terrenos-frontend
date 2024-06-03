@@ -5,15 +5,15 @@ export type ISearchGetData = {
 };
 
 export type ISearchFilters = {
-  priceFrom: string;
-  priceTo: string;
-  surfaceFrom: string;
-  surfaceTo: string;
-  attributes: string;
-  sortBy: string;
-  countryId: string;
-  regionId: string;
-  cityId: string;
-  districtId: string;
-  userLocation: string;
+  priceFrom?: string | string[] | undefined;
+  priceTo?: string | string[] | undefined;
+  surfaceFrom?: string | string[] | undefined;
+  surfaceTo?: string | string[] | undefined;
+  attributes?: string | string[] | undefined;
+  sortBy?: string | string[] | undefined;
+  countryId?: string | string[] | undefined;
+  regionId?: string | string[] | undefined;
+  cityId?: string | string[] | undefined;
+  districtId?: string | string[] | undefined;
+  userLocation?: string | string[] | undefined;
 };

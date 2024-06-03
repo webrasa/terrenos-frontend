@@ -53,9 +53,15 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   const debouncedSearch = useDebounce(displayedRange, 500);
 
   const cleanRange = () => {
-    if (props.type === 'price') {
+    if (
+      props.type === 'price' &&
+      (props.filters.priceFrom !== '' || props.filters.priceTo !== '')
+    ) {
       props.setFilters({ ...props.filters, priceFrom: '', priceTo: '' });
-    } else {
+    } else if (
+      props.type === 'surface' &&
+      (props.filters.surfaceFrom !== '' || props.filters.surfaceTo !== '')
+    ) {
       props.setFilters({
         ...props.filters,
         surfaceFrom: '',
@@ -82,9 +88,15 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
       if (dsSplit[0] && dsSplit[1]) {
         const from = dsSplit[0].replace(/\D/g, '').trim();
         const to = dsSplit[1].replace(/\D/g, '').trim();
-        if (props.type === 'price') {
+        if (
+          props.type === 'price' &&
+          (props.filters.priceTo !== to || props.filters.priceFrom !== from)
+        ) {
           props.setFilters({ ...props.filters, priceFrom: from, priceTo: to });
-        } else {
+        } else if (
+          props.type === 'surface' &&
+          (props.filters.surfaceTo !== to || props.filters.surfaceFrom !== from)
+        ) {
           props.setFilters({
             ...props.filters,
             surfaceFrom: from,
@@ -121,6 +133,37 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   useEffect(() => {
     setExtension(props.type === 'price' ? getCookie('currency') : unit);
   }, []);
+
+  // THIS NEEDS TO BE TALKED THRU
+  // useEffect(() => {
+  //   if (props.minValue !== value[0] || props.maxValue !== value[1]) {
+  //     setValue([props.minValue, props.maxValue]);
+  //   }
+  // }, [props.maxValue, props.minValue]);
+
+  useEffect(() => {
+    if (
+      props.type === 'price' &&
+      (props.filters.priceFrom || props.filters.priceTo) &&
+      (Number(props.filters.priceFrom) !== value[0] ||
+        Number(props.filters.priceTo) !== value[1])
+    ) {
+      const from = props.filters.priceFrom || value[0];
+      const to = props.filters.priceTo || value[1];
+      setDisplayedRange(`${from} ${extension} - ${to} ${extension}`);
+      setValue([Number(from), Number(to)]);
+    } else if (
+      props.type === 'surface' &&
+      (props.filters.surfaceFrom || props.filters.surfaceTo) &&
+      (Number(props.filters.surfaceFrom) !== value[0] ||
+        Number(props.filters.surfaceTo) !== value[1])
+    ) {
+      const from = props.filters.surfaceFrom || value[0];
+      const to = props.filters.surfaceTo || value[1];
+      setDisplayedRange(`${from} ${extension} - ${to} ${extension}`);
+      setValue([Number(from), Number(to)]);
+    }
+  }, [props.filters]);
 
   return (
     <PopupState variant="popover" popupId="demo-popup-popover">

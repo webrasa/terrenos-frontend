@@ -66,6 +66,22 @@ export default function FilterAttributes(props: IFilterAttributesSliderProps) {
     };
   }, []);
 
+  useEffect(() => {
+    let arrayOfFiltersAttributes: Array<String> | any = [];
+    if (props.filters.attributes) {
+      arrayOfFiltersAttributes =
+        typeof props.filters.attributes === 'string'
+          ? props.filters.attributes.split(',')
+          : props.filters.attributes;
+    }
+
+    const filteredAttributes = props.attributesData.filter((value) =>
+      arrayOfFiltersAttributes.some((str: string) => Number(str) === value.id),
+    );
+    if (JSON.stringify(selectedItems) !== JSON.stringify(filteredAttributes))
+      setSelectedItems(filteredAttributes);
+  }, [props.filters.attributes, props.attributesData]);
+
   return (
     <div className="mr-5 flex-col" ref={containerRef}>
       <Menu as="div" className="inline-block w-40 text-left">
@@ -97,7 +113,7 @@ export default function FilterAttributes(props: IFilterAttributesSliderProps) {
                 {props.translation('filtersSection.attributeModalSubTitle')}
               </p>
             </div>
-            <div className="custom-scroll grid h-96 grid-cols-2 gap-x-4 gap-y-2 pl-10">
+            <div className="custom-scroll grid h-48 grid-cols-2 gap-x-4 gap-y-2 pl-10">
               {props.attributesData.map((item, index) => (
                 <MenuItem key={index}>
                   {({ active }) => (

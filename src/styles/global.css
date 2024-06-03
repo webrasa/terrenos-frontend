@@ -16,3 +16,36 @@ button:disabled {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+[type='checkbox']{
+  @apply text-primary-600;
+}
+
+.custom-scroll {
+  max-height: 650px; /* Set max height for the container */
+  overflow-y: auto; /* Enable vertical scrollbar */
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 5px;
+  background-color: #F5F5F5;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #e4dddd;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+[type='number']:focus{
+  @apply ring-offset-0 ring-0;
+}
+
+.marker-label {
+  color: red;
+}

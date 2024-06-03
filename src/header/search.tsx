@@ -1,19 +1,22 @@
 import { Combobox, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import type { DropdownItem } from '@/types/DropdownItem';
 import type { ISearchHome } from '@/types/IHome';
+import type { ISearchFilters } from '@/types/Search';
 
 type ISearchProps = {
   indexTranslations: Function;
   data: Array<ISearchHome>;
   url: string;
-  skipDisableOnChange?: boolean;
+  setFilters?: Function;
+  filters?: ISearchFilters;
+  userLocation?: string;
 };
 
 export default function AutoComplete(props: ISearchProps) {
-  const [selectedLocation, setSelectedLocation] = useState<ISearchHome>({
+  const [selectedLocation, setSelectedLocation] = useState<ISearchHome | null>({
     value: '',
     name: '',
   });
@@ -32,11 +35,11 @@ export default function AutoComplete(props: ISearchProps) {
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         );
 
-  const handleSelect = (location: DropdownItem) => {
+  const handleSelect = (location: DropdownItem | null) => {
     if (!location) return;
 
     setSelectedLocation(location);
-    if (!props.skipDisableOnChange)
+    if (!props.filters)
       setTimeout(() => {
         setIsDisabled(true);
       }, 200);
@@ -44,6 +47,11 @@ export default function AutoComplete(props: ISearchProps) {
     let url = '';
 
     if (location.value === 'currentLocation') {
+      if (props.setFilters)
+        props.setFilters({
+          ...props.filters,
+          userLocation: props.userLocation,
+        });
       url = props.url;
     } else {
       let countryId: string = '';
@@ -55,15 +63,36 @@ export default function AutoComplete(props: ISearchProps) {
       switch (first) {
         case '1':
           countryId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              countryId: second || '',
+            });
+          url = props.url;
           break;
         case '2':
           regionId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              regionId: second || '',
+            });
           break;
         case '3':
           cityId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              cityId: second || '',
+            });
           break;
         case '4':
           districtId = second || '';
+          if (props.setFilters)
+            props.setFilters({
+              ...props.filters,
+              districtId: second || '',
+            });
           break;
         default:
           break;
@@ -75,6 +104,48 @@ export default function AutoComplete(props: ISearchProps) {
     setQuery('');
     router.push(url);
   };
+
+  // Hooks
+  useEffect(() => {
+    if (
+      (props.filters?.countryId ||
+        props.filters?.regionId ||
+        props.filters?.cityId ||
+        props.filters?.districtId) &&
+      filteredLocations &&
+      filteredLocations.length > 0
+    ) {
+      let loc;
+
+      if (props.filters?.countryId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `1-${props.filters?.countryId}`,
+        );
+
+      if (props.filters?.regionId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `2-${props.filters?.regionId}`,
+        );
+
+      if (props.filters?.cityId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `3-${props.filters?.cityId}`,
+        );
+
+      if (props.filters?.districtId)
+        loc = filteredLocations.find(
+          (floc) => floc.value === `4-${props.filters?.districtId}`,
+        );
+
+      if (loc && selectedLocation?.value !== loc?.value)
+        setSelectedLocation(
+          loc || {
+            value: '',
+            name: '',
+          },
+        );
+    }
+  }, [props.filters, filteredLocations]);
 
   return (
     <div className="top-16 md:w-full">

@@ -1,18 +1,19 @@
 import type { Attributes } from '@/types/IComponents';
-import type { ISearchFilters, ISearchGetData } from '@/types/Search';
+import type { ISearchFilters } from '@/types/Search';
 
 import FilterAttributes from './filterAttributes';
 import FilterMenu from './filterMenu';
 import FilterRangeSlider from './filterRangeSlider';
 
 type IFilterProps = {
-  getData: ISearchGetData;
   attributesData: Array<Attributes>;
   sort: Function;
   translations: Function;
   translationCommon: Function;
   setFilters: Function;
   filters: ISearchFilters;
+  maxPrice: number;
+  maxSurface: number;
 };
 
 const Filter = (props: IFilterProps) => {
@@ -21,7 +22,7 @@ const Filter = (props: IFilterProps) => {
       <div className="flex flex-col">
         <FilterRangeSlider
           minValue={0}
-          maxValue={1000000}
+          maxValue={props.maxPrice}
           type="price"
           translation={props.translations}
           setFilters={props.setFilters}
@@ -31,7 +32,7 @@ const Filter = (props: IFilterProps) => {
       <div className="flex flex-col">
         <FilterRangeSlider
           minValue={0}
-          maxValue={1000000}
+          maxValue={props.maxSurface}
           type="surface"
           translation={props.translations}
           setFilters={props.setFilters}
