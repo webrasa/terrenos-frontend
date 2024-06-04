@@ -5,10 +5,12 @@ import {
   MarkerClusterer,
   useJsApiLoader,
 } from '@react-google-maps/api';
+import type { MouseEvent } from 'react';
 import React, { useEffect, useState } from 'react';
 
 import { PropertyCard } from '@/card/Card';
 import type { Properties } from '@/types/IComponents';
+import type { IMarker } from '@/types/IMarker';
 
 const customStiles = {
   mapContainerStyle: {
@@ -18,8 +20,13 @@ const customStiles = {
 };
 
 type IMapsProps = {
-  properties: Array<Properties>;
-  getPropertyLocation: Function;
+  properties?: Array<Properties>;
+  getPropertyLocation?: Function;
+  onClickHandler?: MouseEvent;
+  markerLat?: number;
+  markerLon?: number;
+  markers?: Array<IMarker>;
+  center: IMarker;
 };
 
 const options = {
@@ -31,6 +38,14 @@ function Map(props: IMapsProps) {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || '',
   });
+  let center;
+  if (isLoaded) {
+    center = new google.maps.LatLng(
+      props.center?.latitude,
+      props.center?.longitude,
+    );
+  }
+
   const [activeMarker, setActiveMarker] = useState<number | null>(null);
   const [map, setMap] = useState(null);
 
@@ -43,12 +58,24 @@ function Map(props: IMapsProps) {
 
   const handleOnLoad = (gMap: any) => {
     const bounds = new google.maps.LatLngBounds();
-    props.properties.forEach(({ latitude, longtitude }) =>
-      bounds.extend({
-        lat: latitude || 0,
-        lng: longtitude || 0,
-      }),
-    );
+    if (props.properties) {
+      console.log('TEST');
+      props.properties.forEach(({ latitude, longtitude }) =>
+        bounds.extend({
+          lat: latitude || 0,
+          lng: longtitude || 0,
+        }),
+      );
+    }
+    if (props.markers) {
+      console.log('MARKERS');
+      props.markers.forEach(({ latitude, longitude }) =>
+        bounds.extend({
+          lat: latitude || 0,
+          lng: longitude || 0,
+        }),
+      );
+    }
     gMap.fitBounds(bounds);
     setMap(gMap);
   };
@@ -67,9 +94,21 @@ function Map(props: IMapsProps) {
     <GoogleMap
       mapContainerStyle={customStiles.mapContainerStyle}
       onLoad={handleOnLoad}
-      onClick={() => setActiveMarker(null)}
+      onClick={props.onClickHandler}
       onUnmount={onUnmount}
+      center={center}
     >
+      {props.markers &&
+        props.markers.map((marker, index) => (
+          <Marker
+            key={index}
+            position={{
+              lat: marker.latitude,
+              lng: marker.longitude,
+            }}
+          ></Marker>
+        ))}
+      ;
       {props.properties ? (
         <MarkerClusterer options={options}>
           {(clusterer) =>

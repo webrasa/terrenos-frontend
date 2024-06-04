@@ -256,6 +256,10 @@ const Search = () => {
             <Map
               properties={data.properties || []}
               getPropertyLocation={getPropertyLocation}
+              center={{
+                latitude: ipLocation.latitude,
+                longitude: ipLocation.longitude,
+              }}
             />
           </div>
           <div className="custom-scroll mx-2 mt-5 w-1/2 px-2">
