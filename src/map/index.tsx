@@ -70,9 +70,9 @@ function Map(props: IMapsProps) {
       onClick={() => setActiveMarker(null)}
       onUnmount={onUnmount}
     >
-      <MarkerClusterer options={options}>
-        {(clusterer) =>
-          props.properties ? (
+      {props.properties ? (
+        <MarkerClusterer options={options}>
+          {(clusterer) =>
             props.properties.map((property, index) => (
               <Marker
                 key={index}
@@ -111,11 +111,9 @@ function Map(props: IMapsProps) {
                 ) : null}
               </Marker>
             ))
-          ) : (
-            <></>
-          )
-        }
-      </MarkerClusterer>
+          }
+        </MarkerClusterer>
+      ) : null}
     </GoogleMap>
   ) : (
     <></>
