@@ -12,9 +12,8 @@ import type { Properties } from '@/types/IComponents';
 
 const customStiles = {
   mapContainerStyle: {
-    borderRadius: '6px',
     width: '100%',
-    height: '80dvh',
+    height: '100%',
   },
 };
 

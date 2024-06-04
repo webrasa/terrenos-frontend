@@ -18,7 +18,7 @@ import { convertAndFormatUnit } from '@/utils/UnitConverter';
 type IPropertyCardProps = {
   id: string;
   images: string[];
-  price: number;
+  price: string;
   surfaceArea: number;
   location: string;
   secondLocation: string;

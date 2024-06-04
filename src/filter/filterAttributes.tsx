@@ -86,7 +86,7 @@ export default function FilterAttributes(props: IFilterAttributesSliderProps) {
     <div className="mr-5 flex-col" ref={containerRef}>
       <Menu as="div" className="inline-block w-40 text-left">
         <MenuButton
-          className="inline-flex w-full justify-between rounded border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+          className="inline-flex w-full justify-center rounded border border-gray-500 bg-white px-4 py-2 text-sm font-semibold text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
           onClick={() => setIsOpen(!isOpen)}
         >
           {props.translation('filtersSection.attributePlaceholder')}
@@ -113,7 +113,7 @@ export default function FilterAttributes(props: IFilterAttributesSliderProps) {
                 {props.translation('filtersSection.attributeModalSubTitle')}
               </p>
             </div>
-            <div className="custom-scroll grid h-48 grid-cols-2 gap-x-4 gap-y-2 pl-10">
+            <div className="custom-scroll-attributes grid h-48 grid-cols-2 gap-x-4 gap-y-2 pl-10">
               {props.attributesData.map((item, index) => (
                 <MenuItem key={index}>
                   {({ active }) => (

@@ -1,7 +1,7 @@
 {
   "general": {
-    "title": "Profile | Terranoss",
-    "description": "Terranoss - description"
+    "title": "Profile | Terrenoss",
+    "description": "Terrenoss - description"
   },
   "menuSection": {
     "currentListingsTitle": "Current listings",
@@ -17,5 +17,4 @@
     "sendMessagePlaceholder": "Type your message here",
     "sendButtonTitle": "Send"
   }
-
 }

@@ -22,8 +22,17 @@ button:disabled {
 }
 
 .custom-scroll {
-  max-height: 650px; /* Set max height for the container */
+  height: calc(100vh - 100px);
   overflow-y: auto; /* Enable vertical scrollbar */
+}
+
+.custom-scroll-attributes {
+  height: 200px;
+  overflow-y: auto; /* Enable vertical scrollbar */
+}
+
+.custom-map {
+  height: calc(100vh - 80px);
 }
 
 .custom-scroll::-webkit-scrollbar {

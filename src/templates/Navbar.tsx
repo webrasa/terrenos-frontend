@@ -10,7 +10,7 @@ type INavbarProps = {
 };
 
 const Navbar = (props: INavbarProps) => (
-  <div className="border-b border-gray-300">
+  <div className="flex h-20 justify-center border-b border-gray-300">
     <LandingSection yPadding="py-4">
       <NavbarMenuCenter
         logo={<Logo xl />}

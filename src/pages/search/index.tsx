@@ -12,7 +12,6 @@ import { Meta } from '@/layouts/Meta';
 import Map from '@/map';
 import { Pill } from '@/pill/Pill';
 import { useUserLocation } from '@/store/locationContext';
-import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import type { Attributes, Properties } from '@/types/IComponents';
 import type { IHome } from '@/types/IHome';
@@ -251,9 +250,15 @@ const Search = () => {
         image={AppConfig.image_url}
       />
       <Navbar translation={translationCommon} />
-      <div className="mx-auto mt-3 max-w-screen-xl px-3 py-4">
+      <div className="">
         <div className="flex">
-          <div className="w-1/2">
+          <div className="custom-map w-1/2">
+            <Map
+              properties={data.properties || []}
+              getPropertyLocation={getPropertyLocation}
+            />
+          </div>
+          <div className="custom-scroll mx-2 mt-5 w-1/2 px-2">
             <AutoComplete
               indexTranslations={translationIndex}
               data={homeData?.locations || []}
@@ -262,26 +267,18 @@ const Search = () => {
               setFilters={setFilters}
               userLocation={`${ipLocation.latitude},${ipLocation.longitude}`}
             />
-          </div>
-          <Filter
-            attributesData={attributeData || []}
-            sort={sort}
-            translations={translationSearch}
-            translationCommon={translationCommon}
-            setFilters={setFilters}
-            filters={filters}
-            maxPrice={priceMaxValue}
-            maxSurface={surfaceMaxValue}
-          />
-        </div>
-        <div className="mt-3 flex">
-          <div className="h-auto w-1/2">
-            <Map
-              properties={data.properties || []}
-              getPropertyLocation={getPropertyLocation}
-            />
-          </div>
-          <div className="relative ml-5 w-3/4">
+            <div className="mt-2">
+              <Filter
+                attributesData={attributeData || []}
+                sort={sort}
+                translations={translationSearch}
+                translationCommon={translationCommon}
+                setFilters={setFilters}
+                filters={filters}
+                maxPrice={priceMaxValue}
+                maxSurface={surfaceMaxValue}
+              />
+            </div>
             <div className="mt-2 flex max-h-screen flex-wrap gap-4">
               {filters.attributes && typeof filters.attributes === 'string'
                 ? filters.attributes?.split(',').map((id, key) => {
@@ -291,18 +288,21 @@ const Search = () => {
                     return (
                       <Pill
                         key={key}
-                        translation={translationCommon}
                         base
                         greenBorder
-                        name={att?.name || ''}
+                        name={translationCommon(
+                          `attributes.${att?.name || ''}`,
+                        )}
                         onClickHandler={() => pillOnClickHandler(id)}
                       ></Pill>
                     );
                   })
                 : ''}
             </div>
-            <span className="text-3xl font-semibold text-black">Results</span>
-            <div className="custom-scroll mt-2 grid max-h-screen grid-cols-2 gap-4">
+            <div className="">
+              <span className="text-3xl font-semibold text-black">Results</span>
+            </div>
+            <div className="mt-2 grid max-h-screen grid-cols-2 gap-4">
               {data && data.properties && data.properties
                 ? data.properties.map((item, index) => {
                     return (
@@ -327,7 +327,6 @@ const Search = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
