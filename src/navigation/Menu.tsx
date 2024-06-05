@@ -4,10 +4,14 @@ import { getCookie, hasCookie, setCookie } from 'cookies-next';
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 
-import { MenuDropdownItem } from './MenuDropdownItem';
-import { useUnit } from '@/store/unitContext';
 import { useCurrency } from '@/store/currencyContext';
+<<<<<<< Terrenoss-prevod
+import { useUnit } from '@/store/unitContext';
+
+import { MenuDropdownItem } from './MenuDropdownItem';
+=======
 import { useRouter } from 'next/router';
+>>>>>>> main
 
 export default function DropdownMenu() {
   const [customOpen, setCustomOpen] = useState(false);
@@ -74,7 +78,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/favorites"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -86,7 +90,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/properties"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -98,7 +102,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/inbox"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -110,7 +114,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/account"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}

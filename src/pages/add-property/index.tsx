@@ -8,6 +8,7 @@ import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import ImageUploader from '@/image-upload';
 import { LandingSection } from '@/layouts/LandingSection';
+import { Meta } from '@/layouts/Meta';
 import Map from '@/map';
 import { Select } from '@/select/Select';
 import { useCurrency } from '@/store/currencyContext';
@@ -16,6 +17,7 @@ import { useUnit } from '@/store/unitContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import type { IMarker } from '@/types/IMarker';
+import { AppConfig } from '@/utils/AppConfig';
 import { currencies, getCurrency } from '@/utils/CurrencyConverter';
 import { getUnit, units } from '@/utils/UnitConverter';
 
@@ -33,8 +35,9 @@ export async function getStaticProps({ locale }: any) {
 
 const Index = () => {
   const { ipLocation } = useUserLocation();
-
+  // Translations
   const { t } = useTranslation('common');
+  const { t: translationAddProperty } = useTranslation('add-property');
   const { unit, setUnit } = useUnit();
   const { currency, setCurrency } = useCurrency();
   const [markers, setMarkers] = useState<Array<IMarker>>([]);
@@ -57,6 +60,11 @@ const Index = () => {
 
   return (
     <div className="antialiased">
+      <Meta
+        title={translationAddProperty('general.title')}
+        description={translationAddProperty('general.description')}
+        image={AppConfig.image_url}
+      />
       <Navbar translation={t} />
       <LandingSection yPadding="py-4">
         <div className="container mx-auto">

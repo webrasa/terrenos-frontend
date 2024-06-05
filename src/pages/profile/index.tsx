@@ -14,10 +14,12 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useAsync } from '@/hooks/UseAsync';
 import { LandingSection } from '@/layouts/LandingSection';
+import { Meta } from '@/layouts/Meta';
 import { useWatchList } from '@/store/watchListContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 import type { Properties, PropertyData } from '@/types/IComponents';
+import { AppConfig } from '@/utils/AppConfig';
 
 import Account from './Account';
 import CurrentListing from './CurrentListing';
@@ -29,13 +31,14 @@ import WatchList from './WatchList';
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'profile'])),
     },
   };
 }
 
 const Index = () => {
   const { t } = useTranslation('common');
+  const { t: translationProfile } = useTranslation('profile');
   const { setWatchList } = useWatchList();
   const [properties, setProperties] = useState<Array<PropertyData>>();
   const userName = 'Mary';
@@ -166,6 +169,11 @@ const Index = () => {
 
   return (
     <div className="antialiased">
+      <Meta
+        title={translationProfile('general.title')}
+        description={translationProfile('general.description')}
+        image={AppConfig.image_url}
+      />
       <Navbar translation={t} />
       <LandingSection yPadding="py-4">
         <div className="container mx-auto">

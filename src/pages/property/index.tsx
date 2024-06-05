@@ -87,13 +87,13 @@ const Property = () => {
           <h1 className="mb-5 text-2xl font-semibold text-black">
             {translationProperty('descriptionSection.title')}
           </h1>
-          <p className="mb-5 text-black">
+          <p className="mb-14 text-black">
             {translationProperty('descriptionSection.text')}
           </p>
           <h1 className="my-5 text-2xl font-semibold text-black">
             {translationProperty('propertyAttributesSection.title')}
           </h1>
-          <div className="h-80">
+          <div className="h-96">
             <Map
               center={{
                 latitude: ipLocation.latitude,
@@ -102,7 +102,9 @@ const Property = () => {
               markers={[{ latitude: 44.8152453, longitude: 20.42259 }]}
             />
           </div>
-
+          <h1 className="mb-5 mt-14 text-2xl font-semibold text-black">
+            {translationProperty('propertyAttributesSection.title')}
+          </h1>
           <PropertyTable
             propertyTranslations={translationProperty}
             country="Portugal"
