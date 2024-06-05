@@ -18,7 +18,7 @@ type IFilterProps = {
 
 const Filter = (props: IFilterProps) => {
   return (
-    <div className="ml-5 flex w-3/4 items-center justify-between">
+    <div className="flex items-center justify-between">
       <div className="flex flex-col">
         <FilterRangeSlider
           minValue={0}

@@ -7,6 +7,7 @@ import { Button } from '@/button/Button';
 import Gallery from '@/gallery';
 import { LandingSection } from '@/layouts/LandingSection';
 import { Meta } from '@/layouts/Meta';
+import Map from '@/map';
 import { Pill } from '@/pill/Pill';
 import PropertyInfo from '@/propertyInfo';
 import PropertyTable from '@/propertyTable';
@@ -90,6 +91,10 @@ const Property = () => {
           <h1 className="my-5 text-2xl font-semibold text-black">
             {translationProperty('propertyAttributesSection.title')}
           </h1>
+          <div className="h-80">
+            <Map markers={[{ latitude: 44.8152453, longitude: 20.42259 }]} />
+          </div>
+
           <PropertyTable
             propertyTranslations={translationProperty}
             country="Portugal"

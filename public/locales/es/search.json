@@ -1,16 +1,16 @@
 {
   "general": {
-    "title": "Busca o vende tus propiedades | Terranoss",
-    "description": "Terranoss - description"
+    "title": "Busca o vende tus propiedades | Terrenoss",
+    "description": "Terrenoss - description"
   },
   "searchSection": {
     "inputPlaceholder": "Ingresa tu ubicación"
   },
   "filtersSection": {
     "priceRangeLabel": "Rango de precios",
-    "squareMetersLabel": "Metros cuadrados",
+    "surfaceRangeLabel": "Rango de superficie",
     "acresLabel": "Hectáreas",
-    "attributePlaceholder": "Buscar por atributo",
+    "attributePlaceholder": "Atributos",
     "attributeModalTitle": "Seleccione qué atributos le gustaría ver en su búsqueda",
     "attributeModalSubTitle": "Seleccione todas las que correspondan",
     "attributeModalButtonTitle": "Confirmar"

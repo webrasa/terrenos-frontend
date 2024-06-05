@@ -45,7 +45,7 @@ const FilterRangeSlider = (props: IFilterRangeSliderProps) => {
   const getButtonText = () => {
     return props.type === 'price'
       ? props.translation('filtersSection.priceRangeLabel')
-      : props.translation('filtersSection.squareMetersLabel');
+      : props.translation('filtersSection.surfaceRangeLabel');
   };
   const [displayedRange, setDisplayedRange] = useState<string>(getButtonText());
   const { unit } = useUnit();

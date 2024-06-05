@@ -8,11 +8,14 @@ import { FormElement } from '@/form/FormElement';
 import { Label } from '@/form/Label';
 import ImageUploader from '@/image-upload';
 import { LandingSection } from '@/layouts/LandingSection';
+import Map from '@/map';
 import { Select } from '@/select/Select';
 import { useCurrency } from '@/store/currencyContext';
+import { useUserLocation } from '@/store/locationContext';
 import { useUnit } from '@/store/unitContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
+import type { IMarker } from '@/types/IMarker';
 import { currencies, getCurrency } from '@/utils/CurrencyConverter';
 import { getUnit, units } from '@/utils/UnitConverter';
 
@@ -29,9 +32,12 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Index = () => {
+  const { ipLocation } = useUserLocation();
+
   const { t } = useTranslation('common');
   const { unit, setUnit } = useUnit();
   const { currency, setCurrency } = useCurrency();
+  const [markers, setMarkers] = useState<Array<IMarker>>([]);
 
   const [unitObject, setUnitObject] = useState(units[0]);
   const [currencyObject, setCurrencyObject] = useState(currencies[0]);
@@ -97,7 +103,23 @@ const Index = () => {
                 Draw for more precise location
               </div>
             </div>
-            <div>MAPA</div>
+            <div className="h-80">
+              <Map
+                center={{
+                  latitude: ipLocation.latitude,
+                  longitude: ipLocation.longitude,
+                }}
+                markers={markers}
+                onClickHandler={(e) => {
+                  setMarkers([
+                    {
+                      latitude: e.latLng.lat(),
+                      longitude: e.latLng.lng(),
+                    },
+                  ]);
+                }}
+              />
+            </div>
             <div className="flex gap-4">
               <div className="w-1/2">
                 <Label htmlFor="latitude">Latitude</Label>
