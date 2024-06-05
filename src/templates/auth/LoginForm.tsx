@@ -66,7 +66,7 @@ const LoginForm = (props: ILoginFormProps) => {
       ) {
         props.setChallengeMfaUser(user);
       } else {
-        await router.push('/dashboard');
+        await router.push('/profile');
       }
     } catch (err: any) {
       if (err.code === 'UserNotConfirmedException') {
