@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import type { ReactNode } from 'react';
+import type { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import { createContext, useContext } from 'react';
 import useSWR from 'swr';
 
@@ -71,4 +71,14 @@ export const useAuth = () => {
   }
 
   return userInfo;
+};
+
+export const withAuth = (Page: FunctionComponent<PropsWithChildren>) => {
+  return function AuthenticatedPage(props: PropsWithChildren) {
+    return (
+      <AuthProvider>
+        <Page {...props} />
+      </AuthProvider>
+    );
+  };
 };

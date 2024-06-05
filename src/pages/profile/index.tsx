@@ -13,6 +13,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useAsync } from '@/hooks/UseAsync';
+import { useAuth, withAuth } from '@/hooks/UseAuth';
 import { LandingSection } from '@/layouts/LandingSection';
 import { useWatchList } from '@/store/watchListContext';
 import { Footer } from '@/templates/Footer';
@@ -35,12 +36,14 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Index = () => {
+  const { profile } = useAuth();
+
   const { t } = useTranslation('common');
   const { setWatchList } = useWatchList();
   const [properties, setProperties] = useState<Array<PropertyData>>();
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
-  const userId = 1; // TODO: Change this to the user id when userAuth
+  const userId = profile.id;
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // FIX:  This is a temporary dev data
 
   const getData = useAsync(async () => {
@@ -269,4 +272,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default withAuth(Index);
