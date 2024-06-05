@@ -32,7 +32,8 @@ export function UserLocationProvider(props: any) {
 
   const fetchAPI = async () => {
     const res = await getUserLocationFromIp();
-    if (!getCookie('currency')) setCookie('currency', res.currency);
+    if (!getCookie('currency'))
+      setCookie('currency', res.currency.toLowerCase());
     if (!getCookie('language'))
       setCookie('language', res.languages.split(',')[0].trim());
 
