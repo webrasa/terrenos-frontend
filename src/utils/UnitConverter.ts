@@ -30,17 +30,16 @@ export const units: Array<Unit> = [
   },
 ];
 
-
 export const convertAndFormatUnit = (
   value: number,
   fromUnit: Unit['shortName'],
-  toUnit: Unit['shortName']
+  toUnit: Unit['shortName'],
 ): string => {
   const fromFactor =
     units.find((obj) => obj.shortName === fromUnit)?.conversionFactorToSqm ?? 1;
   const toFactor =
     units.find((obj) => obj.shortName === toUnit)?.conversionFactorToSqm ?? 1;
-  
+
   const convertedValue = (value * fromFactor) / toFactor;
   const unitName = units.find((obj) => obj.shortName === toUnit)?.symbol ?? '';
 
@@ -48,5 +47,5 @@ export const convertAndFormatUnit = (
 };
 
 export const getUnit = (unit: Unit['shortName']): Unit => {
-  return units.find((obj) => obj.shortName === unit) ?? units[0] as Unit;
-}
+  return units.find((obj) => obj.shortName === unit) ?? (units[0] as Unit);
+};

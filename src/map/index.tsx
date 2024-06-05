@@ -59,7 +59,7 @@ function Map(props: IMapsProps) {
   const handleOnLoad = (gMap: any) => {
     const bounds = new google.maps.LatLngBounds();
     if (props.properties) {
-      console.log('TEST');
+      console.log('PROPERTIES');
       props.properties.forEach(({ latitude, longtitude }) =>
         bounds.extend({
           lat: latitude || 0,
