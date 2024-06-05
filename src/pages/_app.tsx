@@ -1,9 +1,11 @@
 import '../styles/global.css';
 
 import { Amplify, API } from 'aws-amplify';
+import { getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
-import { useEffect, type ReactElement } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
@@ -16,8 +18,6 @@ import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
-import { getCookie } from 'cookies-next';
-import { useRouter } from 'next/router';
 
 Amplify.configure({ ...AwsConfig });
 
@@ -25,7 +25,7 @@ const PoolProviders = poolProviders(
   UnitProvider,
   WatchListProvider,
   CurrencyProvider,
-  UserLocationProvider
+  UserLocationProvider,
 );
 
 // Next JS App props with the shared layout support.
