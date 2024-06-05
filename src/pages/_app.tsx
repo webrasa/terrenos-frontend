@@ -3,7 +3,7 @@ import '../styles/global.css';
 import { Amplify, API } from 'aws-amplify';
 import type { AppProps } from 'next/app';
 import { appWithTranslation } from 'next-i18next';
-import type { ReactElement } from 'react';
+import { useEffect, type ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
@@ -16,6 +16,8 @@ import { FallbackErrorBoundary } from '@/templates/FallbackErrorBoundary';
 import { AwsConfig } from '@/utils/AwsConfig';
 
 import type { NextPageWithLayout } from '../utils/NextLayout';
+import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 
 Amplify.configure({ ...AwsConfig });
 
@@ -23,7 +25,7 @@ const PoolProviders = poolProviders(
   UnitProvider,
   WatchListProvider,
   CurrencyProvider,
-  UserLocationProvider,
+  UserLocationProvider
 );
 
 // Next JS App props with the shared layout support.
@@ -34,6 +36,14 @@ type AppPropsWithLayout = AppProps & {
 const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
   const handleError = useErrorHandler();
+  const router = useRouter();
+
+  useEffect(() => {
+    const cookiesParsed = getCookie('language') ?? 'en';
+    router.push(router.asPath, router.asPath, {
+      locale: cookiesParsed,
+    });
+  }, []);
 
   return (
     <SWRConfig

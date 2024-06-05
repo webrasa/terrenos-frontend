@@ -7,6 +7,7 @@ import { Fragment, useState } from 'react';
 import { MenuDropdownItem } from './MenuDropdownItem';
 import { useUnit } from '@/store/unitContext';
 import { useCurrency } from '@/store/currencyContext';
+import { useRouter } from 'next/router';
 
 export default function DropdownMenu() {
   const [customOpen, setCustomOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function DropdownMenu() {
   const [selectedUnit, setSelectedUnit] = useState<CookieValueTypes>('sqm');
   const { setUnit } = useUnit();
   const { setCurrency } = useCurrency();
+  const router = useRouter();
 
   function buttonClicked() {
     setCustomOpen((prev: boolean) => !prev);
@@ -123,6 +125,9 @@ export default function DropdownMenu() {
                     onChangeHandler={(val) => {
                       setCookie('language', val.target.value);
                       setSelectedLanguage(val.target.value);
+                      router.push(router.asPath, router.asPath, {
+                        locale: val.target.value,
+                      });
                     }}
                     items={[
                       { value: 'en', name: 'English' },
