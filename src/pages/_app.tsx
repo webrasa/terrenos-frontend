@@ -1,9 +1,11 @@
 import '../styles/global.css';
 
 import { Amplify, API } from 'aws-amplify';
+import { getCookie } from 'cookies-next';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { appWithTranslation } from 'next-i18next';
-import type { ReactElement } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
@@ -34,6 +36,14 @@ type AppPropsWithLayout = AppProps & {
 const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
   const handleError = useErrorHandler();
+  const router = useRouter();
+
+  useEffect(() => {
+    const cookiesParsed = getCookie('language') ?? 'en';
+    router.push(router.asPath, router.asPath, {
+      locale: cookiesParsed,
+    });
+  }, []);
 
   return (
     <SWRConfig

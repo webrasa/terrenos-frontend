@@ -55,5 +55,8 @@ export const convertAndFormatCurrency = (
 };
 
 export const getCurrency = (currency: Currency['shortName']): Currency => {
-  return currencies.find((obj) => obj.shortName === currency) ?? currencies[0] as Currency;
-}
+  return (
+    currencies.find((obj) => obj.shortName === currency) ??
+    (currencies[0] as Currency)
+  );
+};
