@@ -2,16 +2,13 @@ import { Menu, Transition } from '@headlessui/react';
 import type { CookieValueTypes } from 'cookies-next';
 import { getCookie, hasCookie, setCookie } from 'cookies-next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import { useCurrency } from '@/store/currencyContext';
-<<<<<<< Terrenoss-prevod
 import { useUnit } from '@/store/unitContext';
 
 import { MenuDropdownItem } from './MenuDropdownItem';
-=======
-import { useRouter } from 'next/router';
->>>>>>> main
 
 export default function DropdownMenu() {
   const [customOpen, setCustomOpen] = useState(false);
