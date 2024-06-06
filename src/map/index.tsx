@@ -98,6 +98,16 @@ function Map(props: IMapsProps) {
       onClick={props.onClickHandler}
       onUnmount={onUnmount}
       center={center}
+      mapTypeId={google.maps.MapTypeId.SATELLITE}
+      options={{
+        styles: [
+          {
+            elementType: 'labels',
+            featureType: 'poi.business',
+            stylers: [{ visibility: 'off' }],
+          },
+        ],
+      }}
     >
       {props.markers &&
         props.markers.map((marker, index) => (
