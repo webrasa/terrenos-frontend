@@ -99,3 +99,11 @@ button:disabled {
   border-radius: 4px;
 }
 
+/* Info window styling */
+
+.gm-style .gm-style-iw-c {
+  padding: 0px;
+}
+.gm-style .gm-style-iw-d {
+  padding: 0px;
+}

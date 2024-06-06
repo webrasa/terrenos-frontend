@@ -117,6 +117,7 @@ const Index = () => {
                   latitude: ipLocation.latitude,
                   longitude: ipLocation.longitude,
                 }}
+                showMarkers={true}
                 markers={markers}
                 onClickHandler={(e) => {
                   setMarkers([

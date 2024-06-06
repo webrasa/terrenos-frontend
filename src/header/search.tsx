@@ -145,7 +145,6 @@ export default function AutoComplete(props: ISearchProps) {
         );
     }
   }, [props.filters, filteredLocations]);
-  console.log(filteredLocations);
   return (
     <div className="top-16 md:w-full">
       <Combobox

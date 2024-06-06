@@ -95,6 +95,7 @@ const Property = () => {
           </h1>
           <div className="h-96">
             <Map
+              showMarkers={true}
               center={{
                 latitude: ipLocation.latitude,
                 longitude: ipLocation.longitude,
