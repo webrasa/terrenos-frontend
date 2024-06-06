@@ -17,6 +17,7 @@
     "ctaTitle": "En venta cerca de mí"
   },
   "searchSection": {
-    "title": "Buscar por atributos o por país"
+    "title": "Buscar por atributos o por país",
+    "countryText": "Terreno en Venta en"
   }
 }

@@ -116,7 +116,6 @@ export default function AutoComplete(props: ISearchProps) {
       filteredLocations.length > 0
     ) {
       let loc;
-
       if (props.filters?.countryId)
         loc = filteredLocations.find(
           (floc) => floc.value === `1-${props.filters?.countryId}`,
@@ -146,7 +145,7 @@ export default function AutoComplete(props: ISearchProps) {
         );
     }
   }, [props.filters, filteredLocations]);
-
+  console.log(filteredLocations);
   return (
     <div className="top-16 md:w-full">
       <Combobox

@@ -43,7 +43,7 @@ const Discover = (props: IDiscoverProps) => {
                 key={index}
                 href={`/search?countryId=${item.id}&regionId=&cityId=&districtId=&userLocation=`}
               >
-                {`${props.translation('sliderSection.title')} ${item.name}`}
+                {`${props.translation('searchSection.countryText')} ${item.name}`}
               </Link>
             );
           })}

@@ -39,7 +39,8 @@ function Map(props: IMapsProps) {
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || '',
   });
   let center;
-  if (isLoaded) {
+  if (isLoaded && !props.markers?.length && !props.properties?.length) {
+    console.log('test');
     center = new google.maps.LatLng(
       props.center?.latitude,
       props.center?.longitude,
@@ -122,12 +123,11 @@ function Map(props: IMapsProps) {
                 }}
                 label={{
                   text: `${property.price}`,
-                  color: 'blue',
-                  fontSize: '20px',
-                  background: 'red',
+                  color: 'black',
+                  fontSize: '16px',
                   padding: '10px',
                 }}
-                icon={'/rounded-rectangle-svgrepo-com.png'}
+                icon={'/map-marker-64x64.png'}
                 clusterer={clusterer}
               >
                 {activeMarker === index ? (
@@ -136,15 +136,11 @@ function Map(props: IMapsProps) {
                       key={index}
                       id={property.id.toString()}
                       price={property.price.toString()}
-                      status={index % 3}
-                      surfaceArea={1.6}
+                      status={property.status}
+                      surfaceArea={property.surface}
                       location={props.getPropertyLocation(property)}
                       secondLocation={property.address}
-                      images={[
-                        'https://picsum.photos/200/300',
-                        'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                        'https://picsum.photos/200/300',
-                      ]}
+                      images={property.medias.map((image) => image.url)}
                     />
                   </InfoWindow>
                 ) : null}

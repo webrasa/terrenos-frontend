@@ -230,7 +230,7 @@ const PropertyCard = ({
               currency as Currency['shortName'],
             )}
           </h3>
-          <p className="text-sm text-black">{`${convertAndFormatUnit(surfaceArea, 'Sq Meters', unit as Unit['shortName'])}`}</p>
+          <p className="text-sm leading-7 text-black">{`${convertAndFormatUnit(surfaceArea, 'Sq Meters', unit as Unit['shortName'])}`}</p>
         </div>
         <p
           className="mt-2 cursor-pointer text-sm text-black"
