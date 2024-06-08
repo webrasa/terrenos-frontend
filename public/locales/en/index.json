@@ -17,6 +17,7 @@
     "ctaTitle": "For sale near me"
   },
   "searchSection": {
-    "title": "Search by attributes or by country"
+    "title": "Search by attributes or by country",
+    "countryText": "Land for Sale in"
   }
 }

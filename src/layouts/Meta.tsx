@@ -9,6 +9,7 @@ import { AppConfig } from '@/utils/AppConfig';
  * @params props - Component props.
  * @param props.title - Page title for SEO.
  * @param props.description - Page description for SEO.
+ * @param props.image - URL of the image to be used for SEO.
  * @param props.canonical - Page canonical url.
  */
 const Meta = (props: IMetaProps) => (

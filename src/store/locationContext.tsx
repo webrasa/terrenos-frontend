@@ -32,9 +32,19 @@ export function UserLocationProvider(props: any) {
 
   const fetchAPI = async () => {
     const res = await getUserLocationFromIp();
-    if (!getCookie('currency')) setCookie('currency', res.currency);
-    if (!getCookie('language'))
-      setCookie('language', res.languages.split(',')[0].trim());
+    if (res.country.toLowerCase() === 'us') {
+      if (!getCookie('currency')) setCookie('currency', 'usd');
+      if (!getCookie('unit')) setCookie('unit', 'acres');
+      if (!getCookie('language')) setCookie('language', 'en');
+    } else if (res.country.toLowerCase() === 'co') {
+      if (!getCookie('currency')) setCookie('currency', 'usd');
+      if (!getCookie('unit')) setCookie('unit', 'hectares');
+      if (!getCookie('language')) setCookie('language', 'es');
+    } else if (res.country.toLowerCase() === 'rs') {
+      if (!getCookie('currency')) setCookie('currency', 'rsd');
+      if (!getCookie('unit')) setCookie('unit', 'sqm');
+      if (!getCookie('language')) setCookie('language', 'es');
+    }
 
     if (
       !ipLocation.latitude ||

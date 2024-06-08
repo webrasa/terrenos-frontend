@@ -104,15 +104,11 @@ const Index = () => {
                   key={index}
                   id={item.id.toString()}
                   price={item.price.toString()}
-                  status={index % 3}
-                  surfaceArea={1.6}
+                  status={item.status}
+                  surfaceArea={item.surface}
                   location={getPropertyLocation(item)}
                   secondLocation={item.address}
-                  images={[
-                    'https://picsum.photos/200/300',
-                    'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                    'https://picsum.photos/200/300',
-                  ]}
+                  images={item.medias.map((image) => image.url)}
                 />
               );
             })

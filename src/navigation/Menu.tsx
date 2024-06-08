@@ -2,11 +2,13 @@ import { Menu, Transition } from '@headlessui/react';
 import type { CookieValueTypes } from 'cookies-next';
 import { getCookie, hasCookie, setCookie } from 'cookies-next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
-import { MenuDropdownItem } from './MenuDropdownItem';
-import { useUnit } from '@/store/unitContext';
 import { useCurrency } from '@/store/currencyContext';
+import { useUnit } from '@/store/unitContext';
+
+import { MenuDropdownItem } from './MenuDropdownItem';
 
 export default function DropdownMenu() {
   const [customOpen, setCustomOpen] = useState(false);
@@ -17,6 +19,7 @@ export default function DropdownMenu() {
   const [selectedUnit, setSelectedUnit] = useState<CookieValueTypes>('sqm');
   const { setUnit } = useUnit();
   const { setCurrency } = useCurrency();
+  const router = useRouter();
 
   function buttonClicked() {
     setCustomOpen((prev: boolean) => !prev);
@@ -72,7 +75,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/favorites"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -84,7 +87,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/properties"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -96,7 +99,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/inbox"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -108,7 +111,7 @@ export default function DropdownMenu() {
                   <Menu.Item>
                     {({ active }) => (
                       <Link
-                        href="/account"
+                        href="/"
                         className={`${
                           active ? 'bg-primary-500 text-white' : 'text-gray-900'
                         } group flex w-full items-center rounded-md p-2 text-sm`}
@@ -123,6 +126,9 @@ export default function DropdownMenu() {
                     onChangeHandler={(val) => {
                       setCookie('language', val.target.value);
                       setSelectedLanguage(val.target.value);
+                      router.push(router.asPath, router.asPath, {
+                        locale: val.target.value,
+                      });
                     }}
                     items={[
                       { value: 'en', name: 'English' },

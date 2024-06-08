@@ -11,6 +11,7 @@ import Map from '@/map';
 import { Pill } from '@/pill/Pill';
 import PropertyInfo from '@/propertyInfo';
 import PropertyTable from '@/propertyTable';
+import { useUserLocation } from '@/store/locationContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
 //* * Utils */
@@ -28,6 +29,7 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Property = () => {
+  const { ipLocation } = useUserLocation();
   // Translations
   const { t: translationCommon } = useTranslation('common');
   const { t: translationProperty } = useTranslation('property');
@@ -85,16 +87,25 @@ const Property = () => {
           <h1 className="mb-5 text-2xl font-semibold text-black">
             {translationProperty('descriptionSection.title')}
           </h1>
-          <p className="mb-5 text-black">
+          <p className="mb-14 text-black">
             {translationProperty('descriptionSection.text')}
           </p>
           <h1 className="my-5 text-2xl font-semibold text-black">
             {translationProperty('propertyAttributesSection.title')}
           </h1>
-          <div className="h-80">
-            <Map markers={[{ latitude: 44.8152453, longitude: 20.42259 }]} />
+          <div className="h-96">
+            <Map
+              showMarkers={true}
+              center={{
+                latitude: ipLocation.latitude,
+                longitude: ipLocation.longitude,
+              }}
+              markers={[{ latitude: 44.8152453, longitude: 20.42259 }]}
+            />
           </div>
-
+          <h1 className="mb-5 mt-14 text-2xl font-semibold text-black">
+            {translationProperty('propertyAttributesSection.title')}
+          </h1>
           <PropertyTable
             propertyTranslations={translationProperty}
             country="Portugal"

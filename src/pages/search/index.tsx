@@ -1,3 +1,4 @@
+import { InfoWindow, Marker, MarkerClusterer } from '@react-google-maps/api';
 import { API } from 'aws-amplify';
 import router, { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -54,7 +55,7 @@ const Search = () => {
   });
   const [priceMaxValue, setPriceMaxValue] = useState<number>(1000000);
   const [surfaceMaxValue, setSurfaceMaxValue] = useState<number>(1000000);
-
+  const [activeMarker, setActiveMarker] = useState<number | null>(null);
   // Translations
   const { t: translationSearch } = useTranslation('search');
   const { t: translationCommon } = useTranslation('common');
@@ -64,6 +65,15 @@ const Search = () => {
   const { ipLocation } = useUserLocation();
 
   // Functions
+
+  const handleActiveMarker = (marker: number) => {
+    console.log(marker, activeMarker);
+    if (marker === activeMarker) {
+      return;
+    }
+    console.log('HI');
+    setActiveMarker(marker);
+  };
   const getData = useAsync(async () => {
     try {
       const searchData = await API.get(
@@ -260,13 +270,71 @@ const Search = () => {
         <div className="flex">
           <div className="custom-map w-1/2">
             <Map
-              properties={data.properties || []}
-              getPropertyLocation={getPropertyLocation}
               center={{
                 latitude: ipLocation.latitude,
                 longitude: ipLocation.longitude,
               }}
-            />
+              showMarkers={false}
+              markers={data.properties?.map((property) => ({
+                longitude: property.longtitude,
+                latitude: property.latitude,
+              }))}
+              onClickHandler={() => setActiveMarker(null)}
+            >
+              {data.properties && data.properties.length > 0 ? (
+                <MarkerClusterer
+                  options={{
+                    imagePath:
+                      'https://web.archive.org/web/20230701011019/https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
+                  }}
+                >
+                  {(clusterer) => (
+                    <div>
+                      {data.properties
+                        ? data.properties.map((property, index) => (
+                            <Marker
+                              key={index}
+                              onClick={() => handleActiveMarker(property.id)}
+                              position={{
+                                lat: property.latitude,
+                                lng: property.longtitude,
+                              }}
+                              label={{
+                                text: `${property.price}`,
+                                color: 'black',
+                                fontSize: '16px',
+                              }}
+                              icon={'/map-marker-64x64.png'}
+                              clusterer={clusterer}
+                            >
+                              {activeMarker === property.id ? (
+                                <InfoWindow
+                                  onCloseClick={() => setActiveMarker(null)}
+                                >
+                                  <PropertyCard
+                                    key={index}
+                                    id={property.id.toString()}
+                                    price={property.price.toString()}
+                                    status={property.status}
+                                    surfaceArea={property.surface}
+                                    location={getPropertyLocation(property)}
+                                    secondLocation={property.address}
+                                    images={property.medias.map(
+                                      (image) => image.url,
+                                    )}
+                                  />
+                                </InfoWindow>
+                              ) : null}
+                            </Marker>
+                          ))
+                        : null}
+                    </div>
+                  )}
+                </MarkerClusterer>
+              ) : (
+                <></>
+              )}
+            </Map>
           </div>
           <div className="custom-scroll mx-2 mt-5 w-1/2 px-2">
             <AutoComplete
@@ -320,15 +388,11 @@ const Search = () => {
                         key={index}
                         id={item.id.toString()}
                         price={item.price.toString()}
-                        status={index % 3}
-                        surfaceArea={1.6}
+                        status={item.status}
+                        surfaceArea={item.surface}
                         location={getPropertyLocation(item)}
                         secondLocation={item.address}
-                        images={[
-                          'https://picsum.photos/200/300',
-                          'https://umetnickagalerija.rs/slike/dva-drveta-jesen.jpg',
-                          'https://picsum.photos/200/300',
-                        ]}
+                        images={item.medias.map((image) => image.url)}
                       />
                     );
                   })
