@@ -36,14 +36,18 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Index = () => {
-  const { profile } = useAuth();
+  const { profile, providerInfo } = useAuth();
+
+  // NOTE: Testing
+  console.log('Profile: ', profile);
+  console.log('ProviderInfo: ', providerInfo);
 
   const { t } = useTranslation('common');
   const { setWatchList } = useWatchList();
   const [properties, setProperties] = useState<Array<PropertyData>>();
   const userName = 'Mary';
   const userProfileImage = 'https://picsum.photos/200/200';
-  const userId = profile.id;
+  const userId = profile?.id;
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; // FIX:  This is a temporary dev data
 
   const getData = useAsync(async () => {

@@ -13,6 +13,7 @@ export const AuthContext = createContext<UserAuth | null>(null);
 
 export type IAuthProviderProps = {
   children: ReactNode;
+  requireAuth?: boolean;
 };
 
 /**
@@ -22,6 +23,7 @@ export type IAuthProviderProps = {
  * @param props.children -  Children components.
  */
 export const AuthProvider = (props: IAuthProviderProps) => {
+  const { requireAuth = true, children } = props;
   const router = useRouter();
   const { userInfo } = useProviderInfo();
 
@@ -35,10 +37,10 @@ export const AuthProvider = (props: IAuthProviderProps) => {
 
   if (
     userInfo === AuthState.AUTHENTICATING ||
-    userInfo === AuthState.UNAUTHENTICATED ||
-    !data
+    (requireAuth && userInfo === AuthState.UNAUTHENTICATED) ||
+    (requireAuth && !data)
   ) {
-    if (userInfo === AuthState.UNAUTHENTICATED) {
+    if (userInfo === AuthState.UNAUTHENTICATED && requireAuth) {
       router.push('/signin');
     }
 
@@ -52,7 +54,7 @@ export const AuthProvider = (props: IAuthProviderProps) => {
         profile: data,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 };

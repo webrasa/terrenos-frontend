@@ -11,6 +11,7 @@ import CardSlider from '@/card-slider/CardSlider';
 import Discover from '@/discover';
 import { Header } from '@/header/header';
 import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
 import { Meta } from '@/layouts/Meta';
 import Promo from '@/promo';
 import { useUserLocation } from '@/store/locationContext';
@@ -29,6 +30,11 @@ export async function getStaticProps({ locale }: any) {
 }
 
 const Index = () => {
+  const { profile, providerInfo } = useAuth();
+
+  // NOTE: Testing
+  console.log('Profile: ', profile);
+  console.log('ProviderInfo: ', providerInfo);
   // States
   const [data, setData] = useState<IHome>({});
 

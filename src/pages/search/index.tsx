@@ -8,6 +8,7 @@ import { PropertyCard } from '@/card/Card';
 import Filter from '@/filter/filter';
 import AutoComplete from '@/header/search';
 import { useAsync } from '@/hooks/UseAsync';
+import { useAuth } from '@/hooks/UseAuth';
 import { Meta } from '@/layouts/Meta';
 import Map from '@/map';
 import { Pill } from '@/pill/Pill';
@@ -28,6 +29,11 @@ export async function getStaticProps({ locale }: any) {
 
 const Search = () => {
   const { query, isReady } = useRouter();
+  const { profile, providerInfo } = useAuth();
+
+  // NOTE: Testing
+  console.log('Profile: ', profile);
+  console.log('ProviderInfo: ', providerInfo);
 
   // States
   const [data, setData] = useState<IHome>({});

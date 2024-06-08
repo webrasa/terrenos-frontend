@@ -39,8 +39,8 @@ export type UserProfile = {
 
 // User information from backend (/user/profile) and authentication provider combined
 export type UserAuth = {
-  providerInfo: ProviderInfo;
-  profile: UserProfile;
+  providerInfo: ProviderInfo | AuthState.UNAUTHENTICATED;
+  profile: UserProfile | undefined;
 };
 
 export enum GlobalRole {

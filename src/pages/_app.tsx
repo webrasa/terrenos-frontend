@@ -7,6 +7,7 @@ import type { ReactElement } from 'react';
 import { ErrorBoundary, useErrorHandler } from 'react-error-boundary';
 import { SWRConfig } from 'swr';
 
+import { AuthProvider } from '@/hooks/UseAuth';
 import { CurrencyProvider } from '@/store/currencyContext';
 import { UserLocationProvider } from '@/store/locationContext';
 import { poolProviders } from '@/store/poolContext';
@@ -50,7 +51,9 @@ const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
         },
       }}
     >
-      <PoolProviders>{getLayout(<Component {...pageProps} />)}</PoolProviders>
+      <AuthProvider requireAuth={false}>
+        <PoolProviders>{getLayout(<Component {...pageProps} />)}</PoolProviders>
+      </AuthProvider>
     </SWRConfig>
   );
 };
