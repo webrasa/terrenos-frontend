@@ -37,7 +37,7 @@ const ConfirmForgotPasswordForm = () => {
         password: data.password,
       });
 
-      await router.push('/dashboard');
+      await router.push('/profile');
     } catch (err) {
       setFormGlobalError(mapAmplifyMessage(err));
     }
