@@ -12,7 +12,7 @@ const ConfirmSignUpSuccess = () => {
       const { event } = payload;
 
       if (event === 'autoSignIn') {
-        router.push('/dashboard');
+        router.push('/profile');
       } else if (event === 'autoSignIn_failure') {
         router.push('/signin');
       }
@@ -39,11 +39,11 @@ const ConfirmSignUpSuccess = () => {
         </svg>
       }
       title="Your email has been verified"
-      description="Please wait while you will be redirected to your dashboard."
+      description="Please wait while you will be redirected to your profile."
     >
       <div className="mt-6 text-center">
-        <Link href="/dashboard">
-          <Button>Go to dashboard</Button>
+        <Link href="/profile">
+          <Button>Go to profile</Button>
         </Link>
       </div>
     </FullCenterSection>

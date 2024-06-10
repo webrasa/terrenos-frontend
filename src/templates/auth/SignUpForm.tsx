@@ -15,6 +15,8 @@ import { mapAmplifyMessage } from '@/utils/AmplifyMessageMap';
 type ISignUpForm = {
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
 };
 
 const SignUpForm = () => {
@@ -27,6 +29,11 @@ const SignUpForm = () => {
       await Auth.signUp({
         username: data.email,
         password: data.password,
+        attributes: {
+          given_name: data.firstName,
+          family_name: data.lastName,
+          picture: '',
+        },
         autoSignIn: {
           enabled: true,
         },
@@ -52,11 +59,19 @@ const SignUpForm = () => {
       {formGlobalError && <Alert text={formGlobalError} />}
 
       <form className="grid gap-y-2" onSubmit={handleSignUp}>
+        <Label htmlFor="firstName">First name</Label>
+        <FormElement>
+          <input id="firstName" type="text" {...register('firstName')} />
+        </FormElement>
+        <Label htmlFor="lastName">Last name</Label>
+        <FormElement>
+          <input id="lastName" type="text" {...register('lastName')} />
+        </FormElement>
+
         <Label htmlFor="email">Email</Label>
         <FormElement>
           <input id="email" type="text" {...register('email')} />
         </FormElement>
-
         <Label htmlFor="password">Password</Label>
         <FormElement helper="Your password must be at least 8 characters with a mix of upper and lower case letters, numbers, and symbols.">
           <input id="password" type="password" {...register('password')} />

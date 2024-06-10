@@ -29,6 +29,9 @@ export const useProviderInfo = () => {
             email: currentUserInfo.attributes.email,
             id: currentUserInfo.attributes.sub,
             identities: currentUserInfo.attributes.identities,
+            name: currentUserInfo.attributes.given_name,
+            lastName: currentUserInfo.attributes.family_name,
+            picture: currentUserInfo.attributes.picture,
           });
         } else {
           setUserInfo(AuthState.UNAUTHENTICATED);

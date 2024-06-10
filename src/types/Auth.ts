@@ -5,6 +5,9 @@ export type ProviderInfo = {
   id: string;
   email: string;
   identities?: any;
+  name?: string;
+  lastName?: string;
+  picture?: string;
   // identities contains third party oauth information.
   // identities is emptied if the user signed up with email.
   // identities contains a stringify JSON data if the user signed up using social login.
@@ -21,6 +24,9 @@ export interface CognitoUserExt extends CognitoUser {
     sub: string;
     email: string;
     identities?: any;
+    given_name?: string;
+    family_name?: string;
+    picture?: string;
   };
 }
 
