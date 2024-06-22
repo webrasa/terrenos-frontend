@@ -3,7 +3,7 @@ import 'react-horizontal-scrolling-menu/dist/styles.css';
 
 import { API } from 'aws-amplify';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 
 import { PropertyCard } from '@/card/Card';
@@ -21,13 +21,11 @@ import type { Properties } from '@/types/IComponents';
 import type { IHome } from '@/types/IHome';
 import { AppConfig } from '@/utils/AppConfig';
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['index', 'common', 'home'])),
-    },
-  };
-}
+import { getStaticPaths, makeStaticProps } from '../../utils/getStatic';
+
+
+const getStaticProps = makeStaticProps(['index', 'common', 'home']);
+export { getStaticPaths, getStaticProps }
 
 const Index = () => {
   const { profile, providerInfo } = useAuth();

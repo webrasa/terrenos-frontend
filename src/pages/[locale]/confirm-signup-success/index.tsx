@@ -1,16 +1,13 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Meta } from '@/layouts/Meta';
 import { ConfirmSignUpSuccess } from '@/templates/auth/ConfirmSignUpSuccess';
 import { AppConfig } from '@/utils/AppConfig';
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common'])),
-    },
-  };
-}
+import { getStaticPaths, makeStaticProps } from '../../../utils/getStatic';
+
+const getStaticProps = makeStaticProps(['common']);
+export { getStaticPaths, getStaticProps }
 
 const ConfirmSignUp = () => (
   <div className="text-gray-900 antialiased">

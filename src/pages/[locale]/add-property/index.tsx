@@ -1,6 +1,6 @@
 import { getCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 
 import { CheckboxWrap } from '@/checkbox-wrap';
@@ -21,17 +21,11 @@ import { AppConfig } from '@/utils/AppConfig';
 import { currencies, getCurrency } from '@/utils/CurrencyConverter';
 import { getUnit, units } from '@/utils/UnitConverter';
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [
-        'add-property',
-        'common',
-        'index',
-      ])),
-    },
-  };
-}
+import { getStaticPaths, makeStaticProps } from '../../../utils/getStatic';
+
+const getStaticProps = makeStaticProps(['common', 'add-property', 'index']);
+export { getStaticPaths, getStaticProps }
+
 
 const Index = () => {
   const { ipLocation } = useUserLocation();

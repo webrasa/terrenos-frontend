@@ -2,7 +2,7 @@ import { InfoWindow, Marker, MarkerClusterer } from '@react-google-maps/api';
 import { API } from 'aws-amplify';
 import router, { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useEffect, useState } from 'react';
 
 import { PropertyCard } from '@/card/Card';
@@ -20,13 +20,11 @@ import type { IHome } from '@/types/IHome';
 import type { ISearchFilters } from '@/types/Search';
 import { AppConfig } from '@/utils/AppConfig';
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['search', 'common', 'index'])),
-    },
-  };
-}
+import { getStaticPaths, makeStaticProps } from '../../../utils/getStatic';
+
+
+const getStaticProps = makeStaticProps(['search', 'common', 'index']);
+export { getStaticPaths, getStaticProps }
 
 const Search = () => {
   const { query, isReady } = useRouter();

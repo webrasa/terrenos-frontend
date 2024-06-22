@@ -2,7 +2,7 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
-const { i18n } = require('./next-i18next.config');
+// const { i18n } = require('./next-i18next.config');
 
 module.exports = withBundleAnalyzer({
   eslint: {
@@ -15,9 +15,13 @@ module.exports = withBundleAnalyzer({
   // So, the source code is "basePath-ready".
   // You can remove `basePath` if you don't need it.
   reactStrictMode: true,
-  i18n,
+  // i18n,
   typescript: {
     ignoreBuildErrors: true,
   },
-  output: 'standalone'
+  // output: 'standalone'
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
 });

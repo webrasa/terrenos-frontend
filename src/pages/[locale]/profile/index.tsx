@@ -9,7 +9,7 @@ import {
 import { API } from 'aws-amplify';
 import { getCookie } from 'cookies-next';
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Fragment, useEffect, useRef, useState } from 'react';
 
 import { useAsync } from '@/hooks/UseAsync';
@@ -29,13 +29,11 @@ import Inbox from './Inbox';
 import SoldOffMarket from './SoldOffMarket';
 import WatchList from './WatchList';
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['common', 'profile'])),
-    },
-  };
-}
+import { getStaticPaths, makeStaticProps } from '../../../utils/getStatic';
+
+
+const getStaticProps = makeStaticProps(['common', 'profile']);
+export { getStaticPaths, getStaticProps }
 
 const Index = () => {
   const { profile, providerInfo } = useAuth();

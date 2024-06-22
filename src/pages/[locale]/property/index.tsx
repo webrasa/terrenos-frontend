@@ -1,7 +1,7 @@
 // ** Layouts
 
 import { useTranslation } from 'next-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+// import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 import { Button } from '@/button/Button';
 import Gallery from '@/gallery';
@@ -14,19 +14,13 @@ import PropertyTable from '@/propertyTable';
 import { useUserLocation } from '@/store/locationContext';
 import { Footer } from '@/templates/Footer';
 import { Navbar } from '@/templates/Navbar';
+
+import { getStaticPaths, makeStaticProps } from '../../../utils/getStatic';
+
 //* * Utils */
 
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [
-        'property',
-        'common',
-        'index',
-      ])),
-    },
-  };
-}
+const getStaticProps = makeStaticProps(['common', 'property', 'index']);
+export { getStaticPaths, getStaticProps }
 
 const Property = () => {
   const { ipLocation } = useUserLocation();
