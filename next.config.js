@@ -19,4 +19,5 @@ module.exports = withBundleAnalyzer({
   typescript: {
     ignoreBuildErrors: true,
   },
+  output: 'standalone'
 });
