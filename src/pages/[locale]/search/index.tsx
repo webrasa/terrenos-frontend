@@ -30,10 +30,6 @@ const Search = () => {
   const { query, isReady } = useRouter();
   const { profile, providerInfo } = useAuth();
 
-  // NOTE: Testing
-  console.log('Profile: ', profile);
-  console.log('ProviderInfo: ', providerInfo);
-
   // States
   const [data, setData] = useState<IHome>({});
   const [homeData, setHomeData] = useState<IHome>({});

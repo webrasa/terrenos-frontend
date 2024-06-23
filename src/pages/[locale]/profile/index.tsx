@@ -38,10 +38,6 @@ export { getStaticPaths, getStaticProps }
 const Index = () => {
   const { profile, providerInfo } = useAuth();
 
-  // NOTE: Testing
-  console.log('Profile: ', profile);
-  console.log('ProviderInfo: ', providerInfo);
-
   const { t } = useTranslation('common');
   const { t: translationProfile } = useTranslation('profile');
   const { setWatchList } = useWatchList();

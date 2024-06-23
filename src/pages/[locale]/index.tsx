@@ -30,9 +30,6 @@ export { getStaticPaths, getStaticProps }
 const Index = () => {
   const { profile, providerInfo } = useAuth();
 
-  // NOTE: Testing
-  console.log('Profile: ', profile);
-  console.log('ProviderInfo: ', providerInfo);
   // States
   const [data, setData] = useState<IHome>({});
 
