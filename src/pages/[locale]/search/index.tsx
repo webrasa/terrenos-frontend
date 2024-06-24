@@ -217,7 +217,7 @@ const Search = () => {
     ) {
       router.push(
         {
-          pathname: '/search',
+          // pathname: '/es/search',
           query: rest,
         },
         undefined,

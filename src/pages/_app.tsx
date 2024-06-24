@@ -39,12 +39,13 @@ const MyAppSWRConfig = ({ Component, pageProps }: AppPropsWithLayout) => {
   const handleError = useErrorHandler();
   const router = useRouter();
 
-  useEffect(() => {
-    const cookiesParsed = getCookie('language') ?? 'en';
-    router.push(router.asPath, router.asPath, {
-      locale: cookiesParsed,
-    });
-  }, []);
+  // useEffect(() => {
+  //   const cookiesParsed = getCookie('language') ?? 'en';
+  //   // router.push(router.asPath, router.asPath, {
+  //   //   locale: cookiesParsed,
+  //   // });
+  //   router.replace('/' + cookiesParsed + router.asPath)
+  // }, []);
 
   return (
     <SWRConfig
